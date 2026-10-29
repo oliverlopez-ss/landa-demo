@@ -125,7 +125,7 @@ section.alt .step{background:var(--bg)}
 section.alt .card{background:var(--bg)}
 .field{display:grid;gap:6px}
 .field>span,.label{font-size:.82rem;font-weight:700;color:var(--muted);letter-spacing:.02em}
-input[type=text],input[type=email],input[type=tel],input[type=number],input[type=date],select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:1rem var(--body)}
+input:not([type]),input[type=text],input[type=email],input[type=tel],input[type=number],input[type=date],select,textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:1rem var(--body)}
 section.alt input,section.alt select,section.alt textarea{background:var(--paper)}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sea);box-shadow:0 0 0 3px var(--sea-soft)}
 textarea{min-height:110px;resize:vertical}
@@ -288,6 +288,27 @@ footer.site .logo{color:var(--on-deep)}
 .search{margin-top:18px}
 .mine .item{padding:12px 0;border-bottom:1px solid var(--line);font-size:.94rem}
 
+/* home calculator */
+.homes{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));margin-top:18px}
+.homes .card{display:grid;gap:12px;align-content:start}
+.home-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.home-head .k{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;color:var(--sea);font-weight:700}
+.compare-wrap{overflow-x:auto;margin-top:12px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r)}
+table.compare{border-collapse:collapse;width:100%;min-width:520px;font-size:.93rem}
+table.compare th,table.compare td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top;font-variant-numeric:tabular-nums}
+table.compare th:first-child,table.compare td:first-child{text-align:left;color:var(--muted);font-variant-numeric:normal;min-width:170px}
+table.compare thead th{font:700 .95rem var(--display);color:var(--ink);text-align:right;background:var(--bg)}
+table.compare thead th:first-child{background:var(--bg)}
+table.compare tr.sec td{background:var(--sea-soft);color:var(--sea);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;text-align:left}
+table.compare tr.strong td{font-weight:800;color:var(--ink)}
+table.compare tr.strong td:first-child{color:var(--ink)}
+table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight:500}
+.homefacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:22px}
+@media(max-width:760px){.homefacts{grid-template-columns:1fr}}
+.homefacts div{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px}
+.homefacts b{display:block;font:800 1.6rem var(--body);font-variant-numeric:tabular-nums}
+.homefacts span{font-size:.88rem;color:var(--muted)}
+
 /* modal + toast */
 .modal{position:fixed;inset:0;background:rgba(6,16,25,.6);display:flex;align-items:flex-end;justify-content:center;z-index:50;padding:16px;padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}
 @media(min-width:620px){.modal{align-items:center}}
@@ -304,6 +325,7 @@ footer.site .logo{color:var(--on-deep)}
     <nav class="links" id="landingLinks" aria-label="Sidan">
       <button data-scroll="sa-funkar-det">Så funkar det</button>
       <button data-scroll="kalkyl">Kalkyl</button>
+      <button data-scroll="bostad-teaser">Bostad</button>
       <button data-scroll="partners">Partners</button>
       <button data-scroll="plus">Plus</button>
       <button data-scroll="vanliga-fragor">Frågor</button>
@@ -314,6 +336,7 @@ footer.site .logo{color:var(--on-deep)}
   <div class="wrap" id="appNavWrap" hidden>
     <nav class="appnav" aria-label="Er flytt">
       <a href="#plan">Er plan</a>
+      <a href="#bostad">Bostad och bolån</a>
       <a href="#kontakter">Partners och kontakter</a>
       <a href="#dokument">Dokument</a>
       <a href="#fragor">Frågor</a>
@@ -411,7 +434,23 @@ footer.site .logo{color:var(--on-deep)}
     </div>
   </section>
 
-  <section class="block alt" id="partners">
+  <section class="block alt" id="bostad-teaser">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Bostad och bolån</div>
+        <h2>Vad kostar bostaden, på riktigt?</h2>
+        <p class="lead">Jämför upp till sex bostäder sida vid sida: vad köpet kräver kontant på köpdagen, månadskostnaden med och utan bankens paket, och vad det blir i kronor. Byggt för den som inte bor i Spanien än.</p>
+      </div>
+      <div class="homefacts">
+        <div><b>70 %</b><span>lånar spanska banker normalt ut till den som inte är resident, mot 80 % för residenta</span></div>
+        <div><b>7 %</b><span>överlåtelseskatt på en begagnad bostad i Andalusien, plus notarie, registro och advokat</span></div>
+        <div><b>3,23 %</b><span>Euribor 12 månader, preliminärt snitt oktober 2026. Rörlig ränta är Euribor plus bankens marginal.</span></div>
+      </div>
+      <div class="row" style="margin-top:28px"><a class="btn sea" href="#bostad">Räkna på en bostad</a></div>
+    </div>
+  </section>
+
+  <section class="block" id="partners">
     <div class="wrap">
       <div class="sec-head">
         <div class="eyebrow">Partners</div>
@@ -474,7 +513,7 @@ footer.site .logo{color:var(--on-deep)}
     </div>
   </section>
 
-  <section class="block" id="plus">
+  <section class="block alt" id="plus">
     <div class="wrap">
       <div class="sec-head">
         <div class="eyebrow">Solpass Plus</div>
@@ -513,7 +552,7 @@ footer.site .logo{color:var(--on-deep)}
     </div>
   </section>
 
-  <section class="block alt" id="vanliga-fragor">
+  <section class="block" id="vanliga-fragor">
     <div class="wrap narrow">
       <div class="sec-head">
         <div class="eyebrow">Vanliga frågor</div>
@@ -551,6 +590,38 @@ footer.site .logo{color:var(--on-deep)}
     <div class="bar"><div class="progress"><i id="planProg" style="width:0%"></i></div><span class="small muted" id="planCount"></span></div>
   </div>
   <div id="plan"></div>
+</div></div>
+
+<div id="v-bostad" hidden><div class="wrap" style="padding-bottom:64px">
+  <div class="apphead">
+    <div class="eyebrow">Bostad och bolån</div>
+    <h2>Vad kostar bostaden i månaden, på riktigt?</h2>
+    <p class="lead">Lägg in bostäderna ni tittar på. Vi räknar ut vad köpet kräver kontant på köpdagen och vad ni betalar i månaden, med och utan bankens paket.</p>
+  </div>
+  <form class="card stack" id="buyerSettings" onsubmit="return false">
+    <span class="label">Gäller alla bostäder</span>
+    <div class="field"><span>Var bor ni när ni köper?</span>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="h_res" value="nonResident" checked>I Sverige (icke-resident)</label>
+        <label class="chip"><input type="radio" name="h_res" value="resident">I Spanien (resident)</label>
+      </div></div>
+    <div class="field"><span>Ränta</span>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="h_rate" value="fixed" checked>Fast hela löptiden</label>
+        <label class="chip"><input type="radio" name="h_rate" value="variable"><span id="varLabel">Rörlig</span></label>
+      </div></div>
+    <div class="grid2">
+      <label class="field"><span id="ltvLabel">Lån, % av priset</span><input type="number" id="h_ltv" min="0" step="5"></label>
+      <label class="field"><span id="yearsLabel">Löptid, år</span><input type="number" id="h_years" min="5"></label>
+    </div>
+    <p class="small muted" id="resNote"></p>
+  </form>
+  <div class="homes" id="homes"></div>
+  <div class="row" style="margin-top:14px">
+    <button class="btn sea" id="addHome">+ Lägg till bostad</button>
+    <button class="btn ghost" id="exampleHomes">Fyll med tre exempel</button>
+  </div>
+  <div id="homeResults"></div>
 </div></div>
 
 <div id="v-kontakter" hidden><div class="wrap" style="padding-bottom:64px">
@@ -1131,8 +1202,212 @@ $("#partnerForm").addEventListener("submit", async e => {
   $$("#partnerForm > :not(#p_ok)").forEach(el => el.hidden = true); $("#p_ok").hidden = false;
 });
 
+/* ---------- home calculator (model ported from the app, PR #215; draft figures, verify with a broker) ---------- */
+const HOME_CFG = {
+  euribor: 0.0323,
+  regions: {
+    andalucia: { label: "Andalusien (Costa del Sol)", itp: [[null, 0.07]], itpMode: "whole", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.012 },
+    valencia: { label: "Valencia (Costa Blanca)", itp: [[1000000, 0.09], [null, 0.11]], itpMode: "whole", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.014 },
+    murcia: { label: "Murcia (Costa Cálida)", itp: [[null, 0.0775]], itpMode: "whole", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.015 },
+    canarias: { label: "Kanarieöarna", itp: [[null, 0.065]], itpMode: "whole", newBuildVat: 0.07, newBuildVatLabel: "IGIC", ajd: 0.01 },
+    baleares: { label: "Balearerna (Mallorca)", itp: [[400000, 0.08], [600000, 0.09], [1000000, 0.1], [2000000, 0.12], [null, 0.13]], itpMode: "progressive", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.015 },
+    cataluna: { label: "Katalonien (Costa Brava)", itp: [[600000, 0.1], [900000, 0.11], [1500000, 0.12], [null, 0.13]], itpMode: "progressive", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.015 },
+    madrid: { label: "Madrid", itp: [[null, 0.06]], itpMode: "whole", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.0075 }
+  },
+  maxLtv: { resident: 0.8, nonResident: 0.7 },
+  maxYears: { resident: 30, nonResident: 25 },
+  rates: { fixed: { bonified: 0.0285, plain: 0.0385 }, variable: { bonified: 0.0055, plain: 0.0155 } },
+  nonResidentRateAdd: 0.0025,
+  linkedProductsMonthly: 75,
+  homeInsuranceMonthly: 25,
+  purchaseFees: { notary: 900, registry: 600, gestoria: 400, valuation: 450, lawyerRate: 0.0121 },
+  catastralRatio: 0.4, imputedRate: 0.011, nonResidentTaxRate: 0.19, stressEuribor: 0.02,
+  note: "Skattesatser enligt regionernas regler oktober 2026; räntorna är typiska erbjudanden samma månad. Reducerade satser (unga, stora familjer, permanentbostad) ingår inte."
+};
+function annuity(loan, rate, years){ const n = Math.round(years * 12); if(loan <= 0 || n <= 0) return 0; const r = rate / 12; return r === 0 ? loan / n : loan * r / (1 - Math.pow(1 + r, -n)); }
+function resaleTax(price, region){
+  if(region.itpMode === "whole"){ const b = region.itp.find(([l]) => l === null || price <= l) || region.itp[region.itp.length - 1]; return price * b[1]; }
+  let tax = 0, prev = 0;
+  for(const [limit, rate] of region.itp){ const top = limit ?? Infinity; if(price > prev) tax += (Math.min(price, top) - prev) * rate; prev = top; }
+  return tax;
+}
+function calculateHome(home, buyer, cfg){
+  const price = Math.max(0, home.price), region = cfg.regions[home.region] || Object.values(cfg.regions)[0];
+  const nonRes = buyer.residency === "nonResident";
+  const ltv = Math.max(0, Math.min(buyer.ltv, nonRes ? cfg.maxLtv.nonResident : cfg.maxLtv.resident));
+  const years = Math.max(1, Math.min(buyer.years, nonRes ? cfg.maxYears.nonResident : cfg.maxYears.resident));
+  const loan = price * ltv;
+  const tax = home.newBuild ? price * (region.newBuildVat + region.ajd) : resaleTax(price, region);
+  const taxLabel = home.newBuild ? `${region.newBuildVatLabel} och AJD` : "överlåtelseskatt (ITP)";
+  const f = cfg.purchaseFees;
+  const fees = [["Notarie", f.notary], ["Registro", f.registry], ["Gestoría", f.gestoria], ["Advokat", price * f.lawyerRate]];
+  if(loan > 0) fees.push(["Värdering", f.valuation]);
+  const feeSum = fees.reduce((s, [, v]) => s + v, 0);
+  const cash = price - loan + tax + feeSum;
+  const base = buyer.rateType === "variable" ? cfg.euribor : 0, add = nonRes ? cfg.nonResidentRateAdd : 0;
+  const rateB = base + cfg.rates[buyer.rateType].bonified + add, rateP = base + cfg.rates[buyer.rateType].plain + add;
+  const catastral = home.catastral > 0 ? home.catastral : price * cfg.catastralRatio;
+  const nonResTax = nonRes ? catastral * cfg.imputedRate * cfg.nonResidentTaxRate : 0;
+  const running = Math.max(0, home.communityMonthly) + Math.max(0, home.ibiYearly) / 12 + nonResTax / 12;
+  const payB = annuity(loan, rateB, years), payP = annuity(loan, rateP, years);
+  const bonified = { rate: rateB, payment: payB, monthly: payB + cfg.linkedProductsMonthly + running };
+  const plain = { rate: rateP, payment: payP, monthly: payP + cfg.homeInsuranceMonthly + running };
+  return { loan, ltv, years, tax, taxLabel, feeSum, cash, bonified, plain, bonifiedExtra: bonified.monthly - plain.monthly, running, nonResTax,
+    stress: buyer.rateType === "variable" ? annuity(loan, rateB + cfg.stressEuribor, years) : null };
+}
+const pct = n => (n * 100).toLocaleString("sv-SE", {maximumFractionDigits: 2}) + " %";
+const HOME_KEY = "solpass.homes.v1";
+const newId = () => Math.random().toString(36).slice(2, 10);
+let home = { buyer: { residency: "nonResident", rateType: "fixed", ltv: 0.7, years: 25 }, homes: [] };
+try{ const h = JSON.parse(localStorage.getItem(HOME_KEY) || "null"); if(h && h.buyer && Array.isArray(h.homes)) home = h; }catch(e){}
+function saveHome(){ try{ localStorage.setItem(HOME_KEY, JSON.stringify(home)); }catch(e){} }
+const exampleHomes = () => [
+  { id: newId(), name: "Lägenhet, Marbella", price: 425000, region: "andalucia", newBuild: false, communityMonthly: 180, ibiYearly: 700 },
+  { id: newId(), name: "Radhus, Estepona (nytt)", price: 520000, region: "andalucia", newBuild: true, communityMonthly: 220, ibiYearly: 900 },
+  { id: newId(), name: "Lägenhet, Torrevieja", price: 210000, region: "valencia", newBuild: false, communityMonthly: 90, ibiYearly: 350 }
+];
+const caps = () => home.buyer.residency === "resident" ? { ltv: HOME_CFG.maxLtv.resident, years: HOME_CFG.maxYears.resident } : { ltv: HOME_CFG.maxLtv.nonResident, years: HOME_CFG.maxYears.nonResident };
+
+function renderBuyer(){
+  const b = home.buyer, c = caps();
+  $$('[name="h_res"]').forEach(i => i.checked = i.value === b.residency);
+  $$('[name="h_rate"]').forEach(i => i.checked = i.value === b.rateType);
+  $("#varLabel").textContent = `Rörlig (Euribor ${pct(HOME_CFG.euribor)} + marginal)`;
+  $("#ltvLabel").textContent = `Lån, % av priset (högst ${Math.round(c.ltv * 100)})`;
+  $("#yearsLabel").textContent = `Löptid, år (högst ${c.years})`;
+  $("#h_ltv").max = Math.round(c.ltv * 100); $("#h_ltv").value = Math.round(b.ltv * 100);
+  $("#h_years").max = c.years; $("#h_years").value = b.years;
+  $("#resNote").textContent = b.residency === "nonResident"
+    ? `Spanska banker lånar normalt ut högst ${Math.round(HOME_CFG.maxLtv.nonResident * 100)} % till den som inte bor i Spanien, mot ${Math.round(HOME_CFG.maxLtv.resident * 100)} % till residenta. Resten plus skatter och avgifter betalar ni kontant.`
+    : "Som resident lånar bankerna normalt ut upp till 80 % och på 30 år.";
+}
+$$('[name="h_res"]').forEach(i => i.addEventListener("change", () => {
+  home.buyer.residency = i.value; const c = caps();
+  home.buyer.ltv = Math.min(home.buyer.ltv, c.ltv); home.buyer.years = Math.min(home.buyer.years, c.years);
+  saveHome(); renderBuyer(); renderHomes(); renderHomeResults();
+}));
+$$('[name="h_rate"]').forEach(i => i.addEventListener("change", () => { home.buyer.rateType = i.value; saveHome(); renderHomeResults(); }));
+$("#h_ltv").addEventListener("input", e => { home.buyer.ltv = Math.max(0, Math.min(caps().ltv, (+e.target.value || 0) / 100)); saveHome(); renderHomeResults(); });
+$("#h_ltv").addEventListener("change", renderBuyer);
+$("#h_years").addEventListener("input", e => { home.buyer.years = Math.max(1, Math.min(caps().years, +e.target.value || 1)); saveHome(); renderHomeResults(); });
+$("#h_years").addEventListener("change", renderBuyer);
+
+function renderHomes(){
+  const keys = Object.keys(HOME_CFG.regions), nonRes = home.buyer.residency === "nonResident";
+  $("#homes").innerHTML = home.homes.map((h, i) => `
+    <div class="card" data-id="${h.id}">
+      <div class="home-head"><span class="k">Bostad ${i + 1}</span><button type="button" class="linkbtn" data-remove="${h.id}">Ta bort</button></div>
+      <label class="field"><span>Namn</span><input type="text" data-f="name" value="${esc(h.name)}" placeholder="t.ex. Lägenhet i Nueva Andalucía"></label>
+      <label class="field"><span>Region</span><select data-f="region">${keys.map(k => `<option value="${k}"${k === h.region ? " selected" : ""}>${HOME_CFG.regions[k].label}</option>`).join("")}</select></label>
+      <label class="field"><span>Pris, €</span><input type="number" data-f="price" min="0" step="5000" value="${h.price}"></label>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="nb_${h.id}" data-f="newBuild" value="0"${h.newBuild ? "" : " checked"}>Begagnad</label>
+        <label class="chip"><input type="radio" name="nb_${h.id}" data-f="newBuild" value="1"${h.newBuild ? " checked" : ""}>Nyproduktion</label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>Comunidad, €/mån</span><input type="number" data-f="communityMonthly" min="0" step="10" value="${h.communityMonthly}"></label>
+        <label class="field"><span>IBI, €/år</span><input type="number" data-f="ibiYearly" min="0" step="50" value="${h.ibiYearly}"></label>
+      </div>
+      ${nonRes ? `<label class="field"><span>Katastervärde, € (valfritt)</span><input type="number" data-f="catastral" min="0" step="5000" value="${h.catastral || ""}" placeholder="${Math.round(h.price * HOME_CFG.catastralRatio)}"></label>` : ""}
+    </div>`).join("");
+  $("#addHome").disabled = home.homes.length >= 6;
+  $("#exampleHomes").hidden = home.homes.length > 0;
+}
+// One delegated listener: typing never re-renders the cards, so focus stays in the field.
+$("#homes").addEventListener("input", e => {
+  const card = e.target.closest("[data-id]"), f = e.target.dataset.f; if(!card || !f) return;
+  const h = home.homes.find(x => x.id === card.dataset.id); if(!h) return;
+  if(f === "name" || f === "region") h[f] = e.target.value;
+  else if(f === "newBuild") h.newBuild = e.target.value === "1";
+  else h[f] = Math.max(0, +e.target.value || 0);
+  if(f === "price"){ const c = card.querySelector('[data-f="catastral"]'); if(c) c.placeholder = Math.round(h.price * HOME_CFG.catastralRatio); }
+  saveHome(); renderHomeResults();
+});
+$("#homes").addEventListener("change", e => { if(e.target.dataset.f === "region" || e.target.dataset.f === "newBuild") e.target.dispatchEvent(new Event("input", {bubbles: true})); });
+$("#homes").addEventListener("click", e => {
+  const id = e.target.dataset.remove; if(!id) return;
+  home.homes = home.homes.filter(h => h.id !== id); saveHome(); renderHomes(); renderHomeResults();
+});
+$("#addHome").addEventListener("click", () => {
+  if(home.homes.length >= 6) return;
+  home.homes.push({ id: newId(), name: "", price: 350000, region: "andalucia", newBuild: false, communityMonthly: 150, ibiYearly: 600 });
+  saveHome(); renderHomes(); renderHomeResults();
+  $("#homes .card:last-child input")?.focus();
+});
+$("#exampleHomes").addEventListener("click", () => { home.homes = exampleHomes(); saveHome(); renderHomes(); renderHomeResults(); });
+
+let homeLeadSent = false;
+function renderHomeResults(){
+  const out = $("#homeResults"), b = home.buyer;
+  if(!home.homes.length){ out.innerHTML = `<p class="lead" style="margin-top:22px">Lägg till en bostad, eller fyll med tre exempel för att se hur jämförelsen ser ut.</p>`; return; }
+  const rs = home.homes.map(h => ({ h, r: calculateHome(h, b, HOME_CFG) }));
+  const row = (label, vals, sub, strong) => `<tr${strong ? ' class="strong"' : ""}><td>${label}</td>${vals.map((v, i) => `<td>${v}${sub && sub[i] ? `<span class="sub">${sub[i]}</span>` : ""}</td>`).join("")}</tr>`;
+  const sec = t => `<tr class="sec"><td colspan="${rs.length + 1}">${t}</td></tr>`;
+  const cheapest = r => Math.abs(r.bonifiedExtra) < 1 ? "lika" : r.bonifiedExtra < 0 ? "med paket" : "utan paket";
+  let rows = row("Pris", rs.map(({h}) => eur(h.price)))
+    + row(`Lån (${Math.round(b.ltv * 100)} %, ${Math.min(b.years, caps().years)} år)`, rs.map(({r}) => eur(r.loan)))
+    + sec("På köpdagen")
+    + row("Kontantinsats", rs.map(({h, r}) => eur(h.price - r.loan)))
+    + row("Skatt vid köpet", rs.map(({r}) => eur(r.tax)), rs.map(({r}) => r.taxLabel))
+    + row("Notarie, registro, gestoría, advokat, värdering", rs.map(({r}) => eur(r.feeSum)))
+    + row("Kontant på köpdagen", rs.map(({r}) => eur(r.cash)), null, true)
+    + sec("Per månad")
+    + row("Med bankens paket", rs.map(({r}) => eur(r.bonified.monthly)), rs.map(({r}) => `ränta ${pct(r.bonified.rate)}, varav lån ${eur(r.bonified.payment)}`))
+    + row("Utan paket", rs.map(({r}) => eur(r.plain.monthly)), rs.map(({r}) => `ränta ${pct(r.plain.rate)}, varav lån ${eur(r.plain.payment)}`))
+    + row("Billigast", rs.map(({r}) => cheapest(r)), rs.map(({r}) => Math.abs(r.bonifiedExtra) < 1 ? "" : `${eur(Math.abs(r.bonifiedExtra))} per månad`), true)
+    + row("Varav comunidad, IBI och skatt", rs.map(({r}) => eur(r.running)), b.residency === "nonResident" ? rs.map(({r}) => `inkl. Modelo 210 ${eur(r.nonResTax)}/år`) : null);
+  if(b.rateType === "variable") rows += row(`Lånet om Euribor stiger ${HOME_CFG.stressEuribor * 100} procentenheter`, rs.map(({r}) => eur(r.stress || 0)), rs.map(({r}) => `+${eur((r.stress || 0) - r.bonified.payment)}`));
+  rows += row("Billigaste alternativet i kronor", rs.map(({r}) => `${Math.round(Math.min(r.bonified.monthly, r.plain.monthly) * RATE).toLocaleString("sv-SE")} kr`), null, true);
+  const keepForm = $("#homeLead");
+  out.innerHTML = `
+    <h3 style="margin-top:30px">Jämförelse</h3>
+    <div class="compare-wrap"><table class="compare"><thead><tr><th></th>${rs.map(({h}, i) => `<th>${esc(h.name || "Bostad " + (i + 1))}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="hint"><b>Bankens paket.</b> Spanska banker annonserar en rabatterad ränta (TIN bonificado) som bara gäller om ni också köper deras liv- och hemförsäkring och har lönen i banken. Vi räknar med ${eur(HOME_CFG.linkedProductsMonthly)} i månaden för paketet, mot ${eur(HOME_CFG.homeInsuranceMonthly)} för en egen hemförsäkring. Jämför alltid båda, och fråga banken vad paketet faktiskt kostar.</div>
+    <p class="small muted" style="margin-top:12px">Uppskattning, inte ett lånelöfte. Skatten är den allmänna satsen per region. Advokat räknas som ${pct(HOME_CFG.purchaseFees.lawyerRate)} av priset inklusive IVA.${b.residency === "nonResident" ? ` Icke-residenta betalar årligen skatt på en schablonintäkt: ${pct(HOME_CFG.imputedRate)} av katastervärdet, beskattat med ${pct(HOME_CFG.nonResidentTaxRate)} för EU-medborgare. Utan katastervärde räknar vi med ${pct(HOME_CFG.catastralRatio)} av priset.` : ""} Kurs ${RATE.toLocaleString("sv-SE")} SEK/EUR. ${HOME_CFG.note}</p>
+    <div id="homeLeadSlot"></div>`;
+  if(keepForm) $("#homeLeadSlot").replaceWith(keepForm);
+  else renderHomeLead();
+}
+function renderHomeLead(){
+  $("#homeLeadSlot").outerHTML = homeLeadSent ? `<div class="ok-msg" id="homeLead" style="margin-top:18px">Tack. Vi skickar er jämförelse vidare, och ni blir kontaktade inom två arbetsdagar.</div>` : `
+    <form class="card stack" id="homeLead" style="margin-top:22px" onsubmit="return false">
+      <h3>Vill ni ha riktiga siffror?</h3>
+      <p class="small muted">Gratis och utan förpliktelse. Vi skickar era bostäder och siffrorna ovan till en av Solpass partners, som hör av sig inom två arbetsdagar.</p>
+      <div class="chips" role="group" aria-label="Vem vill ni prata med">
+        <label class="chip" title="Jämför bankerna och tar fram ett riktigt lånebesked"><input type="checkbox" name="hl_p" value="mortgage-broker" checked>Hypoteksmäklare</label>
+        <label class="chip" title="Granskar bostaden och sköter köpet hos notarien"><input type="checkbox" name="hl_p" value="lawyer">Fastighetsadvokat</label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>Namn</span><input id="hl_name" required autocomplete="name"></label>
+        <label class="field"><span>E-post</span><input id="hl_email" type="email" required autocomplete="email" value="${esc(state.email)}"></label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>Telefon (valfritt)</span><input id="hl_phone" type="tel" autocomplete="tel"></label>
+        <label class="field"><span>Något vi bör veta? (valfritt)</span><input id="hl_msg" placeholder="t.ex. inkomst i SEK, eget bolag, när ni vill köpa"></label>
+      </div>
+      <div class="row"><button class="btn sun" type="submit">Bli kontaktad</button><span class="err" id="hl_err" hidden></span></div>
+    </form>`;
+  const f = $("#homeLead"); if(!f || f.tagName !== "FORM") return;
+  f.addEventListener("submit", async e => {
+    e.preventDefault();
+    const err = $("#hl_err"), email = $("#hl_email").value.trim(), name = $("#hl_name").value.trim(), btn = f.querySelector("button[type=submit]");
+    const partners = $$('[name="hl_p"]:checked').map(i => i.value);
+    err.hidden = true;
+    if(!name || !validEmail(email)){ err.textContent = "Skriv namn och en giltig e-postadress."; err.hidden = false; return; }
+    if(!partners.length){ err.textContent = "Välj hypoteksmäklare, fastighetsadvokat eller båda."; err.hidden = false; return; }
+    const summary = home.homes.map(h => { const r = calculateHome(h, home.buyer, HOME_CFG); return { name: h.name, price: h.price, region: h.region, newBuild: h.newBuild, communityMonthly: h.communityMonthly, ibiYearly: h.ibiYearly, catastral: h.catastral || null, cash: Math.round(r.cash), loan: Math.round(r.loan), monthlyBonified: Math.round(r.bonified.monthly), monthlyPlain: Math.round(r.plain.monthly) }; });
+    btn.disabled = true;
+    const ok = await saveLead({source: "home", email, name, phone: $("#hl_phone").value.trim() || null, partner: partners.join(","), message: $("#hl_msg").value.trim() || null, calc: { buyer: home.buyer, homes: summary }, profile: profile()});
+    btn.disabled = false;
+    if(!ok){ err.textContent = "Det gick inte att skicka just nu. Försök igen om en stund."; err.hidden = false; return; }
+    rememberEmail(email); homeLeadSent = true;
+    f.outerHTML = `<div class="ok-msg" id="homeLead" style="margin-top:18px">Tack, ${esc(name.split(" ")[0])}. Vi skickar er jämförelse vidare, och ni blir kontaktade på ${esc(email)} inom två arbetsdagar.</div>`;
+  });
+}
+function renderBostad(){ renderBuyer(); renderHomes(); renderHomeResults(); }
+
 /* ---------- routing ---------- */
-const VIEWS = ["start","plan","kontakter","dokument","fragor","fraga"];
+const VIEWS = ["start","plan","bostad","kontakter","dokument","fragor","fraga"];
 function route(){
   const h = location.hash.slice(1);
   const v = VIEWS.includes(h) ? h : "landing";
@@ -1148,6 +1423,7 @@ function route(){
   else { cta.textContent = "Gör er flyttplan"; cta.href = "#start"; }
   if(v === "start"){ if(!location.hash.includes("start") || wzStep >= STEPS.length) wzStep = 0; renderWizard(); }
   if(v === "plan"){ if(!hasPlan()){ location.hash = "start"; return; } renderPlan(); }
+  if(v === "bostad") renderBostad();
   if(v === "kontakter") renderContacts();
   if(v === "dokument") renderDocs();
   if(v === "fragor") renderFaq($("#faqSearch").value);
