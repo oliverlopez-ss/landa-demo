@@ -309,6 +309,9 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
 .homefacts b{display:block;font:800 1.6rem var(--body);font-variant-numeric:tabular-nums}
 .homefacts span{font-size:.88rem;color:var(--muted)}
 
+.banks td:nth-child(n+2),.banks th:nth-child(n+2){text-align:left}
+.banks td:first-child,.banks thead th:first-child{color:var(--ink);font-weight:700}
+.banks .src{font-size:.78rem}
 /* modal + toast */
 .modal{position:fixed;inset:0;background:rgba(6,16,25,.6);display:flex;align-items:flex-end;justify-content:center;z-index:50;padding:16px;padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}
 @media(min-width:620px){.modal{align-items:center}}
@@ -610,6 +613,11 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
         <label class="chip"><input type="radio" name="h_rate" value="fixed" checked>Fast hela löptiden</label>
         <label class="chip"><input type="radio" name="h_rate" value="variable"><span id="varLabel">Rörlig</span></label>
       </div></div>
+    <label class="field" id="bankField"><span>Räkna med</span>
+      <select id="h_bank">
+        <option value="typical">Typisk marknadsränta (oktober 2026)</option>
+        <option value="caixabank">CaixaBank HolaBank, publicerad ränta för icke-residenter</option>
+      </select></label>
     <div class="grid2">
       <label class="field"><span id="ltvLabel">Lån, % av priset</span><input type="number" id="h_ltv" min="0" step="5"></label>
       <label class="field"><span id="yearsLabel">Löptid, år</span><input type="number" id="h_years" min="5"></label>
@@ -622,6 +630,9 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <button class="btn ghost" id="exampleHomes">Fyll med tre exempel</button>
   </div>
   <div id="homeResults"></div>
+  <h3 style="margin-top:36px">Banker som lånar ut till icke-residenter</h3>
+  <p class="small muted" style="margin-top:6px">Villkor som bankerna själva publicerar, kontrollerade 29 oktober 2026. Bara CaixaBank publicerar en ränta; övriga lämnar räntan i ett personligt erbjudande. Det slutliga villkoret står i bankens FEIN (europeiskt standardiserat informationsblad).</p>
+  <div class="compare-wrap"><table class="compare banks" id="bankTable"></table></div>
 </div></div>
 
 <div id="v-kontakter" hidden><div class="wrap" style="padding-bottom:64px">
@@ -1255,6 +1266,40 @@ function calculateHome(home, buyer, cfg){
   return { loan, ltv, years, tax, taxLabel, feeSum, cash, bonified, plain, bonifiedExtra: bonified.monthly - plain.monthly, running, nonResTax,
     stress: buyer.rateType === "variable" ? annuity(loan, rateB + cfg.stressEuribor, years) : null };
 }
+// Published non-resident terms per bank, checked 29 Oct 2026 on each bank's own page.
+const BANKS = [
+  { name: "CaixaBank (HolaBank)", ltv: "70 %", term: "20 år med inkomst i SEK", rate: "Fast 2,80 % med paket, 3,80 % utan. TAE 4,374 % respektive 4,398 % i bankens exempel.",
+    notes: "Ansökan på nätet från Sverige, svar inom 72 timmar. Konto krävs (35 € per kvartal). Banken betalar stämpelskatt, notarie och registro för lånet.", url: "https://www.caixabank.es/particular/holabank/holabank-mortgage.html" },
+  { name: "Bankinter", ltv: "60 % för fritidsbostad", term: "25 år", rate: "Publiceras inte. Fast, rörlig, mixad eller dual.",
+    notes: "Lån i annan valuta än euro finns för den som bor i ett EU-land utan euro. Personligt erbjudande.", url: "https://www.bankinter.com/banca/en/nav/banking-products-foreigners-expatriates/foreign-non-residents" },
+  { name: "UCI", ltv: "Upp till 70 %", term: "Fast upp till 30 år", rate: "Publiceras inte. Fast, mixad eller rörlig.",
+    notes: "Specialiserat bolåneinstitut med service på engelska.", url: "https://uci.es/en/types-of-mortgages/mortgage-spain-non-resident/" },
+  { name: "Banca March", ltv: "Upp till 70 %", term: "20–25 år beroende på produkt", rate: "Publiceras inte för icke-residenter.",
+    notes: "Lägre belåning kan gälla med inkomst i annan valuta än euro.", url: "https://www.bancamarch.es/es/actualidad/noticias/banca-march-amplia-su-oferta-hipotecaria-con-la-nueva-hipoteca-fija-bonificada.html" },
+  { name: "Santander", ltv: "Publiceras inte", term: "Publiceras inte", rate: "Publiceras inte.",
+    notes: "Hipoteca Mundo för den som har skatterättslig hemvist utanför Spanien.", url: "https://www.bancosantander.es/particulares/hipotecas/no-residentes" },
+  { name: "Sabadell", ltv: "Publiceras inte", term: "Publiceras inte", rate: "Publiceras inte.",
+    notes: "Villkor tas fram med en specialist.", url: "https://www.bancsabadell.com/bsnacional/es/particulares/hipotecas/" }
+];
+// CaixaBank HolaBank, fixed rate only. Full discount (1 point) needs salary and bills in the bank, home and life insurance,
+// and an alarm: 317 €/yr + 226.58 €/yr + 52.03 €/month + card 36 €/yr. The account (35 € per quarter) applies either way.
+const CAIXA = { rate: { bonified: 0.028, plain: 0.038 }, maxLtv: 0.7, maxYears: 20,
+  packageMonthly: 317 / 12 + 226.58 / 12 + 52.03 + 36 / 12, homeInsuranceMonthly: 25, accountMonthly: 35 / 3, valuation: 289.06 };
+function effectiveCfg(buyer){
+  if(buyer.bank !== "caixabank" || buyer.residency !== "nonResident") return HOME_CFG;
+  return Object.assign({}, HOME_CFG, {
+    rates: { fixed: CAIXA.rate, variable: CAIXA.rate },
+    nonResidentRateAdd: 0,
+    maxLtv: { resident: HOME_CFG.maxLtv.resident, nonResident: CAIXA.maxLtv },
+    maxYears: { resident: HOME_CFG.maxYears.resident, nonResident: CAIXA.maxYears },
+    linkedProductsMonthly: CAIXA.packageMonthly + CAIXA.accountMonthly,
+    homeInsuranceMonthly: CAIXA.homeInsuranceMonthly + CAIXA.accountMonthly,
+    purchaseFees: Object.assign({}, HOME_CFG.purchaseFees, { valuation: CAIXA.valuation })
+  });
+}
+function renderBankTable(){
+  $("#bankTable").innerHTML = `<thead><tr><th>Bank</th><th>Maxbelåning</th><th>Längsta löptid</th><th>Ränta</th><th>Att veta</th></tr></thead><tbody>${BANKS.map(b => `<tr><td>${b.name}</td><td>${b.ltv}</td><td>${b.term}</td><td>${b.rate}</td><td>${b.notes} <a class="src" href="${b.url}" target="_blank" rel="noopener">Källa</a></td></tr>`).join("")}</tbody>`;
+}
 const pct = n => (n * 100).toLocaleString("sv-SE", {maximumFractionDigits: 2}) + " %";
 const HOME_KEY = "solpass.homes.v1";
 const newId = () => Math.random().toString(36).slice(2, 10);
@@ -1266,18 +1311,25 @@ const exampleHomes = () => [
   { id: newId(), name: "Radhus, Estepona (nytt)", price: 520000, region: "andalucia", newBuild: true, communityMonthly: 220, ibiYearly: 900 },
   { id: newId(), name: "Lägenhet, Torrevieja", price: 210000, region: "valencia", newBuild: false, communityMonthly: 90, ibiYearly: 350 }
 ];
-const caps = () => home.buyer.residency === "resident" ? { ltv: HOME_CFG.maxLtv.resident, years: HOME_CFG.maxYears.resident } : { ltv: HOME_CFG.maxLtv.nonResident, years: HOME_CFG.maxYears.nonResident };
+const caps = () => { const c = effectiveCfg(home.buyer); return home.buyer.residency === "resident" ? { ltv: c.maxLtv.resident, years: c.maxYears.resident } : { ltv: c.maxLtv.nonResident, years: c.maxYears.nonResident }; };
 
 function renderBuyer(){
   const b = home.buyer, c = caps();
   $$('[name="h_res"]').forEach(i => i.checked = i.value === b.residency);
-  $$('[name="h_rate"]').forEach(i => i.checked = i.value === b.rateType);
+  if(!b.bank) b.bank = "typical";
+  const caixa = b.bank === "caixabank" && b.residency === "nonResident";
+  $("#bankField").hidden = b.residency !== "nonResident";
+  $("#h_bank").value = b.bank;
+  if(caixa && b.rateType === "variable") b.rateType = "fixed";
+  $$('[name="h_rate"]').forEach(i => { i.checked = i.value === b.rateType; i.disabled = caixa && i.value === "variable"; i.closest(".chip").style.opacity = i.disabled ? .45 : ""; });
   $("#varLabel").textContent = `Rörlig (Euribor ${pct(HOME_CFG.euribor)} + marginal)`;
   $("#ltvLabel").textContent = `Lån, % av priset (högst ${Math.round(c.ltv * 100)})`;
   $("#yearsLabel").textContent = `Löptid, år (högst ${c.years})`;
   $("#h_ltv").max = Math.round(c.ltv * 100); $("#h_ltv").value = Math.round(b.ltv * 100);
   $("#h_years").max = c.years; $("#h_years").value = b.years;
-  $("#resNote").textContent = b.residency === "nonResident"
+  $("#resNote").textContent = caixa
+    ? "CaixaBank HolaBank: fast ränta, högst 70 % och 20 år med inkomst i kronor. Paketet för full rabatt (−1 procentenhet) kräver lön och räkningar i banken, hem- och livförsäkring samt larm via banken; vi räknar med cirka 100 € i månaden för det. Kontot kostar 35 € per kvartal oavsett."
+    : b.residency === "nonResident"
     ? `Spanska banker lånar normalt ut högst ${Math.round(HOME_CFG.maxLtv.nonResident * 100)} % till den som inte bor i Spanien, mot ${Math.round(HOME_CFG.maxLtv.resident * 100)} % till residenta. Resten plus skatter och avgifter betalar ni kontant.`
     : "Som resident lånar bankerna normalt ut upp till 80 % och på 30 år.";
 }
@@ -1287,6 +1339,11 @@ $$('[name="h_res"]').forEach(i => i.addEventListener("change", () => {
   saveHome(); renderBuyer(); renderHomes(); renderHomeResults();
 }));
 $$('[name="h_rate"]').forEach(i => i.addEventListener("change", () => { home.buyer.rateType = i.value; saveHome(); renderHomeResults(); }));
+$("#h_bank").addEventListener("change", e => {
+  home.buyer.bank = e.target.value; const c = caps();
+  home.buyer.ltv = Math.min(home.buyer.ltv, c.ltv); home.buyer.years = Math.min(home.buyer.years, c.years);
+  saveHome(); renderBuyer(); renderHomeResults();
+});
 $("#h_ltv").addEventListener("input", e => { home.buyer.ltv = Math.max(0, Math.min(caps().ltv, (+e.target.value || 0) / 100)); saveHome(); renderHomeResults(); });
 $("#h_ltv").addEventListener("change", renderBuyer);
 $("#h_years").addEventListener("input", e => { home.buyer.years = Math.max(1, Math.min(caps().years, +e.target.value || 1)); saveHome(); renderHomeResults(); });
@@ -1340,7 +1397,8 @@ let homeLeadSent = false;
 function renderHomeResults(){
   const out = $("#homeResults"), b = home.buyer;
   if(!home.homes.length){ out.innerHTML = `<p class="lead" style="margin-top:22px">Lägg till en bostad, eller fyll med tre exempel för att se hur jämförelsen ser ut.</p>`; return; }
-  const rs = home.homes.map(h => ({ h, r: calculateHome(h, b, HOME_CFG) }));
+  const cfg = effectiveCfg(b), caixa = cfg !== HOME_CFG;
+  const rs = home.homes.map(h => ({ h, r: calculateHome(h, b, cfg) }));
   const row = (label, vals, sub, strong) => `<tr${strong ? ' class="strong"' : ""}><td>${label}</td>${vals.map((v, i) => `<td>${v}${sub && sub[i] ? `<span class="sub">${sub[i]}</span>` : ""}</td>`).join("")}</tr>`;
   const sec = t => `<tr class="sec"><td colspan="${rs.length + 1}">${t}</td></tr>`;
   const cheapest = r => Math.abs(r.bonifiedExtra) < 1 ? "lika" : r.bonifiedExtra < 0 ? "med paket" : "utan paket";
@@ -1362,7 +1420,9 @@ function renderHomeResults(){
   out.innerHTML = `
     <h3 style="margin-top:30px">Jämförelse</h3>
     <div class="compare-wrap"><table class="compare"><thead><tr><th></th>${rs.map(({h}, i) => `<th>${esc(h.name || "Bostad " + (i + 1))}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div>
-    <div class="hint"><b>Bankens paket.</b> Spanska banker annonserar en rabatterad ränta (TIN bonificado) som bara gäller om ni också köper deras liv- och hemförsäkring och har lönen i banken. Vi räknar med ${eur(HOME_CFG.linkedProductsMonthly)} i månaden för paketet, mot ${eur(HOME_CFG.homeInsuranceMonthly)} för en egen hemförsäkring. Jämför alltid båda, och fråga banken vad paketet faktiskt kostar.</div>
+    <div class="hint"><b>Bankens paket.</b> ${caixa
+      ? `Räknat med CaixaBank HolaBanks publicerade villkor: fast ränta 2,80 % med full rabatt och 3,80 % utan. Full rabatt kräver lön och tre räkningar i banken, hemförsäkring, livförsäkring och larm via banken, cirka ${eur(CAIXA.packageMonthly)} i månaden. Utan paket räknar vi med ${eur(CAIXA.homeInsuranceMonthly)} för en egen hemförsäkring. Kontot på 35 € per kvartal ingår i båda.`
+      : `Spanska banker annonserar en rabatterad ränta (TIN bonificado) som bara gäller om ni också köper deras liv- och hemförsäkring och har lönen i banken. Vi räknar med ${eur(HOME_CFG.linkedProductsMonthly)} i månaden för paketet, mot ${eur(HOME_CFG.homeInsuranceMonthly)} för en egen hemförsäkring.`} Jämför alltid båda, och fråga banken vad paketet faktiskt kostar.</div>
     <p class="small muted" style="margin-top:12px">Uppskattning, inte ett lånelöfte. Skatten är den allmänna satsen per region. Advokat räknas som ${pct(HOME_CFG.purchaseFees.lawyerRate)} av priset inklusive IVA.${b.residency === "nonResident" ? ` Icke-residenta betalar årligen skatt på en schablonintäkt: ${pct(HOME_CFG.imputedRate)} av katastervärdet, beskattat med ${pct(HOME_CFG.nonResidentTaxRate)} för EU-medborgare. Utan katastervärde räknar vi med ${pct(HOME_CFG.catastralRatio)} av priset.` : ""} Kurs ${RATE.toLocaleString("sv-SE")} SEK/EUR. ${HOME_CFG.note}</p>
     <div id="homeLeadSlot"></div>`;
   if(keepForm) $("#homeLeadSlot").replaceWith(keepForm);
@@ -1395,7 +1455,7 @@ function renderHomeLead(){
     err.hidden = true;
     if(!name || !validEmail(email)){ err.textContent = "Skriv namn och en giltig e-postadress."; err.hidden = false; return; }
     if(!partners.length){ err.textContent = "Välj hypoteksmäklare, fastighetsadvokat eller båda."; err.hidden = false; return; }
-    const summary = home.homes.map(h => { const r = calculateHome(h, home.buyer, HOME_CFG); return { name: h.name, price: h.price, region: h.region, newBuild: h.newBuild, communityMonthly: h.communityMonthly, ibiYearly: h.ibiYearly, catastral: h.catastral || null, cash: Math.round(r.cash), loan: Math.round(r.loan), monthlyBonified: Math.round(r.bonified.monthly), monthlyPlain: Math.round(r.plain.monthly) }; });
+    const summary = home.homes.map(h => { const r = calculateHome(h, home.buyer, effectiveCfg(home.buyer)); return { name: h.name, price: h.price, region: h.region, newBuild: h.newBuild, communityMonthly: h.communityMonthly, ibiYearly: h.ibiYearly, catastral: h.catastral || null, cash: Math.round(r.cash), loan: Math.round(r.loan), monthlyBonified: Math.round(r.bonified.monthly), monthlyPlain: Math.round(r.plain.monthly) }; });
     btn.disabled = true;
     const ok = await saveLead({source: "home", email, name, phone: $("#hl_phone").value.trim() || null, partner: partners.join(","), message: $("#hl_msg").value.trim() || null, calc: { buyer: home.buyer, homes: summary }, profile: profile()});
     btn.disabled = false;
@@ -1404,7 +1464,7 @@ function renderHomeLead(){
     f.outerHTML = `<div class="ok-msg" id="homeLead" style="margin-top:18px">Tack, ${esc(name.split(" ")[0])}. Vi skickar er jämförelse vidare, och ni blir kontaktade på ${esc(email)} inom två arbetsdagar.</div>`;
   });
 }
-function renderBostad(){ renderBuyer(); renderHomes(); renderHomeResults(); }
+function renderBostad(){ renderBuyer(); renderHomes(); renderHomeResults(); renderBankTable(); }
 
 /* ---------- routing ---------- */
 const VIEWS = ["start","plan","bostad","kontakter","dokument","fragor","fraga"];
