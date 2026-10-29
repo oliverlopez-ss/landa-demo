@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Landa i Spanien</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Figtree:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one mobile-first column, sticky tab bar; cards only for separable objects (partner, document, modal). */
+:root{
+  --bg:#F7F4EE; --paper:#FFFFFF; --ink:#16283A; --muted:#5B6B7A; --line:#DDD7CC;
+  --sea:#1F5F8B; --sea-soft:#E3EEF6; --sun:#D99A2B; --sun-soft:#FBF0D8; --ok:#2E7D5B; --ok-soft:#E1F1E8; --warn:#B4452B; --warn-soft:#F8E4DE;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0F1A24; --paper:#162433; --ink:#EEF2F5; --muted:#A3B1BE; --line:#2A3B4C;
+  --sea:#6FB0DE; --sea-soft:#1D3448; --sun:#E8B556; --sun-soft:#3A2F15; --ok:#5FC08F; --ok-soft:#1B3A2C; --warn:#F08A6E; --warn-soft:#4A241B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F1A24; --paper:#162433; --ink:#EEF2F5; --muted:#A3B1BE; --line:#2A3B4C;
+  --sea:#6FB0DE; --sea-soft:#1D3448; --sun:#E8B556; --sun-soft:#3A2F15; --ok:#5FC08F; --ok-soft:#1B3A2C; --warn:#F08A6E; --warn-soft:#4A241B; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:760px;margin:0 auto;padding-block:0 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{padding-block:24px 10px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.brand h1{font-family:var(--display);font-weight:600;font-size:2rem;margin:0;letter-spacing:-.01em;line-height:1.1}
+.brand span{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.acct{text-align:right;font-size:.85rem;color:var(--muted)}
+.acct .plus{display:inline-block;background:var(--sun);color:#1a1300;font-weight:700;border-radius:999px;padding:2px 10px;font-size:.75rem;margin-top:4px}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:4px;padding-block:10px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+nav.tabs button{flex:0 0 auto;background:transparent;border:1px solid transparent;color:var(--muted);font:600 .9rem var(--body);padding:8px 12px;border-radius:999px;cursor:pointer}
+nav.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+nav.tabs button:focus-visible{outline:2px solid var(--sea);outline-offset:2px}
+section.view{padding-block:22px 0}
+h2{font-family:var(--display);font-weight:500;font-size:1.5rem;margin:0 0 6px;text-wrap:balance}
+h3{font-size:1.05rem;margin:0 0 4px}
+p{margin:0 0 10px}
+.lead{color:var(--muted);margin-bottom:18px;max-width:62ch}
+.label{font-size:.72rem;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{background:var(--sea);color:#fff;border:0;border-radius:10px;padding:11px 16px;font:600 .95rem var(--body);cursor:pointer}
+.btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.btn.ghost{background:transparent;color:var(--sea);border:1px solid var(--sea)}
+.btn.sun{background:var(--sun);color:#1a1300}
+.btn.sm{padding:7px 12px;font-size:.85rem}
+.btn[disabled]{opacity:.5;cursor:default}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px}
+.q{display:grid;gap:6px;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips label{position:relative;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.9rem;cursor:pointer;background:var(--bg)}
+.chips input{position:absolute;opacity:0;width:0;height:0}
+.chips label:has(input:checked){border-color:var(--sea);background:var(--sea-soft);color:var(--sea);font-weight:600}
+.chips label:has(input:focus-visible){outline:2px solid var(--sea)}
+input[type=date],input[type=number],input[type=text],input[type=email],input[type=tel],select,textarea{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);font:1rem var(--body);max-width:100%}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--sea)}
+.field{display:grid;gap:4px}
+.field span{font-size:.85rem;color:var(--muted)}
+
+/* plan */
+.summary{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 10px}
+.summary span{background:var(--sun-soft);border-radius:8px;padding:4px 10px;font-size:.85rem}
+.phase{margin-top:22px}
+.phase-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:8px}
+.phase-head .when{color:var(--muted);font-size:.85rem}
+.task{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.task:last-child{border-bottom:0}
+.task input{width:20px;height:20px;margin-top:3px;accent-color:var(--ok)}
+.task .t{font-weight:600}
+.task .d{color:var(--muted);font-size:.92rem}
+.task .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}
+.task .due{font-size:.78rem;padding:3px 8px;border-radius:6px;background:var(--bg);border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.task .due.late{background:var(--warn-soft);border-color:var(--warn);color:var(--warn);font-weight:600}
+.task .due.soon{background:var(--sun-soft);border-color:var(--sun);font-weight:600}
+.task .due.lock{color:var(--muted)}
+.who{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;background:var(--sea-soft);color:var(--sea);border-radius:6px;padding:3px 8px;font-weight:600;cursor:pointer;border:0;font-family:var(--body)}
+.task.done .t{text-decoration:line-through;color:var(--muted)}
+.hint{background:var(--sun-soft);border-left:3px solid var(--sun);padding:10px 12px;border-radius:0 8px 8px 0;font-size:.92rem;margin-top:14px}
+.gate{background:var(--paper);border:1px dashed var(--sun);border-radius:12px;padding:16px;margin-top:16px}
+.gate h3{font-family:var(--display);font-weight:500;font-size:1.2rem}
+.gate ul{margin:8px 0 12px 18px;padding:0;color:var(--muted);font-size:.93rem}
+.gate .price{font-family:var(--display);font-size:1.6rem;margin-right:8px}
+
+/* calc */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.kpi .v{font-family:var(--display);font-size:1.6rem;font-variant-numeric:tabular-nums;line-height:1.1}
+.kpi .l{font-size:.78rem;color:var(--muted)}
+table.lines{width:100%;border-collapse:collapse;font-size:.93rem}
+table.lines td{padding:7px 0;border-bottom:1px solid var(--line)}
+table.lines td:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl{overflow-x:auto}
+.note{font-size:.82rem;color:var(--muted)}
+
+/* faq */
+.search{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font:1rem var(--body);margin-bottom:12px}
+.cat{margin-top:18px}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;padding:12px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--muted);font-weight:400;flex:0 0 auto}
+details[open] summary::after{content:"–"}
+details .a{padding:0 0 14px;max-width:66ch}
+details .a p{margin-bottom:8px}
+.src{font-size:.8rem;color:var(--muted)}
+
+/* contacts */
+.cgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.card .k{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--sea);font-weight:700}
+.card h3{margin:0}
+.card p{font-size:.92rem;color:var(--muted);margin:0;flex:1}
+.pill{display:inline-block;font-size:.74rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pill.v{border-color:var(--ok);color:var(--ok)}
+.pill.o{border-color:var(--sun);color:var(--sun)}
+.card a{color:var(--sea);font-weight:600;font-size:.9rem;word-break:break-all}
+.card .foot{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:4px}
+
+/* docs */
+.doc{display:grid;grid-template-columns:1fr auto;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);align-items:start}
+.doc .t{font-weight:600}
+.doc .d{color:var(--muted);font-size:.9rem}
+.doc .d a{color:var(--sea)}
+.doc select{font-size:.85rem;padding:6px 8px}
+.doc.has .t::before{content:"✓ ";color:var(--ok)}
+.doc.locked{opacity:.55}
+.tpl{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:.9rem}
+.tpl ol{margin:4px 0 0 18px;padding:0}
+
+/* ask + modal */
+form.ask{display:grid;gap:10px}
+form.ask textarea{min-height:110px;resize:vertical;width:100%}
+form.ask input,form.ask select{width:100%}
+.thanks{background:var(--ok-soft);border-radius:10px;padding:14px;margin-top:12px}
+.modal{position:fixed;inset:0;background:rgba(10,20,30,.55);display:flex;align-items:flex-end;justify-content:center;z-index:20;padding:max(16px,env(safe-area-inset-left,0px))}
+@media(min-width:600px){.modal{align-items:center}}
+.modal .box{background:var(--paper);border-radius:14px;padding:20px;max-width:520px;width:100%;max-height:90vh;overflow:auto;display:grid;gap:10px}
+.modal .box input,.modal .box textarea{width:100%}
+.modal .box textarea{min-height:80px}
+.mine{margin-top:18px}
+.mine .item{padding:10px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.mine .item b{display:block}
+footer{margin-top:40px;color:var(--muted);font-size:.8rem;border-top:1px solid var(--line);padding-top:14px}
+.toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:.9rem;z-index:30;max-width:calc(100% - 32px)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand"><h1>Landa</h1><span>Sverige → Spanien</span></div>
+  <div class="acct" id="acct">Laddar konto…</div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-view="plan">Min plan</button>
+  <button role="tab" aria-selected="false" data-view="kalkyl">Kalkyl</button>
+  <button role="tab" aria-selected="false" data-view="faq">Frågor</button>
+  <button role="tab" aria-selected="false" data-view="kontakter">Kontakter</button>
+  <button role="tab" aria-selected="false" data-view="dokument">Dokument</button>
+  <button role="tab" aria-selected="false" data-view="fraga">Fråga</button>
+</nav>
+
+<!-- PLAN -->
+<section class="view" id="view-plan">
+  <h2>Er flytt, steg för steg</h2>
+  <div class="hint" style="margin:0 0 14px">Testversion. Allt du fyller i sparas bara i din webbläsare, och knappen för Landa Plus låser upp utan betalning så att du kan prova hela flödet.</div>
+  <p class="lead">Svara på sju frågor. Planen får ordning direkt, och med flyttdatum får varje steg ett sista datum.</p>
+  <form class="panel" id="intake">
+    <div class="q"><span class="label">Planerad flyttdag</span>
+      <div class="row"><input type="date" name="movedate" id="movedate"><span class="note">Datumstyrd plan ingår i Landa Plus.</span></div></div>
+    <div class="q"><span class="label">Vart flyttar ni?</span>
+      <div class="chips">
+        <label><input type="radio" name="region" value="costa" checked><span>Costa del Sol</span></label>
+        <label><input type="radio" name="region" value="annat"><span>Annan del av Spanien</span></label>
+      </div></div>
+    <div class="q"><span class="label">Vilka flyttar?</span>
+      <div class="chips">
+        <label><input type="radio" name="familj" value="barn" checked><span>Vuxna med barn</span></label>
+        <label><input type="radio" name="familj" value="par"><span>Par utan barn</span></label>
+        <label><input type="radio" name="familj" value="solo"><span>En person</span></label>
+      </div></div>
+    <div class="q"><span class="label">Hur försörjer ni er?</span>
+      <div class="chips">
+        <label><input type="radio" name="inkomst" value="distans" checked><span>Anställd på distans åt svensk arbetsgivare</span></label>
+        <label><input type="radio" name="inkomst" value="bolag"><span>Eget bolag i Sverige</span></label>
+        <label><input type="radio" name="inkomst" value="spansk"><span>Spansk anställning</span></label>
+        <label><input type="radio" name="inkomst" value="pension"><span>Pension eller kapital</span></label>
+      </div></div>
+    <div class="q"><span class="label">Bostad</span>
+      <div class="chips">
+        <label><input type="radio" name="bostad" value="hyra" checked><span>Hyra först</span></label>
+        <label><input type="radio" name="bostad" value="kopa"><span>Köpa direkt</span></label>
+      </div></div>
+    <div class="q"><span class="label">Bil</span>
+      <div class="chips">
+        <label><input type="radio" name="bil" value="med" checked><span>Tar med svensk bil</span></label>
+        <label><input type="radio" name="bil" value="kop"><span>Köper i Spanien</span></label>
+        <label><input type="radio" name="bil" value="ingen"><span>Ingen bil</span></label>
+      </div></div>
+    <div class="q" style="margin-bottom:0"><span class="label">Namn på hushållet (valfritt)</span>
+      <input type="text" name="hushall" id="hushall" placeholder="t.ex. Familjen Andersson" style="max-width:320px"></div>
+  </form>
+  <div id="plan"></div>
+</section>
+
+<!-- KALKYL -->
+<section class="view" id="view-kalkyl" hidden>
+  <h2>Vad kostar livet, och vad händer med skatten?</h2>
+  <p class="lead">Grov uppskattning för att ta beslutet, inte för deklarationen. Alla belopp i euro per månad, kurs 11,3 SEK/EUR.</p>
+  <form class="panel" id="calc">
+    <div class="q"><span class="label">Hushållets bruttoinkomst per år (SEK)</span>
+      <input type="number" id="c_inc" value="1500000" step="50000" min="0" style="max-width:220px"></div>
+    <div class="q"><span class="label">Boende</span>
+      <div class="chips">
+        <label><input type="radio" name="c_bo" value="lgh" checked><span>Lägenhet, 3 rum</span></label>
+        <label><input type="radio" name="c_bo" value="hus"><span>Hus eller radhus</span></label>
+        <label><input type="radio" name="c_bo" value="villa"><span>Villa med pool</span></label>
+      </div></div>
+    <div class="q"><span class="label">Barn och skolform</span>
+      <div class="row">
+        <input type="number" id="c_kids" value="2" min="0" max="6" style="width:80px"> barn i
+        <select id="c_skola"><option value="int">internationell skola</option><option value="sv">svensk skola</option><option value="pub">spansk kommunal skola</option></select>
+      </div></div>
+    <div class="q" style="margin-bottom:0"><span class="label">Bilar</span>
+      <input type="number" id="c_bil" value="1" min="0" max="4" style="width:80px"></div>
+  </form>
+  <div id="calcOut"></div>
+</section>
+
+<!-- FAQ -->
+<section class="view" id="view-faq" hidden>
+  <h2>Det alla frågar</h2>
+  <p class="lead">Korta svar, skrivna för svenskar, med vem du vänder dig till. Regler ändras, så kontrollera datum och belopp hos källan innan du agerar.</p>
+  <input class="search" id="faqSearch" type="search" placeholder="Sök, t.ex. NIE, skola, bil, skatt">
+  <div id="faq"></div>
+</section>
+
+<!-- KONTAKTER -->
+<section class="view" id="view-kontakter" hidden>
+  <h2>Vem löser vad</h2>
+  <p class="lead">Myndigheter och skolor är fasta. Verifierade partners får ni en varm introduktion till med er profil bifogad, så att de vet vilka ni är innan första samtalet.</p>
+  <div class="cgrid" id="contacts"></div>
+  <div class="mine" id="myLeads"></div>
+</section>
+
+<!-- DOKUMENT -->
+<section class="view" id="view-dokument" hidden>
+  <h2>Dokumentvalv</h2>
+  <p class="lead">Allt ni kommer att bli ombedda att visa, i den ordning ni behöver det. Markera vad ni har, så vet ni vad som saknas.</p>
+  <div id="docs"></div>
+</section>
+
+<!-- FRÅGA -->
+<section class="view" id="view-fraga" hidden>
+  <h2>Hittar du inte svaret?</h2>
+  <p class="lead">De vanligaste frågorna blir nya svar i appen. Med Landa Plus får du svar inom ett dygn.</p>
+  <form class="ask panel" id="askForm">
+    <label class="field"><span>Vad undrar du?</span><textarea id="askText" required placeholder="T.ex. Vi har ett AB i Sverige och vill flytta i augusti. Vad måste vi göra före flytten?"></textarea></label>
+    <label class="field"><span>Område</span><select id="askCat">
+      <option>Skatt och bolag</option><option>Bostad</option><option>Skola och barn</option><option>Myndigheter och papper</option><option>Bil och körkort</option><option>Sjukvård</option><option>Annat</option></select></label>
+    <label class="field"><span>E-post för svaret</span><input id="askMail" type="email" required placeholder="du@exempel.se"></label>
+    <div><button class="btn" type="submit">Skicka frågan</button></div>
+  </form>
+  <div id="askDone" class="thanks" hidden></div>
+</section>
+
+<footer>Landa är en guide, inte juridisk eller skatterättslig rådgivning. Belopp, tidsfrister och regler ändras; verifiera alltid hos myndigheten eller en rådgivare innan du fattar beslut.</footer>
+</div>
+<div id="modalHost"></div>
+
+<script>
+const CONTACTS = [
+ {id:"gestor",k:"Gestor",title:"Gestoría (administrativ rådgivare)",status:"o",text:"Den viktigaste personen i flytten. Sköter NIE-bokning, padrón, residens, skatteregistrering, bilomregistrering. Välj en som har svenska eller engelsktalande klienter.",link:null,note:"Partner ej vald ännu"},
+ {id:"skatt",k:"Skatterådgivare",title:"Skatterådgivare Sverige–Spanien",status:"o",text:"Krävs om ni har bolag, kapital, pension eller tänker på Beckham-regimen. En svensk revisor räcker inte; det måste vara någon som kan båda systemen och dubbelbeskattningsavtalet.",link:null,note:"Partner ej vald ännu"},
+ {id:"policia",k:"Myndighet",title:"Policía Nacional – NIE och residens",status:"v",text:"NIE söks hos utlänningsavdelningen (Oficina de Extranjería) eller på en polisstation (comisaría). Tid bokas via cita previa. Residensregistrering för EU-medborgare görs på samma ställe.",link:"https://sede.administracionespublicas.gob.es"},
+ {id:"ayto",k:"Myndighet",title:"Ayuntamiento – empadronamiento",status:"v",text:"Kommunen där ni bor registrerar er i padrón. Det är nyckeln till skola, vårdcentral och bil. Ta med hyreskontrakt eller lagfart, pass och NIE.",link:"https://www.marbella.es"},
+ {id:"skv",k:"Myndighet",title:"Skatteverket – anmäl flytt utomlands",status:"v",text:"Anmälan görs före avresan. Avgör folkbokföring, SINK och om Sverige fortfarande ser er som skatterättsligt bosatta (väsentlig anknytning).",link:"https://www.skatteverket.se"},
+ {id:"aeat",k:"Myndighet",title:"Agencia Tributaria (AEAT)",status:"v",text:"Spanska skatteverket. Registrering med Modelo 030, deklaration (Renta) i april–juni, Modelo 720 för utländska tillgångar.",link:"https://sede.agenciatributaria.gob.es"},
+ {id:"dgt",k:"Myndighet",title:"DGT – trafikverket",status:"v",text:"Omregistrering av bil, byte av körkort, fordonsskatt via kommunen. Tid bokas via cita previa; en gestor gör det i praktiken åt er.",link:"https://sede.dgt.gob.es"},
+ {id:"ss",k:"Myndighet",title:"Seguridad Social",status:"v",text:"Socialförsäkringsnummer (NUSS) och tillgång till den offentliga vården. Vem som har rätt till vad beror på om ni arbetar i Spanien, är pensionär med S1 eller betalar privat.",link:"https://www.seg-social.es"},
+ {id:"fnmt",k:"Myndighet",title:"FNMT – digitalt certifikat",status:"v",text:"Certificado digital låser upp i stort sett alla myndighetsärenden online. Skaffa det så tidigt det går efter NIE.",link:"https://www.sede.fnmt.gob.es"},
+ {id:"skola-sv",k:"Skola",title:"Svenska skolan Marbella",status:"v",text:"Svensk läroplan, svensk gemenskap, mjuk landning för barn som ska kunna gå tillbaka till svenskt system.",link:"https://www.svenskaskolanmarbella.com"},
+ {id:"skola-int",k:"Skola",title:"Internationella skolor på kusten",status:"o",text:"Engelskspråkiga skolor med brittisk eller amerikansk läroplan (t.ex. Atlas, Aloha, EIC, Swans). Avgifter, köer och antagningsdatum skiljer sig kraftigt. Vi bygger en jämförelse.",link:null,note:"Jämförelse under arbete"},
+ {id:"skola-pub",k:"Skola",title:"Spansk kommunal skola",status:"v",text:"Gratis, på spanska, kräver padrón. Ansökan för kommande läsår sker normalt i mars i Andalusien; inflyttade under året placeras via kommunens skolkontor.",link:"https://www.juntadeandalucia.es/educacion"},
+ {id:"maklare",k:"Bostad",title:"Mäklare som arbetar med svenska köpare",status:"o",text:"För hyra: hjälp att förstå kontraktstyp och deposition. För köp: reservation, arras, due diligence. Mäklaren företräder normalt säljaren, så ha egen advokat vid köp.",link:null,note:"Partner ej vald ännu"},
+ {id:"advokat",k:"Bostad",title:"Fastighetsadvokat (abogado)",status:"o",text:"Kontrollerar lagfart, skulder, bygglov och förening innan ni betalar arras. Fast pris är vanligt, ofta runt 1 % av köpeskillingen.",link:null,note:"Partner ej vald ännu"},
+ {id:"bank",k:"Praktiskt",title:"Bank med engelsk service",status:"o",text:"Konto behövs för hyra, el och skola. NIE och padrón underlättar; några banker öppnar konto för icke-residenter.",link:null,note:"Partner ej vald ännu"},
+ {id:"flytt",k:"Praktiskt",title:"Flyttfirma Sverige–Spanien",status:"o",text:"Hela bohag tar 2–4 veckor. Husdjur kräver EU-pass och chip, inget mer inom EU.",link:null,note:"Partner ej vald ännu"},
+ {id:"konsulat",k:"Sverige",title:"Sveriges konsulat i Málaga",status:"v",text:"Pass, intyg och nödsituationer. Inte för flyttadministration.",link:"https://www.swedenabroad.se/sv/utlandsmyndigheter/spanien-madrid/"},
+ {id:"natverk",k:"Nätverk",title:"Svenska familjer på kusten",status:"o",text:"Den snabbaste vägen till en bra gestor, en tandläkare som pratar engelska och ett fotbollslag åt barnen. Vi kopplar ihop nyinflyttade med familjer som landat.",link:null,note:"Öppnar efter lansering"}
+];
+const C = Object.fromEntries(CONTACTS.map(c=>[c.id,c]));
+
+const FAQ = [
+ {cat:"Innan ni bestämmer er",items:[
+  {q:"När blir vi skattskyldiga i Spanien?",a:"<p>När ni vistas mer än 183 dagar under ett kalenderår i Spanien, eller när familjens och ekonomins centrum ligger här. Spanien räknar hela kalenderåret, så en flytt i augusti gör er normalt residenta först året efter, medan en flytt i mars gör er residenta samma år. Det påverkar vilket år ni betalar spansk skatt på hela er inkomst.</p><p>Samtidigt måste Sverige släppa er. Skatteverket tittar på väsentlig anknytning: kvar bostad, bolag, familj. Säljs huset och flyttar hela familjen är det oftast rent; behåller ni en bostad eller ett aktivt bolag kan Sverige hävda att ni fortfarande är bosatta.</p>",who:["skatt","skv","aeat"]},
+  {q:"Vad är Beckham-regimen och passar den oss?",a:"<p>Ett särskilt skattesystem för personer som flyttar till Spanien för att arbeta: inkomst av arbete beskattas med en platt skatt (24 % upp till 600 000 euro) i sex år, och utländska tillgångar lämnas i stort sett utanför. Kravet är att ni inte varit residenta i Spanien de senaste fem åren och att flytten sker på grund av ett arbete, antingen ett spanskt anställningsavtal eller sedan 2023 även distansarbete åt utländsk arbetsgivare.</p><p>Den passar anställda med hög lön. Den passar sällan den som lever på utdelning från eget svenskt bolag, eftersom utdelning inte omfattas på samma sätt. Ansökan måste göras inom sex månader från registreringen hos Seguridad Social, så detta måste planeras före flytten, inte efter.</p>",who:["skatt"]},
+  {q:"Kan vi behålla vårt svenska AB?",a:"<p>Ja, men var bolaget leds ifrån avgör var det beskattas. Flyttar ägaren och ledningen till Spanien kan Spanien hävda att bolaget har sin verkliga ledning här. Lön och utdelning från bolaget beskattas enligt dubbelbeskattningsavtalet, och svensk utdelning får spansk skatt med avräkning för svensk källskatt. Det här är den fråga där flest svenska företagare gör dyra fel, och den ska lösas med en rådgivare innan ni flyttar.</p>",who:["skatt"]},
+  {q:"Vad kostar det att leva på Costa del Sol med barn?",a:"<p>Grovt för en familj med två barn i hyrd bostad: hyra 1 800–3 500 euro per månad för en familjevilla eller större lägenhet i Marbella/Estepona-området, internationell skola 8 000–20 000 euro per barn och år, privat sjukförsäkring 150–300 euro per månad för familjen. Mat och restaurang är billigare än i Sverige, el och vatten dyrare än man tror. Räkna med att en familj behöver 6 000–9 000 euro netto per månad för en jämförbar standard med skola.</p>",who:["natverk"]},
+  {q:"Hyra först eller köpa direkt?",a:"<p>Hyr först om ni inte känner området. Ett år på plats visar vilka områden som fungerar med skola, trafik och vardag, och ni slipper ta en köpskatt på 7 % i Andalusien på ett hus ni kanske vill byta. Köp direkt bara om ni redan har tillbringat mycket tid i området och vet exakt var ni vill bo.</p>",who:["maklare","advokat"]}
+ ]},
+ {cat:"Papper och myndigheter",items:[
+  {q:"Vad är NIE och hur får vi det?",a:"<p>NIE (Número de Identidad de Extranjero) är ert spanska identifikationsnummer. Utan det kan ni inte öppna bankkonto, skriva hyreskontrakt, köpa bil eller betala skatt. Det söks hos Policía Nacional med blankett EX-15, pass, avgift (tasa 790/012) och ett skäl, till exempel bostadsköp eller flytt. Varje person i familjen behöver eget NIE, även barnen.</p><p>Tiderna är ofta långa. Boka cita previa flera veckor i förväg, eller låt en gestor sköta det. Det går också att söka via spanska konsulatet i Stockholm före flytten.</p>",who:["policia","gestor"]},
+  {q:"Vad är empadronamiento och varför tjatar alla om det?",a:"<p>Att skriva sig i kommunens register (padrón). Det är beviset på att ni bor här, och det krävs för skola, vårdcentral, bilomregistrering och de flesta kommunala tjänster. Görs på ayuntamiento med hyreskontrakt eller lagfart, pass och NIE. Gör det så fort ni har en bostad; det låser upp nästa steg.</p>",who:["ayto"]},
+  {q:"Måste vi registrera oss som residenta?",a:"<p>Ja. EU-medborgare som stannar mer än tre månader ska registrera sig och får ett grönt intyg (certificado de registro de ciudadano de la Unión). Ni måste visa att ni kan försörja er (anställning, egna medel eller pension) och har sjukförsäkring. Blankett EX-18, bokad tid hos Policía Nacional.</p>",who:["policia","gestor"]},
+  {q:"Vad gör vi hos Skatteverket innan vi åker?",a:"<p>Anmäl flytt till utlandet minst en vecka före avresan. Då avregistreras ni från folkbokföringen, och Skatteverket tar ställning till er skattestatus. Ansök om SINK om ni fortsätter ha svensk inkomst som anställda eller pension. Behåller ni bostad eller bolag i Sverige bör ni få skattestatusen bedömd skriftligt innan flytten.</p>",who:["skv","skatt"]},
+  {q:"Vad är ett digitalt certifikat och behöver vi det?",a:"<p>Certificado digital från FNMT är den spanska motsvarigheten till BankID för myndigheter. Med det deklarerar ni, bokar tider, hämtar intyg och sköter bilärenden hemifrån. Utan det står ni i kö. Skaffa det direkt efter NIE; det kräver ett fysiskt besök för identifiering.</p>",who:["fnmt"]}
+ ]},
+ {cat:"Skola och barn",items:[
+  {q:"Vilken skola ska barnen gå i?",a:"<p>Tre vägar. Svensk skola (Marbella, Fuengirola) med svensk läroplan, enkel återgång till svenskt system, mindre spansk integration. Internationell skola på engelska, bred, dyr, stora köer till de populära. Spansk kommunal skola, gratis, full integration, men barn över 10–11 år utan spanska får det tufft första året.</p><p>Tumregel: små barn klarar spansk skola bra, tonåringar mår bäst av svensk eller internationell skola om ni inte tänker stanna permanent.</p>",who:["skola-sv","skola-int","skola-pub"]},
+  {q:"När måste vi söka skola?",a:"<p>Internationella skolor tar emot löpande men de populära har köer; sök ett år före flytten. Svenska skolorna tar emot löpande i mån av plats. Spansk kommunal skola: ansökan för kommande läsår sker normalt i mars i Andalusien, och barn som flyttar in under året placeras av kommunens skolkontor, inte nödvändigtvis på närmaste skola.</p>",who:["skola-int","skola-pub"]},
+  {q:"Vad behöver vi för papper till skolan?",a:"<p>Empadronamiento, NIE för barnet, pass, vaccinationsintyg och betyg eller intyg från svensk skola. Internationella skolor vill ofta ha senaste två årens betyg och en rekommendation. Översättningar kan behövas för kommunal skola.</p>",who:["ayto"]}
+ ]},
+ {cat:"Bostad",items:[
+  {q:"Hur fungerar hyreskontrakt i Spanien?",a:"<p>Två typer: långtidskontrakt (vivienda habitual) med lagstadgat skydd, normalt fem år med rätt att säga upp efter sex månader, och tillfälliga kontrakt (temporada) utan samma skydd. Lagstadgad deposition är en månadshyra, men hyresvärdar begär ofta ytterligare garanti. Begär alltid långtidskontrakt när ni ska skriva er på adressen; vissa kommuner accepterar inte temporada-kontrakt för padrón.</p>",who:["maklare"]},
+  {q:"Hur går ett bostadsköp till?",a:"<p>Reservationsavtal med en mindre summa, därefter arras-avtal med 10 % där båda parter låses (den som hoppar av förlorar eller betalar dubbla summan), sedan slutbetalning hos notarie. Köpskatt (ITP) är 7 % i Andalusien för begagnade bostäder, 10 % moms plus stämpelskatt för nybyggt. Lägg till notarie, register och advokat, totalt runt 9–11 % ovanpå priset.</p><p>Mäklaren företräder säljaren. Ha egen advokat som kontrollerar lagfart, skulder, bygglov och eventuella olagliga tillbyggnader före arras.</p>",who:["advokat","maklare"]},
+  {q:"Vilka löpande kostnader har en bostad?",a:"<p>IBI (kommunal fastighetsskatt), sophämtning, comunidad (föreningsavgift) om det är en urbanisation eller lägenhet, hemförsäkring, el, vatten och internet. El är dyrare än i Sverige och villor med pool och luftkonditionering drar mycket.</p>",who:["ayto"]}
+ ]},
+ {cat:"Bil och körkort",items:[
+  {q:"Ska vi ta med bilen eller köpa här?",a:"<p>Oftast: sälj i Sverige och köp i Spanien. Omregistrering kräver teknisk besiktning (ITV), dokumentation, registreringsskatt och ofta ingenjörsintyg om något avviker. Vid flytt kan ni slippa registreringsskatten om ni ägt bilen minst sex månader och ansöker inom tidsfristen, men processen tar tid och kostar en del hos gestor. En svenskregistrerad bil får inte köras av en resident längre än en kort period.</p>",who:["dgt","gestor"]},
+  {q:"Gäller vårt svenska körkort?",a:"<p>Ja, EU-körkort gäller. När ni blivit residenta gäller spanska regler för giltighetstid, och efter två år bör kortet registreras eller bytas hos DGT. Det är också praktiskt att ha ett spanskt kort när ni ska visa legitimation.</p>",who:["dgt"]}
+ ]},
+ {cat:"Sjukvård och försäkring",items:[
+  {q:"Hur får vi sjukvård?",a:"<p>Arbetar ni i Spanien och betalar till Seguridad Social har hela familjen rätt till offentlig vård via vårdcentralen (centro de salud). Svenska pensionärer får offentlig vård genom S1-intyg från Försäkringskassan. Distansanställda åt svensk arbetsgivare och företagare med svenskt bolag hamnar ofta mellan stolarna och behöver privat sjukförsäkring, åtminstone första tiden. Den krävs ändå för residensregistreringen.</p>",who:["ss","bank"]},
+  {q:"Vad händer med Försäkringskassan och barnbidrag?",a:"<p>När ni flyttar och arbetar utanför Sverige upphör normalt svenska förmåner som barnbidrag och föräldrapenning. Är ni fortsatt anställda av svensk arbetsgivare och utsända kan annat gälla. Anmäl flytten till Försäkringskassan samtidigt som till Skatteverket.</p>",who:["skv"]}
+ ]},
+ {cat:"Efter landning",items:[
+  {q:"Vad är Modelo 720?",a:"<p>En informationsdeklaration över tillgångar utanför Spanien, konton, värdepapper och fastigheter, när varje kategori överstiger 50 000 euro. Lämnas senast 31 mars året efter ni blev residenta. Den är inte en skatt, men att missa den har gett höga böter. Svenskar med ISK, pension och kvarvarande bostad i Sverige omfattas nästan alltid.</p>",who:["aeat","skatt"]},
+  {q:"Hur deklarerar vi första gången?",a:"<p>Spansk deklaration (Renta) lämnas april–juni året efter inkomståret. Första året efter flytten är det nästan alltid värt att låta en rådgivare göra den, så att svenska inkomster, avräkning och eventuell Beckham-status blir rätt. Samma år ska ni oftast också lämna en sista svensk deklaration.</p>",who:["skatt","aeat"]},
+  {q:"Vad gör vi med ISK, pension och bolån?",a:"<p>ISK saknar motsvarighet i Spanien och beskattas där på faktisk avkastning, så fördelen försvinner. Svensk tjänstepension och allmän pension beskattas enligt avtalet, ofta i Spanien med SINK-avräkning. Bolån på kvarvarande svensk bostad kan påverka er svenska skattestatus. Allt detta hör till den rådgivning ni gör före flytten.</p>",who:["skatt"]}
+ ]}
+];
+
+
+const PARTNER_IDS = CONTACTS.filter(c=>!c.link).map(c=>c.id);
+
+/* ---------- PLAN TASKS: off = days relative to move day (negative before), fixed = date rule ---------- */
+const TASKS = [
+ {ph:1,off:-150,t:"Boka ett skatte- och bolagsmöte med rådgivare som kan Sverige och Spanien",d:"Avgör flyttmånad, bolagsupplägg, Beckham-regim och vad som ska säljas eller behållas i Sverige. Detta styr allt annat.",who:"skatt",c:a=>a.inkomst!=="spansk"},
+ {ph:1,off:-150,t:"Planera ansökan om Beckham-regimen",d:"Ansökan ska in inom sex månader från registrering hos Seguridad Social. Kräver att ni inte varit residenta i Spanien de senaste fem åren.",who:"skatt",c:a=>a.inkomst==="spansk"||a.inkomst==="distans"},
+ {ph:1,off:-180,t:"Välj skolform och ställ barnen i kö",d:"Internationella skolor har köer, svenska skolorna tar emot i mån av plats, kommunal skola söks i mars. Skolvalet styr var ni ska bo.",who:"skola-int",c:a=>a.familj==="barn"},
+ {ph:1,off:-150,t:"Bestäm flyttmånad utifrån 183-dagarsregeln",d:"Flytt före juli gör er residenta samma år, efter juli först året därpå. Välj det som passar ert svenska bokslut och er svenska deklaration.",who:"skatt",c:()=>true},
+ {ph:1,off:-120,t:"Besök området och välj ett par delområden",d:"Prova skolvägen, pendlingen till flygplatsen och vardagen innan ni bestämmer er. Hyr gärna en månad på plats.",who:"natverk",c:a=>a.region==="costa"},
+ {ph:1,off:-180,t:"Bestäm om bilen ska säljas i Sverige",d:"Omregistrering kostar tid och pengar; för de flesta är det bättre att sälja och köpa här. Vill ni ta med den måste ni ha ägt den minst sex månader före flytten.",who:"dgt",c:a=>a.bil==="med"},
+
+ {ph:2,off:-90,t:"Ansök om NIE för alla i familjen",d:"Via spanska konsulatet i Stockholm eller via cita previa hos Policía Nacional. Blankett EX-15, pass, avgift. Utan NIE stannar allt annat.",who:"policia",c:()=>true},
+ {ph:2,off:-45,t:"Teckna privat sjukförsäkring som gäller i Spanien",d:"Krävs för residensregistreringen och täcker glappet tills ni är inne i Seguridad Social.",who:"ss",c:a=>a.inkomst!=="spansk"},
+ {ph:2,off:-14,t:"Anmäl flytt till Skatteverket och Försäkringskassan",d:"Minst en vecka före avresan. Begär SINK om svensk inkomst kvarstår. Be om skriftlig bedömning av väsentlig anknytning om ni behåller bostad eller bolag.",who:"skv",c:()=>true},
+ {ph:2,off:-60,t:"Säkra bostad med långtidskontrakt",d:"Kräv vivienda habitual-kontrakt, inte temporada, så att ni kan skriva er på adressen. Räkna med deposition plus extra garanti.",who:"maklare",c:a=>a.bostad==="hyra"},
+ {ph:2,off:-90,t:"Anlita fastighetsadvokat före reservation",d:"Lagfart, skulder, bygglov och förening kontrolleras innan arras. Budgetera 9–11 % i skatter och avgifter ovanpå priset.",who:"advokat",c:a=>a.bostad==="kopa"},
+ {ph:2,off:-60,t:"Öppna spanskt bankkonto",d:"Behövs för hyra, el, skola och bil. Kan göras som icke-resident med NIE och pass.",who:"bank",c:()=>true},
+ {ph:2,off:-45,t:"Boka flyttfirma och ordna EU-pass för husdjur",d:"2–4 veckors ledtid för bohag. Husdjur: EU-pass, chip och giltig rabiesvaccination.",who:"flytt",c:()=>true},
+ {ph:2,off:-30,t:"Samla skolpapper",d:"Betyg, vaccinationsintyg och intyg från svensk skola, gärna med engelsk översättning.",who:"skola-sv",c:a=>a.familj==="barn"},
+
+ {ph:3,off:7,t:"Skriv er i kommunen (empadronamiento)",d:"Ayuntamiento, med hyreskontrakt eller lagfart, pass och NIE. Gör det första veckan; det låser upp skola, vård och bil.",who:"ayto",c:()=>true},
+ {ph:3,off:60,t:"Registrera er som residenta (EU-intyg)",d:"Blankett EX-18 hos Policía Nacional. Visa försörjning och sjukförsäkring. Senast tre månader efter ankomst.",who:"policia",c:()=>true},
+ {ph:3,off:21,t:"Skaffa digitalt certifikat",d:"FNMT, med fysisk identifiering. Därefter sköter ni skatt, DGT och intyg hemifrån.",who:"fnmt",c:()=>true},
+ {ph:3,off:14,t:"Registrera er hos Seguridad Social",d:"Socialförsäkringsnummer och tillgång till vårdcentral. Går via arbetsgivaren om ni har spansk anställning.",who:"ss",c:a=>a.inkomst==="spansk"},
+ {ph:3,off:14,t:"Skriv in barnen i skolan",d:"Med padrón, NIE, pass och skolpapper. Kommunal skola placerar via skolkontoret om ni kommer mitt i läsåret.",who:"skola-pub",c:a=>a.familj==="barn"},
+ {ph:3,off:30,t:"Registrera er hos spanska skatteverket (Modelo 030)",d:"Anmäler skatterättslig hemvist och adress. Gestorn gör det på tio minuter med ert certifikat.",who:"aeat",c:()=>true},
+ {ph:3,off:30,t:"Omregistrera bilen",d:"Som resident måste bilen registreras i Spanien; befrielse från registreringsskatt ska sökas inom 60 dagar från padrón. ITV, dokumentation, 4–8 veckor via gestor.",who:"dgt",c:a=>a.bil==="med"},
+ {ph:3,off:30,t:"Köp bil i Spanien",d:"Kräver NIE och padrón. Begagnat via handlare ger garanti; privatköp kräver att ni själva sköter ägarbytet hos DGT.",who:"dgt",c:a=>a.bil==="kop"},
+
+ {ph:4,fixed:"m720",t:"Lämna Modelo 720 senast 31 mars",d:"Gäller året efter att ni blev residenta, om utländska tillgångar i någon kategori överstiger 50 000 euro. Höga böter vid miss.",who:"aeat",c:()=>true},
+ {ph:4,fixed:"renta",t:"Gör första spanska deklarationen med rådgivare",d:"Renta lämnas april–juni året efter inkomståret. Första året ska svenska inkomster, avräkning och bolagsfrågor hanteras rätt.",who:"skatt",c:()=>true},
+ {ph:4,off:180,t:"Se över ISK, pension och eventuella svenska lån",d:"ISK-fördelen försvinner i Spanien. Strukturera om med rådgivaren när ni vet att ni stannar.",who:"skatt",c:a=>a.inkomst!=="spansk"},
+ {ph:4,off:700,t:"Byt till spanskt körkort inom två år",d:"Hos DGT via cita previa eller gestor.",who:"dgt",c:a=>a.bil!=="ingen"},
+ {ph:4,off:90,t:"Gå med i ett svenskt nätverk på kusten",d:"Fritidsaktiviteter för barnen, hantverkare, läkare och vänner. Det är här vardagen faktiskt löser sig.",who:"natverk",c:()=>true}
+];
+const PHASES = {1:"Beslutet",2:"Före flytten",3:"Första månaden",4:"Första året"};
+const PHASE_WHEN = {1:"6 månader före och tidigare",2:"3 månader före till avresa",3:"vecka 1–6 på plats",4:"3–15 månader efter landning"};
+
+/* ---------- DOCUMENTS ---------- */
+const DOCS = [
+ {id:"pass",t:"Pass för alla i familjen, giltiga minst ett år",d:"Krävs vid NIE, residens, bank, skola och bil. ID-kort räcker ofta inte.",free:true},
+ {id:"ex15",t:"EX-15 – ansökan om NIE",d:"En per person, även barn. Fylls i på spanska.",tpl:["Ladda ner blanketten från Policía Nacional (länk under Kontakter).","Fyll i personuppgifter exakt som i passet.","Ange skäl: 'traslado de residencia' eller 'compra de vivienda'.","Betala tasa 790 kod 012 på bank före besöket och ta med kvittot.","Boka cita previa, ta med pass, kopia, blankett och kvitto."],free:true},
+ {id:"tasa",t:"Kvitto på betald avgift (tasa 790/012)",d:"Betalas på bank eller online före NIE-besöket.",free:true},
+ {id:"hyra",t:"Hyreskontrakt eller lagfart",d:"Underlag för padrón, skola och bil. Långtidskontrakt, inte temporada.",free:false},
+ {id:"padron",t:"Empadronamiento-intyg (volante de empadronamiento)",d:"Hämtas på ayuntamiento efter registrering. Begär flera kopior; alla vill ha ett original.",free:false},
+ {id:"ex18",t:"EX-18 – registrering som EU-resident",d:"Kräver försörjningsbevis och sjukförsäkring.",tpl:["Ladda ner EX-18.","Bifoga pass, padrón, bevis på inkomst (anställningsavtal, kontoutdrag eller pensionsbesked) och sjukförsäkring.","Betala tasa 790/012.","Cita previa hos Policía Nacional, en tid per person."],free:false},
+ {id:"forsakring",t:"Sjukförsäkringsbevis på spanska eller engelska",d:"Privat försäkring utan självrisk brukar krävas för EX-18.",free:false},
+ {id:"inkomst",t:"Inkomstbevis",d:"Anställningsavtal, lönespecifikationer, pensionsbesked eller kontoutdrag senaste tre månaderna.",free:false},
+ {id:"skv",t:"Bekräftelse från Skatteverket på utflyttning",d:"Beslut om avregistrering och eventuellt SINK-beslut. Spara som PDF.",free:false},
+ {id:"skola",t:"Betyg, skolintyg och vaccinationsintyg",d:"Översatt till engelska eller spanska. Internationella skolor vill ha två års betyg.",free:false},
+ {id:"fullmakt",t:"Fullmakt till gestor (poder notarial eller apoderamiento)",d:"Låter gestorn boka tider och lämna papper åt er. Sparar veckor.",tpl:["Bestäm omfattning: NIE, padrón, DGT, skatt.","Skriv under hos notarie i Spanien eller via spanska konsulatet.","Ge gestorn en kopia och behåll originalet."],free:false},
+ {id:"bil",t:"Bilens registreringsbevis, köpekvitto och CoC-intyg",d:"Krävs för omregistrering och för befrielse från registreringsskatt.",free:false},
+ {id:"m030",t:"Modelo 030 – skatteregistrering",d:"Lämnas online med digitalt certifikat eller via gestor.",free:false},
+ {id:"cert",t:"Digitalt certifikat (FNMT) installerat på dator och telefon",d:"Exportera en säkerhetskopia; förnyas vart fjärde år.",free:false}
+];
+
+/* ---------- STATE & STORAGE ---------- */
+const $=s=>document.querySelector(s);
+let state={answers:{},movedate:"",hushall:"",done:{},docs:{},plus:false,leads:[],questions:[]};
+let db=null,user=null,uid=null,hhRef=null,saveTimer=null;
+
+function loadLocal(){try{const s=JSON.parse(localStorage.getItem("landa.v2")||"null");if(s)state=Object.assign(state,s)}catch(e){}}
+function saveLocal(){try{localStorage.setItem("landa.v2",JSON.stringify(state))}catch(e){}}
+function save(){
+  saveLocal();
+  if(!hhRef)return;
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{hhRef.set({answers:state.answers,movedate:state.movedate,hushall:state.hushall,done:state.done,docs:state.docs,plus:state.plus,updated:new Date().toISOString()}).catch(()=>{})},600);
+}
+function toast(msg){const t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2600)}
+
+async function initAccount(){
+  loadLocal();
+  applyStateToForm();
+  renderAll();
+  // Demo: no account; everything stays in this browser.
+  if(db&&uid){
+    hhRef=db.doc("data/users/"+uid+"/household");
+    try{
+      const snap=await hhRef.get();
+      if(snap.exists){
+        const d=snap.data();
+        state=Object.assign(state,{answers:d.answers||state.answers,movedate:d.movedate||"",hushall:d.hushall||"",done:d.done||{},docs:d.docs||{},plus:!!d.plus});
+        applyStateToForm();
+      }else{ hhRef.set({answers:state.answers,movedate:state.movedate,hushall:state.hushall,done:state.done,docs:state.docs,plus:state.plus,created:new Date().toISOString()}).catch(()=>{}) }
+      const ls=await db.doc("leads/"+uid).collection("items").get();
+      state.leads=ls.docs.map(x=>Object.assign({id:x.id},x.data()));
+    }catch(e){}
+    $("#acct").innerHTML=`Inloggad · ${state.hushall||"ert hushåll"}<br><span class="note">Planen sparas på ert konto</span>${state.plus?'<br><span class="plus">Landa Plus</span>':''}`;
+  }else{
+    $("#acct").innerHTML=`Demo<br><span class="note">Sparas bara i den här webbläsaren</span>${state.plus?'<br><span class="plus">Landa Plus</span>':''}`;
+  }
+  renderAll();
+}
+function applyStateToForm(){
+  const f=$("#intake");
+  for(const [k,v] of Object.entries(state.answers||{})){const el=f.querySelector(`[name="${k}"][value="${v}"]`);if(el)el.checked=true}
+  $("#movedate").value=state.movedate||"";
+  $("#hushall").value=state.hushall||"";
+}
+function readForm(){
+  const f=new FormData($("#intake"));const a={};
+  for(const [k,v] of f.entries()){if(k!=="movedate"&&k!=="hushall")a[k]=v}
+  state.answers=a;state.movedate=$("#movedate").value;state.hushall=$("#hushall").value.trim();
+}
+
+/* ---------- DATES ---------- */
+const fmt=d=>d.toLocaleDateString("sv-SE",{day:"numeric",month:"short",year:"numeric"});
+function dueFor(t){
+  if(!state.movedate)return null;
+  const m=new Date(state.movedate+"T12:00:00");
+  if(t.fixed==="m720"||t.fixed==="renta"){
+    const residentYear = m.getMonth()<6 ? m.getFullYear() : m.getFullYear()+1; // flytt före juli => resident samma år
+    return t.fixed==="m720"? new Date(residentYear+1,2,31,12) : new Date(residentYear+1,5,30,12);
+  }
+  const d=new Date(m);d.setDate(d.getDate()+t.off);return d;
+}
+
+/* ---------- RENDER PLAN ---------- */
+const LABELS={region:{costa:"Costa del Sol",annat:"Annan region"},familj:{barn:"med barn",par:"par",solo:"en person"},inkomst:{distans:"distansanställd",bolag:"eget svenskt AB",spansk:"spansk anställning",pension:"pension/kapital"},bostad:{hyra:"hyra först",kopa:"köpa"},bil:{med:"tar med bil",kop:"köper bil",ingen:"ingen bil"}};
+function hash(s){let h=0;for(const c of s)h=(h*31+c.charCodeAt(0))>>>0;return h.toString(36)}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;")}
+function shortWho(id){return C[id].title.split(" –")[0].split(" (")[0]}
+
+function renderPlan(){
+  const a=state.answers;
+  const tasks=TASKS.filter(t=>t.c(a));
+  const today=new Date();today.setHours(12,0,0,0);
+  const open=tasks.filter(t=>!state.done[t.t]).length;
+  let html=`<div class="summary">${Object.keys(LABELS).map(k=>a[k]?`<span>${LABELS[k][a[k]]}</span>`:"").join("")}${state.movedate?`<span>flytt ${fmt(new Date(state.movedate+"T12:00:00"))}</span>`:""}</div>`;
+  html+=`<p class="lead">${tasks.length} steg, ${open} kvar.${state.movedate&&!state.plus?" Datumen visas när ni låser upp Landa Plus.":""}</p>`;
+  let lateCount=0;
+  for(const ph of [1,2,3,4]){
+    const list=tasks.filter(t=>t.ph===ph);if(!list.length)continue;
+    html+=`<div class="phase"><div class="phase-head"><h3>${PHASES[ph]}</h3><span class="when">${PHASE_WHEN[ph]}</span></div>`;
+    for(const t of list){
+      const d=!!state.done[t.t];
+      let due="";
+      const dd=dueFor(t);
+      if(dd){
+        if(state.plus){
+          const days=Math.round((dd-today)/86400000);
+          let cls="",txt="senast "+fmt(dd);
+          if(!d&&days<0){cls="late";txt="försenat · "+fmt(dd);lateCount++}
+          else if(!d&&days<=21){cls="soon";txt="snart · "+fmt(dd)}
+          due=`<span class="due ${cls}">${txt}</span>`;
+        }else due=`<span class="due lock">datum i Plus</span>`;
+      }
+      html+=`<div class="task${d?" done":""}"><input type="checkbox" id="t-${hash(t.t)}" ${d?"checked":""} data-task="${esc(t.t)}" aria-label="Klar: ${esc(t.t)}"><div><div class="t">${t.t}</div><div class="d">${t.d}</div><div class="meta">${due}<button class="who" data-contact="${t.who}">${shortWho(t.who)}</button></div></div></div>`;
+    }
+    html+=`</div>`;
+  }
+  if(lateCount) html=`<div class="hint">${lateCount} steg har passerat sitt datum. Börja med dem; det mesta nedströms beror på dem.</div>`+html;
+  if(a.inkomst==="bolag") html+=`<div class="hint">Ni har ett svenskt AB. Var bolaget leds ifrån avgör var det beskattas. Det här är den enskilt dyraste frågan att få fel; lös den innan ni bokar flyttfirma.</div>`;
+  if(!state.plus) html+=gateHtml("plan");
+  $("#plan").innerHTML=html;
+  $("#plan").querySelectorAll("input[type=checkbox]").forEach(cb=>cb.addEventListener("change",e=>{
+    state.done[e.target.dataset.task]=e.target.checked;save();
+    e.target.closest(".task").classList.toggle("done",e.target.checked);
+  }));
+  bindWho($("#plan"));
+  bindGate();
+}
+function gateHtml(ctx){
+  const why={plan:"Sista datum på varje steg, räknat från er flyttdag, och planen delad mellan er båda.",docs:"Hela dokumentvalvet med ifyllnadsguider för varje blankett.",kontakter:"Varma introduktioner till verifierade partners, med er profil bifogad så att första samtalet börjar rätt.",fraga:"Svar inom ett dygn från någon som gjort flytten."}[ctx];
+  return `<div class="gate"><h3>Landa Plus</h3><p class="note">${why}</p><ul><li>Datumstyrd plan för hela hushållet</li><li>Dokumentvalv med guider och mallar</li><li>Introduktioner till verifierade partners</li><li>Frågor besvarade inom ett dygn</li></ul><div class="row"><span class="price">249 €</span><span class="note">engångsbetalning, gäller hela flytten</span></div><div class="row" style="margin-top:10px"><button class="btn sun" data-unlock>Lås upp Landa Plus</button><span class="note">Prototyp: ingen betalning sker.</span></div></div>`;
+}
+function bindGate(){document.querySelectorAll("[data-unlock]").forEach(b=>b.onclick=()=>{state.plus=true;save();toast("Landa Plus upplåst");initAccountBadge();renderAll()})}
+function initAccountBadge(){const el=$("#acct");if(!el.innerHTML.includes("plus")&&state.plus)el.innerHTML+='<br><span class="plus">Landa Plus</span>'}
+function bindWho(root){root.querySelectorAll(".who").forEach(b=>b.addEventListener("click",()=>goContact(b.dataset.contact)))}
+
+/* ---------- CALC ---------- */
+const RATE=11.3;
+function seTax(gross){ // per person, SEK, grov 2026
+  const ga=Math.max(0,gross-17000);let t=ga*0.32;if(gross>625000)t+=(gross-625000)*0.20;return Math.max(0,t-5000);
+}
+function esTax(gross){ // per person, EUR, grov IRPF Andalucía + Seguridad Social för anställd
+  const br=[[12450,.19],[20200,.24],[35200,.30],[60000,.37],[300000,.45],[1e12,.47]];
+  let base=Math.max(0,gross-5550-2000),t=0,prev=0;
+  for(const [lim,r] of br){if(base>prev){t+=(Math.min(base,lim)-prev)*r;prev=lim}}
+  return t;
+}
+function renderCalc(){
+  const inc=+$("#c_inc").value||0;
+  const bo=document.querySelector('[name="c_bo"]:checked').value;
+  const kids=+$("#c_kids").value||0, skola=$("#c_skola").value, bilar=+$("#c_bil").value||0;
+  const adults=(state.answers.familj==="solo")?1:2;
+  const perSe=inc/adults, perEs=inc/RATE/adults;
+  const seNet=(perSe-seTax(perSe))*adults/RATE/12;
+  const esNetStd=(perEs-esTax(perEs))*adults/12;
+  const beckham=(state.answers.inkomst==="distans"||state.answers.inkomst==="spansk");
+  const esNetBeck=beckham?(perEs*(1-0.24))*adults/12:null;
+  const rent={lgh:1600,hus:2400,villa:3800}[bo], util={lgh:200,hus:300,villa:450}[bo];
+  const school={int:1100,sv:450,pub:60}[skola]*kids;
+  const lines=[["Bostad (hyra)",rent],["El, vatten, internet",util],["Skola",school],["Sjukförsäkring, privat",60*(adults+kids)],["Bil (försäkring, bränsle, skatt)",350*bilar],["Mat och hushåll",1100+250*kids],["Övrigt (fritid, resor hem, kläder)",700]];
+  const cost=lines.reduce((s,l)=>s+l[1],0);
+  const net=esNetBeck??esNetStd;
+  const f=n=>Math.round(n).toLocaleString("sv-SE")+" €";
+  $("#calcOut").innerHTML=`
+  <div class="kpis">
+    <div class="kpi"><div class="v">${f(cost)}</div><div class="l">levnadskostnad per månad</div></div>
+    <div class="kpi"><div class="v">${f(net)}</div><div class="l">netto per månad i Spanien${esNetBeck?" (Beckham)":""}</div></div>
+    <div class="kpi"><div class="v">${f(seNet)}</div><div class="l">netto per månad i Sverige, jämförelse</div></div>
+    <div class="kpi"><div class="v" style="color:${net-cost<0?"var(--warn)":"var(--ok)"}">${f(net-cost)}</div><div class="l">kvar per månad</div></div>
+  </div>
+  <div class="tbl"><table class="lines">${lines.map(l=>`<tr><td>${l[0]}</td><td>${f(l[1])}</td></tr>`).join("")}<tr><td><b>Summa</b></td><td><b>${f(cost)}</b></td></tr></table></div>
+  ${esNetBeck?`<p class="note" style="margin-top:10px">Utan Beckham-regimen: ${f(esNetStd)} netto per månad. Skillnaden ${f(esNetBeck-esNetStd)} per månad är skälet att planera ansökan före flytten.</p>`:""}
+  <p class="note" style="margin-top:10px">Skatten är en grov modell: svensk kommunal- och statlig skatt, spansk IRPF för Andalusien, inkomsten delad lika mellan vuxna, inga avdrag utöver grundavdrag. Kapitalinkomst, utdelning från bolag och pension beskattas annorlunda och kräver rådgivare. Kostnaderna är typiska nivåer för Marbella–Estepona hösten 2026.</p>`;
+}
+
+/* ---------- FAQ ---------- */
+function renderFaq(filter=""){
+  const f=filter.trim().toLowerCase();let html="";
+  for(const cat of FAQ){
+    const items=cat.items.filter(i=>!f||(i.q+" "+i.a).toLowerCase().includes(f));
+    if(!items.length)continue;
+    html+=`<div class="cat"><div class="label">${cat.cat}</div>`;
+    for(const i of items){
+      const who=i.who.map(w=>`<button class="who" data-contact="${w}">${shortWho(w)}</button>`).join(" ");
+      html+=`<details${f?" open":""}><summary>${i.q}</summary><div class="a">${i.a}<div class="row" style="margin-top:6px"><span class="src">Vem löser det:</span>${who}</div></div></details>`;
+    }
+    html+=`</div>`;
+  }
+  $("#faq").innerHTML=html||`<p class="lead">Inget svar matchar. Ställ frågan under <strong>Fråga</strong>, så blir den ett nytt svar.</p>`;
+  bindWho($("#faq"));
+}
+
+/* ---------- CONTACTS & LEADS ---------- */
+function renderContacts(){
+  $("#contacts").innerHTML=CONTACTS.map(c=>{
+    const partner=!c.link;
+    const foot=partner
+      ? `<div class="foot"><span class="pill o">${c.note}</span>${state.plus?`<button class="btn sm" data-intro="${c.id}">Be om introduktion</button>`:`<button class="btn sm ghost" data-needplus>Intro i Plus</button>`}</div>`
+      : `<div class="foot"><a href="${c.link}" target="_blank" rel="noopener">${c.link.replace(/^https?:\/\//,"")}</a><span class="pill v">Officiell källa</span></div>`;
+    return `<div class="card" id="c-${c.id}"><div class="k">${c.k}</div><h3>${c.title}</h3><p>${c.text}</p>${foot}</div>`;
+  }).join("");
+  $("#contacts").querySelectorAll("[data-intro]").forEach(b=>b.onclick=()=>openIntro(b.dataset.intro));
+  $("#contacts").querySelectorAll("[data-needplus]").forEach(b=>b.onclick=()=>{$("#myLeads").scrollIntoView({block:"center"})});
+  let mine="";
+  if(state.leads.length){
+    mine=`<div class="label">Era introduktioner</div>`+state.leads.slice().sort((a,b)=>(b.created||"").localeCompare(a.created||"")).map(l=>`<div class="item"><b>${esc(C[l.partner]?.title||l.partner)}</b>${esc(l.message||"")}<br><span class="note">${l.created?fmt(new Date(l.created)):""} · ${l.synced?"mottagen":"sparad lokalt (prototyp)"}</span></div>`).join("");
+  }
+  if(!state.plus) mine+=gateHtml("kontakter");
+  $("#myLeads").innerHTML=mine;bindGate();
+}
+function goContact(id){
+  show("kontakter");
+  const el=document.getElementById("c-"+id);
+  if(el){el.scrollIntoView({behavior:"smooth",block:"center"});el.style.outline="2px solid var(--sun)";setTimeout(()=>el.style.outline="",1800)}
+}
+function profileText(){
+  const a=state.answers;
+  return [state.hushall,LABELS.familj[a.familj],LABELS.inkomst[a.inkomst],LABELS.bostad[a.bostad],LABELS.bil[a.bil],state.movedate?"flytt "+state.movedate:null].filter(Boolean).join(" · ");
+}
+function openIntro(pid){
+  const c=C[pid];
+  const host=$("#modalHost");
+  host.innerHTML=`<div class="modal" id="modal"><form class="box" id="introForm">
+    <h3>Introduktion till ${esc(c.title)}</h3>
+    <p class="note">Vi skickar er profil och ert meddelande till partnern, som kontaktar er inom två arbetsdagar.</p>
+    <div class="tpl"><b>Er profil som bifogas</b><br>${esc(profileText()||"Fyll i Min plan så följer profilen med.")}</div>
+    <label class="field"><span>Namn</span><input id="i_name" required></label>
+    <label class="field"><span>E-post</span><input id="i_mail" type="email" required></label>
+    <label class="field"><span>Telefon (valfritt)</span><input id="i_tel" type="tel"></label>
+    <label class="field"><span>Vad vill ni ha hjälp med?</span><textarea id="i_msg" required placeholder="T.ex. NIE för fyra personer, padrón och omregistrering av bil. Flyttar 1 mars."></textarea></label>
+    <div class="row"><button class="btn" type="submit">Skicka</button><button class="btn ghost" type="button" id="i_cancel">Avbryt</button></div>
+  </form></div>`;
+  $("#i_cancel").onclick=()=>host.innerHTML="";
+  $("#introForm").onsubmit=async e=>{
+    e.preventDefault();
+    const lead={partner:pid,name:$("#i_name").value.trim(),email:$("#i_mail").value.trim(),phone:$("#i_tel").value.trim(),message:$("#i_msg").value.trim(),profile:profileText(),answers:state.answers,movedate:state.movedate,created:new Date().toISOString(),status:"ny",synced:false};
+    if(db&&uid){try{const ref=await db.doc("leads/"+uid).collection("items").add(lead);lead.id=ref.id;lead.synced=true}catch(x){}}
+    state.leads.push(lead);saveLocal();
+    host.innerHTML="";toast(lead.synced?"Introduktionen är skickad":"Sparad lokalt (prototyp)");
+    renderContacts();
+  };
+}
+
+/* ---------- DOCS ---------- */
+function renderDocs(){
+  let html=`<div class="panel" style="padding:4px 18px">`;
+  let have=0;
+  for(const d of DOCS){
+    const locked=!d.free&&!state.plus;
+    const st=state.docs[d.id]||"saknas";if(st==="har")have++;
+    html+=`<div class="doc ${st==="har"?"has":""} ${locked?"locked":""}"><div><div class="t">${d.t}</div><div class="d">${d.d}</div>${d.tpl&&!locked?`<div class="tpl"><b>Så fyller ni i</b><ol>${d.tpl.map(s=>`<li>${s}</li>`).join("")}</ol></div>`:d.tpl?`<div class="note">Ifyllnadsguide i Plus</div>`:""}</div>
+      <select data-doc="${d.id}" ${locked?"disabled":""}><option value="saknas"${st==="saknas"?" selected":""}>saknas</option><option value="pagar"${st==="pagar"?" selected":""}>pågår</option><option value="har"${st==="har"?" selected":""}>har</option></select></div>`;
+  }
+  html+=`</div><p class="note" style="margin-top:10px">${have} av ${DOCS.length} dokument klara.</p>`;
+  if(!state.plus)html+=gateHtml("docs");
+  $("#docs").innerHTML=html;
+  $("#docs").querySelectorAll("select[data-doc]").forEach(s=>s.onchange=()=>{state.docs[s.dataset.doc]=s.value;save();renderDocs()});
+  bindGate();
+}
+
+/* ---------- ASK ---------- */
+$("#askForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const q={text:$("#askText").value.trim(),cat:$("#askCat").value,email:$("#askMail").value.trim(),profile:profileText(),created:new Date().toISOString(),plus:state.plus,synced:false};
+  if(db&&uid){try{await db.doc("questions/"+uid).collection("items").add(q);q.synced=true}catch(x){}}
+  state.questions.push(q);saveLocal();
+  $("#askDone").hidden=false;
+  $("#askDone").innerHTML=`<strong>Tack.</strong> Frågan om <em>${esc(q.cat.toLowerCase())}</em> är ${q.synced?"mottagen":"sparad lokalt (prototyp)"}. ${state.plus?"Svar inom ett dygn till "+esc(q.email)+".":"Som gratisanvändare får du svar när frågan blir ett nytt svar i appen. Med Landa Plus svarar vi inom ett dygn."}`;
+  e.target.reset();
+});
+
+/* ---------- TABS ---------- */
+const VIEWS=["plan","kalkyl","faq","kontakter","dokument","fraga"];
+function show(v){
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.view===v)));
+  document.querySelectorAll("section.view").forEach(s=>s.hidden=(s.id!=="view-"+v));
+  if(location.hash!=="#"+v) history.replaceState(null,"","#"+v);
+}
+document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.view)));
+addEventListener("hashchange",()=>{const v=location.hash.slice(1);if(VIEWS.includes(v))show(v)});
+
+function renderAll(){renderPlan();renderCalc();renderFaq($("#faqSearch").value);renderContacts();renderDocs()}
+$("#intake").addEventListener("change",()=>{readForm();save();renderPlan();renderCalc()});
+$("#intake").addEventListener("input",e=>{if(e.target.id==="hushall"){readForm();save()}});
+$("#intake").addEventListener("submit",e=>e.preventDefault());
+$("#calc").addEventListener("input",renderCalc);
+$("#calc").addEventListener("submit",e=>e.preventDefault());
+$("#faqSearch").addEventListener("input",e=>renderFaq(e.target.value));
+
+const v0=location.hash.slice(1);if(VIEWS.includes(v0))show(v0);
+initAccount();
+</script>
+</body>
+</html>
