@@ -77,16 +77,34 @@ header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;backgrou
 header.site .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
 .logo{font:800 1.4rem var(--display);letter-spacing:-.045em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;line-height:1}
 .logo i{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:var(--acc);margin:0 .05em 0 .04em;transform:translateY(.1em)}
-.links{display:flex;gap:4px;margin-left:auto}
-.links a{text-decoration:none;font:500 .95rem var(--body);color:var(--muted);padding:8px 12px;border-radius:8px}
-.links a:hover{color:var(--ink);background:var(--deep)}
-.links button{background:none;border:0;font:500 .95rem var(--body);color:var(--muted);padding:8px 12px;border-radius:8px;cursor:pointer}
-.links button:hover{color:var(--ink);background:var(--bg)}
-.head-cta{margin-left:12px}
-@media(max-width:860px){.links{display:none}.head-cta{margin-left:auto}}
-.appnav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-bottom:10px}
-.appnav a{flex:0 0 auto;text-decoration:none;color:var(--muted);font:500 .92rem var(--body);padding:8px 14px;border-radius:8px}
-.appnav a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.mainnav{display:flex;gap:2px;margin-left:28px}
+.dd{position:relative}
+.dd-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;font:500 .95rem var(--body);color:var(--muted);padding:8px 12px;border-radius:8px;cursor:pointer}
+.dd-btn:hover,.dd.open .dd-btn{color:var(--ink);background:var(--deep)}
+.dd-btn.active{color:var(--ink);font-weight:600}
+.dd-btn svg{transition:transform .15s}
+.dd.open .dd-btn svg{transform:rotate(180deg)}
+.dd-menu{position:absolute;top:calc(100% + 6px);left:-8px;min-width:300px;background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:8px;display:none;gap:2px;z-index:50}
+.dd.open .dd-menu{display:grid}
+.dd-menu.cols{grid-template-columns:repeat(2,minmax(0,1fr));min-width:400px}
+.dd-menu a,.dd-menu button{display:block;width:100%;text-align:left;background:none;border:0;text-decoration:none;color:var(--ink);font:600 .94rem/1.3 var(--body);padding:10px 12px;border-radius:8px;cursor:pointer}
+.dd-menu a span,.dd-menu button span{display:block;font-weight:400;font-size:.84rem;color:var(--muted);margin-top:2px}
+.dd-menu a:hover,.dd-menu button:hover,.dd-menu a:focus-visible,.dd-menu button:focus-visible{background:var(--deep);outline:none}
+.dd-menu a[aria-current="page"]{color:var(--acc-ink)}
+.head-cta{margin-left:auto}
+#plusBadge:not([hidden])+.head-cta{margin-left:10px}
+#plusBadge{margin-left:auto}
+.burger{display:none;background:none;border:0;color:var(--ink);padding:8px;border-radius:8px;cursor:pointer;margin-left:6px}
+@media(max-width:960px){
+  .burger{display:inline-grid;place-items:center}
+  .mainnav{display:none;position:absolute;top:100%;left:0;right:0;height:calc(100dvh - 64px);margin:0;background:var(--paper);flex-direction:column;gap:0;padding:8px 16px 32px;overflow:auto;border-top:1px solid var(--line)}
+  body.nav-open .mainnav{display:flex}
+  body.nav-open{overflow:hidden}
+  .dd{border-bottom:1px solid var(--line)}
+  .dd-btn{width:100%;justify-content:space-between;font-size:1.08rem;color:var(--ink);padding:16px 4px;border-radius:0}
+  .dd-btn:hover,.dd.open .dd-btn{background:none}
+  .dd-menu,.dd-menu.cols{position:static;box-shadow:none;border:0;padding:0 0 12px;min-width:0;grid-template-columns:1fr}
+}
 .plusbadge{display:inline-flex;align-items:center;gap:6px;background:var(--acc-soft);color:var(--acc-ink);border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700}
 
 /* hero */
@@ -397,32 +415,57 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
 <header class="site">
   <div class="wrap">
     <a class="logo" href="#" aria-label="Solpass">s<i aria-hidden="true"></i>lpass</a>
-    <nav class="links" id="landingLinks" aria-label="Sidan">
-      <button data-scroll="sa-funkar-det">Så funkar det</button>
-      <button data-scroll="kalkyl">Kalkyl</button>
-      <a href="#omraden">Områden</a>
-      <button data-scroll="bostad-teaser">Bostad</button>
-      <button data-scroll="beckham-teaser">Beckham</button>
-      <button data-scroll="partners">Partners</button>
-      <button data-scroll="plus">Plus</button>
-      <button data-scroll="vanliga-fragor">Frågor</button>
+    <nav class="mainnav" id="mainnav" aria-label="Huvudmeny">
+      <div class="dd" data-group="flytt">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-flytt">Flytten <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dd-menu" id="m-flytt">
+          <a href="#plan">Er flyttplan<span>Alla steg i rätt ordning, med datum</span></a>
+          <a href="#dokument">Dokument och checklista<span>Blanketter, papper och PDF</span></a>
+          <a href="#fragor">Vanliga frågor<span>Skatt, NIE, skola, bil och vård</span></a>
+          <a href="#fraga">Ställ en fråga<span>Vi svarar på det som inte står här</span></a>
+          <button type="button" data-scroll="plus">Solpass Plus<span>Datum, partners och svar inom ett dygn</span></button>
+        </div>
+      </div>
+      <div class="dd" data-group="omraden">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-omraden">Områden <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dd-menu cols" id="m-omraden">
+          <a href="#omraden">Alla områden<span>Jämför sex områden på kusten</span></a>
+          <a href="#omraden/marbella">Marbella</a>
+          <a href="#omraden/san-pedro">San Pedro</a>
+          <a href="#omraden/estepona">Estepona</a>
+          <a href="#omraden/benahavis">Benahavís</a>
+          <a href="#omraden/fuengirola-mijas">Fuengirola och Mijas</a>
+          <a href="#omraden/malaga">Málaga</a>
+          <a href="#skolor">Skolor<span>19 skolor jämförda</span></a>
+        </div>
+      </div>
+      <div class="dd" data-group="bostad">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-bostad">Bostad <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dd-menu" id="m-bostad">
+          <a href="#bostadsguide">Bostadsguiden<span>Hyra först eller köpa, steg för steg</span></a>
+          <a href="#bostad">Bolånekalkyl<span>Månadskostnad med spanska banker</span></a>
+          <a href="#hyrakopa">Hyra eller köpa<span>Vad som är borta efter 3, 5 eller 10 år</span></a>
+          <a href="#bostadsguide/radgivning">Rådgivning inför köp<span>Någon som köper åt er, inte åt säljaren</span></a>
+        </div>
+      </div>
+      <div class="dd" data-group="ekonomi">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-ekonomi">Ekonomi <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dd-menu" id="m-ekonomi">
+          <button type="button" data-scroll="kalkyl">Ekonomikalkyl<span>Lön, skatt och levnadskostnad</span></button>
+          <a href="#skatt">Beckham-regimen<span>24 % skatt i sex år, kvalificerar ni?</span></a>
+        </div>
+      </div>
+      <div class="dd" data-group="partners">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-partners">Partners <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="dd-menu" id="m-partners">
+          <a href="#kontakter">Partners och kontakter<span>Myndigheter, skolor och verifierade partners</span></a>
+          <a href="#bli-partner">Bli partner<span>För gestorer, rådgivare och mäklare</span></a>
+        </div>
+      </div>
     </nav>
     <span id="plusBadge" class="plusbadge" hidden>★ Solpass Plus</span>
     <a class="btn sun sm head-cta" id="headCta" href="#start">Gör er flyttplan</a>
-  </div>
-  <div class="wrap" id="appNavWrap" hidden>
-    <nav class="appnav" aria-label="Er flytt">
-      <a href="#plan">Er plan</a>
-      <a href="#omraden">Områden</a>
-      <a href="#bostadsguide">Bostad</a>
-      <a href="#bostad">Bolånekalkyl</a>
-      <a href="#skatt">Beckham</a>
-      <a href="#skolor">Skolor</a>
-      <a href="#kontakter">Partners och kontakter</a>
-      <a href="#dokument">Dokument</a>
-      <a href="#fragor">Frågor</a>
-      <a href="#fraga">Ställ en fråga</a>
-    </nav>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mainnav" aria-label="Meny"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
   </div>
 </header>
 
@@ -2112,10 +2155,10 @@ function route(){
   const [h, sub] = location.hash.slice(1).split("/");
   const v = VIEWS.includes(h) ? h : "landing";
   $$("main > div[id^=v-]").forEach(el => el.hidden = el.id !== "v-" + v);
-  const app = v !== "landing" && v !== "start";
-  $("#appNavWrap").hidden = !app;
-  $("#landingLinks").style.visibility = v === "landing" ? "" : "hidden";
-  $$(".appnav a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + v ? "page" : "false"));
+  const here = "#" + location.hash.slice(1);
+  $$(".dd").forEach(d => d.querySelector(".dd-btn").classList.toggle("active", (NAV_GROUPS[d.dataset.group] || []).includes(v)));
+  $$(".dd-menu a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === here ? "page" : "false"));
+  closeMenus(); document.body.classList.remove("nav-open"); $("#burger").setAttribute("aria-expanded", "false");
   $("#plusBadge").hidden = !state.plus;
   const cta = $("#headCta");
   cta.hidden = v === "start";
@@ -2128,6 +2171,7 @@ function route(){
   if(v === "hyrakopa") renderRentBuy();
   if(v === "omraden") renderAreas(sub);
   if(v === "bli-partner") renderPartnerCats2();
+  if(sub && v !== "omraden") setTimeout(() => document.getElementById(sub)?.scrollIntoView({behavior:"smooth"}), 60);
   if(v === "skolor") renderSchools();
   if(v === "kontakter") renderContacts();
   if(v === "dokument") renderDocs();
@@ -2138,6 +2182,32 @@ function route(){
 }
 let lastHash = location.hash;
 addEventListener("hashchange", () => { if(location.hash === "#start" && lastHash !== "#start") wzStep = 0; lastHash = location.hash; route(); });
+/* ---------- main menu ---------- */
+const NAV_GROUPS = { flytt:["plan","start","dokument","fragor","fraga"], omraden:["omraden","skolor"], bostad:["bostadsguide","bostad","hyrakopa"], ekonomi:["skatt"], partners:["kontakter","bli-partner"] };
+const desktopNav = matchMedia("(min-width: 961px) and (hover: hover)");
+function closeMenus(except){
+  $$(".dd").forEach(d => { if(d !== except){ d.classList.remove("open"); d.querySelector(".dd-btn").setAttribute("aria-expanded", "false"); } });
+}
+function setMenu(d, open){ closeMenus(d); d.classList.toggle("open", open); d.querySelector(".dd-btn").setAttribute("aria-expanded", String(open)); }
+$$(".dd").forEach(d => {
+  const btn = d.querySelector(".dd-btn");
+  btn.addEventListener("click", () => setMenu(d, !d.classList.contains("open")));
+  let t;
+  d.addEventListener("mouseenter", () => { if(desktopNav.matches){ clearTimeout(t); setMenu(d, true); } });
+  d.addEventListener("mouseleave", () => { if(desktopNav.matches) t = setTimeout(() => setMenu(d, false), 120); });
+  d.querySelectorAll(".dd-menu a,.dd-menu button").forEach(a => a.addEventListener("click", () => { closeMenus(); document.body.classList.remove("nav-open"); $("#burger").setAttribute("aria-expanded", "false"); }));
+});
+$("#burger").addEventListener("click", () => {
+  const open = !document.body.classList.contains("nav-open");
+  document.body.classList.toggle("nav-open", open); $("#burger").setAttribute("aria-expanded", String(open));
+});
+document.addEventListener("click", e => { if(!e.target.closest(".dd")) closeMenus(); });
+document.addEventListener("keydown", e => {
+  if(e.key !== "Escape") return;
+  const open = $(".dd.open"); closeMenus(); document.body.classList.remove("nav-open"); $("#burger").setAttribute("aria-expanded", "false");
+  open?.querySelector(".dd-btn").focus();
+});
+
 $$("[data-scroll]").forEach(b => b.addEventListener("click", () => {
   const go = () => document.getElementById(b.dataset.scroll)?.scrollIntoView({behavior:"smooth"});
   if(location.hash && location.hash !== "#"){ history.pushState(null, "", location.pathname); route(); setTimeout(go, 30); } else go();
