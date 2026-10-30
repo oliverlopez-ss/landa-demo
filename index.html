@@ -347,6 +347,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <button data-scroll="sa-funkar-det">Så funkar det</button>
       <button data-scroll="kalkyl">Kalkyl</button>
       <button data-scroll="bostad-teaser">Bostad</button>
+      <button data-scroll="beckham-teaser">Beckham</button>
       <button data-scroll="partners">Partners</button>
       <button data-scroll="plus">Plus</button>
       <button data-scroll="vanliga-fragor">Frågor</button>
@@ -358,6 +359,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <nav class="appnav" aria-label="Er flytt">
       <a href="#plan">Er plan</a>
       <a href="#bostad">Bostad och bolån</a>
+      <a href="#skatt">Beckham</a>
       <a href="#skolor">Skolor</a>
       <a href="#kontakter">Partners och kontakter</a>
       <a href="#dokument">Dokument</a>
@@ -469,6 +471,22 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
         <div><b>3,23 %</b><span>Euribor 12 månader, preliminärt snitt oktober 2026. Rörlig ränta är Euribor plus bankens marginal.</span></div>
       </div>
       <div class="row" style="margin-top:28px"><a class="btn sea" href="#bostad">Räkna på en bostad</a></div>
+    </div>
+  </section>
+
+  <section class="block" id="beckham-teaser">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Beckham-regimen</div>
+        <h2>Vad sparar ni på Beckham?</h2>
+        <p class="lead">Spaniens särskilda skatteregim för inflyttade: 24 % platt skatt på lönen i sex år i stället för upp till 47 %. Den gäller distansanställda, spanskt anställda och bolagsledare, men bara om ansökan lämnas i tid.</p>
+      </div>
+      <div class="homefacts">
+        <div><b>24 %</b><span>platt skatt på arbetsinkomst upp till 600 000 € per år, 47 % därutöver</span></div>
+        <div><b>6 år</b><span>flyttåret plus fem år. Inkomst och kapital från Sverige beskattas inte i Spanien under tiden.</span></div>
+        <div><b>6 mån</b><span>från registreringen hos Seguridad Social har ni på er att lämna Modelo 149. Efter det är chansen borta.</span></div>
+      </div>
+      <div class="row" style="margin-top:28px"><a class="btn sea" href="#skatt">Räkna på Beckham</a></div>
     </div>
   </section>
 
@@ -652,6 +670,52 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
   <h3 style="margin-top:36px">Banker som lånar ut till icke-residenter</h3>
   <p class="small muted" style="margin-top:6px">Villkor som bankerna själva publicerar, kontrollerade 29 oktober 2026. Bara CaixaBank publicerar en ränta; övriga lämnar räntan i ett personligt erbjudande. Det slutliga villkoret står i bankens FEIN (europeiskt standardiserat informationsblad).</p>
   <div class="compare-wrap"><table class="compare banks" id="bankTable"></table></div>
+</div></div>
+
+<div id="v-skatt" hidden><div class="wrap" style="padding-bottom:64px">
+  <div class="apphead">
+    <div class="eyebrow">Beckham-regimen</div>
+    <h2>Vad sparar ni på Beckham-regimen?</h2>
+    <p class="lead">Jämför spansk skatt med och utan regimen, för hela hushållet och för hela perioden. Regimen är personlig; make eller maka och barn kan följa med om deras inkomst är lägre än huvudpersonens.</p>
+  </div>
+  <div class="calc">
+    <form class="card stack" id="bk" onsubmit="return false">
+      <div class="grid2">
+        <label class="field"><span>Lön, person 1 (€ per år, brutto)</span><input type="number" id="bk_s1" value="120000" step="5000" min="0" inputmode="numeric"></label>
+        <label class="field"><span>Lön, person 2 (€ per år, 0 om ingen)</span><input type="number" id="bk_s2" value="60000" step="5000" min="0" inputmode="numeric"></label>
+      </div>
+      <label class="field"><span>Varför flyttar ni?</span>
+        <select id="bk_why">
+          <option value="distans">Jobbar på distans för en arbetsgivare utanför Spanien</option>
+          <option value="spansk">Anställning hos en arbetsgivare i Spanien</option>
+          <option value="vd">Blir styrelseledamot eller VD i ett bolag (eget eller annans)</option>
+          <option value="egen">Egen verksamhet som egenföretagare</option>
+          <option value="pension">Pension eller kapital, ingen lön</option>
+        </select></label>
+      <div class="field"><span>Har någon av er bott i Spanien de senaste fem åren?</span>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="bk_prev" value="nej" checked>Nej</label>
+          <label class="chip"><input type="radio" name="bk_prev" value="ja">Ja</label>
+        </div></div>
+      <label class="field"><span>Utdelning, ränta och kapitalvinst från Sverige (€ per år)</span><input type="number" id="bk_cap" value="0" step="5000" min="0" inputmode="numeric"></label>
+      <p class="small muted">Skatt i Andalusien 2026: statlig plus regional skala. Beckham: 24 % på lönen, ingen spansk skatt på kapital utanför Spanien. Svensk skatt på svenska inkomster ingår inte.</p>
+    </form>
+    <div class="result">
+      <div id="bkOut" class="stack" style="gap:18px"></div>
+      <div class="stack" id="bkCap"><b>Få kalkylen granskad</b><p class="note">En skatterådgivare som kan både Sverige och Spanien bekräftar om ni kvalificerar och hur ansökan ska göras. Vi skickar kalkylen till er och till rådgivaren.</p><form class="capture" onsubmit="return false" id="bkForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="bkEmail"><button class="btn sun" type="submit">Skicka</button></form><p class="err" id="bkErr" hidden></p></div>
+    </div>
+  </div>
+  <div class="card stack" style="margin-top:24px">
+    <b>Så fungerar regimen (artikel 93 i den spanska inkomstskattelagen)</b>
+    <ul class="small" style="margin:0;padding-left:20px;display:grid;gap:6px">
+      <li><b>Vem:</b> den som blir skatterättsligt bosatt i Spanien efter minst fem år utanför landet, och flyttar på grund av en anställning (även distansarbete för en utländsk arbetsgivare), ett uppdrag som styrelseledamot, en godkänd entreprenörsverksamhet eller högkvalificerat arbete för startups. Vanliga egenföretagare och pensionärer omfattas inte.</li>
+      <li><b>Bolagsledare:</b> om bolaget är ett förvaltningsbolag (mest kapital, inte verksamhet) får ni inte äga så mycket att ni räknas som närstående, i praktiken 25 % eller mer. Ett rörelsedrivande bolag går bra även om ni äger det.</li>
+      <li><b>Vad:</b> all arbetsinkomst, var den än tjänas, beskattas med 24 % upp till 600 000 € och 47 % därutöver. Övriga inkomster beskattas bara om de kommer från Spanien. Inga grundavdrag. Förmögenhetsskatt och Modelo 720 gäller bara spanska tillgångar.</li>
+      <li><b>Baksidan:</b> ni räknas inte som bosatta i Spanien enligt skatteavtalet med Sverige. Sverige kan därför beskatta svensk utdelning, pension och kapital som för en utomlands bosatt (SINK, kupongskatt, tioårsregeln). Det måste räknas på i varje enskilt fall.</li>
+      <li><b>När:</b> flyttåret plus fem år. Ansökan med Modelo 149 inom sex månader från registreringen hos Seguridad Social. Familjen kan följa med om deras skatteunderlag är lägre än huvudpersonens.</li>
+      <li><b>Deklaration:</b> Modelo 151 i stället för vanlig Renta. Källa: Agencia Tributaria, Manual de tributación de no residentes, oktober 2026.</li>
+    </ul>
+  </div>
 </div></div>
 
 <div id="v-skolor" hidden><div class="wrap" style="padding-bottom:64px">
@@ -1305,6 +1369,71 @@ document.addEventListener("click", async e => {
   downloadChecklist();
 });
 
+/* ---------- Beckham calculator: Andalucía 2026 (state + regional scale) vs art. 93 flat rate ---------- */
+const IRPF_STATE = [[12450,.095],[20200,.12],[35200,.15],[60000,.185],[300000,.225],[1e12,.245]];
+const IRPF_AND = [[13000,.095],[21100,.12],[35200,.15],[60000,.185],[1e12,.225]];
+const SAVINGS = [[6000,.19],[50000,.21],[200000,.23],[300000,.27],[1e12,.30]];
+function scale(base, br){ let t = 0, prev = 0; for(const [lim, r] of br){ if(base > prev) t += (Math.min(base, lim) - prev) * r; prev = lim; } return t; }
+const PERSONAL_MIN = 5550, SS_EMPLOYEE = 0.0647, SS_MAX_BASE = 4909.5 * 12;
+function irpfStandard(salary){ // employee: SS contributions and the 2 000 € expense deduction, personal minimum as a credit
+  if(salary <= 0) return {tax:0, ss:0};
+  const ss = Math.min(salary, SS_MAX_BASE) * SS_EMPLOYEE;
+  const base = Math.max(0, salary - ss - 2000);
+  const gross = scale(base, IRPF_STATE) + scale(base, IRPF_AND);
+  const credit = scale(Math.min(base, PERSONAL_MIN), IRPF_STATE) + scale(Math.min(base, PERSONAL_MIN), IRPF_AND);
+  return {tax: Math.max(0, gross - credit), ss};
+}
+function irpfBeckham(salary){ return {tax: scale(salary, [[600000,.24],[1e12,.47]]), ss: Math.min(salary, SS_MAX_BASE) * SS_EMPLOYEE}; }
+let bkSnapshot = {};
+function renderBeckham(){
+  const s1 = +$("#bk_s1").value || 0, s2 = +$("#bk_s2").value || 0, cap = +$("#bk_cap").value || 0;
+  const why = $("#bk_why").value, prev = $('[name="bk_prev"]:checked').value;
+  const eligible = prev === "nej" && ["distans","spansk","vd"].includes(why);
+  const std1 = irpfStandard(s1), std2 = irpfStandard(s2), bk1 = irpfBeckham(s1), bk2 = irpfBeckham(s2);
+  const capStd = scale(cap, SAVINGS);
+  const stdTax = std1.tax + std2.tax + capStd, bkTax = bk1.tax + bk2.tax;
+  // the spouse follows the main taxpayer only with a lower taxable base; if person 2 earns more, person 2 is the main one
+  const saving = stdTax - bkTax, years = 6;
+  const salary = s1 + s2;
+  bkSnapshot = {s1, s2, cap, why, prev, eligible, stdTax: Math.round(stdTax), bkTax: Math.round(bkTax), saving: Math.round(saving)};
+  let why_txt = "";
+  if(prev === "ja") why_txt = "Ni har bott i Spanien under de senaste fem åren. Då går regimen inte att söka, oavsett inkomst.";
+  else if(why === "egen") why_txt = "Egen verksamhet som egenföretagare räknas inte, om den inte godkänns som entreprenörsverksamhet (Ley 14/2013) eller är högkvalificerat arbete för startups. Ett alternativ är att driva verksamheten i ett bolag där ni är styrelseledamot. Fråga rådgivaren innan ni flyttar.";
+  else if(why === "pension") why_txt = "Regimen kräver en flytt på grund av arbete. Pension och kapital kvalificerar inte. För er handlar frågan i stället om SINK, pensionsbeskattning och förmögenhetsskatt, som Andalusien i praktiken har tagit bort.";
+  const eff = salary ? Math.round(stdTax / (salary + cap) * 100) : 0, effBk = salary ? Math.round(bkTax / (salary + cap) * 100) : 0;
+  let html = "";
+  if(!eligible){
+    html += `<div class="kpis"><div class="kpi big neg"><div class="v">Kvalificerar inte</div><div class="l">${why_txt}</div></div>
+      <div class="kpi"><div class="v">${eur(stdTax)}</div><div class="l">spansk skatt per år med vanlig IRPF</div></div>
+      <div class="kpi"><div class="v">${eff} %</div><div class="l">effektiv skatt på hushållets inkomst</div></div></div>`;
+  } else {
+    const pos = saving > 0;
+    html += `<div class="kpis"><div class="kpi big${pos ? "" : " neg"}"><div class="v">${pos ? "+" : ""}${eur(saving)}</div><div class="l">${pos ? "lägre spansk skatt per år med Beckham" : "Beckham ger ingen vinst på den här inkomsten. Under ungefär 57 000 € per person är den vanliga skalan lägre."}</div></div>
+      <div class="kpi"><div class="v">${eur(stdTax)}</div><div class="l">spansk skatt per år, vanlig IRPF (${eff} %)</div></div>
+      <div class="kpi"><div class="v">${eur(bkTax)}</div><div class="l">spansk skatt per år, Beckham (${effBk} %)</div></div>
+      <div class="kpi"><div class="v">${eur(Math.max(0, saving) / 12)}</div><div class="l">mer kvar per månad</div></div>
+      <div class="kpi"><div class="v">${eur(Math.max(0, saving) * years)}</div><div class="l">över hela perioden, sex år</div></div></div>`;
+    if(s2 > 0 && std2.tax > bk2.tax && s2 >= s1) html += `<p class="note">Person 2 tjänar mest och blir huvudperson i regimen. Person 1 kan följa med som familjemedlem så länge inkomsten är lägre.</p>`;
+    if(s2 > 0 && bk2.tax > std2.tax) html += `<p class="note">Person 2 tjänar på att stå utanför regimen (vanlig skala ${eur(std2.tax)} mot ${eur(bk2.tax)} med 24 %). Regimen väljs per person.</p>`;
+    if(cap > 0) html += `<p class="note">Kapitalinkomsten från Sverige (${eur(cap)}) beskattas inte i Spanien under Beckham, men Sverige kan ta ut kupongskatt eller tillämpa tioårsregeln. Den delen av vinsten (${eur(capStd)} per år) ska bekräftas av rådgivaren.</p>`;
+    if(why === "vd") html += `<p class="note">Som bolagsledare: äger ni 25 % eller mer av ett bolag som mest förvaltar kapital gäller inte regimen. Ett rörelsedrivande bolag går bra.</p>`;
+  }
+  html += `<details><summary>Så räknar vi</summary><table>
+    <tr><td>Person 1, vanlig IRPF efter sociala avgifter ${eur(std1.ss)}</td><td>${eur(std1.tax)}</td></tr>
+    <tr><td>Person 1, Beckham 24 %</td><td>${eur(bk1.tax)}</td></tr>
+    ${s2 > 0 ? `<tr><td>Person 2, vanlig IRPF efter sociala avgifter ${eur(std2.ss)}</td><td>${eur(std2.tax)}</td></tr><tr><td>Person 2, Beckham 24 %</td><td>${eur(bk2.tax)}</td></tr>` : ""}
+    ${cap > 0 ? `<tr><td>Kapital från Sverige, spansk sparskala 19–30 %</td><td>${eur(capStd)}</td></tr><tr><td>Kapital från Sverige under Beckham</td><td>0 €</td></tr>` : ""}
+  </table>
+  <p class="note" style="margin-top:10px">Statlig skala 9,5–24,5 % plus Andalusiens skala 9,5–22,5 % för 2026, grundavdrag 5 550 €, schablonavdrag 2 000 € och arbetstagarens sociala avgifter 6,47 % upp till maxbasen. Individuell beskattning, inga andra avdrag. Beckham: 24 % på bruttolönen utan avdrag, 47 % över 600 000 €. Sociala avgifter betalas i båda fallen om ni är anslutna till spansk socialförsäkring. Kalkylen visar bara spansk skatt; svensk skatt på svenska inkomster tillkommer och kräver rådgivare.</p></details>`;
+  $("#bkOut").innerHTML = html;
+}
+$$("#bk input, #bk select").forEach(el => el.addEventListener("input", renderBeckham));
+bindCapture("#bkForm", "#bkEmail", "#bkErr", async email => {
+  const ok = await saveLead({source:"beckham", email, calc: bkSnapshot, profile: profile()});
+  if(ok) $("#bkCap").innerHTML = `<div class="ok-msg">Tack. Vi skickar kalkylen till ${esc(email)} och hör av oss med en rådgivare inom ett dygn.</div>`;
+  return ok;
+});
+
 /* ---------- landing forms ---------- */
 bindCapture("#checklistForm", "#cl_email", "#cl_err", async email => {
   const ok = await saveLead({source:"checklist", email, profile: profile()});
@@ -1624,7 +1753,7 @@ function renderSchools(){
 }
 
 /* ---------- routing ---------- */
-const VIEWS = ["start","plan","bostad","skolor","kontakter","dokument","fragor","fraga"];
+const VIEWS = ["start","plan","bostad","skatt","skolor","kontakter","dokument","fragor","fraga"];
 function route(){
   const h = location.hash.slice(1);
   const v = VIEWS.includes(h) ? h : "landing";
@@ -1641,6 +1770,7 @@ function route(){
   if(v === "start"){ if(!location.hash.includes("start") || wzStep >= STEPS.length) wzStep = 0; renderWizard(); }
   if(v === "plan"){ if(!hasPlan()){ location.hash = "start"; return; } renderPlan(); }
   if(v === "bostad") renderBostad();
+  if(v === "skatt") renderBeckham();
   if(v === "skolor") renderSchools();
   if(v === "kontakter") renderContacts();
   if(v === "dokument") renderDocs();
