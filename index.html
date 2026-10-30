@@ -588,11 +588,11 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
   <section class="band">
     <div class="wrap">
       <div class="eyebrow" style="color:#FFD58A">Checklistan</div>
-      <h2>Hela flytten på en sida, i er inkorg.</h2>
-      <p>Alla steg i rätt ordning, med vilka papper som behövs och vem som löser vad.</p>
-      <form class="capture" id="checklistForm" onsubmit="return false"><input type="email" id="cl_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Skicka checklistan</button></form>
+      <h2>Hela flytten i en PDF.</h2>
+      <p>Alla steg i rätt ordning, vilka papper som behövs, vem som löser vad och länkar till de officiella blanketterna. Har ni gjort planen blir den personlig.</p>
+      <form class="capture" id="checklistForm" onsubmit="return false"><input type="email" id="cl_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Ladda ner checklistan</button></form>
       <p class="err" id="cl_err" hidden></p>
-      <div class="ok-msg" id="cl_ok" hidden>Tack. Vi skickar checklistan till din e-post inom ett dygn.</div>
+      <div class="ok-msg" id="cl_ok" hidden>Klart. Checklistan laddas ner nu. <button class="linkbtn" type="button" data-pdf style="color:inherit">Ladda ner igen</button></div>
     </div>
   </section>
 </div>
@@ -608,7 +608,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <div class="eyebrow">Er flyttplan</div>
     <h2 id="planTitle">Er flytt, steg för steg</h2>
     <div class="summary" id="planSummary"></div>
-    <div class="row"><a class="linkbtn" href="#start">Ändra svar</a></div>
+    <div class="row"><a class="linkbtn" href="#start">Ändra svar</a><button class="linkbtn" type="button" data-pdf>Ladda ner som PDF</button></div>
     <div class="bar"><div class="progress"><i id="planProg" style="width:0%"></i></div><span class="small muted" id="planCount"></span></div>
   </div>
   <div id="plan"></div>
@@ -682,6 +682,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <div class="eyebrow">Dokumentvalv</div>
     <h2>Allt ni kommer att bli ombedda att visa</h2>
     <p class="lead">I den ordning ni behöver det. Markera vad ni har, så ser ni vad som saknas.</p>
+    <div class="row"><button class="btn sm ghost" type="button" data-pdf>Ladda ner checklistan som PDF</button></div>
   </div>
   <div id="docs"></div>
 </div></div>
@@ -1223,10 +1224,91 @@ $("#askForm").addEventListener("submit", async e => {
   $("#askText").value = "";
 });
 
+/* ---------- checklist PDF (jsPDF, loaded on first use) ---------- */
+let jspdfLoading;
+function loadJsPDF(){
+  if(window.jspdf) return Promise.resolve(window.jspdf);
+  return jspdfLoading ||= new Promise((res, rej) => {
+    const sc = document.createElement("script");
+    sc.src = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
+    sc.onload = () => res(window.jspdf); sc.onerror = () => { jspdfLoading = null; rej(new Error("jspdf")); };
+    document.head.appendChild(sc);
+  });
+}
+async function downloadChecklist(){
+  let lib;
+  try { lib = await loadJsPDF(); } catch { toast("PDF:en kunde inte skapas just nu. Försök igen om en stund."); return; }
+  const doc = new lib.jsPDF({unit:"mm", format:"a4"});
+  const W = 210, L = 18, R = 192, BOTTOM = 280, personal = hasPlan(), a = answers();
+  let y = 20;
+  const ensure = h => { if(y + h > BOTTOM){ doc.addPage(); y = 20; } };
+  const text = (str, size, style = "normal", color = [20,24,31], x = L, width = R - L) => {
+    doc.setFont("helvetica", style); doc.setFontSize(size); doc.setTextColor(...color);
+    const lines = doc.splitTextToSize(str, width), h = lines.length * size * 0.42;
+    ensure(h); doc.text(lines, x, y + size * 0.35); y += h; return h;
+  };
+  const box = (x, filled) => { doc.setDrawColor(120,128,140); doc.setLineWidth(0.3); doc.rect(x, y + 0.6, 3.6, 3.6); if(filled){ doc.setFillColor(47,111,143); doc.rect(x + 0.7, y + 1.3, 2.2, 2.2, "F"); } };
+
+  doc.setFillColor(243,235,221); doc.rect(0, 0, W, 34, "F");
+  doc.setFont("helvetica","bold"); doc.setFontSize(20); doc.setTextColor(31,46,58);
+  doc.text("s", L, 16); doc.setFillColor(233,166,107); doc.circle(L + 6.6, 13.9, 2.1, "F"); doc.text("lpass", L + 9.2, 16);
+  doc.setFont("helvetica","normal"); doc.setFontSize(11); doc.setTextColor(47,111,143);
+  doc.text(state.hushall ? `${state.hushall}s flyttchecklista` : "Flyttchecklista, Costa del Sol", L, 25);
+  y = 44;
+  text(personal ? profileText() : "Generell version. Gör planen på Solpass så blir checklistan personlig, med bara de steg som gäller er.", 10, "normal", [80,88,100]);
+  text(`Skapad ${fmt(new Date())}${state.movedate && state.plus ? " · datum räknade från flyttdagen" : ""}`, 9, "normal", [120,128,140]);
+  y += 4;
+
+  const tasks = TASKS.filter(t => t.c(a));
+  for(const ph of [1,2,3,4]){
+    const list = tasks.filter(t => t.ph === ph); if(!list.length) continue;
+    ensure(16); y += 3;
+    text(`${PHASES[ph]}  ·  ${PHASE_WHEN[ph]}`, 13, "bold", [47,111,143]);
+    doc.setDrawColor(232,225,213); doc.line(L, y + 1, R, y + 1); y += 4;
+    for(const t of list){
+      const dd = state.plus ? dueFor(t) : null;
+      ensure(14); box(L, !!state.done[taskKey(t)]);
+      text(t.t + (dd ? `  (senast ${fmt(dd)})` : ""), 10.5, "bold", [20,24,31], L + 6, R - L - 6);
+      text(t.d, 9.5, "normal", [70,78,90], L + 6, R - L - 6);
+      text("Vem: " + shortWho(t.who), 8.5, "italic", [120,128,140], L + 6, R - L - 6);
+      y += 2.5;
+    }
+  }
+
+  doc.addPage(); y = 20;
+  text("Dokument att samla", 15, "bold", [47,111,143]);
+  text("Ta med original och en kopia till varje besök. Blanketterna hämtas alltid i senaste version från myndigheten.", 9.5, "normal", [80,88,100]);
+  y += 3;
+  for(const d of DOCS){
+    ensure(12); box(L, state.docs[d.id] === "har");
+    text(d.t, 10.5, "bold", [20,24,31], L + 6, R - L - 6);
+    text(d.d, 9.5, "normal", [70,78,90], L + 6, R - L - 6);
+    for(const [l, u] of d.src || []){
+      ensure(5); doc.setFont("helvetica","normal"); doc.setFontSize(8.5); doc.setTextColor(47,111,143);
+      doc.textWithLink(`${l}: ${u.length > 92 ? u.slice(0, 89) + "..." : u}`, L + 6, y + 3, {url: u}); y += 4;
+    }
+    y += 2.5;
+  }
+  y += 4;
+  text(`Länkar kontrollerade ${DOCS_CHECKED}. Regler, avgifter och blanketter ändras. Kontrollera med myndigheten eller en gestor innan ni lämnar in. Solpass är vägledning, inte juridisk eller skattemässig rådgivning.`, 8.5, "italic", [120,128,140]);
+
+  const pages = doc.getNumberOfPages();
+  for(let i = 1; i <= pages; i++){ doc.setPage(i); doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(150,150,150); doc.text(`Solpass · sida ${i} av ${pages}`, L, 290); }
+  doc.save(personal && state.hushall ? `solpass-checklista-${state.hushall.toLowerCase().replace(/[^a-z0-9åäö]+/g,"-")}.pdf` : "solpass-checklista.pdf");
+}
+let pdfLeadSent = false;
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-pdf]"); if(!b) return;
+  e.preventDefault();
+  if(!state.email){ location.hash = "start"; setTimeout(() => { $("#checklistForm")?.scrollIntoView({behavior:"smooth", block:"center"}); $("#cl_email")?.focus(); }, 60); return; }
+  if(!pdfLeadSent){ pdfLeadSent = true; saveLead({source:"checklist", email: state.email, profile: profile()}); }
+  downloadChecklist();
+});
+
 /* ---------- landing forms ---------- */
 bindCapture("#checklistForm", "#cl_email", "#cl_err", async email => {
   const ok = await saveLead({source:"checklist", email, profile: profile()});
-  if(ok){ $("#checklistForm").hidden = true; $("#cl_ok").hidden = false; }
+  if(ok){ rememberEmail(email); pdfLeadSent = true; $("#checklistForm").hidden = true; $("#cl_ok").hidden = false; downloadChecklist(); }
   return ok;
 });
 bindCapture("#buyerForm", "#b_email", "#b_err", async email => {
