@@ -283,6 +283,7 @@ footer.site .logo{color:var(--on-deep)}
 .doc select{width:auto;padding:8px 10px;font-size:.88rem}
 .doc.has .t::before{content:"✓ ";color:var(--ok)}
 .doc.locked{opacity:.55}
+.srcs{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;font-size:.88rem;font-weight:600}
 .tpl{background:var(--bg);border-radius:10px;padding:12px 14px;margin-top:10px;font-size:.92rem}
 .tpl ol{margin:6px 0 0 18px;padding:0;display:grid;gap:4px}
 .search{margin-top:18px}
@@ -824,21 +825,23 @@ const PHASES = {1:"Beslutet",2:"Före flytten",3:"Första månaden",4:"Första �
 const PHASE_WHEN = {1:"6 månader före och tidigare",2:"3 månader före till avresa",3:"vecka 1–6 på plats",4:"3–15 månader efter landning"};
 
 /* ---------- DOCUMENTS ---------- */
+const MIGR = "https://www.inclusion.gob.es/documents/d/migraciones/"; // Migraciones, official forms (checked 30 Oct 2026)
+const DOCS_CHECKED = "30 okt 2026";
 const DOCS = [
  {id:"pass",t:"Pass för alla i familjen, giltiga minst ett år",d:"Krävs vid NIE, residens, bank, skola och bil. ID-kort räcker ofta inte.",free:true},
- {id:"ex15",t:"EX-15 – ansökan om NIE",d:"En per person, även barn. Fylls i på spanska.",tpl:["Ladda ner blanketten från Policía Nacional (länk under Kontakter).","Fyll i personuppgifter exakt som i passet.","Ange skäl: 'traslado de residencia' eller 'compra de vivienda'.","Betala tasa 790 kod 012 på bank före besöket och ta med kvittot.","Boka cita previa, ta med pass, kopia, blankett och kvitto."],free:true},
- {id:"tasa",t:"Kvitto på betald avgift (tasa 790/012)",d:"Betalas på bank eller online före NIE-besöket.",free:true},
+ {id:"ex15",t:"EX-15 – ansökan om NIE",d:"En per person, även barn. Fylls i på spanska.",src:[["EX-15, ifyllbar PDF",MIGR+"ex15-formulario-solicitud-numero-de-identidad-de-extranjero-y-certificados-editable.pdf"],["Utskriftsversion",MIGR+"ex15-formulario-solicitud-numero-de-identidad-de-extranjero-y-certificados.pdf"]],tpl:["Ladda ner den ifyllbara blanketten ovan (Migraciones officiella PDF).","Fyll i personuppgifter exakt som i passet.","Ange skäl: 'traslado de residencia' eller 'compra de vivienda'.","Betala tasa 790 kod 012 på bank före besöket och ta med kvittot.","Boka cita previa, ta med pass, kopia, blankett och kvitto."],free:true},
+ {id:"tasa",t:"Kvitto på betald avgift (tasa 790/012)",d:"Fyll i formuläret hos Policía Nacional, skriv ut och betala på bank eller online före besöket. Samma avgift för NIE och EX-18.",src:[["Generera tasa 790/012","https://sede.policia.gob.es/Tasa790_012/"]],free:true},
  {id:"hyra",t:"Hyreskontrakt eller lagfart",d:"Underlag för padrón, skola och bil. Långtidskontrakt, inte temporada.",free:false},
  {id:"padron",t:"Empadronamiento-intyg (volante de empadronamiento)",d:"Hämtas på ayuntamiento efter registrering. Begär flera kopior; alla vill ha ett original.",free:false},
- {id:"ex18",t:"EX-18 – registrering som EU-resident",d:"Kräver försörjningsbevis och sjukförsäkring.",tpl:["Ladda ner EX-18.","Bifoga pass, padrón, bevis på inkomst (anställningsavtal, kontoutdrag eller pensionsbesked) och sjukförsäkring.","Betala tasa 790/012.","Cita previa hos Policía Nacional, en tid per person."],free:false},
+ {id:"ex18",t:"EX-18 – registrering som EU-resident",d:"Kräver försörjningsbevis och sjukförsäkring.",src:[["EX-18, ifyllbar PDF",MIGR+"ex18-formulario-inscripcion-en-el-rce-residencia-ciudadano-de-la-ue-editable.pdf"],["Krav enligt Policía Nacional","https://sede.policia.gob.es/portalCiudadano/_es/tramites_extranjeria_tramite_certificadoregistro_ciudadanoue.php"]],tpl:["Ladda ner den ifyllbara blanketten ovan.","Bifoga pass, padrón, bevis på inkomst (anställningsavtal, kontoutdrag eller pensionsbesked) och sjukförsäkring.","Betala tasa 790/012.","Cita previa hos Policía Nacional, en tid per person."],free:false},
  {id:"forsakring",t:"Sjukförsäkringsbevis på spanska eller engelska",d:"Privat försäkring utan självrisk brukar krävas för EX-18.",free:false},
  {id:"inkomst",t:"Inkomstbevis",d:"Anställningsavtal, lönespecifikationer, pensionsbesked eller kontoutdrag senaste tre månaderna.",free:false},
  {id:"skv",t:"Bekräftelse från Skatteverket på utflyttning",d:"Beslut om avregistrering och eventuellt SINK-beslut. Spara som PDF.",free:false},
  {id:"skola",t:"Betyg, skolintyg och vaccinationsintyg",d:"Översatt till engelska eller spanska. Internationella skolor vill ha två års betyg.",free:false},
  {id:"fullmakt",t:"Fullmakt till gestor (poder notarial eller apoderamiento)",d:"Låter gestorn boka tider och lämna papper åt er. Sparar veckor.",tpl:["Bestäm omfattning: NIE, padrón, DGT, skatt.","Skriv under hos notarie i Spanien eller via spanska konsulatet.","Ge gestorn en kopia och behåll originalet."],free:false},
  {id:"bil",t:"Bilens registreringsbevis, köpekvitto och CoC-intyg",d:"Krävs för omregistrering och för befrielse från registreringsskatt.",free:false},
- {id:"m030",t:"Modelo 030 – skatteregistrering",d:"Lämnas online med digitalt certifikat eller via gestor.",free:false},
- {id:"cert",t:"Digitalt certifikat (FNMT) installerat på dator och telefon",d:"Exportera en säkerhetskopia; förnyas vart fjärde år.",free:false}
+ {id:"m030",t:"Modelo 030 – skatteregistrering",d:"Lämnas online med digitalt certifikat eller via gestor.",src:[["Modelo 030 hos Agencia Tributaria","https://sede.agenciatributaria.gob.es/Sede/procedimientoini/G321.shtml"]],free:false},
+ {id:"cert",t:"Digitalt certifikat (FNMT) installerat på dator och telefon",d:"Exportera en säkerhetskopia; förnyas vart fjärde år.",src:[["Ansök hos FNMT","https://www.sede.fnmt.gob.es/certificados/persona-fisica"]],free:false}
 ];
 
 const RATE=11.3;
@@ -1181,10 +1184,10 @@ function renderDocs(){
   for(const d of DOCS){
     const locked = !d.free && !state.plus, st = state.docs[d.id] || "saknas";
     if(st === "har") have++;
-    html += `<div class="doc${st === "har" ? " has" : ""}${locked ? " locked" : ""}"><div><div class="t">${d.t}</div><div class="d">${d.d}</div>${d.tpl && !locked ? `<div class="tpl"><b>Så fyller ni i</b><ol>${d.tpl.map(s => `<li>${s}</li>`).join("")}</ol></div>` : d.tpl ? `<div class="small muted" style="margin-top:6px">Ifyllnadsguide i Plus</div>` : ""}</div>
+    html += `<div class="doc${st === "har" ? " has" : ""}${locked ? " locked" : ""}"><div><div class="t">${d.t}</div><div class="d">${d.d}</div>${d.src ? `<div class="srcs">${d.src.map(([l,u]) => `<a href="${u}" target="_blank" rel="noopener">${l} ↗</a>`).join("")}</div>` : ""}${d.tpl && !locked ? `<div class="tpl"><b>Så fyller ni i</b><ol>${d.tpl.map(s => `<li>${s}</li>`).join("")}</ol></div>` : d.tpl ? `<div class="small muted" style="margin-top:6px">Ifyllnadsguide i Plus</div>` : ""}</div>
       <select data-doc="${d.id}" ${locked ? "disabled" : ""} aria-label="Status: ${esc(d.t)}"><option value="saknas"${st === "saknas" ? " selected" : ""}>saknas</option><option value="pagar"${st === "pagar" ? " selected" : ""}>pågår</option><option value="har"${st === "har" ? " selected" : ""}>har</option></select></div>`;
   }
-  html += `</div><p class="small muted" style="margin-top:12px">${have} av ${DOCS.length} dokument klara.</p>`;
+  html += `</div><p class="small muted" style="margin-top:12px">${have} av ${DOCS.length} dokument klara. Länkarna går direkt till myndigheternas egna blanketter, kontrollerade ${DOCS_CHECKED}. Använd alltid senaste versionen därifrån.</p>`;
   if(!state.plus) html += gateHtml("Hela valvet med ifyllnadsguider");
   $("#docs").innerHTML = html;
   $$("#docs select[data-doc]").forEach(s => s.onchange = () => { state.docs[s.dataset.doc] = s.value; save(); renderDocs(); });
