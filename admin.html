@@ -83,15 +83,12 @@ dt{color:var(--muted)} dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
 <main class="wrap">
   <section class="card login" id="loginView" hidden>
     <h1>Logga in</h1>
-    <p class="muted small" style="margin:0">Vi mejlar en inloggningslänk. Bara e-postadresser som finns i adminlistan ser några leads.</p>
+    <p class="muted small" style="margin:0">Bara konton som Solpass har gett adminbehörighet ser några leads.</p>
     <form class="stack" id="loginForm">
       <label class="stack small"><span>E-post</span><input type="email" id="loginEmail" required autocomplete="email"></label>
-      <button type="submit" id="loginBtn">Skicka inloggningslänk</button>
-    </form>
-    <form class="stack" id="codeForm" hidden>
-      <p class="small" style="margin:0">Länken är skickad. Klicka på den i mejlet, eller skriv in koden om mejlet innehåller en.</p>
-      <label class="stack small"><span>Kod från mejlet</span><input id="loginCode" inputmode="numeric" autocomplete="one-time-code"></label>
-      <button type="submit">Logga in med kod</button>
+      <label class="stack small"><span>Lösenord</span><input type="password" id="loginPass" required minlength="10" autocomplete="current-password"></label>
+      <button type="submit" id="loginBtn">Logga in</button>
+      <button type="button" class="link small" id="signupBtn" style="justify-self:start">Första gången? Skapa konto med det här lösenordet</button>
     </form>
     <p class="small" id="loginMsg" role="status"></p>
   </section>
@@ -213,20 +210,22 @@ async function show(session){
   $("#who").textContent = session.user.email; $("#logout").hidden = false; $("#loginView").hidden = true;
   const { data: isAdmin } = await sb.rpc("is_admin");
   if(!isAdmin){ $("#appView").hidden = false; $("#kpis").innerHTML = ""; $("#sources").innerHTML = "";
-    $("#list").innerHTML = `<div class="empty">${esc(session.user.email)} har inte adminbehörighet. Be Oliver lägga till adressen.</div>`; return; }
+    $("#list").innerHTML = `<div class="empty">${esc(session.user.email)} är inloggad men har inte adminbehörighet än. Säg till i chatten så kopplas kontot.</div>`; return; }
   $("#appView").hidden = false; load();
 }
+const creds = () => ({ email: $("#loginEmail").value.trim(), password: $("#loginPass").value });
+function say(text, cls = "small"){ const m = $("#loginMsg"); m.className = cls; m.textContent = text; }
 $("#loginForm").onsubmit = async e => {
-  e.preventDefault(); const btn = $("#loginBtn"), msg = $("#loginMsg"); btn.disabled = true; msg.className = "small"; msg.textContent = "";
-  const { error } = await sb.auth.signInWithOtp({ email: $("#loginEmail").value.trim(), options: { emailRedirectTo: location.origin + location.pathname } });
+  e.preventDefault(); const btn = $("#loginBtn"); btn.disabled = true; say("");
+  const { error } = await sb.auth.signInWithPassword(creds());
   btn.disabled = false;
-  if(error){ msg.className = "small err"; msg.textContent = "Det gick inte att skicka länken: " + error.message; return; }
-  $("#loginForm").hidden = true; $("#codeForm").hidden = false; $("#loginCode").focus();
+  if(error) say(/confirm/i.test(error.message) ? "Bekräfta först e-postadressen via länken i mejlet från Supabase, logga sedan in här." : "Inloggningen misslyckades: " + error.message, "small err");
 };
-$("#codeForm").onsubmit = async e => {
-  e.preventDefault(); const msg = $("#loginMsg");
-  const { error } = await sb.auth.verifyOtp({ email: $("#loginEmail").value.trim(), token: $("#loginCode").value.trim(), type: "email" });
-  if(error){ msg.className = "small err"; msg.textContent = "Koden fungerade inte: " + error.message; }
+$("#signupBtn").onclick = async () => {
+  if(!$("#loginForm").reportValidity()) return;
+  const { data, error } = await sb.auth.signUp(creds());
+  if(error) return say("Kontot kunde inte skapas: " + error.message, "small err");
+  say(data.session ? "Kontot är skapat och du är inloggad. Be Solpass ge kontot adminbehörighet." : "Kontot är skapat. Klicka på bekräftelselänken i mejlet (sidan den öppnar kan visa fel, det gör inget), logga sedan in här.", "small ok");
 };
 $("#logout").onclick = () => sb.auth.signOut();
 $("#refresh").onclick = load; $("#csv").onclick = csv;
