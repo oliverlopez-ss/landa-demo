@@ -1243,7 +1243,7 @@ const FAQ = [
   {q:"Vilka löpande kostnader har en bostad?",a:"<p>IBI (kommunal fastighetsskatt), sophämtning, comunidad (föreningsavgift) om det är en urbanisation eller lägenhet, hemförsäkring, el, vatten och internet. El är dyrare än i Sverige och villor med pool och luftkonditionering drar mycket.</p>",who:["ayto"]}
  ]},
  {cat:"Bil och körkort",items:[
-  {q:"Ska vi ta med bilen eller köpa här?",a:"<p>Oftast: sälj i Sverige och köp i Spanien. Omregistrering kräver teknisk besiktning (ITV), dokumentation, registreringsskatt och ofta ingenjörsintyg om något avviker. Vid flytt kan ni slippa registreringsskatten om ni ägt bilen minst sex månader och ansöker inom tidsfristen, men processen tar tid och kostar en del hos gestor. En svenskregistrerad bil får inte köras av en resident längre än en kort period.</p>",who:["dgt","gestor"]},
+  {q:"Ska vi ta med bilen eller köpa här?",a:"<p>Oftast: sälj i Sverige och köp i Spanien. Omregistrering kräver teknisk besiktning (ITV), dokumentation, registreringsskatt och ofta ingenjörsintyg om något avviker. Vid flytt kan ni slippa registreringsskatten om ni har använt bilen i minst sex månader före flytten, ansöker inom 60 dagar från att bilen kom till Spanien och inte säljer den inom tolv månader. En svenskregistrerad bil får inte köras av en resident längre än en kort period.</p>",who:["dgt","gestor"]},
   {q:"Gäller vårt svenska körkort?",a:"<p>Ja, EU-körkort gäller. När ni blivit residenta gäller spanska regler för giltighetstid, och efter två år bör kortet registreras eller bytas hos DGT. Det är också praktiskt att ha ett spanskt kort när ni ska visa legitimation.</p>",who:["dgt"]}
  ]},
  {cat:"Sjukvård och försäkring",items:[
@@ -1267,9 +1267,9 @@ const TASKS = [
  {ph:1,off:-180,t:"Välj skolform och ställ barnen i kö",d:"Internationella skolor har köer, svenska skolorna tar emot i mån av plats, kommunal skola söks i mars. Skolvalet styr var ni ska bo.",who:"skola-int",c:a=>a.familj==="barn"},
  {ph:1,off:-150,t:"Bestäm flyttmånad utifrån 183-dagarsregeln",d:"Flytt före juli gör er residenta samma år, efter juli först året därpå. Välj det som passar ert svenska bokslut och er svenska deklaration.",who:"skatt",c:()=>true},
  {ph:1,off:-120,t:"Besök området och välj ett par delområden",d:"Prova skolvägen, pendlingen till flygplatsen och vardagen innan ni bestämmer er. Hyr gärna en månad på plats.",who:"natverk",c:a=>a.region==="costa"},
- {ph:1,off:-180,t:"Bestäm om bilen ska säljas i Sverige",d:"Omregistrering kostar tid och pengar; för de flesta är det bättre att sälja och köpa här. Vill ni ta med den måste ni ha ägt den minst sex månader före flytten.",who:"dgt",c:a=>a.bil==="med"},
+ {ph:1,off:-180,t:"Bestäm om bilen ska säljas i Sverige",d:"Omregistrering kostar tid och pengar; för de flesta är det bättre att sälja och köpa här. Vill ni ta med den skattefritt måste ni ha använt den i minst sex månader före flytten och inte sälja den inom tolv månader i Spanien.",who:"dgt",c:a=>a.bil==="med"},
 
- {ph:2,off:-90,t:"Ansök om NIE för alla i familjen",d:"Via spanska konsulatet i Stockholm eller via cita previa hos Policía Nacional. Blankett EX-15, pass, avgift. Utan NIE stannar allt annat.",who:"policia",c:()=>true},
+ {ph:2,off:-90,t:"Ansök om NIE om ni hyr eller köper före flytten",d:"Behövs bara om ni skriver kontrakt innan ni flyttat. Söks via spanska konsulatet i Stockholm eller hos Policía Nacional med blankett EX-15. Flyttar ni först får ni NIE när ni registrerar er som residenta.",who:"policia",c:()=>true},
  {ph:2,off:-45,t:"Teckna privat sjukförsäkring som gäller i Spanien",d:"Krävs för residensregistreringen och täcker glappet tills ni är inne i Seguridad Social.",who:"ss",c:a=>a.inkomst!=="spansk"},
  {ph:2,off:-14,t:"Anmäl flytt till Skatteverket och Försäkringskassan",d:"Minst en vecka före avresan. Begär SINK om svensk inkomst kvarstår. Be om skriftlig bedömning av väsentlig anknytning om ni behåller bostad eller bolag.",who:"skv",c:()=>true},
  {ph:2,off:-60,t:"Säkra bostad med långtidskontrakt",d:"Kräv vivienda habitual-kontrakt, inte temporada, så att ni kan skriva er på adressen. Räkna med deposition plus extra garanti.",who:"maklare",c:a=>a.bostad==="hyra"},
@@ -1280,18 +1280,18 @@ const TASKS = [
  {ph:2,off:-30,t:"Samla skolpapper",d:"Betyg, vaccinationsintyg och intyg från svensk skola, gärna med engelsk översättning.",who:"skola-sv",c:a=>a.familj==="barn"},
 
  {ph:3,off:7,t:"Skriv er i kommunen (empadronamiento)",d:"Ayuntamiento, med hyreskontrakt eller lagfart, pass och NIE. Gör det första veckan; det låser upp skola, vård och bil.",who:"ayto",c:()=>true},
- {ph:3,off:60,t:"Registrera er som residenta (EU-intyg)",d:"Blankett EX-18 hos Policía Nacional. Visa försörjning och sjukförsäkring. Senast tre månader efter ankomst.",who:"policia",c:()=>true},
+ {ph:3,off:60,t:"Registrera er som residenta (EU-intyg)",d:"Blankett EX-18 hos Policía Nacional, personligen och inom tre månader efter ankomst. Visa försörjning och sjukförsäkring. NIE ingår i intyget.",who:"policia",c:()=>true},
  {ph:3,off:21,t:"Skaffa digitalt certifikat",d:"FNMT, med fysisk identifiering. Därefter sköter ni skatt, DGT och intyg hemifrån.",who:"fnmt",c:()=>true},
  {ph:3,off:14,t:"Registrera er hos Seguridad Social",d:"Socialförsäkringsnummer och tillgång till vårdcentral. Går via arbetsgivaren om ni har spansk anställning.",who:"ss",c:a=>a.inkomst==="spansk"},
  {ph:3,off:14,t:"Skriv in barnen i skolan",d:"Med padrón, NIE, pass och skolpapper. Kommunal skola placerar via skolkontoret om ni kommer mitt i läsåret.",who:"skola-pub",c:a=>a.familj==="barn"},
  {ph:3,off:30,t:"Registrera er hos spanska skatteverket (Modelo 030)",d:"Anmäler skatterättslig hemvist och adress. Gestorn gör det på tio minuter med ert certifikat.",who:"aeat",c:()=>true},
- {ph:3,off:30,t:"Omregistrera bilen",d:"Som resident måste bilen registreras i Spanien; befrielse från registreringsskatt ska sökas inom 60 dagar från padrón. ITV, dokumentation, 4–8 veckor via gestor.",who:"dgt",c:a=>a.bil==="med"},
+ {ph:3,off:21,t:"Omregistrera bilen",d:"Registrering och befrielse från registreringsskatt ska sökas inom 60 dagar från att bilen kom till Spanien, så vänta inte på padrón. ITV och dokumentation, ofta 4–8 veckor via gestor.",who:"dgt",c:a=>a.bil==="med"},
  {ph:3,off:30,t:"Köp bil i Spanien",d:"Kräver NIE och padrón. Begagnat via handlare ger garanti; privatköp kräver att ni själva sköter ägarbytet hos DGT.",who:"dgt",c:a=>a.bil==="kop"},
 
  {ph:4,fixed:"m720",t:"Lämna Modelo 720 senast 31 mars",d:"Gäller året efter att ni blev residenta, om utländska tillgångar i någon kategori överstiger 50 000 euro. Höga böter vid miss.",who:"aeat",c:()=>true},
  {ph:4,fixed:"renta",t:"Gör första spanska deklarationen med rådgivare",d:"Renta lämnas april–juni året efter inkomståret. Första året ska svenska inkomster, avräkning och bolagsfrågor hanteras rätt.",who:"skatt",c:()=>true},
  {ph:4,off:180,t:"Se över ISK, pension och eventuella svenska lån",d:"ISK-fördelen försvinner i Spanien. Strukturera om med rådgivaren när ni vet att ni stannar.",who:"skatt",c:a=>a.inkomst!=="spansk"},
- {ph:4,off:700,t:"Byt till spanskt körkort inom två år",d:"Hos DGT via cita previa eller gestor.",who:"dgt",c:a=>a.bil!=="ingen"},
+ {ph:4,off:700,t:"Håll koll på körkortets giltighet",d:"Svenskt körkort gäller i Spanien så länge det är giltigt, och byte är frivilligt. När det går ut förnyar ni det hos DGT, eftersom ni då bor i Spanien.",who:"dgt",c:a=>a.bil!=="ingen"},
  {ph:4,off:90,t:"Gå med i ett svenskt nätverk på kusten",d:"Fritidsaktiviteter för barnen, hantverkare, läkare och vänner. Det är här vardagen faktiskt löser sig.",who:"natverk",c:()=>true}
 ];
 const PHASES = {1:"Beslutet",2:"Före flytten",3:"Första månaden",4:"Första året"};
@@ -1307,7 +1307,7 @@ const DOCS = [
  {id:"hyra",t:"Hyreskontrakt eller lagfart",d:"Underlag för padrón, skola och bil. Långtidskontrakt, inte temporada.",free:false},
  {id:"padron",t:"Empadronamiento-intyg (volante de empadronamiento)",d:"Hämtas på ayuntamiento efter registrering. Begär flera kopior; alla vill ha ett original.",free:false},
  {id:"ex18",t:"EX-18 – registrering som EU-resident",d:"Kräver försörjningsbevis och sjukförsäkring.",src:[["EX-18, ifyllbar PDF",MIGR+"ex18-formulario-inscripcion-en-el-rce-residencia-ciudadano-de-la-ue-editable.pdf"],["Krav enligt Policía Nacional","https://sede.policia.gob.es/portalCiudadano/_es/tramites_extranjeria_tramite_certificadoregistro_ciudadanoue.php"]],tpl:["Ladda ner den ifyllbara blanketten ovan.","Bifoga pass, padrón, bevis på inkomst (anställningsavtal, kontoutdrag eller pensionsbesked) och sjukförsäkring.","Betala tasa 790/012.","Cita previa hos Policía Nacional, en tid per person."],free:false},
- {id:"forsakring",t:"Sjukförsäkringsbevis på spanska eller engelska",d:"Privat försäkring utan självrisk brukar krävas för EX-18.",free:false},
+ {id:"forsakring",t:"Sjukförsäkringsbevis på spanska eller engelska",d:"Ska motsvara den spanska offentliga vården. I praktiken krävs oftast privat försäkring utan självrisk och karens. Pensionärer kan använda intyg S1.",free:false},
  {id:"inkomst",t:"Inkomstbevis",d:"Anställningsavtal, lönespecifikationer, pensionsbesked eller kontoutdrag senaste tre månaderna.",free:false},
  {id:"skv",t:"Bekräftelse från Skatteverket på utflyttning",d:"Beslut om avregistrering och eventuellt SINK-beslut. Spara som PDF.",free:false},
  {id:"skola",t:"Betyg, skolintyg och vaccinationsintyg",d:"Översatt till engelska eller spanska. Internationella skolor vill ha två års betyg.",free:false},
@@ -2025,28 +2025,33 @@ const WHEN_OPTS = ["Så snart som möjligt", "Inom 1–3 månader", "Om 3–6 m�
 const PGROUPS = [["papper","Myndigheter och papper"],["ekonomi","Ekonomi och juridik"],["bostad","Bostad"],["vardag","Familj och vardag"]];
 const PTYPES = [
   {id:"gestor", g:"papper", name:"Gestor", short:"NIE, padrón, residencia och skatteregistrering",
-   lead:"Den viktigaste personen i flytten. En gestoría bokar tider hos myndigheterna, fyller i blanketterna och lämnar in dem åt er, ofta med fullmakt.",
-   does:["Bokar cita previa för NIE och residencia","Registrerar er hos kommunen (padrón) och skatteverket (Modelo 030)","Sköter omregistrering av bil och byte av körkort"],
-   when:"Tre till sex månader före flytten, så att NIE är klart i tid.",
+   lead:"Den viktigaste personen i flytten. En gestoría bokar tider, fyller i blanketter och sköter mycket med fullmakt. Residencia (EX-18) måste ni ändå söka personligen, inom tre månader efter att ni kommit till Spanien.",
+   does:["Bokar tid (cita previa) för NIE och residencia","Registrerar er hos kommunen (padrón) och skatteverket (Modelo 030, eller 036 om ni driver verksamhet)","Sköter omregistrering av bil. Svenskt körkort gäller så länge det är giltigt, och byte är frivilligt."],
+   when:"Tre till sex månader före flytten om ni behöver NIE för att hyra eller köpa i förväg. Annars direkt efter ankomst. Glöm inte att anmäla utflyttning till Skatteverket senast en vecka före flytten.",
+   src:[["Policía Nacional: registrering som EU-medborgare","https://sede.policia.gob.es/portalCiudadano/_es/tramites_extranjeria_tramite_certificadoregistro_ciudadanoue.php"],["Policía Nacional: NIE","https://sede.policia.gob.es/portalCiudadano/_es/tramites_extranjeria_tramite_asignacion_nie.php"],["Agencia Tributaria: Modelo 030","https://sede.agenciatributaria.gob.es/Sede/censos-nif-domicilio-fiscal/censos/modelo-030-censo_____de-domicilio-variacion-personales_/instrucciones.html"],["Körkort inom EU","https://administracion.gob.es/tu-espacio-europeo/derechos-obligaciones/ciudadanos/vehiculos/permiso-conduccion/validez-canje-reconocimiento"],["Skatteverket: flytta från Sverige","https://www.skatteverket.se/privat/folkbokforing/flyttafransverige.4.18e1b10334ebe8bc80001591.html"]],
    ask:["Pratar ni engelska eller svenska, och vem är min kontaktperson?","Är priset fast per ärende eller per timme?","Behöver ni fullmakt hos notarie, och vad omfattar den?"]},
   {id:"oversattare", g:"papper", name:"Auktoriserad översättare", short:"Edsvurna översättningar av svenska dokument",
-   lead:"Vissa svenska dokument måste översättas av en edsvuren översättare (traductor jurado) för att godtas av spanska myndigheter, till exempel personbevis, betyg och vigselbevis.",
-   does:["Översätter personbevis, betyg, intyg och domar","Levererar stämplade översättningar som myndigheterna godtar","Kan ofta hjälpa med vilka dokument som behöver apostille"],
-   when:"Innan ni behöver dokumenten, ofta inför residencia och skolinskrivning.",
+   lead:"Personbevis från Skatteverket godtas inom EU utan apostille, och Skatteverket kan bifoga ett flerspråkigt formulär så att ni ofta slipper översätta. Andra dokument, till exempel betyg och domar, kan behöva översättas av en edsvuren översättare (traductor jurado).",
+   does:["Översätter betyg, intyg och domar","Levererar stämplade översättningar som myndigheterna godtar","Vet vilka dokument som behöver apostille; i Sverige utfärdas den bara av notarius publicus"],
+   src:[["Skatteverket: personbevis till utländska myndigheter","https://www.skatteverket.se/privat/folkbokforing/personbevis/informationompersonbevisforutlandskamyndigheter.4.3810a01c150939e893f22054.html"],["Regeringen: legaliseringar och apostille","https://www.regeringen.se/sveriges-regering/utrikesdepartementet/legaliseringar/"],["Spaniens UD: sök edsvuren översättare","https://www.exteriores.gob.es/es/ServiciosAlCiudadano/Paginas/Buscador-STIJ.aspx"]],
+   when:"Innan ni behöver dokumenten, ofta inför skolinskrivningen. Fråga skolan vilka papper den kräver.",
    ask:["Är ni auktoriserad (traductor jurado) för svenska?","Tar ni emot digitala kopior eller krävs original?","Hur lång leveranstid har ni?"]},
   {id:"fordon", g:"papper", name:"Fordonsregistrering", short:"Omregistrera svensk bil i Spanien",
    lead:"Den som bor i Spanien ska ha bilen registrerad här. Det kräver besiktning (ITV), dokumentation och registrering hos DGT, och befrielse från registreringsskatt måste sökas i tid.",
-   does:["Ansöker om befrielse från registreringsskatt vid flytt","Bokar ITV och tar fram tekniska intyg","Registrerar bilen och tar fram spanska skyltar"],
-   when:"Direkt efter padrón. Befrielsen ska sökas inom 60 dagar.",
+   does:["Ansöker om befrielse från registreringsskatt vid flytt. Bilen ska ha använts av er i minst sex månader före flytten och får inte säljas inom tolv månader.","Bokar ITV och tar fram tekniska intyg","Registrerar bilen och tar fram spanska skyltar"],
+   when:"Så snart ni flyttat. Registrering och befrielse ska sökas inom 60 dagar från att bilen kom till Spanien, så vänta inte på padrón.",
+   src:[["Ley 38/1992, artikel 65–66 (registreringsskatt)","https://noticias.juridicas.com/base_datos/Fiscal/l38-1992.t2.html"]],
    ask:["Har ni gjort svenska bilar förut?","Vad kostar det totalt, inklusive avgifter och intyg?","Hur lång tid tar det från start till spanska skyltar?"]},
   {id:"skatt", g:"ekonomi", name:"Skatterådgivare", short:"Sverige och Spanien, bolag och Beckham",
    lead:"Den enskilt viktigaste rådgivaren om ni har bolag, kapital, pension eller tänker på Beckham-regimen. Det måste vara någon som kan både svensk och spansk skatt.",
-   does:["Planerar flyttmånad och skatterättslig hemvist","Bedömer Beckham-regimen och lämnar in Modelo 149","Gör första spanska deklarationen och Modelo 720"],
+   does:["Planerar flyttmånad och skatterättslig hemvist","Bedömer Beckham-regimen och lämnar in Modelo 149, senast sex månader från registreringen i Seguridad Social","Gör första spanska deklarationen och Modelo 720 (tillgångar utomlands över 50 000 € per kategori, 1 januari–31 mars)"],
+   src:[["Agencia Tributaria: Modelo 149","https://sede.agenciatributaria.gob.es/Sede/todas-gestiones/impuestos-tasas/impuesto-sobre-renta-personas-fisicas/modelo-149-irpf-comunicacion-opcion-exclusion_/instrucciones-cumplimentar-comunicacion.html"],["Agencia Tributaria: Modelo 720","https://sede.agenciatributaria.gob.es/Sede/todas-gestiones/impuestos-tasas/declaraciones-informativas/modelo-720-decla_____sobre-bienes-derechos-extranjero_/plazos-presentacion.html"]],
    when:"Sex månader före flytten. Det styr allt annat.",
    ask:["Har ni klienter som flyttat från Sverige?","Kan ni både svensk och spansk skatt, eller samarbetar ni med någon?","Vad kostar en första genomgång?"]},
   {id:"redovisning", g:"ekonomi", name:"Redovisning för egenföretagare", short:"Autónomo, moms och kvartalsdeklarationer",
    lead:"Den som driver verksamhet i Spanien som egenföretagare (autónomo) har avgifter och deklarationer varje kvartal. En asesoría sköter det löpande.",
-   does:["Registrerar er som autónomo","Lämnar kvartalsvis moms (Modelo 303) och preliminärskatt (Modelo 130)","Gör årsdeklarationen"],
+   does:["Registrerar er som autónomo (Modelo 036 och Seguridad Social)","Lämnar kvartalsvis moms (Modelo 303) och preliminärskatt (Modelo 130). Modelo 130 behövs inte om minst 70 % av intäkterna redan har källskatt.","Gör årsdeklarationen"],
+   src:[["Agencia Tributaria: Modelo 036","https://sede.agenciatributaria.gob.es/Sede/ayuda/calendario-contribuyente/calendario-contribuyente-2026/informacion-sobre-presentacion-modelos-no-periodicos/modelo-036.html"],["Agencia Tributaria: preliminärskatt","https://sede.agenciatributaria.gob.es/Sede/irpf/retenciones-ingresos-cuenta-pagos-fraccionados/pagos-fraccionados.html"]],
    when:"Innan ni börjar fakturera från Spanien.",
    ask:["Vad ingår i månadsavgiften?","Hur snabbt svarar ni på frågor?","Har ni kunder med svenska uppdragsgivare?"]},
   {id:"advokat", g:"ekonomi", name:"Fastighetsadvokat", short:"Granskar köpet innan ni betalar",
@@ -2055,7 +2060,8 @@ const PTYPES = [
    when:"Innan ni betalar något, även reservationsavgiften.",
    ask:["Är ni oberoende av mäklaren?","Är arvodet fast eller en procent av priset?","Kan ni sköta köpet med fullmakt om vi inte är på plats?"]},
   {id:"bolan", g:"ekonomi", name:"Hypoteksmäklare", short:"Jämför bankerna och tar fram lånebesked",
-   lead:"En hypoteksmäklare jämför bankernas villkor för er situation, särskilt om ni inte är residenta eller har inkomst i kronor. Kontrollera att förmedlaren är registrerad som kreditförmedlare.",
+   lead:"En hypoteksmäklare jämför bankernas villkor för er situation, särskilt om ni inte är residenta eller har inkomst i kronor. Kontrollera att förmedlaren är registrerad som kreditförmedlare hos Banco de España eller Junta de Andalucía.",
+   src:[["Ley 5/2019 om bolån, artikel 28","https://www.boe.es/buscar/act.php?id=BOE-A-2019-3814"]],
    does:["Jämför flera bankers villkor","Tar fram lånebesked innan ni skriver kontrakt","Sköter kontakten med banken fram till notarien"],
    when:"Innan ni lägger bud.",
    ask:["Är ni registrerade som kreditförmedlare?","Vem betalar er, banken eller vi?","Vilka banker arbetar ni med för icke-residenter?"]},
@@ -2065,7 +2071,8 @@ const PTYPES = [
    when:"Två månader före flytten, och innan ni ska betala för en bostad.",
    ask:["Vilka avgifter har kontot per månad?","Vilken kurs och avgift gäller för 100 000 €?","Vilka dokument behövs för att visa var pengarna kommer ifrån?"]},
   {id:"forsakring", g:"ekonomi", name:"Försäkring", short:"Sjukförsäkring, hem och bil",
-   lead:"Privat sjukförsäkring utan självrisk brukar krävas för att registrera sig som resident om man inte omfattas av Seguridad Social. Hem- och bilförsäkring tecknas i Spanien.",
+   lead:"Den som inte arbetar i Spanien behöver en sjukförsäkring som motsvarar den spanska offentliga vården för att bli resident. I praktiken krävs oftast privat försäkring utan självrisk och karens. Pensionärer kan i stället använda intyg S1 från Försäkringskassan. Hem- och bilförsäkring tecknas i Spanien.",
+   src:[["Migraciones: krav för EU-medborgare och familj","https://www.inclusion.gob.es/web/migraciones/w/62.-tarjeta-de-residencia-de-familiar-de-ciudadano-de-la-union-europea"]],
    does:["Sjukförsäkring som godtas för EX-18","Hemförsäkring för hyrd eller ägd bostad","Bilförsäkring när bilen är spanskregistrerad"],
    when:"Sjukförsäkringen före residencia, de andra vid inflyttning.",
    ask:["Godtas försäkringen för residencia (utan självrisk och karens)?","Täcks befintliga sjukdomar?","Kan vi få villkoren på engelska?"]},
@@ -2076,12 +2083,14 @@ const PTYPES = [
    ask:["Vem betalar er, och får ni ersättning från säljaren?","Hur många köpare har ni hjälpt i området?","Kan ni visa referenser?"]},
   {id:"hyresmaklare", g:"bostad", name:"Uthyrningsmäklare", short:"Hitta ett långtidskontrakt",
    lead:"Den som hjälper er hitta en bostad att hyra på långtidskontrakt. Sedan hyreslagen ändrades betalar hyresvärden mäklarens arvode, inte ni.",
-   does:["Hittar bostäder med kontrakt för permanentbostad","Förhandlar villkor och deposition","Går igenom kontraktet med er"],
+   does:["Hittar bostäder med kontrakt för permanentbostad","Förhandlar villkor och deposition. Utöver depositionen får hyresvärden kräva högst två månadshyror i extra garanti.","Går igenom kontraktet med er"],
+   src:[["Hyreslagen (LAU), konsoliderad text","https://www.boe.es/buscar/act.php?id=BOE-A-1994-26003"],["Real Decreto-ley 29/2026","https://www.boe.es/buscar/act.php?id=BOE-A-2026-20823"]],
    when:"Två till tre månader före flytten.",
    ask:["Gäller kontraktet permanentbostad (vivienda habitual)?","Vad är depositionen och eventuella extra garantier?","Är bostaden registrerad och får vi skriva oss där?"]},
   {id:"hantverkare", g:"bostad", name:"Hantverkare och renovering", short:"Renovering, el, VVS och pool",
-   lead:"För allt från en ny köksbänk till en helrenovering. Större arbeten kräver tillstånd från kommunen, och en skriftlig offert (presupuesto) är standard.",
-   does:["Renovering av kök, badrum och ytskikt","El, VVS, luftkonditionering och pool","Ansöker om tillstånd hos kommunen vid större arbeten"],
+   lead:"För allt från en ny köksbänk till en helrenovering. Nästan alla arbeten kräver att kommunen får veta: mindre arbeten görs med en anmälan (declaración responsable), större med bygglov (licencia de obra). En skriftlig offert (presupuesto) är standard.",
+   src:[["Andalusiens plan- och bygglag (LISTA), artikel 137–138","https://www.boe.es/buscar/act.php?id=BOE-A-2021-20916"]],
+   does:["Renovering av kök, badrum och ytskikt","El, VVS, luftkonditionering och pool","Gör anmälan eller söker bygglov hos kommunen"],
    when:"Efter köpet, eller före inflyttning om ni hyr omöblerat.",
    ask:["Kan vi få en skriftlig offert med tidplan?","Vem söker tillstånd hos kommunen?","Kan vi prata med en tidigare kund?"]},
   {id:"stad", g:"bostad", name:"Städning och fastighetsskötsel", short:"Städ, trädgård, pool och tillsyn",
@@ -2091,7 +2100,8 @@ const PTYPES = [
    ask:["Är personalen anställd och försäkrad?","Vad ingår per besök?","Hur hanterar ni nycklar och larm?"]},
   {id:"flytt", g:"vardag", name:"Flyttfirma", short:"Bohag från Sverige till kusten",
    lead:"Ett helt bohag tar två till fyra veckor från Sverige. Delad last är billigare men tar längre tid.",
-   does:["Packning, transport och uppackning","Magasinering i väntan på bostad","Transport av bil och husdjursutrustning"],
+   does:["Packning, transport och uppackning","Magasinering i väntan på bostad","Transport av bil. Husdjur behöver mikrochip, EU-pass och rabiesvaccin minst 21 dagar före resan."],
+   src:[["Spaniens jordbruksdepartement: resa med hund och katt","https://www.mapa.gob.es/es/ganaderia/temas/comercio-exterior-ganadero/desplazamiento-animales-compania/viajar-perros-gatos-hurones"]],
    when:"Boka två månader före flytten.",
    ask:["Är försäkringen för fullvärde under hela transporten?","Delad eller egen last, och vad är leveranstiden?","Ingår packmaterial och uppackning?"]},
   {id:"spanska", g:"vardag", name:"Spanskundervisning", short:"Kurser för vuxna och läxhjälp för barn",
@@ -2127,12 +2137,13 @@ function renderPartnerTypes(id){
         <h3>När i flytten</h3><p>${t.when}</p>
         <h3>Fråga det här innan ni anlitar någon</h3><ul>${t.ask.map(x => `<li>${x}</li>`).join("")}</ul>
         ${t.link ? `<p style="margin-top:16px"><a href="${t.link[0]}">${t.link[1]}</a></p>` : ""}
+        ${t.src ? `<p class="src">Källor, kontrollerade 30 oktober 2026: ${t.src.map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join(", ")}.</p>` : ""}
       </div>
       <form class="card stack" id="ptForm" onsubmit="return false">
         <span class="pill" style="justify-self:start">Partner väljs nu</span>
         <h3 style="margin:0">Bli kopplade till ${t.name.toLowerCase()}</h3>
         <p class="small muted" style="margin:0">Berätta vad ni behöver. Vi kopplar er till en partner vi har avtal med i ert område, och er profil följer med så att ni slipper börja om.</p>
-        ${pickHtml("ptNeed", "Vad behöver ni hjälp med?", t.does)}
+        ${pickHtml("ptNeed", "Vad behöver ni hjälp med?", t.does.map(d => d.split(". ")[0].replace(/\s*\([^)]*\)/g, "").replace(/[;.]\s.*$/, "").replace(/\.$/, "")))}
         <div class="grid2">${pickHtml("ptWhen", "När?", WHEN_OPTS, {other: ""})}${pickHtml("ptArea", "Område", AREAS.map(a => a.name).concat(["Hela kusten"]), {other: "Annat område"})}</div>
         <div class="grid2"><label class="field"><span>Namn</span><input id="ptName" autocomplete="name" value="${esc(state.hushall)}"></label><label class="field"><span>E-post</span><input id="ptEmail" type="email" required autocomplete="email" value="${esc(state.email)}"></label></div>
         <label class="field"><span>Telefon (valfritt)</span><input id="ptTel" type="tel" autocomplete="tel"></label>
