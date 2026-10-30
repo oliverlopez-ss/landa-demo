@@ -46,8 +46,8 @@ img{max-width:100%}
 [hidden]{display:none!important}
 a{color:var(--sea)}
 h1,h2,h3{font-family:var(--display);letter-spacing:-.04em;margin:0;text-wrap:balance}
-h1{font-weight:700;font-size:clamp(2.3rem,6.4vw,4.4rem);line-height:1.02}
-h2{font-weight:700;font-size:clamp(1.7rem,3.6vw,2.6rem);line-height:1.08}
+h1{font-weight:700;font-size:clamp(2.8rem,7.4vw,6.2rem);line-height:.98;letter-spacing:-.05em}
+h2{font-weight:700;font-size:clamp(2rem,4.6vw,3.6rem);line-height:1.02;letter-spacing:-.045em}
 h3{font-weight:700;font-size:1.15rem;line-height:1.25}
 p{margin:0}
 .wrap{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
@@ -74,44 +74,89 @@ p{margin:0}
 
 /* header */
 header.site{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid var(--line)}
-header.site .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
-.logo{font:800 1.4rem var(--display);letter-spacing:-.045em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;line-height:1}
+header.site .wrap{display:flex;align-items:center;gap:18px;min-height:76px}
+.logo{font:800 1.55rem var(--display);letter-spacing:-.045em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;line-height:1}
 .logo i{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:var(--acc);margin:0 .05em 0 .04em;transform:translateY(.1em)}
-.mainnav{display:flex;gap:2px;margin-left:28px}
-.dd{position:relative}
-.dd-btn{display:inline-flex;align-items:center;gap:6px;background:none;border:0;font:500 .95rem var(--body);color:var(--muted);padding:8px 12px;border-radius:8px;cursor:pointer}
-.dd-btn:hover,.dd.open .dd-btn{color:var(--ink);background:var(--deep)}
-.dd-btn.active{color:var(--ink);font-weight:600}
-.dd-btn svg{transition:transform .15s}
+.mainnav{display:flex;gap:4px;margin-left:36px}
+.dd{position:static}
+.dd-btn{display:inline-flex;align-items:center;gap:7px;background:none;border:0;font:500 1rem var(--body);color:var(--ink);padding:10px 14px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s}
+.dd-btn:hover,.dd.open .dd-btn{background:var(--deep)}
+.dd-btn.active::after{content:"";width:5px;height:5px;border-radius:50%;background:var(--acc);margin-left:2px}
+.dd-btn svg{transition:transform .2s}
 .dd.open .dd-btn svg{transform:rotate(180deg)}
-.dd-menu{position:absolute;top:calc(100% + 6px);left:-8px;min-width:300px;background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:8px;display:none;gap:2px;z-index:50}
-.dd.open .dd-menu{display:grid}
-.dd-menu.cols{grid-template-columns:repeat(2,minmax(0,1fr));min-width:400px}
-.dd-menu a,.dd-menu button{display:block;width:100%;text-align:left;background:none;border:0;text-decoration:none;color:var(--ink);font:600 .94rem/1.3 var(--body);padding:10px 12px;border-radius:8px;cursor:pointer}
-.dd-menu a span,.dd-menu button span{display:block;font-weight:400;font-size:.84rem;color:var(--muted);margin-top:2px}
-.dd-menu a:hover,.dd-menu button:hover,.dd-menu a:focus-visible,.dd-menu button:focus-visible{background:var(--deep);outline:none}
-.dd-menu a[aria-current="page"]{color:var(--acc-ink)}
+.dd-menu{position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:1px solid var(--line);box-shadow:0 30px 60px -20px rgba(14,17,22,.25);visibility:hidden;opacity:0;transform:translateY(-8px);transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;z-index:50}
+.dd.open .dd-menu{visibility:visible;opacity:1;transform:none;transition:opacity .18s ease,transform .18s ease}
+.mm{max-width:1160px;margin:0 auto;padding:36px max(20px,env(safe-area-inset-left,0px)) 44px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:48px}
+.mm-k{font-size:.86rem;color:var(--muted);margin:0 0 10px 14px}
+.mm-links{display:grid;align-content:start;gap:2px}
+.ml{display:block;width:100%;text-align:left;background:none;border:0;text-decoration:none;color:var(--ink);font:600 1.3rem/1.2 var(--body);letter-spacing:-.02em;padding:12px 14px;border-radius:12px;cursor:pointer;transition:background .15s}
+.ml span{display:block;font:400 .92rem/1.4 var(--body);letter-spacing:0;color:var(--muted);margin-top:4px}
+.ml:hover,.ml:focus-visible{background:var(--deep);outline:none}
+.ml[aria-current="page"]{color:var(--acc-ink)}
+.mm-feat{display:grid;grid-template-rows:1fr auto;min-height:300px;border-radius:16px;overflow:hidden;text-decoration:none;color:#fff;position:relative;background:#1d2a33}
+.mm-ph{position:absolute;inset:0;background:center/cover no-repeat;transition:transform .6s ease}
+.mm-feat:hover .mm-ph{transform:scale(1.04)}
+.mm-ft{position:relative;grid-row:2;display:grid;gap:6px;padding:24px;background:linear-gradient(0deg,rgba(14,17,22,.85),rgba(14,17,22,0))}
+.mm-ft small,.mm-cta small{font-size:.84rem;opacity:.8}
+.mm-ft b{font:700 1.6rem/1.15 var(--body);letter-spacing:-.03em;max-width:18em}
+.mm-ft em,.mm-cta em,.mm-stat em{font-style:normal;font-weight:600;display:inline-flex;align-items:center;gap:8px;margin-top:6px}
+.mm-cta{display:grid;align-content:end;gap:10px;min-height:300px;padding:28px;border-radius:16px;background:#0E1116;color:#fff;text-decoration:none}
+.mm-cta b{font:700 2.2rem/1.05 var(--body);letter-spacing:-.04em}
+.mm-cta span{color:#AAB2BD;max-width:34em}
+.mm-cta em{color:#7FD6AA}
+.mm-stat{display:grid;align-content:end;gap:10px;min-height:300px;padding:28px;border-radius:16px;background:var(--acc-soft);color:var(--ink);text-decoration:none}
+.mm-stat b{font:700 clamp(4rem,8vw,6.5rem)/.9 var(--body);letter-spacing:-.06em;color:var(--acc-ink)}
+.mm-stat span{max-width:30em;color:var(--ink)}
+.mm-stat em{color:var(--acc-ink)}
+.mm-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.mm-tiles a{position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#1d2a33 center/cover no-repeat;text-decoration:none;color:#fff}
+.mm-tiles a::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(14,17,22,.7),rgba(14,17,22,0) 60%);transition:background .2s}
+.mm-tiles a:hover::after{background:linear-gradient(0deg,rgba(14,17,22,.8),rgba(14,17,22,.1) 70%)}
+.mm-tiles span{position:absolute;left:12px;bottom:10px;z-index:1;font-weight:700;letter-spacing:-.01em}
+.scrim{position:fixed;inset:0;background:rgba(14,17,22,.35);z-index:25;opacity:0;transition:opacity .2s}
+body.menu-open .scrim{opacity:1}
 .head-cta{margin-left:auto}
 #plusBadge:not([hidden])+.head-cta{margin-left:10px}
 #plusBadge{margin-left:auto}
-.burger{display:none;background:none;border:0;color:var(--ink);padding:8px;border-radius:8px;cursor:pointer;margin-left:6px}
+.burger{display:none;background:none;border:0;color:inherit;padding:8px;border-radius:8px;cursor:pointer;margin-left:6px}
+/* transparent header over the landing hero */
+body.on-landing:not(.menu-open):not(.nav-open) header.site:not(.solid){background:transparent;border-bottom-color:transparent;backdrop-filter:none;color:#fff}
+body.on-landing:not(.menu-open):not(.nav-open) header.site:not(.solid) .logo,body.on-landing:not(.menu-open):not(.nav-open) header.site:not(.solid) .dd-btn{color:#fff}
+body.on-landing:not(.menu-open):not(.nav-open) header.site:not(.solid) .dd-btn:hover{background:rgba(255,255,255,.14)}
+body.on-landing:not(.menu-open):not(.nav-open) header.site:not(.solid) .head-cta{background:#fff;color:#0E1116}
+header.site{transition:background .25s,border-color .25s,color .25s}
+body.menu-open header.site,body.nav-open header.site{background:var(--paper);backdrop-filter:none}
+@media(max-width:1060px){.mainnav{margin-left:16px}.dd-btn{padding:10px 10px}}
 @media(max-width:960px){
   .burger{display:inline-grid;place-items:center}
-  .mainnav{display:none;position:absolute;top:100%;left:0;right:0;height:calc(100dvh - 64px);margin:0;background:var(--paper);flex-direction:column;gap:0;padding:8px 16px 32px;overflow:auto;border-top:1px solid var(--line)}
+  .mainnav{display:none;position:absolute;top:100%;left:0;right:0;height:calc(100dvh - 76px);margin:0;background:var(--paper);flex-direction:column;gap:0;padding:8px 20px 40px;overflow:auto;border-top:1px solid var(--line)}
   body.nav-open .mainnav{display:flex}
   body.nav-open{overflow:hidden}
   .dd{border-bottom:1px solid var(--line)}
-  .dd-btn{width:100%;justify-content:space-between;font-size:1.08rem;color:var(--ink);padding:16px 4px;border-radius:0}
+  .dd-btn{width:100%;justify-content:space-between;font:600 1.5rem var(--body);letter-spacing:-.03em;color:var(--ink);padding:20px 2px;border-radius:0}
   .dd-btn:hover,.dd.open .dd-btn{background:none}
-  .dd-menu,.dd-menu.cols{position:static;box-shadow:none;border:0;padding:0 0 12px;min-width:0;grid-template-columns:1fr}
+  .dd-btn.active::after{display:none}
+  .dd-menu{position:static;box-shadow:none;border:0;display:none;visibility:visible;opacity:1;transform:none;transition:none}
+  .dd.open .dd-menu{display:block}
+  .mm{grid-template-columns:1fr;padding:0 0 18px;gap:14px}
+  .mm-k{display:none}
+  .ml{font-size:1.1rem;padding:10px 6px}
+  .mm-feat,.mm-cta,.mm-stat{display:none}
+  .mm-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .scrim{display:none}
 }
 .plusbadge{display:inline-flex;align-items:center;gap:6px;background:var(--acc-soft);color:var(--acc-ink);border-radius:6px;padding:4px 10px;font-size:.78rem;font-weight:700}
 
 /* hero */
-.hero{position:relative;color:#fff;background:#1d2a33 center 62%/cover no-repeat;background-image:linear-gradient(100deg,rgba(14,17,22,.82) 0%,rgba(14,17,22,.58) 45%,rgba(14,17,22,.12) 100%),url("https://images.unsplash.com/photo-1774208671069-c2e5a00689c3?fm=jpg&q=70&w=2200&auto=format&fit=crop")}
+.hero{position:relative;color:#fff;background:#1d2a33;overflow:hidden;min-height:min(100svh,980px);display:grid;align-items:center;margin-top:-77px;padding-top:77px}
+.hero::before{content:"";position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1774208671069-c2e5a00689c3?fm=jpg&q=70&w=2200&auto=format&fit=crop") center 62%/cover no-repeat;transform-origin:60% 50%;animation:kb 22s ease-out both}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,rgba(14,17,22,.82) 0%,rgba(14,17,22,.58) 45%,rgba(14,17,22,.12) 100%)}
+.hero>.wrap{position:relative;z-index:1;width:100%}
+@keyframes kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+@media (prefers-reduced-motion: reduce){.hero::before{animation:none}}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr);gap:48px;align-items:center;padding-block:clamp(56px,10vw,120px)}
 .hero .eyebrow{color:rgba(255,255,255,.72)}
-.hero h1 .mute{color:rgba(255,255,255,.6)}
+.hero h1 .mute{color:rgba(255,255,255,.6);display:block}
 .hero .btn.sun{background:#fff;color:#0E1116}
 .hero .btn.sun:hover{background:#E9ECEF}
 .hero h1{margin:14px 0 18px}
@@ -130,10 +175,19 @@ header.site .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
 @media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.preview{max-width:460px}}
 
 /* sections */
-section.block{padding-block:clamp(56px,9vw,104px)}
+section.block{padding-block:clamp(72px,11vw,144px)}
 section.block.alt{background:var(--deep)}
 section.block.alt .card,section.block.alt .step{background:var(--paper)}
-.sec-head{display:grid;gap:12px;margin-bottom:36px;max-width:720px}
+@media (prefers-reduced-motion: no-preference){
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+  .rv.in{opacity:1;transform:none}
+  .hero h1,.hero .lead,.hero .row,.hero .preview{animation:up .9s cubic-bezier(.2,.7,.2,1) both}
+  .hero .lead{animation-delay:.08s}.hero .row{animation-delay:.16s}.hero .preview{animation-delay:.24s}
+}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.step,.acard,.pcat{transition:transform .25s ease,box-shadow .25s ease,border-color .25s}
+.step:hover,.acard:hover,.pcat:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:transparent}
+.sec-head{display:grid;gap:16px;margin-bottom:48px;max-width:820px}
 .facts{background:var(--paper);color:var(--ink);border-bottom:1px solid var(--line)}
 .facts .wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding-block:36px}
 .fact b{display:block;font:700 2.4rem/1.1 var(--body);letter-spacing:-.04em;color:var(--ink);font-variant-numeric:tabular-nums}
@@ -419,47 +473,46 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <div class="dd" data-group="flytt">
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-flytt">Flytten <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="dd-menu" id="m-flytt">
-          <a href="#plan">Er flyttplan<span>Alla steg i rätt ordning, med datum</span></a>
-          <a href="#dokument">Dokument och checklista<span>Blanketter, papper och PDF</span></a>
-          <a href="#fragor">Vanliga frågor<span>Skatt, NIE, skola, bil och vård</span></a>
-          <a href="#fraga">Ställ en fråga<span>Vi svarar på det som inte står här</span></a>
-          <button type="button" data-scroll="plus">Solpass Plus<span>Datum, partners och svar inom ett dygn</span></button>
+          <div class="mm">
+            <div class="mm-links"><div class="mm-k">Planera flytten</div><a class="ml" href="#plan">Er flyttplan<span>Alla steg i rätt ordning, med datum</span></a><a class="ml" href="#dokument">Dokument och checklista<span>Blanketter, papper och PDF</span></a><a class="ml" href="#fragor">Vanliga frågor<span>Skatt, NIE, skola, bil och vård</span></a><a class="ml" href="#fraga">Ställ en fråga<span>Vi svarar på det som inte står här</span></a><button class="ml" type="button" data-scroll="plus">Solpass Plus<span>Datum, partners och svar inom ett dygn</span></button></div>
+            <a class="mm-cta" href="#start"><small>Två minuter, ingen inloggning</small><b>Gör er flyttplan</b><span>Sju frågor om er familj, så får ni varje steg från beslut till första deklaration, med datum och rätt kontakter.</span><em>Börja nu <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></em></a>
+          </div>
         </div>
       </div>
       <div class="dd" data-group="omraden">
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-omraden">Områden <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-        <div class="dd-menu cols" id="m-omraden">
-          <a href="#omraden">Alla områden<span>Jämför sex områden på kusten</span></a>
-          <a href="#omraden/marbella">Marbella</a>
-          <a href="#omraden/san-pedro">San Pedro</a>
-          <a href="#omraden/estepona">Estepona</a>
-          <a href="#omraden/benahavis">Benahavís</a>
-          <a href="#omraden/fuengirola-mijas">Fuengirola och Mijas</a>
-          <a href="#omraden/malaga">Málaga</a>
-          <a href="#skolor">Skolor<span>19 skolor jämförda</span></a>
+        <div class="dd-menu" id="m-omraden">
+          <div class="mm">
+            <div class="mm-links"><div class="mm-k">Var vill ni bo?</div><a class="ml" href="#omraden">Alla områden<span>Jämför pris, skolor och tid till flyget</span></a><a class="ml" href="#skolor">Skolor<span>19 skolor från Sotogrande till Málaga</span></a></div>
+            <div class="mm-tiles"><a href="#omraden/marbella" style="background-image:url('https://images.unsplash.com/photo-1770929356217-cc70b66b30c2?fm=jpg&q=70&w=600&auto=format&fit=crop')"><span>Marbella</span></a><a href="#omraden/san-pedro" style="background-image:url('https://images.unsplash.com/photo-1785692264661-f6c6b184c59c?fm=jpg&q=70&w=600&auto=format&fit=crop')"><span>San Pedro</span></a><a href="#omraden/estepona" style="background-image:url('https://images.unsplash.com/photo-1736428997142-7f447128f3c4?fm=jpg&q=70&w=600&auto=format&fit=crop')"><span>Estepona</span></a><a href="#omraden/benahavis" style="background-image:url('https://images.unsplash.com/photo-1630488202498-d2c2462871f4?fm=jpg&q=70&w=600&auto=format&fit=crop')"><span>Benahavís</span></a><a href="#omraden/fuengirola-mijas" style="background-image:url('https://images.unsplash.com/photo-1774208671069-c2e5a00689c3?fm=jpg&q=70&w=600&auto=format&fit=crop')"><span>Fuengirola och Mijas</span></a><a href="#omraden/malaga" style="background-image:url('https://images.unsplash.com/photo-1731150630818-f11af1e036a2?fm=jpg&q=70&w=600&auto=format&fit=crop')"><span>Málaga</span></a></div>
+          </div>
         </div>
       </div>
       <div class="dd" data-group="bostad">
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-bostad">Bostad <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="dd-menu" id="m-bostad">
-          <a href="#bostadsguide">Bostadsguiden<span>Hyra först eller köpa, steg för steg</span></a>
-          <a href="#bostad">Bolånekalkyl<span>Månadskostnad med spanska banker</span></a>
-          <a href="#hyrakopa">Hyra eller köpa<span>Vad som är borta efter 3, 5 eller 10 år</span></a>
-          <a href="#bostadsguide/radgivning">Rådgivning inför köp<span>Någon som köper åt er, inte åt säljaren</span></a>
+          <div class="mm">
+            <div class="mm-links"><div class="mm-k">Hyra eller köpa</div><a class="ml" href="#bostadsguide">Bostadsguiden<span>Hyra först eller köpa, steg för steg</span></a><a class="ml" href="#bostad">Bolånekalkyl<span>Månadskostnad med spanska banker</span></a><a class="ml" href="#hyrakopa">Hyra eller köpa<span>Vad som är borta efter 3, 5 eller 10 år</span></a><a class="ml" href="#bostadsguide/radgivning">Rådgivning inför köp<span>Någon som köper åt er, inte åt säljaren</span></a></div>
+            <a class="mm-feat" href="#bostadsguide/radgivning"><span class="mm-ph" style="background-image:url('https://images.unsplash.com/photo-1747495956302-6e41f0af9b83?fm=jpg&q=70&w=900&auto=format&fit=crop')"></span><span class="mm-ft"><small>Rådgivning inför köp</small><b>En rådgivare som står på er sida, inte säljarens</b><em>Läs mer <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></em></span></a>
+          </div>
         </div>
       </div>
       <div class="dd" data-group="ekonomi">
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-ekonomi">Ekonomi <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="dd-menu" id="m-ekonomi">
-          <button type="button" data-scroll="kalkyl">Ekonomikalkyl<span>Lön, skatt och levnadskostnad</span></button>
-          <a href="#skatt">Beckham-regimen<span>24 % skatt i sex år, kvalificerar ni?</span></a>
+          <div class="mm">
+            <div class="mm-links"><div class="mm-k">Räkna på flytten</div><button class="ml" type="button" data-scroll="kalkyl">Ekonomikalkyl<span>Lön, skatt och levnadskostnad</span></button><a class="ml" href="#skatt">Beckham-regimen<span>Kvalificerar ni för 24 % skatt?</span></a><a class="ml" href="#hyrakopa">Hyra eller köpa<span>Jämför i euro över tid</span></a></div>
+            <a class="mm-stat" href="#skatt"><b>24 %</b><span>platt skatt på lönen i sex år med Beckham-regimen, i stället för upp till 47 %.</span><em>Räkna på er <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></em></a>
+          </div>
         </div>
       </div>
       <div class="dd" data-group="partners">
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-partners">Partners <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="dd-menu" id="m-partners">
-          <a href="#kontakter">Partners och kontakter<span>Myndigheter, skolor och verifierade partners</span></a>
-          <a href="#bli-partner">Bli partner<span>För gestorer, rådgivare och mäklare</span></a>
+          <div class="mm">
+            <div class="mm-links"><div class="mm-k">Rätt person för varje steg</div><a class="ml" href="#kontakter">Partners och kontakter<span>Myndigheter, skolor och verifierade partners</span></a><a class="ml" href="#bli-partner">Bli partner<span>För gestorer, rådgivare och mäklare</span></a></div>
+            <a class="mm-feat" href="#bli-partner"><span class="mm-ph" style="background-image:url('https://images.unsplash.com/photo-1770929356217-cc70b66b30c2?fm=jpg&q=70&w=900&auto=format&fit=crop')"></span><span class="mm-ft"><small>För leverantörer</small><b>Arbetar ni med svenska familjer på kusten?</b><em>Bli partner <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></em></span></a>
+          </div>
         </div>
       </div>
     </nav>
@@ -468,6 +521,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="mainnav" aria-label="Meny"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
   </div>
 </header>
+<div class="scrim" id="scrim" hidden></div>
 
 <main>
 <!-- ================= LANDING ================= -->
@@ -2159,6 +2213,8 @@ function route(){
   $$(".dd").forEach(d => d.querySelector(".dd-btn").classList.toggle("active", (NAV_GROUPS[d.dataset.group] || []).includes(v)));
   $$(".dd-menu a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === here ? "page" : "false"));
   closeMenus(); document.body.classList.remove("nav-open"); $("#burger").setAttribute("aria-expanded", "false");
+  document.body.classList.toggle("on-landing", v === "landing");
+  if(typeof reveal === "function") setTimeout(() => reveal(), 0);
   $("#plusBadge").hidden = !state.plus;
   const cta = $("#headCta");
   cta.hidden = v === "start";
@@ -2187,14 +2243,20 @@ const NAV_GROUPS = { flytt:["plan","start","dokument","fragor","fraga"], omraden
 const desktopNav = matchMedia("(min-width: 961px) and (hover: hover)");
 function closeMenus(except){
   $$(".dd").forEach(d => { if(d !== except){ d.classList.remove("open"); d.querySelector(".dd-btn").setAttribute("aria-expanded", "false"); } });
+  if(!except){ document.body.classList.remove("menu-open"); const sc = $("#scrim"); if(sc) sc.hidden = true; }
 }
-function setMenu(d, open){ closeMenus(d); d.classList.toggle("open", open); d.querySelector(".dd-btn").setAttribute("aria-expanded", String(open)); }
+function setMenu(d, open){
+  if(open) closeMenus(d);
+  d.classList.toggle("open", open); d.querySelector(".dd-btn").setAttribute("aria-expanded", String(open));
+  const any = !!$(".dd.open") && desktopNav.matches;
+  document.body.classList.toggle("menu-open", any); $("#scrim").hidden = !any;
+}
 $$(".dd").forEach(d => {
   const btn = d.querySelector(".dd-btn");
   btn.addEventListener("click", () => setMenu(d, !d.classList.contains("open")));
   let t;
   d.addEventListener("mouseenter", () => { if(desktopNav.matches){ clearTimeout(t); setMenu(d, true); } });
-  d.addEventListener("mouseleave", () => { if(desktopNav.matches) t = setTimeout(() => setMenu(d, false), 120); });
+  d.addEventListener("mouseleave", () => { if(desktopNav.matches) t = setTimeout(() => { if(d.classList.contains("open")) setMenu(d, false); }, 220); });
   d.querySelectorAll(".dd-menu a,.dd-menu button").forEach(a => a.addEventListener("click", () => { closeMenus(); document.body.classList.remove("nav-open"); $("#burger").setAttribute("aria-expanded", "false"); }));
 });
 $("#burger").addEventListener("click", () => {
@@ -2202,6 +2264,16 @@ $("#burger").addEventListener("click", () => {
   document.body.classList.toggle("nav-open", open); $("#burger").setAttribute("aria-expanded", String(open));
 });
 document.addEventListener("click", e => { if(!e.target.closest(".dd")) closeMenus(); });
+$("#scrim").addEventListener("mouseenter", () => { if(desktopNav.matches) closeMenus(); });
+const header = $("header.site");
+const solid = () => header.classList.toggle("solid", scrollY > 40);
+addEventListener("scroll", solid, {passive:true}); solid();
+// fade sections in as they scroll into view
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), {rootMargin:"0px 0px -8% 0px"}) : null;
+function reveal(root = document){
+  if(!io) return;
+  root.querySelectorAll(".sec-head,.step,.acard,.pcat,.phase-card,.homefacts>div,.fact,.calc,.feature,.letter,.faq-item").forEach(el => { if(!el.classList.contains("rv")){ el.classList.add("rv"); io.observe(el); } });
+}
 document.addEventListener("keydown", e => {
   if(e.key !== "Escape") return;
   const open = $(".dd.open"); closeMenus(); document.body.classList.remove("nav-open"); $("#burger").setAttribute("aria-expanded", "false");
