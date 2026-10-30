@@ -352,6 +352,66 @@ input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px var(-
 .qc-scen .up{color:#F0A08A}.qc-scen .down{color:#7FD6AA}
 .qc-out .btn.sun{background:#17724A;color:#fff}
 .qc-out .btn.ghost{color:#fff;box-shadow:inset 0 0 0 1.5px #3A414B}
+.pthero{padding:clamp(24px,4vw,40px) 0 8px}
+.pthero h2{font-size:clamp(2.6rem,6vw,4.6rem);margin-top:18px}
+.pt-short{font:600 clamp(1.1rem,2vw,1.35rem)/1.3 var(--body);color:var(--acc-ink);margin:8px 0 10px;letter-spacing:-.01em}
+.pthero .lead{max-width:62ch}
+.ptfacts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:16px;margin-top:28px;background:var(--paper)}
+@media(max-width:760px){.ptfacts{grid-template-columns:1fr}}
+.ptfacts>div{padding:18px 20px;border-right:1px solid var(--line)}
+.ptfacts>div:last-child{border-right:0}
+@media(max-width:760px){.ptfacts>div{border-right:0;border-bottom:1px solid var(--line)}.ptfacts>div:last-child{border-bottom:0}}
+.ptfacts span{display:block;font-size:.84rem;color:var(--muted)}
+.ptfacts b{display:flex;align-items:center;gap:8px;font:700 1.15rem/1.3 var(--body);letter-spacing:-.02em;margin-top:4px}
+.ptfacts .dot{width:8px;height:8px;border-radius:50%;background:#E0A93B;box-shadow:0 0 0 4px #FBF0D8;flex:none}
+.ptlayout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;align-items:start;margin-top:40px}
+@media(max-width:980px){.ptlayout{grid-template-columns:1fr}}
+.ptmain{display:grid;gap:44px}
+.ptmain h3{font-size:1.45rem;letter-spacing:-.03em;margin:0 0 14px}
+.ticks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ticks li{position:relative;padding:14px 16px 14px 46px;border:1px solid var(--line);border-radius:12px;background:var(--paper)}
+.ticks li::before{content:"";position:absolute;left:16px;top:17px;width:18px;height:18px;border-radius:50%;background:var(--acc-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M5 9.3l2.6 2.6L13 6.5' stroke='%2317724A' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/18px no-repeat}
+.note2{margin-top:12px;color:var(--muted)}
+.ptsteps{list-style:none;margin:0;padding:0;display:grid;gap:0;border-left:2px solid var(--line);margin-left:6px}
+.ptsteps li{position:relative;padding:4px 0 16px 22px}
+.ptsteps li::before{content:"";position:absolute;left:-7px;top:9px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:2px solid var(--acc)}
+.ptsteps .ph{display:block;font-size:.8rem;color:var(--muted)}
+.ptsteps b{font-weight:600}
+.more{display:inline-block;margin-top:6px;font-weight:600;color:var(--acc-ink)}
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;counter-reset:f}
+@media(max-width:760px){.flow{grid-template-columns:1fr 1fr}}
+.flow li{background:var(--deep);border-radius:14px;padding:18px;display:grid;gap:6px;align-content:start}
+.flow li::before{counter-increment:f;content:counter(f);font:700 1.6rem/1 var(--body);color:var(--acc)}
+.flow b{font-weight:700;letter-spacing:-.01em}
+.flow span{font-size:.9rem;color:var(--muted)}
+.qhead{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.qhead h3{margin-bottom:14px}
+.qlist{display:grid;gap:8px}
+.q{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border:1px solid var(--line);border-radius:12px;cursor:pointer;background:var(--paper)}
+.q input{width:18px;height:18px;margin-top:2px;accent-color:var(--acc);flex:none}
+.q:has(input:checked) span{color:var(--muted);text-decoration:line-through}
+.trust{background:var(--deep);border-radius:18px;padding:26px}
+.trustgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+@media(max-width:760px){.trustgrid{grid-template-columns:1fr}}
+.trustgrid b{display:block;margin-bottom:4px}
+.trustgrid span{font-size:.92rem;color:var(--muted)}
+.ptfaq details{border-top:1px solid var(--line);padding:14px 0}
+.ptfaq details:last-child{border-bottom:1px solid var(--line)}
+.ptfaq summary{cursor:pointer;font-weight:600}
+.ptfaq details p{color:var(--muted);margin-top:8px}
+.relgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media(max-width:760px){.relgrid{grid-template-columns:1fr}}
+.relcard{display:grid;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink);background:var(--paper);transition:transform .2s,box-shadow .2s,border-color .2s}
+.relcard:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:transparent}
+.relcard span{font-size:.88rem;color:var(--muted)}
+.relcard.tool{background:var(--acc-soft);border-color:transparent}
+.relcard.tool b{color:var(--acc-ink)}
+.ptaside{position:sticky;top:96px;display:grid;gap:12px}
+@media(max-width:980px){.ptaside{position:static}}
+.become-mini{display:block;text-align:center;font-size:.9rem;color:var(--muted);text-decoration:none;padding:10px}
+.become-mini b{color:var(--ink)}
+.ptbar{display:none}
+@media(max-width:980px){.ptbar{display:block;position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:20;text-align:center;background:#0E1116;color:#fff;font-weight:600;text-decoration:none;padding:15px;border-radius:12px;box-shadow:0 10px 30px rgba(14,17,22,.3)}}
 .letter{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:40px;align-items:center}
 @media(max-width:860px){.letter{grid-template-columns:1fr;gap:20px}}
 .agrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
@@ -2111,6 +2171,24 @@ const PTYPES = [
    ask:["Undervisar ni på plats eller online?","Har ni kurser på morgonen när barnen är i skolan?","Hur testar ni nivån?"]}
 ];
 const PT = Object.fromEntries(PTYPES.map(t => [t.id, t]));
+const PT_LINKS = {
+  gestor:      { plan:["policia","ayto","aeat","fnmt"], faq:["gestor","policia","ayto"], rel:["oversattare","fordon","skatt"] },
+  oversattare: { plan:[], faq:["policia"], rel:["gestor"] },
+  fordon:      { plan:["dgt"], faq:["dgt"], rel:["gestor","forsakring"] },
+  skatt:       { plan:["skatt","aeat","skv"], faq:["skatt","aeat","skv"], rel:["redovisning","bank","bolan"], tools:[["#skatt","Beckham-kalkyl","Kvalificerar ni för 24 % skatt?"]] },
+  redovisning: { plan:["aeat"], faq:["aeat"], rel:["skatt","bank"] },
+  advokat:     { plan:["advokat"], faq:["advokat","maklare"], rel:["kopmaklare","bolan","bank"], tools:[["#bostadsguide","Bostadsguiden","Köpet steg för steg"]] },
+  bolan:       { plan:[], faq:["bank"], rel:["advokat","kopmaklare","bank"], tools:[["#bostad","Bolånekalkyl","Månadskostnad med spanska banker"]] },
+  bank:        { plan:["bank"], faq:["bank"], rel:["bolan","skatt"], tools:[["#bostad","Bolånekalkyl","Vad kostar lånet i månaden?"]] },
+  forsakring:  { plan:["ss"], faq:["ss"], rel:["gestor","fordon"] },
+  kopmaklare:  { plan:["maklare"], skip:["långtidskontrakt"], faq:["maklare","advokat"], rel:["advokat","bolan","hantverkare"], tools:[["#bostad","Bolånekalkyl","Vad kostar bostaden i månaden?"],["#hyrakopa","Hyra eller köpa","Vad är borta efter fem år?"]] },
+  hyresmaklare:{ plan:["maklare"], skip:["köper åt er"], faq:["maklare"], rel:["gestor","flytt","stad"], tools:[["#hyrakopa","Hyra eller köpa","Jämför i euro över tid"]] },
+  hantverkare: { plan:[], faq:[], rel:["stad","kopmaklare"] },
+  stad:        { plan:[], faq:[], rel:["hantverkare","hyresmaklare"] },
+  flytt:       { plan:["flytt"], faq:[], rel:["hyresmaklare","fordon"] },
+  spanska:     { plan:["natverk"], faq:["natverk"], rel:["gestor"] }
+};
+
 function ptMenu(cur){
   return `<div class="ptswitch"><button class="ptbtn" type="button" aria-expanded="false" aria-controls="ptlist">${esc(cur.name)} <svg width="14" height="14" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <div class="ptlist" id="ptlist" hidden>${PGROUPS.map(([g, gn]) => `<div><div class="ptg">${gn}</div>${PTYPES.filter(t => t.g === g).map(t => `<a href="#partners/${t.id}"${t.id === cur.id ? ' aria-current="page"' : ""}>${t.name}</a>`).join("")}</div>`).join("")}</div></div>`;
@@ -2128,30 +2206,78 @@ function renderPartnerTypes(id){
       <div class="row" style="margin-top:36px"><a class="btn ghost" href="#kontakter">Myndigheter och skolor</a><a class="btn ghost" href="#bli-partner">Arbetar ni med svenskar? Bli partner</a></div>`;
     return;
   }
+  const tasks = TASKS.filter(x => (PT_LINKS[t.id]?.plan || []).includes(x.who) && !(PT_LINKS[t.id]?.skip || []).some(w => x.t.includes(w))).sort((a, b) => a.ph - b.ph);
+  const faqs = FAQ.flatMap(c => c.items).filter(q => (q.who || []).some(w => (PT_LINKS[t.id]?.faq || []).includes(w))).slice(0, 3);
+  const rel = (PT_LINKS[t.id]?.rel || []).map(r => PT[r]).filter(Boolean);
+  const tools = PT_LINKS[t.id]?.tools || [];
+  const checked = (state.qchk || {})[t.id] || [];
+  const when1 = t.when.split(". ")[0].replace(/\.$/, "");
   $("#ptOut").innerHTML = `
-    <div class="apphead" style="padding-bottom:6px"><div class="crumb"><a href="#partners">Partners</a><span>/</span>${ptMenu(t)}</div>
-      <h2>${t.name}</h2><p class="lead">${t.lead}</p></div>
-    <div class="acols">
-      <div>
-        <h3>Det här gör de</h3><ul>${t.does.map(x => `<li>${x}</li>`).join("")}</ul>
-        <h3>När i flytten</h3><p>${t.when}</p>
-        <h3>Fråga det här innan ni anlitar någon</h3><ul>${t.ask.map(x => `<li>${x}</li>`).join("")}</ul>
-        ${t.link ? `<p style="margin-top:16px"><a href="${t.link[0]}">${t.link[1]}</a></p>` : ""}
+    <div class="pthero">
+      <div class="crumb"><a href="#partners">Partners</a><span>/</span>${ptMenu(t)}</div>
+      <h2>${t.name}</h2>
+      <p class="pt-short">${t.short}</p>
+      <p class="lead">${t.lead}</p>
+      <div class="ptfacts">
+        <div><span>När i flytten</span><b>${when1}</b></div>
+        <div><span>Steg i er plan</span><b>${tasks.length ? `<a href="#plan">${tasks.length} steg</a>` : "Inga direkta steg"}</b></div>
+        <div><span>Partner i ert område</span><b><span class="dot"></span>Väljs just nu</b></div>
+      </div>
+    </div>
+    <div class="ptlayout">
+      <div class="ptmain">
+        <section><h3>Det här gör de</h3>
+          <ul class="ticks">${t.does.map(x => `<li>${x}</li>`).join("")}</ul>
+          ${t.when.includes(". ") ? `<p class="note2">${t.when}</p>` : ""}
+        </section>
+        ${tasks.length ? `<section><h3>Steg i er plan där ni behöver dem</h3><ol class="ptsteps">${tasks.map(x => `<li><span class="ph">${PHASES[x.ph]}</span><b>${x.t}</b></li>`).join("")}</ol><a class="more" href="#plan">Öppna er plan</a></section>` : ""}
+        <section><h3>Så går det till med Solpass</h3>
+          <ol class="flow">
+            <li><b>Ni berättar vad ni behöver</b><span>Formuläret tar en minut. Har ni gjort en plan följer den med.</span></li>
+            <li><b>Vi matchar inom två arbetsdagar</b><span>Med en partner vi har avtal med i ert område.</span></li>
+            <li><b>Första samtalet</b><span>Partnern har läst er profil, så ni slipper börja från början.</span></li>
+            <li><b>Ni bestämmer</b><span>Ingen förpliktelse. Passar det inte hjälper vi er vidare.</span></li>
+          </ol>
+        </section>
+        <section><div class="qhead"><h3>Fråga det här innan ni anlitar någon</h3><button type="button" class="linkbtn" id="ptCopy">Kopiera frågorna</button></div>
+          <div class="qlist">${t.ask.map((x, i) => `<label class="q"><input type="checkbox" data-q="${i}"${checked.includes(i) ? " checked" : ""}><span>${x}</span></label>`).join("")}</div>
+          <p class="small muted" style="margin-top:8px">Bocka av under samtalet. Det sparas i er webbläsare.</p>
+        </section>
+        <section class="trust"><h3>Så väljer vi partners</h3>
+          <div class="trustgrid"><div><b>Avtal</b><span>Vi tar bara in partners vi har avtal med och själva skulle anlita.</span></div><div><b>Svar inom två dagar</b><span>Annars byter vi partner.</span></div><div><b>Vana vid svenskar</b><span>De har hjälpt svenska familjer förut och pratar engelska eller svenska.</span></div></div>
+          <p class="small muted" style="margin-top:12px">Så tjänar Solpass pengar: partners betalar en ersättning när en introduktion leder till ett uppdrag. Ni betalar ingenting för introduktionen.</p>
+        </section>
+        ${faqs.length ? `<section><h3>Vanliga frågor</h3><div class="ptfaq">${faqs.map(q => `<details><summary>${q.q}</summary>${q.a}</details>`).join("")}</div><a class="more" href="#fragor">Alla frågor</a></section>` : ""}
+        ${rel.length || tools.length ? `<section><h3>Behövs ofta tillsammans med</h3><div class="relgrid">${rel.map(r => `<a class="relcard" href="#partners/${r.id}"><b>${r.name}</b><span>${r.short}</span></a>`).join("")}${tools.map(([h, n, d]) => `<a class="relcard tool" href="${h}"><b>${n}</b><span>${d}</span></a>`).join("")}</div></section>` : ""}
+        ${t.link ? `<p><a href="${t.link[0]}">${t.link[1]}</a></p>` : ""}
         ${t.src ? `<p class="src">Källor, kontrollerade 30 oktober 2026: ${t.src.map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join(", ")}.</p>` : ""}
       </div>
+      <aside class="ptaside" id="ptAside">
       <form class="card stack" id="ptForm" onsubmit="return false">
-        <span class="pill" style="justify-self:start">Partner väljs nu</span>
         <h3 style="margin:0">Bli kopplade till ${t.name.toLowerCase()}</h3>
-        <p class="small muted" style="margin:0">Berätta vad ni behöver. Vi kopplar er till en partner vi har avtal med i ert område, och er profil följer med så att ni slipper börja om.</p>
+        <p class="small muted" style="margin:0">Gratis och utan förpliktelse. Vi hör av oss inom två arbetsdagar.</p>
         ${pickHtml("ptNeed", "Vad behöver ni hjälp med?", t.does.map(d => d.split(". ")[0].replace(/\s*\([^)]*\)/g, "").replace(/[;.]\s.*$/, "").replace(/\.$/, "")))}
         <div class="grid2">${pickHtml("ptWhen", "När?", WHEN_OPTS, {other: ""})}${pickHtml("ptArea", "Område", AREAS.map(a => a.name).concat(["Hela kusten"]), {other: "Annat område"})}</div>
         <div class="grid2"><label class="field"><span>Namn</span><input id="ptName" autocomplete="name" value="${esc(state.hushall)}"></label><label class="field"><span>E-post</span><input id="ptEmail" type="email" required autocomplete="email" value="${esc(state.email)}"></label></div>
         <label class="field"><span>Telefon (valfritt)</span><input id="ptTel" type="tel" autocomplete="tel"></label>
         <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label>
-        <div class="row"><button class="btn sun" type="submit">Skicka</button></div>
+        <div class="row"><button class="btn sun" type="submit">Bli kopplade</button></div>
         <p class="err" id="ptErr" hidden></p>
       </form>
-    </div>`;
+      <a class="become-mini" href="#bli-partner">Arbetar ni som ${t.name.toLowerCase()}? <b>Bli partner</b></a>
+      </aside>
+    </div>
+    <a class="ptbar" href="#ptAside" id="ptBar">Bli kopplade till ${t.name.toLowerCase()}</a>`;
+  $$("#ptOut [data-q]").forEach(c => c.onchange = () => {
+    state.qchk = state.qchk || {};
+    state.qchk[t.id] = $$("#ptOut [data-q]:checked").map(x => +x.dataset.q); save();
+  });
+  $("#ptCopy").onclick = async () => {
+    const txt = `${t.name}: frågor att ställa\n` + t.ask.map(x => "– " + x).join("\n");
+    try{ await navigator.clipboard.writeText(txt); toast("Frågorna är kopierade."); }catch(e){ toast("Kunde inte kopiera. Markera texten i stället."); }
+  };
+  $("#ptBar").onclick = e => { e.preventDefault(); $("#ptAside").scrollIntoView({behavior:"smooth"}); };
+  if("IntersectionObserver" in window){ const bar = $("#ptBar"); new IntersectionObserver(es => { bar.style.visibility = es[0].isIntersecting ? "hidden" : ""; }).observe($("#ptAside")); }
   const btn = $(".ptbtn"), list = $("#ptlist");
   btn.onclick = () => { const o = list.hidden; list.hidden = !o; btn.setAttribute("aria-expanded", String(o)); };
   bindCapture("#ptForm", "#ptEmail", "#ptErr", async email => {
