@@ -312,6 +312,20 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
 .banks td:nth-child(n+2),.banks th:nth-child(n+2){text-align:left}
 .banks td:first-child,.banks thead th:first-child{color:var(--ink);font-weight:700}
 .banks .src{font-size:.78rem}
+/* schools */
+.sgroup{margin-top:28px}
+.sgroup>h3{display:flex;align-items:baseline;gap:10px}
+.sgroup>h3 small{font:500 .85rem var(--body);color:var(--muted)}
+.sgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));margin-top:12px}
+.school{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:8px;align-content:start;min-width:0}
+.school h4{margin:0;font:700 1.05rem var(--display);letter-spacing:-.01em}
+.school .tags{display:flex;flex-wrap:wrap;gap:6px}
+.school .tag{font-size:.74rem;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--sea-soft);color:var(--sea)}
+.school .tag.sv{background:var(--sun-soft);color:var(--ink)}
+.school dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:.9rem}
+.school dt{color:var(--muted)}
+.school dd{margin:0}
+.school a{font-weight:600;font-size:.88rem}
 /* modal + toast */
 .modal{position:fixed;inset:0;background:rgba(6,16,25,.6);display:flex;align-items:flex-end;justify-content:center;z-index:50;padding:16px;padding-bottom:max(16px,env(safe-area-inset-bottom,0px))}
 @media(min-width:620px){.modal{align-items:center}}
@@ -340,6 +354,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <nav class="appnav" aria-label="Er flytt">
       <a href="#plan">Er plan</a>
       <a href="#bostad">Bostad och bolån</a>
+      <a href="#skolor">Skolor</a>
       <a href="#kontakter">Partners och kontakter</a>
       <a href="#dokument">Dokument</a>
       <a href="#fragor">Frågor</a>
@@ -635,6 +650,18 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
   <div class="compare-wrap"><table class="compare banks" id="bankTable"></table></div>
 </div></div>
 
+<div id="v-skolor" hidden><div class="wrap" style="padding-bottom:64px">
+  <div class="apphead">
+    <div class="eyebrow">Skolor</div>
+    <h2>Skolor från Sotogrande till Málaga</h2>
+    <p class="lead">Svenska, internationella och nordiska skolor längs kusten, ordnade från väster till öster. Skolvalet styr ofta var ni ska bo, så börja här.</p>
+    <div class="filters" id="sfilters"></div>
+  </div>
+  <div id="schools"></div>
+  <div class="hint" style="margin-top:28px"><b>Spansk kommunal skola</b> är gratis och undervisar på spanska. Den kräver padrón, och ansökan för kommande läsår görs normalt i mars i Andalusien. Barn som flyttar in mitt i läsåret placeras av kommunens skolkontor. <a href="https://www.juntadeandalucia.es/educacion" target="_blank" rel="noopener">Junta de Andalucía</a></div>
+  <p class="small muted" style="margin-top:14px">Läroplan, åldrar och ort enligt skolornas egna webbplatser, kontrollerade 30 oktober 2026. Avgifter enligt skolans prislista eller International Schools Database för 2026/27 där de är publicerade; flera skolor lämnar avgiften på förfrågan. Kontrollera alltid med skolan, och ställ barnen i kö tidigt.</p>
+</div></div>
+
 <div id="v-kontakter" hidden><div class="wrap" style="padding-bottom:64px">
   <div class="apphead">
     <div class="eyebrow">Partners och kontakter</div>
@@ -706,7 +733,7 @@ const CONTACTS = [
  {id:"ss",k:"Myndighet",title:"Seguridad Social",status:"v",text:"Socialförsäkringsnummer (NUSS) och tillgång till den offentliga vården. Vem som har rätt till vad beror på om ni arbetar i Spanien, är pensionär med S1 eller betalar privat.",link:"https://www.seg-social.es"},
  {id:"fnmt",k:"Myndighet",title:"FNMT – digitalt certifikat",status:"v",text:"Certificado digital låser upp i stort sett alla myndighetsärenden online. Skaffa det så tidigt det går efter NIE.",link:"https://www.sede.fnmt.gob.es"},
  {id:"skola-sv",k:"Skola",title:"Svenska skolan Marbella",status:"v",text:"Svensk läroplan, svensk gemenskap, mjuk landning för barn som ska kunna gå tillbaka till svenskt system.",link:"https://www.svenskaskolanmarbella.com"},
- {id:"skola-int",k:"Skola",title:"Internationella skolor på kusten",status:"o",text:"Engelskspråkiga skolor med brittisk eller amerikansk läroplan (t.ex. Atlas, Aloha, EIC, Swans). Avgifter, köer och antagningsdatum skiljer sig kraftigt. Vi bygger en jämförelse.",link:null,note:"Jämförelse under arbete"},
+ {id:"skola-int",k:"Skola",title:"Internationella skolor på kusten",status:"o",text:"Engelskspråkiga skolor med brittisk eller amerikansk läroplan (t.ex. Atlas, Aloha, EIC, Swans). Avgifter, köer och antagningsdatum skiljer sig kraftigt; jämför dem under Skolor.",link:null,note:"Jämförelse under arbete"},
  {id:"skola-pub",k:"Skola",title:"Spansk kommunal skola",status:"v",text:"Gratis, på spanska, kräver padrón. Ansökan för kommande läsår sker normalt i mars i Andalusien; inflyttade under året placeras via kommunens skolkontor.",link:"https://www.juntadeandalucia.es/educacion"},
  {id:"maklare",k:"Bostad",title:"Mäklare som arbetar med svenska köpare",status:"o",text:"För hyra: hjälp att förstå kontraktstyp och deposition. För köp: reservation, arras, due diligence. Mäklaren företräder normalt säljaren, så ha egen advokat vid köp.",link:null,note:"Partner ej vald ännu"},
  {id:"advokat",k:"Bostad",title:"Fastighetsadvokat (abogado)",status:"o",text:"Kontrollerar lagfart, skulder, bygglov och förening innan ni betalar arras. Fast pris är vanligt, ofta runt 1 % av köpeskillingen.",link:null,note:"Partner ej vald ännu"},
@@ -1067,7 +1094,8 @@ function renderContacts(){
   const shown = CONTACTS.filter(c => cfilter === "alla" || (cfilter === "partner" ? !c.link : c.k === cfilter));
   $("#contacts").innerHTML = shown.map(c => {
     const partner = !c.link;
-    const extra = c.id === "maklare" ? `<span class="small muted">Solpass köprådgivning för Estepona, San Pedro och Marbella lanseras snart.</span>` : "";
+    if(c.k === "Skola") c.note = "Se alla skolor";
+    const extra = c.k === "Skola" ? `<a class="small" href="#skolor">Jämför ${SCHOOLS.length} skolor på kusten</a>` : c.id === "maklare" ? `<span class="small muted">Solpass köprådgivning för Estepona, San Pedro och Marbella lanseras snart.</span>` : "";
     const foot = partner
       ? `<div class="foot"><span class="pill o">${c.note}</span>${state.plus ? `<button class="btn sm sea" data-intro="${c.id}">Be om introduktion</button>` : `<button class="btn sm ghost" data-plus>Introduktion i Plus</button>`}</div>`
       : `<div class="foot"><a class="ext" href="${c.link}" target="_blank" rel="noopener">${c.link.replace(/^https?:\/\//,"")}</a><span class="pill v">Officiell källa</span></div>`;
@@ -1466,8 +1494,49 @@ function renderHomeLead(){
 }
 function renderBostad(){ renderBuyer(); renderHomes(); renderHomeResults(); renderBankTable(); }
 
+/* ---------- schools (checked 30 Oct 2026; west to east) ---------- */
+const SCHOOLS = [
+  { area: "Sotogrande och Estepona", name: "Sotogrande International School", place: "Sotogrande (Cádiz)", tags: ["IB"], qual: "IB hela vägen: PYP, MYP och IB Diploma", ages: "4 månader–18 år, internat finns", fee: "9 840–28 255 €", url: "https://www.sis.ac/" },
+  { area: "Sotogrande och Estepona", name: "Atlas American School of Málaga", place: "Selwo Hills, Estepona", tags: ["Amerikansk", "IB"], qual: "Amerikansk läroplan, high school diploma och IB Diploma", ages: "3–18 år (K1–12th grade)", url: "https://atlas-asm.es/en/" },
+  { area: "Sotogrande och Estepona", name: "Mayfair School", place: "Estepona", tags: ["Brittisk"], qual: "Cambridge: IGCSE och A-level", ages: "3–18 år", url: "https://mayfairschool.es/" },
+  { area: "Marbella, San Pedro och Nueva Andalucía", name: "Laude San Pedro International College", place: "San Pedro de Alcántara", tags: ["Brittisk", "Spansk"], qual: "Brittisk (IGCSE, A-level) och spansk (ESO, Bachillerato), dubbel väg", ages: "2,5–18 år", url: "https://www.laudesanpedro.com/en/" },
+  { area: "Marbella, San Pedro och Nueva Andalucía", name: "Svenska Skolan Marbella", place: "Marbella", tags: ["Svensk"], qual: "Svensk skola. Förskola och F–6; högstadium och gymnasium på distans", ages: "3–12 år på plats", url: "https://www.svenskaskolanmarbella.com/" },
+  { area: "Marbella, San Pedro och Nueva Andalucía", name: "Aloha College", place: "Nueva Andalucía, Marbella", tags: ["Brittisk", "IB"], qual: "IGCSE, A-level och IB Diploma", ages: "3–18 år", url: "https://www.aloha-college.com/" },
+  { area: "Marbella, San Pedro och Nueva Andalucía", name: "Swans International School", place: "Marbella: lågstadiet centralt, år 6–13 i Sierra Blanca", tags: ["Brittisk", "IB"], qual: "GCSE och IB Diploma", ages: "3–18 år", url: "https://www.swansschool.com/" },
+  { area: "Marbella, San Pedro och Nueva Andalucía", name: "English International College (EIC)", place: "Marbella", tags: ["Brittisk"], qual: "GCSE och International A-level", ages: "3–18 år", url: "https://www.eicmarbella.org/" },
+  { area: "Marbella, San Pedro och Nueva Andalucía", name: "The British International School of Marbella", place: "Marbella", tags: ["Brittisk"], qual: "Engelsk läroplan till IGCSE och A-level", ages: "2–18 år", url: "https://www.bism.es/" },
+  { area: "Marbella, San Pedro och Nueva Andalucía", name: "Deutsche Schule Málaga", place: "Ojén, ovanför Elviria", tags: ["Tysk"], qual: "Tyska systemet till Abitur, undervisning på tyska, spanska och engelska", ages: "3–18 år", fee: "5 660–7 385 €", url: "https://www.dsmalaga.com/" },
+  { area: "Fuengirola, Mijas och Benalmádena", name: "Svenska Skolan Costa del Sol", place: "Fuengirola", tags: ["Svensk"], qual: "Svensk läroplan med spanska, från förskola till gymnasium. Cirka 300 elever.", ages: "3–19 år", fee: "7 080–7 500 €", url: "https://skolan.es/" },
+  { area: "Fuengirola, Mijas och Benalmádena", name: "Colegio Finlandés (Aurinkorannikon suomalainen koulu)", place: "Los Pacos, Fuengirola", tags: ["Finsk"], qual: "Finsk läroplan, från förskola till gymnasium (lukio)", ages: "5–18 år", url: "https://suomalainenkoulu.net/" },
+  { area: "Fuengirola, Mijas och Benalmádena", name: "St Anthony's College", place: "Mijas Costa", tags: ["Brittisk"], qual: "Engelsk läroplan till IGCSE och sixth form", ages: "Förskola till sixth form", url: "https://www.stanthonyscollege.com/" },
+  { area: "Fuengirola, Mijas och Benalmádena", name: "The British College of Benalmádena", place: "Benalmádena", tags: ["Brittisk"], qual: "Engelsk läroplan", ages: "1–18 år", url: "https://www.goodschoolsguide.co.uk/international/profile/british-college-benalmadena-the" },
+  { area: "Fuengirola, Mijas och Benalmádena", name: "The Benalmádena International College", place: "Benalmádena", tags: ["Brittisk"], qual: "Engelsk läroplan med inslag av den spanska", ages: "3–18 år", url: "https://www.benalmadenainternationalcollege.com/" },
+  { area: "Málaga", name: "Novaschool Sunland International", place: "Cártama, inåt land från Málaga", tags: ["Brittisk", "Spansk"], qual: "Brittisk läroplan (IGCSE, A-level) med dubbel brittisk och spansk examen", ages: "3–18 år", fee: "6 910–8 262 €", url: "https://sunland.novaschool.es/" },
+  { area: "Málaga", name: "The British School of Málaga", place: "Málaga", tags: ["Brittisk", "Spansk"], qual: "IGCSE, A-level, ESO och Bachillerato", ages: "3–18 år", fee: "9 880–13 150 €", url: "https://www.britishschoolmalaga.com/en" },
+  { area: "Málaga", name: "Lycée Français International de Málaga", place: "Cerrado de Calderón, Málaga", tags: ["Fransk"], qual: "Franska systemet till baccalauréat", ages: "3–18 år", fee: "ca 5 670–7 200 € (EU-medborgare)", url: "https://lfmalaga.com/" },
+  { area: "Málaga", name: "St George's British International School", place: "Málaga", tags: ["Brittisk"], qual: "Engelsk läroplan i tvåspråkig miljö", ages: "Förskola till gymnasiet", url: "https://stgeorgeinternational.es/en/" }
+];
+const SFILTERS = ["Alla", "Svensk", "Brittisk", "IB", "Amerikansk", "Spansk", "Tysk", "Fransk", "Finsk"];
+let sfilter = "Alla";
+function renderSchools(){
+  $("#sfilters").innerHTML = SFILTERS.map(f => `<button aria-pressed="${sfilter === f}" data-sf="${f}">${f === "Alla" ? "Alla" : f}${f === "Alla" ? "" : ` (${SCHOOLS.filter(x => x.tags.includes(f)).length})`}</button>`).join("");
+  $$("#sfilters button").forEach(b => b.onclick = () => { sfilter = b.dataset.sf; renderSchools(); });
+  const list = SCHOOLS.filter(x => sfilter === "Alla" || x.tags.includes(sfilter));
+  const areas = [...new Set(list.map(x => x.area))];
+  $("#schools").innerHTML = areas.map(a => {
+    const items = list.filter(x => x.area === a);
+    return `<div class="sgroup"><h3>${a} <small>${items.length} ${items.length === 1 ? "skola" : "skolor"}</small></h3><div class="sgrid">${items.map(x => `
+      <div class="school">
+        <div class="tags">${x.tags.map(t => `<span class="tag${t === "Svensk" ? " sv" : ""}">${t}</span>`).join("")}</div>
+        <h4>${x.name}</h4>
+        <dl><dt>Ort</dt><dd>${x.place}</dd><dt>Läroplan</dt><dd>${x.qual}</dd><dt>Ålder</dt><dd>${x.ages}</dd><dt>Avgift/år</dt><dd>${x.fee || "Lämnas på förfrågan"}</dd></dl>
+        <a href="${x.url}" target="_blank" rel="noopener">Skolans webbplats</a>
+      </div>`).join("")}</div></div>`;
+  }).join("") || `<p class="lead" style="margin-top:20px">Ingen skola matchar filtret.</p>`;
+}
+
 /* ---------- routing ---------- */
-const VIEWS = ["start","plan","bostad","kontakter","dokument","fragor","fraga"];
+const VIEWS = ["start","plan","bostad","skolor","kontakter","dokument","fragor","fraga"];
 function route(){
   const h = location.hash.slice(1);
   const v = VIEWS.includes(h) ? h : "landing";
@@ -1484,6 +1553,7 @@ function route(){
   if(v === "start"){ if(!location.hash.includes("start") || wzStep >= STEPS.length) wzStep = 0; renderWizard(); }
   if(v === "plan"){ if(!hasPlan()){ location.hash = "start"; return; } renderPlan(); }
   if(v === "bostad") renderBostad();
+  if(v === "skolor") renderSchools();
   if(v === "kontakter") renderContacts();
   if(v === "dokument") renderDocs();
   if(v === "fragor") renderFaq($("#faqSearch").value);
