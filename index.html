@@ -359,6 +359,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <nav class="appnav" aria-label="Er flytt">
       <a href="#plan">Er plan</a>
       <a href="#bostad">Bostad och bolån</a>
+      <a href="#hyrakopa">Hyra eller köpa</a>
       <a href="#skatt">Beckham</a>
       <a href="#skolor">Skolor</a>
       <a href="#kontakter">Partners och kontakter</a>
@@ -470,7 +471,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
         <div><b>7 %</b><span>överlåtelseskatt på en begagnad bostad i Andalusien, plus notarie, registro och advokat</span></div>
         <div><b>3,23 %</b><span>Euribor 12 månader, preliminärt snitt oktober 2026. Rörlig ränta är Euribor plus bankens marginal.</span></div>
       </div>
-      <div class="row" style="margin-top:28px"><a class="btn sea" href="#bostad">Räkna på en bostad</a></div>
+      <div class="row" style="margin-top:28px"><a class="btn sea" href="#bostad">Räkna på en bostad</a><a class="btn ghost" href="#hyrakopa">Hyra eller köpa, över fem år?</a></div>
     </div>
   </section>
 
@@ -670,6 +671,45 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
   <h3 style="margin-top:36px">Banker som lånar ut till icke-residenter</h3>
   <p class="small muted" style="margin-top:6px">Villkor som bankerna själva publicerar, kontrollerade 29 oktober 2026. Bara CaixaBank publicerar en ränta; övriga lämnar räntan i ett personligt erbjudande. Det slutliga villkoret står i bankens FEIN (europeiskt standardiserat informationsblad).</p>
   <div class="compare-wrap"><table class="compare banks" id="bankTable"></table></div>
+</div></div>
+
+<div id="v-hyrakopa" hidden><div class="wrap" style="padding-bottom:64px">
+  <div class="apphead">
+    <div class="eyebrow">Hyra eller köpa</div>
+    <h2>Vad kostar det att hyra först, jämfört med att köpa direkt?</h2>
+    <p class="lead">Köpet kostar 10–13 % i skatt och avgifter som ni aldrig får tillbaka, och att sälja kostar igen. Hyran är pengar ut varje månad. Här räknar vi ihop vad som faktiskt är borta efter några år, med bostaden såld eller hyran betald.</p>
+  </div>
+  <div class="calc">
+    <form class="card stack" id="rb" onsubmit="return false">
+      <div class="grid2">
+        <label class="field"><span>Pris för bostaden ni skulle köpa (€)</span><input type="number" id="rb_price" value="450000" step="10000" min="0" inputmode="numeric"></label>
+        <label class="field"><span>Hyra för motsvarande bostad (€ per månad)</span><input type="number" id="rb_rent" value="1900" step="100" min="0" inputmode="numeric"></label>
+      </div>
+      <div class="field"><span>Hur länge räknar vi?</span>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="rb_years" value="3">3 år</label>
+          <label class="chip"><input type="radio" name="rb_years" value="5" checked>5 år</label>
+          <label class="chip"><input type="radio" name="rb_years" value="10">10 år</label>
+        </div></div>
+      <div class="grid2">
+        <label class="field"><span>Kontantinsats (% av priset)</span><input type="number" id="rb_down" value="30" min="10" max="100" step="5"></label>
+        <label class="field"><span>Bolåneränta, fast (%)</span><input type="number" id="rb_rate" value="2.85" min="0" max="15" step="0.05"></label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>Prisutveckling per år (%)</span><input type="number" id="rb_growth" value="2" min="-10" max="15" step="0.5"></label>
+        <label class="field"><span>Hyreshöjning per år (%)</span><input type="number" id="rb_rentg" value="3" min="-5" max="15" step="0.5"></label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>Comunidad (€ per månad)</span><input type="number" id="rb_com" value="150" min="0" step="10"></label>
+        <label class="field"><span>Avkastning på pengar ni inte binder (% per år)</span><input type="number" id="rb_alt" value="3" min="0" max="15" step="0.5"></label>
+      </div>
+      <p class="small muted">Andalusien, begagnad bostad, lån på 25 år, ni är residenta vid köpet. Mäklararvode vid försäljning 5 %, underhåll 1 % av priset per år, reavinstskatt enligt spansk sparskala.</p>
+    </form>
+    <div class="result">
+      <div id="rbOut" class="stack" style="gap:18px"></div>
+      <div class="stack" id="rbCap"><b>Spara jämförelsen</b><p class="note">Vi skickar den till er. Vill ni ha bostäder att räkna på får ni dem från Solpass köprådgivning när den lanseras.</p><form class="capture" onsubmit="return false" id="rbForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="rbEmail"><button class="btn sun" type="submit">Skicka</button></form><p class="err" id="rbErr" hidden></p></div>
+    </div>
+  </div>
 </div></div>
 
 <div id="v-skatt" hidden><div class="wrap" style="padding-bottom:64px">
@@ -1434,6 +1474,58 @@ bindCapture("#bkForm", "#bkEmail", "#bkErr", async email => {
   return ok;
 });
 
+/* ---------- rent or buy: money gone after N years, home sold at the end ---------- */
+function loanBalance(loan, rate, years, afterYears){ const r = rate / 12, n = Math.round(years * 12), k = Math.min(n, Math.round(afterYears * 12)); if(loan <= 0) return 0; if(r === 0) return loan * (1 - k / n); const pay = annuity(loan, rate, years); return loan * Math.pow(1 + r, k) - pay * (Math.pow(1 + r, k) - 1) / r; }
+let rbSnapshot = {};
+function rentOrBuy(i){
+  const cfg = HOME_CFG, N = i.years, region = cfg.regions.andalucia;
+  const ltv = Math.min(1 - i.down, cfg.maxLtv.resident), loanYears = 25;
+  const home = calculateHome({price: i.price, region: "andalucia", newBuild: false, communityMonthly: i.com, ibiYearly: i.price * 0.005, catastral: 0}, {residency: "resident", ltv, years: loanYears, rateType: "fixed", bank: "typical"}, cfg);
+  const pay = annuity(home.loan, i.rate, loanYears);
+  const maintenance = i.price * 0.01;
+  let buyOut = home.cash, rentOut = 0, interestPaid = 0;
+  const rows = [];
+  for(let y = 1; y <= N; y++){
+    const yearly = pay * 12 + cfg.homeInsuranceMonthly * 12 + home.running * 12 + maintenance;
+    buyOut += yearly;
+    rentOut += i.rent * 12 * Math.pow(1 + i.rentg, y - 1);
+    const value = i.price * Math.pow(1 + i.growth, y), balance = loanBalance(home.loan, i.rate, loanYears, y);
+    const gain = Math.max(0, value * 0.95 - i.price - home.tax - home.feeSum), cgt = scale(gain, SAVINGS);
+    const back = value * 0.95 - cgt - balance;
+    const opp = home.cash * (Math.pow(1 + i.alt, y) - 1);
+    const buyNet = buyOut - back + opp;
+    rows.push({y, buyNet, rentNet: rentOut, value, balance, back, cgt, opp});
+  }
+  const last = rows[N - 1];
+  const breakeven = rows.find(r => r.buyNet <= r.rentNet)?.y ?? null;
+  return { home, pay, rows, last, breakeven, maintenance };
+}
+function renderRentBuy(){
+  const i = { price: +$("#rb_price").value || 0, rent: +$("#rb_rent").value || 0, years: +$('[name="rb_years"]:checked').value, down: (+$("#rb_down").value || 30) / 100,
+    rate: (+$("#rb_rate").value || 0) / 100, growth: (+$("#rb_growth").value || 0) / 100, rentg: (+$("#rb_rentg").value || 0) / 100, com: +$("#rb_com").value || 0, alt: (+$("#rb_alt").value || 0) / 100 };
+  const r = rentOrBuy(i), L = r.last, diff = L.rentNet - L.buyNet, buyWins = diff > 0;
+  rbSnapshot = Object.assign({}, i, {buyNet: Math.round(L.buyNet), rentNet: Math.round(L.rentNet), breakeven: r.breakeven});
+  const flat = rentOrBuy(Object.assign({}, i, {growth: 0})).last;
+  let html = `<div class="kpis">
+    <div class="kpi big"><div class="v">${buyWins ? "Köpa" : "Hyra"} är ${eur(Math.abs(diff))} billigare</div><div class="l">borta efter ${i.years} år, med bostaden såld eller hyran betald</div></div>
+    <div class="kpi"><div class="v">${eur(L.rentNet)}</div><div class="l">hyra, totalt ${i.years} år</div></div>
+    <div class="kpi"><div class="v">${eur(L.buyNet)}</div><div class="l">köpa, netto efter försäljning</div></div>
+    <div class="kpi"><div class="v">${eur(r.home.cash)}</div><div class="l">kontant på köpdagen, inkl. ${eur(r.home.tax + r.home.feeSum)} i skatt och avgifter</div></div>
+    <div class="kpi"><div class="v">${r.breakeven ? r.breakeven + " år" : "över " + i.years + " år"}</div><div class="l">${r.breakeven ? "innan köpet går om hyran" : "hyran är billigare hela perioden"}</div></div>
+  </div>`;
+  html += `<p class="note">Utan prisökning (0 %) blir skillnaden ${flat.rentNet - flat.buyNet > 0 ? "köpa " : "hyra "}${eur(Math.abs(flat.rentNet - flat.buyNet))} billigare. Mycket av köpets fördel vilar på antagandet om ${Math.round(i.growth * 100)} % per år.</p>`;
+  if(i.years <= 3) html += `<p class="note">På kort tid vinner hyran nästan alltid. Köpets fasta kostnader (${eur(r.home.tax + r.home.feeSum)} in, cirka 5 % ut) hinner inte slås ut.</p>`;
+  html += `<details><summary>År för år</summary><table><tr><td>År</td><td>Hyra, ackumulerat</td><td>Köpa, netto om ni säljer då</td></tr>${r.rows.map(x => `<tr><td>${x.y}</td><td>${eur(x.rentNet)}</td><td>${eur(x.buyNet)}</td></tr>`).join("")}</table>
+    <p class="note" style="margin-top:10px">Köpa: kontantinsats, ITP 7 %, notarie, registro, advokat och värdering, lån ${eur(r.home.loan)} på 25 år till ${(i.rate * 100).toFixed(2).replace(".", ",")} % (${eur(r.pay)} per månad), hemförsäkring, comunidad, IBI 0,5 % och underhåll 1 % per år. Vid försäljning: mäklare 5 %, reavinstskatt 19–30 % på vinsten efter köpkostnader, kvarvarande lån löses. Plus den avkastning (${Math.round(i.alt * 100)} %) ni gått miste om på kontantinsatsen. Hyra: hyran med ${Math.round(i.rentg * 100)} % höjning per år; depositionen räknas som återbetald. Plusvalía municipal och lånets uppläggning ingår inte.</p></details>`;
+  $("#rbOut").innerHTML = html;
+}
+$$("#rb input").forEach(el => el.addEventListener("input", renderRentBuy));
+bindCapture("#rbForm", "#rbEmail", "#rbErr", async email => {
+  const ok = await saveLead({source:"rentbuy", email, calc: rbSnapshot, profile: profile()});
+  if(ok) $("#rbCap").innerHTML = `<div class="ok-msg">Tack. Vi skickar jämförelsen till ${esc(email)} inom ett dygn.</div>`;
+  return ok;
+});
+
 /* ---------- landing forms ---------- */
 bindCapture("#checklistForm", "#cl_email", "#cl_err", async email => {
   const ok = await saveLead({source:"checklist", email, profile: profile()});
@@ -1753,7 +1845,7 @@ function renderSchools(){
 }
 
 /* ---------- routing ---------- */
-const VIEWS = ["start","plan","bostad","skatt","skolor","kontakter","dokument","fragor","fraga"];
+const VIEWS = ["start","plan","bostad","hyrakopa","skatt","skolor","kontakter","dokument","fragor","fraga"];
 function route(){
   const h = location.hash.slice(1);
   const v = VIEWS.includes(h) ? h : "landing";
@@ -1771,6 +1863,7 @@ function route(){
   if(v === "plan"){ if(!hasPlan()){ location.hash = "start"; return; } renderPlan(); }
   if(v === "bostad") renderBostad();
   if(v === "skatt") renderBeckham();
+  if(v === "hyrakopa") renderRentBuy();
   if(v === "skolor") renderSchools();
   if(v === "kontakter") renderContacts();
   if(v === "dokument") renderDocs();
