@@ -1106,10 +1106,15 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
             <label class="field"><span>Telefon</span><input id="p_phone" type="tel" autocomplete="tel"></label>
           </div>
           <div class="grid2">
-            <label class="field"><span>Kategori</span><select id="p_cat" required><option value="">Välj</option><option>Gestor</option><option>Auktoriserad översättare</option><option>Fordonsregistrering</option><option>Skatterådgivare</option><option>Redovisning för egenföretagare</option><option>Fastighetsadvokat</option><option>Hypoteksmäklare</option><option>Bank och valuta</option><option>Försäkring</option><option>Köparrådgivare</option><option>Uthyrningsmäklare</option><option>Hantverkare och renovering</option><option>Städning och fastighetsskötsel</option><option>Flyttfirma</option><option>Spanskundervisning</option><option>Skola</option><option>Annat</option></select></label>
-            <label class="field"><span>Område</span><input id="p_area" placeholder="t.ex. Marbella–Estepona"></label>
+            <label class="field"><span>Kategori</span><select id="p_cat" data-other required><option value="">Välj</option><option>Gestor</option><option>Auktoriserad översättare</option><option>Fordonsregistrering</option><option>Skatterådgivare</option><option>Redovisning för egenföretagare</option><option>Fastighetsadvokat</option><option>Hypoteksmäklare</option><option>Bank och valuta</option><option>Försäkring</option><option>Köparrådgivare</option><option>Uthyrningsmäklare</option><option>Hantverkare och renovering</option><option>Städning och fastighetsskötsel</option><option>Flyttfirma</option><option>Spanskundervisning</option><option>Skola</option><option value="__other">Annat</option></select></label>
+            <label class="field" id="p_catO" hidden><span>Vilken typ av tjänst?</span><input maxlength="60" id="p_catText" placeholder="t.ex. fotograf, inredare"></label>
+            <label class="field"><span>Område</span><select id="p_area" data-other required><option value="">Välj</option><option>Hela Costa del Sol</option><option>Marbella och San Pedro</option><option>Estepona och Benahavís</option><option>Fuengirola och Mijas</option><option>Málaga</option><option value="__other">Annat område</option></select></label>
+            <label class="field" id="p_areaO" hidden><span>Vilket område?</span><input maxlength="60" id="p_areaText" placeholder="t.ex. Sotogrande"></label>
           </div>
-          <label class="field"><span>Kort om er (valfritt)</span><textarea id="p_msg" placeholder="Språk, hur många svenska kunder ni har, vad ni är bäst på."></textarea></label>
+          <div class="grid2">
+            <label class="field"><span>Språk ni arbetar på</span><select id="p_lang" required><option value="">Välj</option><option>Svenska, engelska och spanska</option><option>Engelska och spanska</option><option>Bara spanska</option></select></label>
+            <label class="field"><span>Svenska kunder per år</span><select id="p_vol" required><option value="">Välj</option><option>Inga än</option><option>1–10</option><option>10–50</option><option>Fler än 50</option></select></label>
+          </div>
           <div class="row"><button class="btn sea" type="submit">Skicka intresseanmälan</button><span class="err" id="p_err" hidden></span></div>
           <div class="ok-msg" id="p_ok" hidden>Tack. Vi hör av oss inom en vecka för ett kort samtal.</div>
         </form>
@@ -1168,7 +1173,8 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
   <form class="card stack" id="askForm" onsubmit="return false">
     <label class="field"><span>Vad undrar ni?</span><textarea id="askText" required placeholder="T.ex. Vi har ett AB i Sverige och vill flytta i augusti. Vad måste vi göra före flytten?"></textarea></label>
     <div class="grid2">
-      <label class="field"><span>Område</span><select id="askCat"><option>Skatt och bolag</option><option>Bostad</option><option>Skola och barn</option><option>Myndigheter och papper</option><option>Bil och körkort</option><option>Sjukvård</option><option>Annat</option></select></label>
+      <label class="field"><span>Vad gäller frågan?</span><select id="askCat" data-other required><option value="">Välj</option><option>Skatt och bolag</option><option>Bostad</option><option>Skola och barn</option><option>Myndigheter och papper</option><option>Bil och körkort</option><option>Sjukvård</option><option value="__other">Annat</option></select></label>
+      <label class="field" id="askCatO" hidden><span>Vad gäller det?</span><input maxlength="60" id="askCatText" placeholder="Beskriv kort"></label>
       <label class="field"><span>E-post för svaret</span><input id="askMail" type="email" required placeholder="din@epost.se"></label>
     </div>
     <div class="row"><button class="btn sea" type="submit">Skicka frågan</button><span class="err" id="askErr" hidden></span></div>
@@ -1610,7 +1616,8 @@ function openIntro(pid){
     <label class="field"><span>Namn</span><input id="i_name" required autocomplete="name"></label>
     <label class="field"><span>E-post</span><input id="i_mail" type="email" required autocomplete="email" value="${esc(state.email)}"></label>
     <label class="field"><span>Telefon (valfritt)</span><input id="i_tel" type="tel" autocomplete="tel"></label>
-    <label class="field"><span>Vad vill ni ha hjälp med?</span><textarea id="i_msg" required placeholder="T.ex. NIE för fyra personer, padrón och omregistrering av bil. Flyttar 1 mars."></textarea></label>
+    ${pickHtml("i_need", "Vad vill ni ha hjälp med?", ["En första genomgång av vårt läge", "Ett specifikt ärende", "Löpande hjälp under flytten", "En offert"])}
+    ${pickHtml("i_when", "När?", WHEN_OPTS, {other: ""})}
     <p class="err" id="i_err" hidden></p>
     <div class="row"><button class="btn sea" type="submit">Skicka</button><button class="btn ghost" type="button" id="i_cancel">Avbryt</button></div>
   </form></div>`;
@@ -1621,7 +1628,8 @@ function openIntro(pid){
     e.preventDefault();
     const email = $("#i_mail").value.trim(), err = $("#i_err");
     if(!validEmail(email)){ err.textContent = "Skriv en giltig e-postadress."; err.hidden = false; return; }
-    const lead = {partner: pid, message: $("#i_msg").value.trim(), created: new Date().toISOString()};
+    if(!$("#i_need").value || !$("#i_when").value){ err.textContent = "Välj vad ni behöver hjälp med och när."; err.hidden = false; return; }
+    const lead = {partner: pid, message: [pick("i_need"), pick("i_when")].join(" · "), created: new Date().toISOString()};
     const ok = await saveLead({source:"intro", email, name: $("#i_name").value.trim(), phone: $("#i_tel").value.trim() || null, partner: pid, message: lead.message, profile: profile()});
     if(!ok){ err.textContent = "Det gick inte att skicka just nu. Försök igen om en stund."; err.hidden = false; return; }
     rememberEmail(email); state.leads.push(lead); save(); close(); toast("Förfrågan är skickad"); renderContacts();
@@ -1684,7 +1692,7 @@ function renderFaq(filter = ""){
 /* ---------- ask ---------- */
 $("#askForm").addEventListener("submit", async e => {
   e.preventDefault();
-  const email = $("#askMail").value.trim(), text = $("#askText").value.trim(), err = $("#askErr"), cat = $("#askCat").value;
+  const email = $("#askMail").value.trim(), text = $("#askText").value.trim(), err = $("#askErr"), cat = pick("askCat") || "Annat";
   err.hidden = true;
   if(!text || !validEmail(email)){ err.textContent = "Skriv frågan och en giltig e-postadress."; err.hidden = false; return; }
   const ok = await saveLead({source:"question", email, message: text, category: cat, profile: profile()});
@@ -1972,7 +1980,8 @@ function renderAreas(id){
         <form class="card stack" id="areaForm" onsubmit="return false">
           <h3 style="margin:0">Fråga oss om ${a.short || a.name}</h3>
           <p class="small muted" style="margin:0">Om skolor, bostäder, vilka delar som passar barnfamiljer eller vad som helst annat. Vi svarar inom ett par dagar.</p>
-          <label class="field"><span>Er fråga</span><textarea id="aMsg" required placeholder="T.ex. Vilka delar av ${esc(a.short || a.name)} passar en familj med två barn i skolåldern?"></textarea></label>
+          ${pickHtml("aNeed", "Vad vill ni veta?", ["Vilka delar som passar barnfamiljer", "Skolor och skolplatser", "Bostäder att hyra", "Bostäder att köpa", "Prisnivåer och vad vi får för pengarna", "Pendling och tid till flyget", "Vardag, vård och service"], {other: "Annan fråga", placeholder: "Skriv er fråga"})}
+          ${pickHtml("aWhen", "När flyttar ni?", ["Inom 6 månader", "Om 6–12 månader", "Om mer än ett år", "Vi funderar bara"], {other: ""})}
           <label class="field"><span>E-post</span><input type="email" id="aEmail" required autocomplete="email" value="${esc(state.email)}"></label>
           ${'<label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label>'}
           <div class="row"><button class="btn sun" type="submit">Skicka frågan</button></div>
@@ -1982,8 +1991,7 @@ function renderAreas(id){
     </div>`;
   $("#aCalc").onclick = () => { $("#rb_price").value = Math.round(ex[1] * 100 / 10000) * 10000; $("#rb_rent").value = Math.round(ex[2] * 100 / 50) * 50; location.hash = "hyrakopa"; };
   bindCapture("#areaForm", "#aEmail", "#aErr", async email => {
-    const msg = $("#aMsg").value.trim();
-    if(!msg){ $("#aErr").textContent = "Skriv er fråga först."; $("#aErr").hidden = false; return true; }
+    const msg = [pick("aNeed"), pick("aWhen") && "flyttar " + pick("aWhen").toLowerCase()].filter(Boolean).join(" · ");
     const ok = await saveLead({source:"area", email, area: a.name, message: msg, profile: profile()});
     if(ok) $("#areaForm").outerHTML = `<div class="ok-msg">Tack. Vi svarar på er fråga om ${esc(a.short || a.name)} till ${esc(email)}.</div>`;
     return ok;
@@ -1998,6 +2006,20 @@ bindCapture("#nlForm", "#nlEmail", "#nlErr", async email => {
   return ok;
 });
 renderAreaTeaser();
+
+/* ---------- choice fields: a select with fixed options; "Annat" reveals a text field ---------- */
+function pickHtml(id, label, opts, {required = true, other = "Annat", placeholder = "Beskriv kort"} = {}){
+  return `<label class="field"><span>${label}</span><select id="${id}" data-other${required ? " required" : ""}><option value="">Välj</option>${opts.map(o => `<option>${esc(o)}</option>`).join("")}${other ? `<option value="__other">${other}</option>` : ""}</select></label>
+    <label class="field" id="${id}O" hidden><span>${other === "Annat" ? "Vad gäller det?" : other}</span><input id="${id}Text" maxlength="60" placeholder="${esc(placeholder)}"></label>`;
+}
+function pick(id){ const v = $("#" + id)?.value || ""; return v === "__other" ? ($("#" + id + "Text")?.value.trim() || "Annat") : v; }
+document.addEventListener("change", e => {
+  const sel = e.target.closest?.("select[data-other]"); if(!sel) return;
+  const o = document.getElementById(sel.id + "O"); if(!o) return;
+  o.hidden = sel.value !== "__other";
+  const t = document.getElementById(sel.id + "Text"); if(t){ t.required = !o.hidden; if(!o.hidden) t.focus(); }
+});
+const WHEN_OPTS = ["Så snart som möjligt", "Inom 1–3 månader", "Om 3–6 månader", "Om mer än 6 månader"];
 
 /* ---------- partner types: one page per type, switched with a dropdown ---------- */
 const PGROUPS = [["papper","Myndigheter och papper"],["ekonomi","Ekonomi och juridik"],["bostad","Bostad"],["vardag","Familj och vardag"]];
@@ -2110,7 +2132,8 @@ function renderPartnerTypes(id){
         <span class="pill" style="justify-self:start">Partner väljs nu</span>
         <h3 style="margin:0">Bli kopplade till ${t.name.toLowerCase()}</h3>
         <p class="small muted" style="margin:0">Berätta vad ni behöver. Vi kopplar er till en partner vi har avtal med i ert område, och er profil följer med så att ni slipper börja om.</p>
-        <label class="field"><span>Vad behöver ni hjälp med?</span><textarea id="ptMsg" required placeholder="T.ex. område, när ni flyttar och vad det gäller"></textarea></label>
+        ${pickHtml("ptNeed", "Vad behöver ni hjälp med?", t.does)}
+        <div class="grid2">${pickHtml("ptWhen", "När?", WHEN_OPTS, {other: ""})}${pickHtml("ptArea", "Område", AREAS.map(a => a.name).concat(["Hela kusten"]), {other: "Annat område"})}</div>
         <div class="grid2"><label class="field"><span>Namn</span><input id="ptName" autocomplete="name" value="${esc(state.hushall)}"></label><label class="field"><span>E-post</span><input id="ptEmail" type="email" required autocomplete="email" value="${esc(state.email)}"></label></div>
         <label class="field"><span>Telefon (valfritt)</span><input id="ptTel" type="tel" autocomplete="tel"></label>
         <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label>
@@ -2121,9 +2144,8 @@ function renderPartnerTypes(id){
   const btn = $(".ptbtn"), list = $("#ptlist");
   btn.onclick = () => { const o = list.hidden; list.hidden = !o; btn.setAttribute("aria-expanded", String(o)); };
   bindCapture("#ptForm", "#ptEmail", "#ptErr", async email => {
-    const msg = $("#ptMsg").value.trim();
-    if(!msg){ $("#ptErr").textContent = "Skriv kort vad ni behöver hjälp med."; $("#ptErr").hidden = false; return true; }
-    const ok = await saveLead({source:"intro", email, name: $("#ptName").value.trim() || null, phone: $("#ptTel").value.trim() || null, partner: t.id, category: t.name, message: msg, profile: profile()});
+    const msg = [pick("ptNeed"), pick("ptWhen")].filter(Boolean).join(" · ");
+    const ok = await saveLead({source:"intro", email, name: $("#ptName").value.trim() || null, phone: $("#ptTel").value.trim() || null, partner: t.id, category: t.name, area: pick("ptArea") || null, message: msg, profile: profile()});
     if(ok) $("#ptForm").outerHTML = `<div class="ok-msg">Tack. Vi hör av oss inom två arbetsdagar med en ${esc(t.name.toLowerCase())} som passar er.</div>`;
     return ok;
   });
@@ -2223,7 +2245,7 @@ $("#partnerForm").addEventListener("submit", async e => {
   err.hidden = true;
   if(!$("#p_name").value.trim() || !$("#p_company").value.trim() || !$("#p_cat").value || !validEmail(email)){ err.textContent = "Fyll i namn, företag, e-post och kategori."; err.hidden = false; return; }
   btn.disabled = true;
-  const ok = await saveLead({source:"partner", email, name: $("#p_name").value.trim(), company: $("#p_company").value.trim(), phone: $("#p_phone").value.trim() || null, category: $("#p_cat").value, area: $("#p_area").value.trim() || null, message: $("#p_msg").value.trim() || null});
+  const ok = await saveLead({source:"partner", email, name: $("#p_name").value.trim(), company: $("#p_company").value.trim(), phone: $("#p_phone").value.trim() || null, category: pick("p_cat"), area: pick("p_area") || null, message: ["Språk: " + $("#p_lang").value, "Svenska kunder per år: " + $("#p_vol").value].join(" · ")});
   btn.disabled = false;
   if(!ok){ err.textContent = "Det gick inte att skicka just nu. Försök igen om en stund."; err.hidden = false; return; }
   $$("#partnerForm > :not(#p_ok)").forEach(el => el.hidden = true); $("#p_ok").hidden = false;
@@ -2459,7 +2481,10 @@ function renderHomeLead(){
       </div>
       <div class="grid2">
         <label class="field"><span>Telefon (valfritt)</span><input id="hl_phone" type="tel" autocomplete="tel"></label>
-        <label class="field"><span>Något vi bör veta? (valfritt)</span><input id="hl_msg" placeholder="t.ex. inkomst i SEK, eget bolag, när ni vill köpa"></label>
+        ${pickHtml("hl_inc", "Er inkomst kommer från", ["Lön i kronor", "Lön i euro", "Eget bolag", "Pension eller kapital"], {required: false})}
+      </div>
+      <div class="grid2">
+        ${pickHtml("hl_when", "När vill ni köpa?", ["Inom 6 månader", "6–12 månader", "Om mer än ett år"], {required: false, other: ""})}
       </div>
       <div class="row"><button class="btn sun" type="submit">Bli kontaktad</button><span class="err" id="hl_err" hidden></span></div>
       <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label>
@@ -2474,7 +2499,7 @@ function renderHomeLead(){
     if(!partners.length){ err.textContent = "Välj hypoteksmäklare, fastighetsadvokat eller båda."; err.hidden = false; return; }
     const summary = home.homes.map(h => { const r = calculateHome(h, home.buyer, effectiveCfg(home.buyer)); return { name: h.name, price: h.price, region: h.region, newBuild: h.newBuild, communityMonthly: h.communityMonthly, ibiYearly: h.ibiYearly, catastral: h.catastral || null, cash: Math.round(r.cash), loan: Math.round(r.loan), monthlyBonified: Math.round(r.bonified.monthly), monthlyPlain: Math.round(r.plain.monthly) }; });
     btn.disabled = true;
-    const ok = await saveLead({source: "home", email, name, phone: $("#hl_phone").value.trim() || null, partner: partners.join(","), message: $("#hl_msg").value.trim() || null, calc: { buyer: home.buyer, homes: summary }, profile: profile()});
+    const ok = await saveLead({source: "home", email, name, phone: $("#hl_phone").value.trim() || null, partner: partners.join(","), message: [pick("hl_inc"), pick("hl_when") && "köper " + pick("hl_when").toLowerCase()].filter(Boolean).join(" · ") || null, calc: { buyer: home.buyer, homes: summary }, profile: profile()});
     btn.disabled = false;
     if(!ok){ err.textContent = "Det gick inte att skicka just nu. Försök igen om en stund."; err.hidden = false; return; }
     rememberEmail(email); homeLeadSent = true;
