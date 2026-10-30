@@ -305,6 +305,53 @@ section.alt .pcat{background:var(--bg)}
 .feature .disclose{font-size:.82rem;color:var(--on-deep-muted);border-top:1px solid rgba(31,46,58,.15);padding-top:12px}
 .feature .ok-msg{background:rgba(98,195,148,.16);color:var(--on-deep)}
 @media(max-width:860px){.feature{grid-template-columns:1fr}.feature .img{min-height:200px}}
+.qc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--paper)}
+@media(max-width:900px){.qc{grid-template-columns:1fr}}
+.qc-in{padding:28px;display:grid;gap:10px;align-content:start}
+.qc-row{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px}
+.qc-row label{font-weight:600}
+.qc-row output{font:700 1.15rem var(--body);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.qc-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:6px}
+@media(max-width:520px){.qc-two{grid-template-columns:1fr}}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;cursor:pointer;--p:50%}
+input[type=range]::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--acc) var(--p),var(--line) var(--p))}
+input[type=range]::-moz-range-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--acc) var(--p),var(--line) var(--p))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--paper);border:2px solid var(--acc);margin-top:-8px;box-shadow:0 1px 4px rgba(14,17,22,.2)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--paper);border:2px solid var(--acc)}
+input[type=range]:focus-visible{outline:none}
+input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 4px var(--acc-soft)}
+.seg{display:inline-flex;background:var(--deep);border:1px solid var(--line);border-radius:10px;padding:3px;gap:2px}
+.seg button{font:500 .92rem var(--body);background:none;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--paper);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(14,17,22,.08)}
+.presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:4px}
+.presets button{text-align:left;background:var(--paper);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;cursor:pointer;font:600 .92rem var(--body);color:var(--ink)}
+.presets button b{display:block;font:700 1.15rem var(--body);letter-spacing:-.02em;margin-top:2px}
+.presets button small{display:block;font-weight:400;color:var(--muted);font-size:.78rem;margin-top:2px}
+.presets button[aria-pressed="true"]{border-color:var(--acc);background:var(--acc-soft)}
+.qc-more{margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.qc-more summary{cursor:pointer;font-weight:600}
+.qc-out{background:#0E1116;color:#fff;padding:28px;display:grid;gap:16px;align-content:start}
+.qc-big span{display:block;color:#AAB2BD;font-size:.92rem}
+.qc-big b{display:block;font:700 clamp(3rem,6vw,4.6rem)/1 var(--body);letter-spacing:-.05em;font-variant-numeric:tabular-nums;margin:6px 0}
+.qc-big small{color:#AAB2BD;font-size:.9rem}
+.qc-bar{display:flex;height:12px;border-radius:6px;overflow:hidden;background:#1F252D}
+.qc-bar i{display:block;height:100%;transition:width .3s ease}
+.qc-legend{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 16px;font-size:.88rem;color:#C9CFD6}
+.qc-legend li{display:flex;align-items:center;gap:8px}
+.qc-legend li b{margin-left:auto;color:#fff;font-weight:600;font-variant-numeric:tabular-nums}
+.qc-legend i{width:10px;height:10px;border-radius:3px;flex:none}
+.qc-cash{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;border-top:1px solid #262B33;padding-top:16px}
+.qc-cash span{display:block;color:#AAB2BD;font-size:.86rem}
+.qc-cash b{font:700 1.5rem var(--body);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.qc-scen-h{color:#AAB2BD;font-size:.86rem;border-top:1px solid #262B33;padding-top:16px}
+.qc-scen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.qc-scen div{background:#171B21;border:1px solid #262B33;border-radius:12px;padding:12px 14px}
+.qc-scen span{display:block;font-size:.84rem;color:#AAB2BD}
+.qc-scen b{display:block;font:700 1.25rem var(--body);font-variant-numeric:tabular-nums;margin-top:2px}
+.qc-scen em{font-style:normal;font-size:.84rem;font-weight:600}
+.qc-scen .up{color:#F0A08A}.qc-scen .down{color:#7FD6AA}
+.qc-out .btn.sun{background:#17724A;color:#fff}
+.qc-out .btn.ghost{color:#fff;box-shadow:inset 0 0 0 1.5px #3A414B}
 .letter{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:40px;align-items:center}
 @media(max-width:860px){.letter{grid-template-columns:1fr;gap:20px}}
 .agrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
@@ -800,8 +847,45 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
   <div class="apphead">
     <div class="eyebrow">Bostad och bolån</div>
     <h2>Vad kostar bostaden i månaden, på riktigt?</h2>
-    <p class="lead">Lägg in bostäderna ni tittar på. Vi räknar ut vad köpet kräver kontant på köpdagen och vad ni betalar i månaden, med och utan bankens paket.</p>
+    <p class="lead">Dra i reglagen. Vi räknar med spanska bankers villkor, skatterna vid köp och de löpande kostnader som mäklarannonsen inte visar.</p>
   </div>
+  <section class="qc" id="qc" aria-label="Snabbkalkyl">
+    <form class="qc-in" id="qcForm" onsubmit="return false">
+      <div class="qc-row"><label for="qcPrice">Pris</label><output id="qcPriceO"></output></div>
+      <input type="range" id="qcPrice" min="150000" max="3000000" step="10000" value="450000">
+      <div class="qc-two">
+        <label class="field"><span>Region</span><select id="qcRegion"></select></label>
+        <div class="field"><span>Typ</span><div class="seg" role="group" aria-label="Typ av bostad"><button type="button" data-nb="0" aria-pressed="true">Begagnad</button><button type="button" data-nb="1" aria-pressed="false">Nyproduktion</button></div></div>
+      </div>
+      <div class="field"><span>Ni bor när ni köper</span><div class="seg" role="group" aria-label="Bosättning"><button type="button" data-res="nonResident" aria-pressed="true">I Sverige</button><button type="button" data-res="resident" aria-pressed="false">I Spanien</button></div></div>
+      <div class="qc-row"><label for="qcDown">Kontantinsats</label><output id="qcDownO"></output></div>
+      <input type="range" id="qcDown" min="20" max="100" step="5" value="30">
+      <div class="qc-row"><label for="qcYears">Löptid</label><output id="qcYearsO"></output></div>
+      <input type="range" id="qcYears" min="5" max="30" step="1" value="25">
+      <div class="qc-row"><label for="qcRate">Ränta</label><output id="qcRateO"></output></div>
+      <input type="range" id="qcRate" min="1" max="7" step="0.05" value="3.1">
+      <div class="presets" id="qcPresets" role="group" aria-label="Föreslagna räntenivåer"></div>
+      <details class="qc-more"><summary>Löpande kostnader</summary>
+        <div class="qc-row"><label for="qcCom">Comunidad (förening)</label><output id="qcComO"></output></div>
+        <input type="range" id="qcCom" min="0" max="1000" step="10" value="150">
+        <div class="qc-row"><label for="qcIbi">IBI (fastighetsskatt)</label><output id="qcIbiO"></output></div>
+        <input type="range" id="qcIbi" min="0" max="6000" step="50" value="1800">
+        <label class="nl" style="margin-top:4px"><input type="checkbox" id="qcPkg" checked> Bankens paket (lägre ränta mot försäkringar och kort)</label>
+      </details>
+    </form>
+    <div class="qc-out" aria-live="polite">
+      <div class="qc-big"><span>Per månad</span><b id="qcTotal"></b><small id="qcSub"></small></div>
+      <div class="qc-bar" id="qcBar" aria-hidden="true"></div>
+      <ul class="qc-legend" id="qcLegend"></ul>
+      <div class="qc-cash"><div><span>Kontant på köpdagen</span><b id="qcCash"></b></div><div><span>Lån</span><b id="qcLoan"></b></div></div>
+      <div class="qc-scen-h">Scenarier</div>
+      <div class="qc-scen" id="qcScen"></div>
+      <div class="row" style="margin-top:18px"><a class="btn sun" href="#partners/bolan">Få ett riktigt lånebesked</a><button class="btn ghost" type="button" id="qcAdd">Lägg till i jämförelsen</button></div>
+    </div>
+  </section>
+
+  <h3 style="margin:56px 0 6px">Jämför flera bostäder</h3>
+  <p class="small muted" style="margin:0 0 16px">Lägg in upp till sex bostäder sida vid sida, med och utan bankens paket.</p>
   <form class="card stack" id="buyerSettings" onsubmit="return false">
     <span class="label">Gäller alla bostäder</span>
     <div class="field"><span>Var bor ni när ni köper?</span>
@@ -2045,6 +2129,82 @@ function renderPartnerTypes(id){
   });
 }
 
+/* ---------- quick home calculator: sliders, suggested rates and scenarios ---------- */
+const qc = { price: 450000, region: "andalucia", newBuild: false, res: "nonResident", down: 0.3, years: 25, rate: null, preset: "fix-pkg", pkg: true, com: 150, ibi: null };
+function qcPresets(){
+  const c = HOME_CFG, add = qc.res === "nonResident" ? c.nonResidentRateAdd : 0;
+  const list = [
+    { id: "fix-pkg", label: "Fast med paket", rate: c.rates.fixed.bonified + add, pkg: true, note: "typisk ränta, oktober 2026" },
+    { id: "fix", label: "Fast utan paket", rate: c.rates.fixed.plain + add, pkg: false, note: "utan försäkringar via banken" },
+    { id: "var", label: "Rörlig med paket", rate: c.euribor + c.rates.variable.bonified + add, pkg: true, note: "Euribor 3,23 % plus marginal" }
+  ];
+  if(qc.res === "nonResident") list.push({ id: "caixa", label: "CaixaBank HolaBank", rate: CAIXA.rate.bonified, pkg: true, note: "publicerad ränta, högst 20 år", years: CAIXA.maxYears });
+  return list;
+}
+const qpct = n => (n * 100).toFixed(2).replace(".", ",").replace(/,?0+$/, "") + " %";
+function qcMonthly(rate, years, down){
+  const c = HOME_CFG, ibi = qc.ibi ?? Math.round(qc.price * 0.004 / 50) * 50;
+  const h = calculateHome({ price: qc.price, region: qc.region, newBuild: qc.newBuild, communityMonthly: qc.com, ibiYearly: ibi, catastral: 0 },
+    { residency: qc.res, ltv: 1 - down, years, rateType: "fixed", bank: "typical" }, c);
+  const pay = annuity(h.loan, rate, h.years), interest = h.loan * rate / 12, ins = qc.pkg ? c.linkedProductsMonthly : c.homeInsuranceMonthly;
+  return { h, pay, interest, amort: Math.max(0, pay - interest), running: h.running, ins, ibi, total: pay + h.running + ins };
+}
+function setRange(el, v){ el.value = v; el.style.setProperty("--p", ((v - el.min) / (el.max - el.min) * 100) + "%"); }
+function renderQc(){
+  const c = HOME_CFG, maxLtv = qc.res === "nonResident" ? c.maxLtv.nonResident : c.maxLtv.resident;
+  let maxYears = qc.res === "nonResident" ? c.maxYears.nonResident : c.maxYears.resident;
+  const presets = qcPresets(), pre = presets.find(x => x.id === qc.preset);
+  if(pre && pre.years) maxYears = Math.min(maxYears, pre.years);
+  if(qc.preset === "caixa" && qc.res !== "nonResident") qc.preset = "fix-pkg";
+  if(qc.rate === null) qc.rate = (presets.find(x => x.id === qc.preset) || presets[0]).rate;
+  qc.down = Math.max(qc.down, Math.round((1 - maxLtv) * 100) / 100); qc.years = Math.min(qc.years, maxYears);
+  $("#qcDown").min = Math.round((1 - maxLtv) * 100); $("#qcYears").max = maxYears;
+  setRange($("#qcPrice"), qc.price); setRange($("#qcDown"), Math.round(qc.down * 100)); setRange($("#qcYears"), qc.years); setRange($("#qcRate"), qc.rate * 100);
+  setRange($("#qcCom"), qc.com);
+  const r = qcMonthly(qc.rate, qc.years, qc.down);
+  setRange($("#qcIbi"), r.ibi);
+  $("#qcPriceO").textContent = eur(qc.price); $("#qcDownO").textContent = Math.round(qc.down * 100) + " % · " + eur(qc.price * qc.down);
+  $("#qcYearsO").textContent = qc.years + " år"; $("#qcRateO").textContent = qpct(qc.rate);
+  $("#qcComO").textContent = eur(qc.com) + "/mån"; $("#qcIbiO").textContent = eur(r.ibi) + "/år";
+  $("#qcPkg").checked = qc.pkg;
+  $$("[data-nb]").forEach(b => b.setAttribute("aria-pressed", String((b.dataset.nb === "1") === qc.newBuild)));
+  $$("[data-res]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.res === qc.res)));
+  $("#qcPresets").innerHTML = presets.map(x => `<button type="button" data-pre="${x.id}" aria-pressed="${qc.preset === x.id}">${x.label}<b>${qpct(x.rate)}</b><small>${x.note}</small></button>`).join("");
+  $$("#qcPresets [data-pre]").forEach(b => b.onclick = () => { const x = qcPresets().find(p => p.id === b.dataset.pre); qc.preset = x.id; qc.rate = x.rate; qc.pkg = x.pkg; if(x.years) qc.years = Math.min(qc.years, x.years); renderQc(); });
+  $("#qcTotal").textContent = eur(r.total);
+  $("#qcSub").textContent = `${qpct(qc.rate)} på ${qc.years} år · lån ${Math.round((1 - qc.down) * 100)} %${qc.res === "nonResident" ? " · inklusive skatt för icke-residenter" : ""}`;
+  const parts = [["Ränta", r.interest, "#7FD6AA"], ["Amortering", r.amort, "#17724A"], ["Comunidad, IBI och skatt", r.running, "#9AA3AE"], [qc.pkg ? "Bankens paket" : "Hemförsäkring", r.ins, "#5B6470"]];
+  $("#qcBar").innerHTML = parts.map(([, v, col]) => `<i style="width:${(v / r.total * 100).toFixed(1)}%;background:${col}"></i>`).join("");
+  $("#qcLegend").innerHTML = parts.map(([n, v, col]) => `<li><i style="background:${col}"></i>${n}<b>${eur(v)}</b></li>`).join("");
+  $("#qcCash").textContent = eur(r.h.cash); $("#qcLoan").textContent = eur(r.h.loan);
+  const scen = [
+    ["Räntan stiger 1 %", qcMonthly(qc.rate + 0.01, qc.years, qc.down).total],
+    ["Räntan sjunker 1 %", qcMonthly(Math.max(0.005, qc.rate - 0.01), qc.years, qc.down).total],
+    ["Stresstest: +2 %", qcMonthly(qc.rate + 0.02, qc.years, qc.down).total],
+    [qc.down < 0.9 ? "10 % mer kontant" : "5 år kortare löptid", qc.down < 0.9 ? qcMonthly(qc.rate, qc.years, Math.min(1, qc.down + 0.1)).total : qcMonthly(qc.rate, Math.max(5, qc.years - 5), qc.down).total]
+  ];
+  $("#qcScen").innerHTML = scen.map(([n, v]) => { const d = v - r.total; return `<div><span>${n}</span><b>${eur(v)}</b><em class="${d > 0 ? "up" : "down"}">${d > 0 ? "+" : "−"}${eur(Math.abs(d))} i månaden</em></div>`; }).join("");
+}
+function bindQc(){
+  $("#qcRegion").innerHTML = Object.entries(HOME_CFG.regions).map(([k, v]) => `<option value="${k}">${v.label}</option>`).join("");
+  $("#qcRegion").value = qc.region;
+  $("#qcPrice").oninput = e => { qc.price = +e.target.value; renderQc(); };
+  $("#qcDown").oninput = e => { qc.down = +e.target.value / 100; renderQc(); };
+  $("#qcYears").oninput = e => { qc.years = +e.target.value; renderQc(); };
+  $("#qcRate").oninput = e => { qc.rate = +e.target.value / 100; qc.preset = ""; renderQc(); };
+  $("#qcCom").oninput = e => { qc.com = +e.target.value; renderQc(); };
+  $("#qcIbi").oninput = e => { qc.ibi = +e.target.value; renderQc(); };
+  $("#qcPkg").onchange = e => { qc.pkg = e.target.checked; renderQc(); };
+  $("#qcRegion").onchange = e => { qc.region = e.target.value; renderQc(); };
+  $$("[data-nb]").forEach(b => b.onclick = () => { qc.newBuild = b.dataset.nb === "1"; renderQc(); });
+  $$("[data-res]").forEach(b => b.onclick = () => { qc.res = b.dataset.res; const pr = qcPresets().find(x => x.id === qc.preset); if(pr) qc.rate = pr.rate; else if(qc.preset === "caixa"){ qc.preset = "fix-pkg"; qc.rate = null; } renderQc(); });
+  $("#qcAdd").onclick = () => {
+    if(home.homes.length >= 6){ toast("Jämförelsen har redan sex bostäder."); return; }
+    home.homes.push({ id: newId(), name: "", price: qc.price, region: qc.region, newBuild: qc.newBuild, communityMonthly: qc.com, ibiYearly: qc.ibi ?? Math.round(qc.price * 0.004 / 50) * 50 });
+    saveHome(); renderBostad(); toast("Bostaden ligger nu i jämförelsen nedanför.");
+  };
+}
+
 /* ---------- landing forms ---------- */
 bindCapture("#checklistForm", "#cl_email", "#cl_err", async email => {
   const ok = await saveLead({source:"checklist", email, profile: profile()});
@@ -2321,7 +2481,7 @@ function renderHomeLead(){
     f.outerHTML = `<div class="ok-msg" id="homeLead" style="margin-top:18px">Tack, ${esc(name.split(" ")[0])}. Vi skickar er jämförelse vidare, och ni blir kontaktade på ${esc(email)} inom två arbetsdagar.</div>`;
   });
 }
-function renderBostad(){ renderBuyer(); renderHomes(); renderHomeResults(); renderBankTable(); }
+function renderBostad(){ renderQc(); renderBuyer(); renderHomes(); renderHomeResults(); renderBankTable(); }
 
 /* ---------- schools (checked 30 Oct 2026; west to east) ---------- */
 const SCHOOLS = [
@@ -2451,7 +2611,7 @@ addEventListener("popstate", () => { if(!location.hash) route(); });
 $("#faqSearch").addEventListener("input", e => renderFaq(e.target.value));
 $("#calc").addEventListener("input", renderCalc);
 
-renderFacts(); renderTimeline(); renderPartnerCats(); renderFaqTop(); renderCalc(); bindPlus(); route();
+renderFacts(); renderTimeline(); renderPartnerCats(); renderFaqTop(); renderCalc(); bindPlus(); bindQc(); route();
 </script>
 </body>
 </html>
