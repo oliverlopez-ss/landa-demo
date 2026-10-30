@@ -62,6 +62,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sea);box
 .lead .who{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .lead .who b{font-weight:700}
 .pill{display:inline-block;font-size:.74rem;font-weight:600;padding:3px 9px;border-radius:6px;background:var(--sun-soft);white-space:nowrap}
+.seg-het{background:var(--sea);color:#fff} .seg-kopare{background:var(--sea-soft);color:var(--sea)} .seg-leverantor{background:#EEF0F3} .seg-partnerbehov{background:var(--sun-soft)} .seg-hyra,.seg-prenumerant,.seg-ovrigt{background:#F5F6F8;color:var(--muted)}
 .st-new{background:var(--sea-soft);color:var(--sea)} .st-contacted{background:var(--sun-soft)} .st-converted{background:var(--ok-soft);color:var(--ok)} .st-lost,.st-spam{background:var(--warn-soft);color:var(--warn)}
 .detail{border-top:1px solid var(--line);padding:16px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px}
 @media(max-width:820px){.detail{grid-template-columns:1fr}}
@@ -100,7 +101,9 @@ dt{color:var(--muted)} dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
       <select id="status" aria-label="Status"><option value="">Alla statusar</option></select>
       <div style="display:flex;gap:8px"><button class="ghost" id="refresh">Uppdatera</button><button class="ghost" id="csv">Exportera CSV</button></div>
     </div>
+    <div class="chips" id="segs" aria-label="Segment"></div>
     <div class="chips" id="sources" aria-label="Källa"></div>
+    <p class="small muted" style="margin:-6px 0 14px">Het = köpare med minst tre poäng: budget över <label>gränsen <input id="thr" type="number" step="50000" min="0" style="width:120px;padding:4px 8px;display:inline-block"> €</label> (2), köp inom ett år (2), telefon (1), flera kontakter (1).</p>
     <div class="list" id="list"></div>
   </section>
 </main>
@@ -112,15 +115,46 @@ const sb = supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: true,
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 
-const SOURCES = { plan:"Flyttplan", calc:"Ekonomikalkyl", checklist:"Checklista", intro:"Introduktion", question:"Fråga", plus:"Plus", partner:"Leverantör", buyer:"Köprådgivning", home:"Bostadskalkyl", beckham:"Beckham", rentbuy:"Hyra eller köpa" };
+const SOURCES = { plan:"Flyttplan", calc:"Ekonomikalkyl", checklist:"Checklista", intro:"Introduktion", question:"Fråga", plus:"Plus", partner:"Leverantör", buyer:"Köprådgivning", home:"Bostadskalkyl", beckham:"Beckham", rentbuy:"Hyra eller köpa", newsletter:"Flyttbrevet", area:"Områdesfråga" };
+const SEGS = { het:"Het köpare", kopare:"Köpare", hyra:"Hyra", partnerbehov:"Behöver partner", leverantor:"Leverantör", prenumerant:"Prenumerant", ovrigt:"Övrigt" };
+const BUDGET = { k1:250000, k2:450000, k3:800000, k4:1500000, "Under 500 000 €":400000, "500 000–1 000 000 €":750000, "1–2 miljoner €":1500000, "Över 2 miljoner €":2500000 };
+const SOON = ["6m", "12m", "Inom 6 månader", "6–12 månader"];
+let threshold = 400000;
+try{ threshold = +localStorage.getItem("solpass.admin.threshold") || 400000; }catch(e){}
 const STATUSES = { new:"Ny", contacted:"Kontaktad", converted:"Affär", lost:"Förlorad", spam:"Skräp" };
-const FIELD_LABELS = { region:"Region", familj:"Familj", inkomst:"Inkomst", bostad:"Bostad", bil:"Bil", movedate:"Flyttdag", hushall:"Hushåll",
+const FIELD_LABELS = { region:"Region", familj:"Familj", inkomst:"Inkomst", bostad:"Bostad", bil:"Bil", movedate:"Flyttdag", hushall:"Hushåll", budget:"Budget", kopwhen:"Köper när",
   s1:"Lön person 1", s2:"Lön person 2", cap:"Kapital från Sverige", why:"Orsak", prev:"Bott i Spanien senaste 5 år", eligible:"Kvalificerar", stdTax:"Skatt vanlig IRPF", bkTax:"Skatt Beckham", saving:"Besparing per år",
   price:"Pris", rent:"Hyra per månad", years:"År", down:"Kontantinsats", rate:"Ränta", growth:"Prisutveckling", rentg:"Hyreshöjning", com:"Comunidad", alt:"Alternativavkastning", buyNet:"Köpa netto", rentNet:"Hyra totalt", breakeven:"Brytpunkt år",
   inc:"Bruttoinkomst SEK", adults:"Vuxna", income:"Inkomstkälla", bo:"Boende", kids:"Barn", skola:"Skola", bilar:"Bilar", cost:"Levnadskostnad/mån", netSpain:"Netto Spanien/mån", netSweden:"Netto Sverige/mån", surplus:"Kvar per månad" };
 Object.entries(STATUSES).forEach(([k, v]) => $("#status").insertAdjacentHTML("beforeend", `<option value="${k}">${v}</option>`));
 
-let leads = [], source = "", open = null;
+let leads = [], source = "", seg = "", open = null, people = {};
+// Everything one email address has done, so a person who used the plan and then asked about an area counts once, with both signals.
+function person(email){
+  const ls = leads.filter(l => l.email.toLowerCase() === email.toLowerCase());
+  const has = f => ls.some(f);
+  const budgets = [];
+  ls.forEach(l => {
+    const p = l.profile || {}, c = l.calc || {};
+    if(BUDGET[p.budget]) budgets.push(BUDGET[p.budget]);
+    if(l.source === "buyer" && l.message) Object.keys(BUDGET).forEach(k => { if(l.message.includes(k)) budgets.push(BUDGET[k]); });
+    if(l.source === "rentbuy" && c.price) budgets.push(+c.price);
+    if(l.source === "home" && Array.isArray(c.homes)) c.homes.forEach(h => h && h.price && budgets.push(+h.price));
+  });
+  const buyer = has(l => ["buyer", "home", "rentbuy"].includes(l.source) || (l.profile || {}).bostad === "kopa");
+  const soon = has(l => SOON.includes((l.profile || {}).kopwhen) || (l.source === "buyer" && SOON.some(x => (l.message || "").includes(x))));
+  const budget = budgets.length ? Math.max(...budgets) : 0;
+  const score = (budget >= threshold ? 2 : 0) + (soon ? 2 : 0) + (has(l => l.phone) ? 1 : 0) + (ls.length > 1 ? 1 : 0);
+  let segment = "ovrigt";
+  if(has(l => l.source === "partner")) segment = "leverantor";
+  else if(buyer) segment = score >= 3 ? "het" : "kopare";
+  else if(has(l => ["intro", "question", "area"].includes(l.source))) segment = "partnerbehov";
+  else if(has(l => (l.profile || {}).bostad === "hyra")) segment = "hyra";
+  else if(ls.every(l => ["newsletter", "checklist"].includes(l.source) || l.newsletter)) segment = "prenumerant";
+  return { segment, score, budget, newsletter: has(l => l.newsletter), touches: ls.length };
+}
+function index(){ people = {}; leads.forEach(l => { const k = l.email.toLowerCase(); if(!people[k]) people[k] = person(l.email); }); }
+const who = l => people[l.email.toLowerCase()] || {};
 const fmtDate = d => new Date(d).toLocaleString("sv-SE", { day:"numeric", month:"short", hour:"2-digit", minute:"2-digit" });
 
 function kv(obj){
@@ -134,20 +168,27 @@ function summary(l){
   if(l.source === "rentbuy" && c.price) return `${Math.round(c.price).toLocaleString("sv-SE")} € · ${c.years} år`;
   if(l.source === "partner") return [l.company, l.category, l.area].filter(Boolean).join(" · ");
   if(l.message) return l.message.slice(0, 90);
-  return [p.hushall, p.movedate && "flytt " + p.movedate].filter(Boolean).join(" · ");
+  const PL = { kopa:"vill köpa", hyra:"hyr först", k1:"under 300 000 €", k2:"300–600 000 €", k3:"600 000–1 milj. €", k4:"över 1 milj. €", "6m":"inom 6 mån", "12m":"inom ett år", later:"om mer än ett år", hyrforst:"hyr först" };
+  return [p.hushall, PL[p.bostad], PL[p.budget], PL[p.kopwhen], p.movedate && "flytt " + p.movedate].filter(Boolean).join(" · ");
 }
 function filtered(){
   const q = $("#q").value.trim().toLowerCase(), st = $("#status").value;
-  return leads.filter(l => (!source || l.source === source) && (!st || l.status === st) &&
+  return leads.filter(l => (!source || l.source === source) && (!st || l.status === st) && (!seg || who(l).segment === seg || (seg === "kopare" && who(l).segment === "het")) &&
     (!q || [l.email, l.name, l.message, l.company, l.phone].some(v => (v || "").toLowerCase().includes(q))));
 }
 function render(){
+  index();
   const week = Date.now() - 7 * 86400000;
   const uniq = new Set(leads.map(l => l.email.toLowerCase())).size;
   $("#kpis").innerHTML = [
     [leads.length, "leads totalt"], [leads.filter(l => new Date(l.created_at) > week).length, "senaste 7 dagarna"],
-    [leads.filter(l => l.status === "new").length, "ej hanterade"], [uniq, "unika e-postadresser"]
+    [Object.values(people).filter(x => x.segment === "het").length, "heta köpare"], [uniq, "unika e-postadresser"]
   ].map(([v, l]) => `<div class="kpi"><b>${v}</b><span>${l}</span></div>`).join("");
+  const sc = {}; Object.values(people).forEach(x => sc[x.segment] = (sc[x.segment] || 0) + 1);
+  sc.kopare = (sc.kopare || 0) + (sc.het || 0);
+  $("#segs").innerHTML = `<button class="chip" aria-pressed="${!seg}" data-seg="">Alla personer (${Object.keys(people).length})</button>` +
+    Object.keys(SEGS).filter(k => sc[k]).map(k => `<button class="chip" aria-pressed="${seg === k}" data-seg="${k}">${SEGS[k]} (${sc[k]})</button>`).join("");
+  document.querySelectorAll("#segs [data-seg]").forEach(b => b.onclick = () => { seg = b.dataset.seg; render(); });
   const counts = {}; leads.forEach(l => counts[l.source] = (counts[l.source] || 0) + 1);
   $("#sources").innerHTML = `<button class="chip" aria-pressed="${!source}" data-src="">Alla (${leads.length})</button>` +
     Object.keys(SOURCES).filter(k => counts[k]).map(k => `<button class="chip" aria-pressed="${source === k}" data-src="${k}">${SOURCES[k]} (${counts[k]})</button>`).join("");
@@ -155,10 +196,10 @@ function render(){
   const rows = filtered();
   $("#list").innerHTML = rows.length ? rows.map(l => `<article class="lead" id="l-${l.id}">
     <button aria-expanded="${open === l.id}" data-open="${l.id}">
-      <span class="when small muted">${fmtDate(l.created_at)}</span>
+      <span class="when small muted">${fmtDate(l.created_at)}${who(l).newsletter ? "<br>Flyttbrevet" : ""}</span>
       <span class="src"><span class="pill">${esc(SOURCES[l.source] || l.source)}</span></span>
       <span class="who"><b>${esc(l.name || l.email)}</b>${l.name ? ` <span class="muted small">${esc(l.email)}</span>` : ""}<br><span class="muted small">${esc(summary(l))}</span></span>
-      <span class="pill st-${l.status}">${STATUSES[l.status] || l.status}</span>
+      <span style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end"><span class="pill seg-${who(l).segment}">${SEGS[who(l).segment]}</span><span class="pill st-${l.status}">${STATUSES[l.status] || l.status}</span></span>
     </button>
     ${open === l.id ? detail(l) : ""}
   </article>`).join("") : `<div class="empty">${leads.length ? "Inga leads matchar filtret." : "Inga leads ännu. De dyker upp här när besökare lämnar sin e-post på sajten."}</div>`;
@@ -198,9 +239,9 @@ async function load(){
   leads = data || []; render();
 }
 function csv(){
-  const cols = ["created_at","source","status","email","name","phone","company","category","area","partner","message","notes","profile","calc"];
+  const cols = ["created_at","segment","score","newsletter","source","status","email","name","phone","company","category","area","partner","message","notes","profile","calc"];
   const cell = v => { const s = v == null ? "" : typeof v === "object" ? JSON.stringify(v) : String(v); return /[",\n;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
-  const text = [cols.join(","), ...filtered().map(l => cols.map(c => cell(l[c])).join(","))].join("\n");
+  const text = [cols.join(","), ...filtered().map(l => cols.map(c => cell(c === "segment" ? SEGS[who(l).segment] : c === "score" ? who(l).score : c === "newsletter" ? who(l).newsletter : l[c])).join(","))].join("\n");
   const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(["﻿" + text], { type: "text/csv;charset=utf-8" }));
   a.download = `solpass-leads-${new Date().toISOString().slice(0, 10)}.csv`; a.click(); URL.revokeObjectURL(a.href);
 }
@@ -229,6 +270,8 @@ $("#signupBtn").onclick = async () => {
 };
 $("#logout").onclick = () => sb.auth.signOut();
 $("#refresh").onclick = load; $("#csv").onclick = csv;
+$("#thr").value = threshold;
+$("#thr").onchange = () => { threshold = +$("#thr").value || 0; try{ localStorage.setItem("solpass.admin.threshold", threshold); }catch(e){} render(); };
 $("#q").oninput = render; $("#status").onchange = render;
 sb.auth.onAuthStateChange((event, session) => {
   if(location.hash.includes("access_token")) history.replaceState(null, "", location.pathname);

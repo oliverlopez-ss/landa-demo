@@ -78,6 +78,8 @@ header.site .wrap{display:flex;align-items:center;gap:18px;min-height:64px}
 .logo{font:800 1.4rem var(--display);letter-spacing:-.045em;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;line-height:1}
 .logo i{display:inline-block;width:.6em;height:.6em;border-radius:50%;background:var(--acc);margin:0 .05em 0 .04em;transform:translateY(.1em)}
 .links{display:flex;gap:4px;margin-left:auto}
+.links a{text-decoration:none;font:500 .95rem var(--body);color:var(--muted);padding:8px 12px;border-radius:8px}
+.links a:hover{color:var(--ink);background:var(--deep)}
 .links button{background:none;border:0;font:500 .95rem var(--body);color:var(--muted);padding:8px 12px;border-radius:8px;cursor:pointer}
 .links button:hover{color:var(--ink);background:var(--bg)}
 .head-cta{margin-left:12px}
@@ -161,6 +163,9 @@ textarea{min-height:110px;resize:vertical}
 .result .note{font-size:.8rem;color:var(--on-deep-muted)}
 .capture{display:flex;gap:8px;flex-wrap:wrap}
 .capture input{flex:1 1 200px;min-width:0}
+.nl{display:flex;align-items:center;gap:8px;flex-basis:100%;font-size:.88rem;color:var(--muted);cursor:pointer}
+.nl input{width:16px;height:16px;accent-color:var(--acc);margin:0}
+.band .nl,.gate .nl{color:#AAB2BD}
 .result .capture input{background:rgba(255,255,255,.95);color:#0F2535;border-color:transparent}
 .ok-msg{background:var(--ok-soft);color:var(--ink);border-radius:12px;padding:12px 14px;font-size:.95rem}
 .result .ok-msg{background:rgba(98,195,148,.16);color:var(--on-deep)}
@@ -199,6 +204,41 @@ section.alt .pcat{background:var(--bg)}
 .feature .disclose{font-size:.82rem;color:var(--on-deep-muted);border-top:1px solid rgba(31,46,58,.15);padding-top:12px}
 .feature .ok-msg{background:rgba(98,195,148,.16);color:var(--on-deep)}
 @media(max-width:860px){.feature{grid-template-columns:1fr}.feature .img{min-height:200px}}
+.letter{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:40px;align-items:center}
+@media(max-width:860px){.letter{grid-template-columns:1fr;gap:20px}}
+.agrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media(max-width:900px){.agrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.agrid{grid-template-columns:1fr}}
+.acard{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.acard .ph{aspect-ratio:3/2;background:#1d2a33 center/cover no-repeat}
+.acard .tx{padding:16px 18px 18px}
+.acard h3{font-size:1.2rem}
+.acard p{color:var(--muted);font-size:.92rem;margin-top:4px}
+.acard .k{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:.84rem;color:var(--ink)}
+.acard:hover h3{text-decoration:underline;text-underline-offset:3px}
+.ahero{border-radius:var(--r);aspect-ratio:21/8;background:#1d2a33 center/cover no-repeat;margin:8px 0 24px}
+@media(max-width:700px){.ahero{aspect-ratio:3/2}}
+.afacts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);border-radius:var(--r);margin-bottom:28px}
+@media(max-width:760px){.afacts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.afacts div{padding:16px 18px;border-right:1px solid var(--line)}
+.afacts div:last-child{border-right:0}
+@media(max-width:760px){.afacts div:nth-child(2){border-right:0}.afacts div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.afacts b{display:block;font:700 1.5rem/1.15 var(--body);letter-spacing:-.03em}
+.afacts span{font-size:.84rem;color:var(--muted)}
+.acols{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:start}
+@media(max-width:860px){.acols{grid-template-columns:1fr}}
+.acols h3{margin:22px 0 8px}
+.acols h3:first-child{margin-top:0}
+.acols p,.acols li{color:var(--muted)}
+.acols ul{margin:0;padding-left:18px;display:grid;gap:6px}
+.src{font-size:.82rem;color:var(--muted);margin-top:10px}
+.guide{display:grid;gap:0;margin:8px 0 0;padding:0;list-style:none;counter-reset:g}
+.guide li{display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;padding:16px 0;border-top:1px solid var(--line)}
+.guide li::before{counter-increment:g;content:counter(g);font:700 1.4rem/1 var(--body);color:var(--acc)}
+.guide b{display:block;margin-bottom:4px}
+.guide p{color:var(--muted)}
+.twocol{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+@media(max-width:760px){.twocol{grid-template-columns:1fr}}
 .become{margin-top:28px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:28px;align-items:start}
 @media(max-width:860px){.become{grid-template-columns:1fr}}
 .transparency{margin-top:20px;font-size:.9rem;color:var(--muted);max-width:70ch}
@@ -360,6 +400,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <nav class="links" id="landingLinks" aria-label="Sidan">
       <button data-scroll="sa-funkar-det">Så funkar det</button>
       <button data-scroll="kalkyl">Kalkyl</button>
+      <a href="#omraden">Områden</a>
       <button data-scroll="bostad-teaser">Bostad</button>
       <button data-scroll="beckham-teaser">Beckham</button>
       <button data-scroll="partners">Partners</button>
@@ -372,8 +413,9 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
   <div class="wrap" id="appNavWrap" hidden>
     <nav class="appnav" aria-label="Er flytt">
       <a href="#plan">Er plan</a>
-      <a href="#bostad">Bostad och bolån</a>
-      <a href="#hyrakopa">Hyra eller köpa</a>
+      <a href="#omraden">Områden</a>
+      <a href="#bostadsguide">Bostad</a>
+      <a href="#bostad">Bolånekalkyl</a>
       <a href="#skatt">Beckham</a>
       <a href="#skolor">Skolor</a>
       <a href="#kontakter">Partners och kontakter</a>
@@ -455,7 +497,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
         </form>
         <div class="result">
           <div id="calcOut" class="stack" style="gap:18px"></div>
-          <div class="stack" id="calcCap"><b>Spara kalkylen</b><p class="note">Vi mejlar resultatet till er.</p><form class="capture" onsubmit="return false" id="calcForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="calcEmail"><button class="btn sun" type="submit">Mejla mig</button></form><p class="err" id="calcErr" hidden></p></div>
+          <div class="stack" id="calcCap"><b>Spara kalkylen</b><p class="note">Vi mejlar resultatet till er.</p><form class="capture" onsubmit="return false" id="calcForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="calcEmail"><button class="btn sun" type="submit">Mejla mig</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="calcErr" hidden></p></div>
         </div>
       </div>
     </div>
@@ -489,6 +531,17 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     </div>
   </section>
 
+  <section class="block" id="omraden-teaser">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Områden</div>
+        <h2>Var på kusten passar ni?</h2>
+        <p class="lead">Sex områden, sex vardagar. Skolor, tid till flyget, vem som trivs där och vad det kostar att hyra och köpa.</p>
+      </div>
+      <div class="agrid" id="areaTeaser"></div>
+    </div>
+  </section>
+
   <section class="block" id="beckham-teaser">
     <div class="wrap">
       <div class="sec-head">
@@ -514,56 +567,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       </div>
       <div class="pgrid" id="pcats"></div>
 
-      <div class="feature" id="kopradgivning">
-        <div class="img" role="img" aria-label="Utsikt mot Medelhavet genom en valvbåge"></div>
-        <div class="body">
-          <span class="pill" style="background:rgba(255,255,255,.7);color:var(--sea)">Lanseras snart</span>
-          <div class="eyebrow">Solpass köprådgivning</div>
-          <h2 style="font-size:clamp(1.5rem,3vw,2.1rem)">En mäklare som står på er sida, inte säljarens</h2>
-          <p>På kusten företräder mäklaren nästan alltid säljaren. Vi gör tvärtom: vi söker bland alla objekt på marknaden, granskar affären tillsammans med er advokat och företräder er genom hela köpet. Estepona, San Pedro och Marbella.</p>
-          <form class="stack" id="buyerForm" onsubmit="return false">
-            <div class="chips" role="group" aria-label="Område">
-              <label class="chip"><input type="checkbox" name="b_area" value="Estepona">Estepona</label>
-              <label class="chip"><input type="checkbox" name="b_area" value="San Pedro">San Pedro</label>
-              <label class="chip"><input type="checkbox" name="b_area" value="Marbella">Marbella</label>
-            </div>
-            <div class="grid2">
-              <select id="b_budget" aria-label="Budget"><option value="">Budget</option><option>Under 500 000 €</option><option>500 000–1 000 000 €</option><option>1–2 miljoner €</option><option>Över 2 miljoner €</option></select>
-              <select id="b_when" aria-label="När vill ni köpa"><option value="">När vill ni köpa?</option><option>Inom 6 månader</option><option>6–12 månader</option><option>Om mer än ett år</option></select>
-            </div>
-            <div class="capture"><input type="email" id="b_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Anmäl intresse</button></div>
-            <p class="err" id="b_err" hidden></p>
-          </form>
-          <div class="ok-msg" id="b_ok" hidden>Tack. Ni hör från oss när köprådgivningen öppnar, före alla andra.</div>
-          <p class="disclose">Solpass köprådgivning drivs av en registrerad mäklare i Andalusien i samarbete med Solpass grundare. Ni väljer alltid själva och får även förslag på andra verifierade mäklare.</p>
-        </div>
-      </div>
-
-      <div class="become" id="bli-partner">
-        <div class="stack">
-          <div class="eyebrow">För leverantörer</div>
-          <h2 style="font-size:clamp(1.5rem,3vw,2.1rem)">Arbetar ni med svenskar på kusten?</h2>
-          <p class="lead" style="font-size:1.02rem">Familjerna hos Solpass har redan bestämt sig och vet vad de behöver. Ni får en förfrågan med flyttdatum, familjesituation och vad de vill ha hjälp med, innan första samtalet.</p>
-          <p class="small muted">Ni betalar bara när en introduktion leder till ett uppdrag. Vi börjar med gestorer, skatterådgivare och mäklare, och tar sedan in fler kategorier.</p>
-        </div>
-        <form class="card stack" id="partnerForm" onsubmit="return false">
-          <div class="grid2">
-            <label class="field"><span>Namn</span><input id="p_name" required autocomplete="name"></label>
-            <label class="field"><span>Företag</span><input id="p_company" required autocomplete="organization"></label>
-          </div>
-          <div class="grid2">
-            <label class="field"><span>E-post</span><input id="p_email" type="email" required autocomplete="email"></label>
-            <label class="field"><span>Telefon</span><input id="p_phone" type="tel" autocomplete="tel"></label>
-          </div>
-          <div class="grid2">
-            <label class="field"><span>Kategori</span><select id="p_cat" required><option value="">Välj</option><option>Gestor</option><option>Skatterådgivare</option><option>Mäklare, köp</option><option>Mäklare, hyra</option><option>Fastighetsadvokat</option><option>Sjukförsäkring</option><option>Bank och valuta</option><option>Flyttfirma</option><option>Internationell skola</option><option>Hantverkare</option><option>Städ</option><option>Annat</option></select></label>
-            <label class="field"><span>Område</span><input id="p_area" placeholder="t.ex. Marbella–Estepona"></label>
-          </div>
-          <label class="field"><span>Kort om er (valfritt)</span><textarea id="p_msg" placeholder="Språk, hur många svenska kunder ni har, vad ni är bäst på."></textarea></label>
-          <div class="row"><button class="btn sea" type="submit">Skicka intresseanmälan</button><span class="err" id="p_err" hidden></span></div>
-          <div class="ok-msg" id="p_ok" hidden>Tack. Vi hör av oss inom en vecka för ett kort samtal.</div>
-        </form>
-      </div>
+      <div class="row" style="margin-top:24px"><a class="btn sea" href="#kontakter">Se alla partners</a><a class="btn ghost" href="#bli-partner">Arbetar ni med svenskar? Bli partner</a></div>
       <p class="transparency">Så tjänar Solpass pengar: familjer betalar för Solpass Plus, och partners betalar en ersättning när en introduktion leder till ett uppdrag. Det påverkar inte vilka partners vi visar; vi tar bara in dem vi själva skulle anlita.</p>
     </div>
   </section>
@@ -618,12 +622,31 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     </div>
   </section>
 
+  <section class="block alt" id="flyttbrevet">
+    <div class="wrap letter">
+      <div class="stack">
+        <div class="eyebrow">Flyttbrevet</div>
+        <h2>Ett brev i månaden för er som planerar flytten.</h2>
+        <p class="lead">Nya regler och deadlines, ett område i taget och en familj som berättar hur det faktiskt gick. Inget annat, och ni avslutar med ett klick.</p>
+      </div>
+      <div>
+        <form class="card stack" id="nlForm" onsubmit="return false">
+          <label class="field"><span>E-post</span><input type="email" id="nlEmail" required placeholder="namn@exempel.se" autocomplete="email"></label>
+          <label class="field"><span>När tror ni att ni flyttar? (valfritt)</span><select id="nlWhen"><option value="">Välj</option><option>Inom 6 månader</option><option>Om 6–12 månader</option><option>Om mer än ett år</option><option>Vi funderar bara</option></select></label>
+          <div class="row"><button class="btn sun" type="submit">Prenumerera</button></div>
+          <p class="err" id="nlErr" hidden></p>
+        </form>
+        <div class="ok-msg" id="nlOk" hidden>Tack. Första brevet kommer i början av nästa månad.</div>
+      </div>
+    </div>
+  </section>
+
   <section class="band">
     <div class="wrap">
       <div class="eyebrow">Checklistan</div>
       <h2>Hela flytten i en PDF.</h2>
       <p>Alla steg i rätt ordning, vilka papper som behövs, vem som löser vad och länkar till de officiella blanketterna. Har ni gjort planen blir den personlig.</p>
-      <form class="capture" id="checklistForm" onsubmit="return false"><input type="email" id="cl_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Ladda ner checklistan</button></form>
+      <form class="capture" id="checklistForm" onsubmit="return false"><input type="email" id="cl_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Ladda ner checklistan</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form>
       <p class="err" id="cl_err" hidden></p>
       <div class="ok-msg" id="cl_ok" hidden>Klart. Checklistan laddas ner nu. <button class="linkbtn" type="button" data-pdf style="color:inherit">Ladda ner igen</button></div>
     </div>
@@ -721,7 +744,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     </form>
     <div class="result">
       <div id="rbOut" class="stack" style="gap:18px"></div>
-      <div class="stack" id="rbCap"><b>Spara jämförelsen</b><p class="note">Vi skickar den till er. Vill ni ha bostäder att räkna på får ni dem från Solpass köprådgivning när den lanseras.</p><form class="capture" onsubmit="return false" id="rbForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="rbEmail"><button class="btn sun" type="submit">Skicka</button></form><p class="err" id="rbErr" hidden></p></div>
+      <div class="stack" id="rbCap"><b>Spara jämförelsen</b><p class="note">Vi skickar den till er. Vill ni ha bostäder att räkna på får ni dem från Solpass köprådgivning när den lanseras.</p><form class="capture" onsubmit="return false" id="rbForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="rbEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="rbErr" hidden></p></div>
     </div>
   </div>
 </div></div>
@@ -756,7 +779,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     </form>
     <div class="result">
       <div id="bkOut" class="stack" style="gap:18px"></div>
-      <div class="stack" id="bkCap"><b>Få kalkylen granskad</b><p class="note">En skatterådgivare som kan både Sverige och Spanien bekräftar om ni kvalificerar och hur ansökan ska göras. Vi skickar kalkylen till er och till rådgivaren.</p><form class="capture" onsubmit="return false" id="bkForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="bkEmail"><button class="btn sun" type="submit">Skicka</button></form><p class="err" id="bkErr" hidden></p></div>
+      <div class="stack" id="bkCap"><b>Få kalkylen granskad</b><p class="note">En skatterådgivare som kan både Sverige och Spanien bekräftar om ni kvalificerar och hur ansökan ska göras. Vi skickar kalkylen till er och till rådgivaren.</p><form class="capture" onsubmit="return false" id="bkForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="bkEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="bkErr" hidden></p></div>
     </div>
   </div>
   <div class="card stack" style="margin-top:24px">
@@ -770,6 +793,115 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <li><b>Deklaration:</b> Modelo 151 i stället för vanlig Renta. Källa: Agencia Tributaria, Manual de tributación de no residentes, oktober 2026.</li>
     </ul>
   </div>
+</div></div>
+
+<div id="v-omraden" hidden><div class="wrap" style="padding-bottom:64px">
+  <div id="areaList">
+    <div class="apphead">
+      <div class="eyebrow">Områden</div>
+      <h2>Var på kusten passar ni?</h2>
+      <p class="lead">Skolan avgör oftast valet, sedan pendlingen till flygplatsen och hur mycket svenska ni vill höra omkring er. Här är sex områden där svenska familjer bosätter sig.</p>
+    </div>
+    <div class="agrid" id="areaCards"></div>
+    <p class="src" id="areaSrc"></p>
+  </div>
+  <div id="areaDetail" hidden></div>
+</div></div>
+
+<div id="v-bostadsguide" hidden><div class="wrap" style="padding-bottom:64px">
+  <div class="apphead">
+    <div class="eyebrow">Bostad</div>
+    <h2>Hyra först eller köpa direkt?</h2>
+    <p class="lead">De flesta som flyttar till kusten hyr det första året och köper när de vet var de vill bo. Det är inte alltid rätt, men det är det säkra valet. Här är hur båda vägarna fungerar.</p>
+    <div class="row"><a class="btn sea" href="#hyrakopa">Jämför hyra och köp i euro</a><a class="btn ghost" href="#bostad">Räkna på en bostad</a><a class="btn ghost" href="#omraden">Se områdena</a></div>
+  </div>
+  <div class="twocol">
+    <div class="card stack"><h3>Hyr först om</h3><ul style="margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted)"><li>ni inte har bott på kusten och vet vilket område som passar</li><li>barnens skola inte är bestämd</li><li>ni kanske flyttar hem inom några år, eftersom köp och försäljning tillsammans kostar runt 15 % av priset</li></ul></div>
+    <div class="card stack"><h3>Köp direkt om</h3><ul style="margin:0;padding-left:18px;display:grid;gap:6px;color:var(--muted)"><li>ni känner området, ofta efter flera år som semesterboende</li><li>ni räknar med att stanna i minst fem till sju år</li><li>ni har kontantinsatsen: som icke-resident lånar bankerna normalt ut högst 70 %</li></ul></div>
+  </div>
+
+  <h3 style="margin:40px 0 4px">Att hyra</h3>
+  <ol class="guide">
+    <li><div><b>Långtidskontrakt, inte säsongskontrakt</b><p>Kräv ett kontrakt för permanentbostad (vivienda habitual), inte temporada. Bara då kan ni skriva er på adressen, och det är padrón som låser upp skola, vård och bil.</p></div></li>
+    <li><div><b>Ni bestämmer hur länge ni bor kvar</b><p>Som hyresgäst kan ni förlänga kontraktet år för år upp till fem år om hyresvärden är en privatperson, och sju år om det är ett bolag (hyreslagen LAU, artikel 9).</p></div></li>
+    <li><div><b>Deposition och garantier har ett tak</b><p>Depositionen (fianza) är en månadshyra. Extra garantier får vara högst två månadshyror på kontrakt upp till fem år, eller sju om hyresvärden är ett bolag (artikel 36).</p></div></li>
+    <li><div><b>Mäklarens arvode betalas av hyresvärden</b><p>Avgifter för förmedling och kontrakt får inte läggas på hyresgästen (artikel 20). Ber någon om det, säg nej.</p></div></li>
+  </ol>
+  <p class="src">Källa: Ley de Arrendamientos Urbanos, konsoliderad text i BOE, kontrollerad 30 oktober 2026. Hyreslagen har ändrats flera gånger under hösten 2026 och fler ändringar är på väg; låt advokat eller gestor läsa kontraktet.</p>
+
+  <h3 style="margin:40px 0 4px">Att köpa, steg för steg</h3>
+  <ol class="guide">
+    <li><div><b>NIE och spanskt bankkonto</b><p>Utan NIE kan ni inte skriva köpekontrakt. Kontot behövs för betalningen hos notarien.</p></div></li>
+    <li><div><b>Egen advokat innan ni betalar något</b><p>Advokaten kontrollerar lagfart, skulder, bygglov och föreningens ekonomi. Mäklaren företräder nästan alltid säljaren.</p></div></li>
+    <li><div><b>Reservation och handpenning (arras)</b><p>En mindre reservationsavgift tar bostaden från marknaden. Sedan skrivs ett kontrakt med handpenning, oftast 10 % av priset. Backar ni förlorar ni den; backar säljaren ska de normalt betala dubbelt tillbaka.</p></div></li>
+    <li><div><b>Finansiering</b><p>Som icke-resident lånar bankerna oftast högst 70 % och med kortare löptid. Ha lånebeskedet klart innan ni skriver kontrakt med handpenning.</p></div></li>
+    <li><div><b>Notarien och tillträdet</b><p>Köpebrevet (escritura) skrivs under hos notarien, resten betalas och ni får nycklarna samma dag.</p></div></li>
+    <li><div><b>Skatter och registrering</b><p>Begagnad bostad i Andalusien: 7 % överlåtelseskatt (ITP). Nyproduktion: 10 % moms plus 1,2 % stämpelskatt. Därtill notarie, registro och advokat, ofta runt 1 %. Lagfarten registreras i Registro de la Propiedad.</p></div></li>
+  </ol>
+      <div class="feature" id="radgivning">
+        <div class="img" role="img" aria-label="Utsikt mot Medelhavet genom en valvbåge"></div>
+        <div class="body">
+          <span class="pill" style="background:rgba(255,255,255,.7);color:var(--sea)">Lanseras snart</span>
+          <div class="eyebrow">Rådgivning inför köp</div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.1rem)">En mäklare som står på er sida, inte säljarens</h2>
+          <p>På kusten företräder mäklaren nästan alltid säljaren. Vi gör tvärtom: vi söker bland alla objekt på marknaden, granskar affären tillsammans med er advokat och företräder er genom hela köpet. Estepona, San Pedro och Marbella.</p>
+          <form class="stack" id="buyerForm" onsubmit="return false">
+            <div class="chips" role="group" aria-label="Område">
+              <label class="chip"><input type="checkbox" name="b_area" value="Estepona">Estepona</label>
+              <label class="chip"><input type="checkbox" name="b_area" value="San Pedro">San Pedro</label>
+              <label class="chip"><input type="checkbox" name="b_area" value="Marbella">Marbella</label>
+            </div>
+            <div class="grid2">
+              <select id="b_budget" aria-label="Budget"><option value="">Budget</option><option>Under 500 000 €</option><option>500 000–1 000 000 €</option><option>1–2 miljoner €</option><option>Över 2 miljoner €</option></select>
+              <select id="b_when" aria-label="När vill ni köpa"><option value="">När vill ni köpa?</option><option>Inom 6 månader</option><option>6–12 månader</option><option>Om mer än ett år</option></select>
+            </div>
+            <div class="capture"><input type="email" id="b_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Anmäl intresse</button></div>
+            <p class="err" id="b_err" hidden></p>
+          <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form>
+          <div class="ok-msg" id="b_ok" hidden>Tack. Ni hör från oss när köprådgivningen öppnar, före alla andra.</div>
+          <p class="disclose">Solpass köprådgivning drivs av en registrerad mäklare i Andalusien i samarbete med Solpass grundare. Ni väljer alltid själva och får även förslag på andra verifierade mäklare.</p>
+        </div>
+      </div>
+</div></div>
+
+<div id="v-bli-partner" hidden><div class="wrap" style="padding-bottom:64px">
+  <div class="apphead">
+    <div class="eyebrow">För leverantörer</div>
+    <h2>Svenska familjer som redan bestämt sig.</h2>
+    <p class="lead">Solpass hjälper svenska familjer att planera flytten till Costa del Sol. När de behöver en gestor, skatterådgivare, advokat eller mäklare kopplar vi dem till ett fåtal partners per kategori och område.</p>
+  </div>
+  <div class="steps" style="margin-bottom:32px">
+    <div class="step"><div class="n">1</div><h3>Kvalificerade förfrågningar</h3><p>Ni får familjens flyttdatum, situation och vad de vill ha hjälp med innan första samtalet.</p></div>
+    <div class="step"><div class="n">2</div><h3>Få partners per område</h3><p>Vi tar bara in ett par partners per kategori och område, så att varje förfrågan blir värd att svara på.</p></div>
+    <div class="step"><div class="n">3</div><h3>Betala för resultat</h3><p>Ni betalar bara när en introduktion leder till ett uppdrag. Vi kräver svar inom två arbetsdagar.</p></div>
+  </div>
+  <h3 style="margin-bottom:12px">Kategorier vi söker partners i</h3>
+  <div class="pgrid" id="pcats2"></div>
+      <div class="become" id="partnerblock">
+        <div class="stack">
+          <div class="eyebrow">För leverantörer</div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.1rem)">Arbetar ni med svenskar på kusten?</h2>
+          <p class="lead" style="font-size:1.02rem">Familjerna hos Solpass har redan bestämt sig och vet vad de behöver. Ni får en förfrågan med flyttdatum, familjesituation och vad de vill ha hjälp med, innan första samtalet.</p>
+          <p class="small muted">Ni betalar bara när en introduktion leder till ett uppdrag. Vi börjar med gestorer, skatterådgivare och mäklare, och tar sedan in fler kategorier.</p>
+        </div>
+        <form class="card stack" id="partnerForm" onsubmit="return false">
+          <div class="grid2">
+            <label class="field"><span>Namn</span><input id="p_name" required autocomplete="name"></label>
+            <label class="field"><span>Företag</span><input id="p_company" required autocomplete="organization"></label>
+          </div>
+          <div class="grid2">
+            <label class="field"><span>E-post</span><input id="p_email" type="email" required autocomplete="email"></label>
+            <label class="field"><span>Telefon</span><input id="p_phone" type="tel" autocomplete="tel"></label>
+          </div>
+          <div class="grid2">
+            <label class="field"><span>Kategori</span><select id="p_cat" required><option value="">Välj</option><option>Gestor</option><option>Skatterådgivare</option><option>Mäklare, köp</option><option>Mäklare, hyra</option><option>Fastighetsadvokat</option><option>Sjukförsäkring</option><option>Bank och valuta</option><option>Flyttfirma</option><option>Internationell skola</option><option>Hantverkare</option><option>Städ</option><option>Annat</option></select></label>
+            <label class="field"><span>Område</span><input id="p_area" placeholder="t.ex. Marbella–Estepona"></label>
+          </div>
+          <label class="field"><span>Kort om er (valfritt)</span><textarea id="p_msg" placeholder="Språk, hur många svenska kunder ni har, vad ni är bäst på."></textarea></label>
+          <div class="row"><button class="btn sea" type="submit">Skicka intresseanmälan</button><span class="err" id="p_err" hidden></span></div>
+          <div class="ok-msg" id="p_ok" hidden>Tack. Vi hör av oss inom en vecka för ett kort samtal.</div>
+        </form>
+      </div>
 </div></div>
 
 <div id="v-skolor" hidden><div class="wrap" style="padding-bottom:64px">
@@ -828,7 +960,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <label class="field"><span>E-post för svaret</span><input id="askMail" type="email" required placeholder="din@epost.se"></label>
     </div>
     <div class="row"><button class="btn sea" type="submit">Skicka frågan</button><span class="err" id="askErr" hidden></span></div>
-  </form>
+  <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form>
   <div id="askDone" class="ok-msg" style="margin-top:16px" hidden></div>
 </div></div>
 </main>
@@ -838,7 +970,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <a class="logo" href="#" aria-label="Solpass">s<i aria-hidden="true"></i>lpass</a>
     <p>Solpass är en guide, inte juridisk eller skatterättslig rådgivning. Belopp, tidsfrister och regler ändras; verifiera alltid hos myndigheten eller en rådgivare innan ni fattar beslut.</p>
     <p>Testversion. Planen sparas i den här webbläsaren. E-post och förfrågningar ni skickar sparas hos Solpass så att vi kan svara.</p>
-    <p>Foto: <a href="https://unsplash.com/photos/whitewashed-village-nestled-on-a-hillside-at-sunset-CZyHIMBIC34" target="_blank" rel="noopener">Parastou Najdalizadeh</a> (Mijas) och <a href="https://unsplash.com/photos/a-view-of-the-ocean-through-an-arch-in-a-building-Rt_r3mosmkw" target="_blank" rel="noopener">Arthur Tseng</a> på Unsplash.</p>
+    <p>Foto från Unsplash: <a href="https://unsplash.com/photos/whitewashed-village-nestled-on-a-hillside-at-sunset-CZyHIMBIC34" target="_blank" rel="noopener">Parastou Najdalizadeh</a> (Mijas), <a href="https://unsplash.com/photos/a-view-of-the-ocean-through-an-arch-in-a-building-Rt_r3mosmkw" target="_blank" rel="noopener">Arthur Tseng</a>, <a href="https://unsplash.com/photos/boats-docked-in-a-marina-with-white-buildings-and-mountain-EIIxFvNh4Vs" target="_blank" rel="noopener">Ionut Dobre</a> (Marbella), <a href="https://unsplash.com/photos/a-metal-sign-that-says-puerto-banus-in-front-of-a-body-of-water-31IHjm05gkQ" target="_blank" rel="noopener">Sergio Guardiola Herrador</a> (Puerto Banús), <a href="https://unsplash.com/photos/silhouette-of-trees-and-mountains-during-daytime-hPkIQ4yUUp0" target="_blank" rel="noopener">Victor Broch</a> (Benahavís) och <a href="https://unsplash.com/photos/a-narrow-city-street-with-a-clock-tower-in-the-background-YOWXcpVtDsQ" target="_blank" rel="noopener">Kristina Bekher</a> (Málaga).</p>
   </div>
 </footer>
 <div id="modalHost"></div>
@@ -924,6 +1056,7 @@ const TASKS = [
  {ph:2,off:-14,t:"Anmäl flytt till Skatteverket och Försäkringskassan",d:"Minst en vecka före avresan. Begär SINK om svensk inkomst kvarstår. Be om skriftlig bedömning av väsentlig anknytning om ni behåller bostad eller bolag.",who:"skv",c:()=>true},
  {ph:2,off:-60,t:"Säkra bostad med långtidskontrakt",d:"Kräv vivienda habitual-kontrakt, inte temporada, så att ni kan skriva er på adressen. Räkna med deposition plus extra garanti.",who:"maklare",c:a=>a.bostad==="hyra"},
  {ph:2,off:-90,t:"Anlita fastighetsadvokat före reservation",d:"Lagfart, skulder, bygglov och förening kontrolleras innan arras. Budgetera 9–11 % i skatter och avgifter ovanpå priset.",who:"advokat",c:a=>a.bostad==="kopa"},
+ {ph:1,off:-150,t:"Prata med någon som köper åt er, inte åt säljaren",d:"På kusten företräder mäklaren nästan alltid säljaren. En köparrådgivare söker bland alla objekt, granskar affären med er advokat och förhandlar för er. Läs mer i bostadsguiden.",who:"maklare",c:a=>a.bostad==="kopa"},
  {ph:2,off:-60,t:"Öppna spanskt bankkonto",d:"Behövs för hyra, el, skola och bil. Kan göras som icke-resident med NIE och pass.",who:"bank",c:()=>true},
  {ph:2,off:-45,t:"Boka flyttfirma och ordna EU-pass för husdjur",d:"2–4 veckors ledtid för bohag. Husdjur: EU-pass, chip och giltig rabiesvaccination.",who:"flytt",c:()=>true},
  {ph:2,off:-30,t:"Samla skolpapper",d:"Betyg, vaccinationsintyg och intyg från svensk skola, gärna med engelsk översättning.",who:"skola-sv",c:a=>a.familj==="barn"},
@@ -981,7 +1114,10 @@ function esTax(gross){ // per person, EUR, grov IRPF Andalucía + Seguridad Soci
 /* ---------- lead capture: insert-only table in the Supabase project named "landa" ---------- */
 const SB_URL = "https://zdgxdwlztcjtjgxvmfjn.supabase.co";
 const SB_KEY = "sb_publishable_1fz_TxUhf9OPesOVSUmsNw_vKKpdqpf";
+let nlFlag = false; // set from the submitted form's "Flyttbrevet" checkbox
+document.addEventListener("submit", e => { nlFlag = !!e.target.querySelector?.("[data-nl]:checked"); }, true);
 async function saveLead(row){
+  row = Object.assign({newsletter: nlFlag}, row); nlFlag = false;
   try{
     const r = await fetch(SB_URL + "/rest/v1/demo_leads", {
       method: "POST",
@@ -1008,7 +1144,7 @@ const validEmail = e => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e);
 function rememberEmail(e){ if(validEmail(e)){ state.email = e; save(); } }
 function prefill(){ $$('input[type=email]').forEach(i => { if(!i.value && state.email) i.value = state.email; }); }
 function shortWho(id){ return C[id].title.split(" –")[0].split(" (")[0]; }
-const LABELS = {region:{costa:"Costa del Sol",annat:"Annan region"},familj:{barn:"med barn",par:"par",solo:"en person"},inkomst:{distans:"distansanställd",bolag:"eget svenskt AB",spansk:"spansk anställning",pension:"pension/kapital"},bostad:{hyra:"hyra först",kopa:"köpa"},bil:{med:"tar med bil",kop:"köper bil",ingen:"ingen bil"}};
+const LABELS = {region:{costa:"Costa del Sol",annat:"Annan region"},familj:{barn:"med barn",par:"par",solo:"en person"},inkomst:{distans:"distansanställd",bolag:"eget svenskt AB",spansk:"spansk anställning",pension:"pension/kapital"},bostad:{hyra:"hyra först",kopa:"köpa"},bil:{med:"tar med bil",kop:"köper bil",ingen:"ingen bil"},budget:{k1:"under 300 000 €",k2:"300–600 000 €",k3:"600 000–1 milj. €",k4:"över 1 milj. €",h1:"hyra under 1 500 €",h2:"hyra 1 500–2 500 €",h3:"hyra 2 500–4 000 €",h4:"hyra över 4 000 €",vet:"budget ej satt"},kopwhen:{"6m":"köp inom 6 mån","12m":"köp inom ett år",later:"köp om mer än ett år",hyrforst:"hyr först"}};
 function profile(){ return Object.assign({}, state.answers, {movedate: state.movedate || null, hushall: state.hushall || null}); }
 function profileText(){ const a = state.answers; return [state.hushall, ...Object.keys(LABELS).map(k => a[k] && LABELS[k][a[k]]), state.movedate ? "flytt " + state.movedate : null].filter(Boolean).join(" · "); }
 
@@ -1125,12 +1261,16 @@ const STEPS = [
   {key:"familj", q:"Vilka flyttar?", opts:[["barn","Vuxna med barn","Skola och padrón kommer med i planen"],["par","Par utan barn",""],["solo","En person",""]]},
   {key:"inkomst", q:"Hur försörjer ni er?", opts:[["distans","Anställd på distans","Åt svensk eller utländsk arbetsgivare"],["bolag","Eget bolag i Sverige","Den dyraste frågan att få fel"],["spansk","Spansk anställning",""],["pension","Pension eller kapital",""]]},
   {key:"bostad", q:"Hyra eller köpa?", opts:[["hyra","Hyra först","Det vi rekommenderar om ni inte känner området"],["kopa","Köpa direkt","Med egen advokat före handpenningen"]]},
+  {key:"budget", when: a => a.bostad === "kopa", q:"Ungefär vilken prisnivå tittar ni på?", help:"Frivilligt. Det gör att vi kan visa rätt områden och siffror.", opts:[["k1","Under 300 000 €",""],["k2","300 000–600 000 €",""],["k3","600 000 €–1 miljon",""],["k4","Över 1 miljon €",""],["vet","Vet inte än",""]]},
+  {key:"budget", when: a => a.bostad !== "kopa", q:"Ungefär vad vill ni hyra för?", help:"Frivilligt. Per månad, för en bostad som passar familjen.", opts:[["h1","Under 1 500 € i månaden",""],["h2","1 500–2 500 €",""],["h3","2 500–4 000 €",""],["h4","Över 4 000 €",""],["vet","Vet inte än",""]]},
+  {key:"kopwhen", when: a => a.bostad === "kopa", q:"När vill ni ha köpt?", opts:[["6m","Inom sex månader",""],["12m","Inom ett år",""],["later","Om mer än ett år",""],["hyrforst","Vi hyr nog först och ser",""]]},
   {key:"bil", q:"Hur gör ni med bil?", opts:[["med","Tar med svensk bil","Ska omregistreras i Spanien"],["kop","Köper i Spanien",""],["ingen","Ingen bil",""]]},
   {key:"email", type:"email", q:"Vart ska vi skicka er plan?", help:"Vi mejlar planen och påminner när viktiga datum närmar sig. Inget annat."}
 ];
 let wzStep = 0;
+const wzSteps = () => STEPS.filter(x => !x.when || x.when(state.answers));
 function renderWizard(){
-  const s = STEPS[wzStep], pct = Math.round((wzStep) / STEPS.length * 100);
+  const STEPS_ = wzSteps(), s = STEPS_[wzStep], pct = Math.round((wzStep) / STEPS_.length * 100);
   let body = "";
   if(s.type === "date"){
     body = `<label class="field"><span>Flyttdag</span><input type="date" id="wzDate" value="${esc(state.movedate)}"></label>
@@ -1139,12 +1279,13 @@ function renderWizard(){
     body = `<div class="grid2"><label class="field"><span>Namn på hushållet (valfritt)</span><input type="text" id="wzName" value="${esc(state.hushall)}" placeholder="Familjen Andersson"></label>
       <label class="field"><span>E-post</span><input type="email" id="wzEmail" value="${esc(state.email)}" placeholder="din@epost.se" autocomplete="email"></label></div>
       <p class="err" id="wzErr" hidden></p>
+      <label class="nl"><input type="checkbox" id="wzNl"> Skicka mig Flyttbrevet, en gång i månaden</label>
       <div class="row"><button class="btn sun" id="wzDone">Visa vår plan</button><button class="linkbtn" id="wzSkipMail">Visa planen utan att spara</button></div>`;
   } else {
     body = `<div class="opts">${s.opts.map(([v,l,sub]) => `<button class="opt${state.answers[s.key] === v ? " sel" : ""}" data-v="${v}"><span>${l}${sub ? `<small>${sub}</small>` : ""}</span></button>`).join("")}</div>`;
   }
   $("#wz").innerHTML = `
-    <div class="wz-top"><span>Fråga ${wzStep + 1} av ${STEPS.length}</span>${wzStep > 0 ? `<button class="linkbtn" id="wzBack">Tillbaka</button>` : `<a class="linkbtn" href="#">Avbryt</a>`}</div>
+    <div class="wz-top"><span>Fråga ${wzStep + 1} av ${STEPS_.length}</span>${wzStep > 0 ? `<button class="linkbtn" id="wzBack">Tillbaka</button>` : `<a class="linkbtn" href="#">Avbryt</a>`}</div>
     <div class="progress"><i style="width:${pct}%"></i></div>
     <h2>${s.q}</h2>${s.help ? `<p class="lead">${s.help}</p>` : ""}
     ${body}`;
@@ -1158,7 +1299,7 @@ function renderWizard(){
     const email = $("#wzEmail").value.trim(), err = $("#wzErr"), btn = $("#wzDone");
     state.hushall = $("#wzName").value.trim(); save();
     if(!validEmail(email)){ err.textContent = "Skriv en e-postadress, eller välj att visa planen utan att spara."; err.hidden = false; return; }
-    btn.disabled = true;
+    btn.disabled = true; nlFlag = $("#wzNl").checked;
     const ok = await saveLead({source:"plan", email, name: state.hushall || null, profile: profile()});
     btn.disabled = false;
     if(!ok){ err.textContent = "Det gick inte att spara just nu. Försök igen, eller visa planen utan att spara."; err.hidden = false; return; }
@@ -1540,6 +1681,112 @@ bindCapture("#rbForm", "#rbEmail", "#rbErr", async email => {
   return ok;
 });
 
+/* ---------- area guides: asking prices from idealista's price reports, September 2026 ---------- */
+const IDEALISTA = "https://www.idealista.com/sala-de-prensa/informes-precio-vivienda/";
+const UNS = id => `https://images.unsplash.com/photo-${id}?fm=jpg&q=70&w=1400&auto=format&fit=crop`;
+const AREAS = [
+  {id:"marbella", name:"Marbella", img:"1770929356217-cc70b66b30c2", flyg:45, schools:"Marbella, San Pedro och Nueva Andalucía",
+   pitch:"Störst utbud av skolor, service och restauranger året runt.",
+   suits:"Familjer som vill ha allt nära: flest internationella skolor på kusten, Svenska Skolan Marbella och ett liv som fungerar även i januari.",
+   life:["Gamla stan och strandpromenaden är vardag, inte bara semester.","Nueva Andalucía och Golfdalen för villor, centrum och Elviria för lägenheter.","Dyrast på kusten tillsammans med Benahavís, och mest internationellt."],
+   prices:[["Marbella",5967,23.6,"venta/andalucia/malaga-provincia/marbella/","alquiler/andalucia/malaga-provincia/marbella/"]]},
+  {id:"san-pedro", name:"San Pedro de Alcántara", short:"San Pedro", img:"1722600522832-c7ebd5ea1ace", flyg:50, schools:"Marbella, San Pedro och Nueva Andalucía",
+   pitch:"Marbellas skolor inom räckhåll, men lugnare och mer spanskt.",
+   suits:"Familjer som vill ha nära till Laude San Pedro och Marbellas skolor, men bo i en stadsdel där spanska familjer också bor året runt.",
+   life:["Boulevarden och strandpromenaden mot Puerto Banús.","Lägre priser än centrala Marbella för samma typ av bostad.","Del av Marbella kommun, så padrón och skolplacering sker där."],
+   prices:[["San Pedro",4649,20.8,"venta/andalucia/malaga-provincia/marbella/","alquiler/andalucia/malaga-provincia/marbella/"]]},
+  {id:"estepona", name:"Estepona", img:"1723875392307-2f8448afc025", flyg:60, schools:"Sotogrande och Estepona",
+   pitch:"Lugnare vardag, levande gamla stad och mer bostad för pengarna.",
+   suits:"Familjer som vill ha det lugnare än i Marbella och mer yta för pengarna, och som inte flyger varje vecka.",
+   life:["Gamla stan med blomkrukorna och en lång strandpromenad.","Mycket nyproduktion väster om stan och upp mot bergen.","Längst bort från Málagas flygplats; Gibraltar är närmare för vissa resor."],
+   prices:[["Estepona",5021,21.1,"venta/andalucia/malaga-provincia/estepona/","alquiler/andalucia/malaga-provincia/estepona/"]]},
+  {id:"benahavis", name:"Benahavís", img:"1630488202498-d2c2462871f4", flyg:50, schools:"Marbella, San Pedro och Nueva Andalucía",
+   pitch:"Villor, golf och bergsutsikt några minuter upp från kusten.",
+   suits:"Familjer som vill ha villa och natur, har bil och inte har något emot att köra barnen till skolan nere vid kusten.",
+   life:["Liten kommun med stora villaområden som La Zagaleta, El Madroñal och Los Arqueros.","Skolorna ligger nere vid kusten i San Pedro, Marbella och Estepona.","Utan bil fungerar vardagen inte."],
+   prices:[["Benahavís",5602,21.2,"venta/andalucia/malaga-provincia/benahavis/","alquiler/andalucia/malaga-provincia/benahavis/"]]},
+  {id:"fuengirola-mijas", name:"Fuengirola och Mijas", img:"1774208671069-c2e5a00689c3", flyg:25, schools:"Fuengirola, Mijas och Benalmádena",
+   pitch:"Nära flyget, svensk skola och störst svensk gemenskap på kusten.",
+   suits:"Familjer som vill ha kort väg till flyget, Svenska Skolan Costa del Sol och många svenska grannar från första dagen.",
+   life:["Fuengirola är en stad med tåg till Málaga och flygplatsen.","Mijas Costa och Mijas pueblo för hus, radhus och mer utsikt.","Lägst priser av områdena här, och mest svenskt."],
+   prices:[["Fuengirola",4452,17.2,"venta/andalucia/malaga-provincia/fuengirola/","alquiler/andalucia/malaga-provincia/fuengirola/historico/"],["Mijas",3717,17.1,"venta/andalucia/malaga-provincia/mijas/","alquiler/andalucia/malaga-provincia/mijas/"]]},
+  {id:"malaga", name:"Málaga", img:"1731150630818-f11af1e036a2", flyg:15, schools:"Málaga",
+   pitch:"Storstad året runt, med flygplatsen runt hörnet.",
+   suits:"Familjer som vill ha stadsliv, universitet och tåg till Madrid, och som hellre bor i lägenhet än villa.",
+   life:["Spaniens sjätte största stad, levande även på vintern.","Tåg till Madrid på under tre timmar och flyg till Sverige flera gånger om dagen.","Brittiska, franska och spanska skolor, men ingen svensk skola i stan."],
+   prices:[["Málaga",3969,16.5,"venta/andalucia/malaga-provincia/malaga/","alquiler/andalucia/malaga-provincia/malaga/"]]}
+];
+const PRICE_MONTH = "september 2026";
+const nf = n => Math.round(n).toLocaleString("sv-SE");
+function areaCard(a){
+  const p = a.prices[0];
+  return `<a class="acard" href="#omraden/${a.id}"><div class="ph" style="background-image:url('${UNS(a.img)}')" role="img" aria-label="${esc(a.name)}"></div><div class="tx"><h3>${a.name}</h3><p>${a.pitch}</p><div class="k"><span><b>${nf(p[1])} €</b>/m² att köpa</span><span>ca ${a.flyg} min till flyget</span></div></div></a>`;
+}
+function renderAreaTeaser(){ const t = $("#areaTeaser"); if(t) t.innerHTML = AREAS.map(areaCard).join(""); }
+function renderAreas(id){
+  const a = AREAS.find(x => x.id === id);
+  $("#areaList").hidden = !!a; $("#areaDetail").hidden = !a;
+  if(!a){
+    $("#areaCards").innerHTML = AREAS.map(areaCard).join("");
+    $("#areaSrc").textContent = `Priser: genomsnittligt utbudspris per kvadratmeter enligt idealista, ${PRICE_MONTH}. Restider med bil till Málagas flygplats, ungefärliga.`;
+    return;
+  }
+  const near = SCHOOLS.filter(x => x.area === a.schools);
+  const p = a.prices;
+  const ex = p[0];
+  $("#areaDetail").innerHTML = `
+    <div class="apphead" style="padding-bottom:0"><a class="linkbtn" href="#omraden">Alla områden</a><h2 style="margin-top:10px">${a.name}</h2><p class="lead">${a.pitch}</p></div>
+    <div class="ahero" style="background-image:url('${UNS(a.img)}')" role="img" aria-label="${esc(a.name)}"></div>
+    <div class="afacts">
+      <div><b>${p.map(x => nf(x[1]) + " €").join(" / ")}</b><span>per m² att köpa${p.length > 1 ? " (" + p.map(x => x[0]).join(" / ") + ")" : ""}</span></div>
+      <div><b>${p.map(x => String(x[2]).replace(".", ",") + " €").join(" / ")}</b><span>per m² och månad att hyra</span></div>
+      <div><b>ca ${a.flyg} min</b><span>med bil till Málagas flygplats</span></div>
+      <div><b>${near.length}</b><span>skolor i närheten i vår jämförelse</span></div>
+    </div>
+    <div class="acols">
+      <div>
+        <h3>Passar för</h3><p>${a.suits}</p>
+        <h3>Vardagen</h3><ul>${a.life.map(x => `<li>${x}</li>`).join("")}</ul>
+        <h3>Vad kostar det?</h3>
+        <p>En bostad på 100 m² i ${ex[0]} har ett utbudspris kring <b style="color:var(--ink)">${nf(ex[1] * 100)} €</b>, och att hyra motsvarande kostar runt <b style="color:var(--ink)">${nf(ex[2] * 100)} € i månaden</b>. Utbudspriser är vad säljare och hyresvärdar begär; avslutade affärer ligger ofta något lägre, och villor och nyproduktion högre.</p>
+        <div class="row" style="margin-top:14px"><button class="btn sea" id="aCalc">Jämför hyra och köp här</button><a class="btn ghost" href="#bostadsguide">Så går ett köp till</a></div>
+        <p class="src">Källa: idealista, utbudspriser ${PRICE_MONTH}: ${p.map(x => `<a href="${IDEALISTA + x[3]}" target="_blank" rel="noopener">köp ${x[0]}</a>, <a href="${IDEALISTA + x[4]}" target="_blank" rel="noopener">hyra ${x[0]}</a>`).join(", ")}.</p>
+      </div>
+      <div class="stack">
+        <div class="card stack">
+          <h3 style="margin:0">Skolor i närheten</h3>
+          ${near.length ? `<ul style="margin:0;padding-left:18px;display:grid;gap:6px">${near.map(x => `<li><a href="${x.url}" target="_blank" rel="noopener">${x.name}</a><br><span class="small">${x.qual}</span></li>`).join("")}</ul><a class="small" href="#skolor">Jämför alla skolor</a>` : `<p>Se <a href="#skolor">skollistan</a>.</p>`}
+        </div>
+        <form class="card stack" id="areaForm" onsubmit="return false">
+          <h3 style="margin:0">Fråga oss om ${a.short || a.name}</h3>
+          <p class="small muted" style="margin:0">Om skolor, bostäder, vilka delar som passar barnfamiljer eller vad som helst annat. Vi svarar inom ett par dagar.</p>
+          <label class="field"><span>Er fråga</span><textarea id="aMsg" required placeholder="T.ex. Vilka delar av ${esc(a.short || a.name)} passar en familj med två barn i skolåldern?"></textarea></label>
+          <label class="field"><span>E-post</span><input type="email" id="aEmail" required autocomplete="email" value="${esc(state.email)}"></label>
+          ${'<label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label>'}
+          <div class="row"><button class="btn sun" type="submit">Skicka frågan</button></div>
+          <p class="err" id="aErr" hidden></p>
+        </form>
+      </div>
+    </div>`;
+  $("#aCalc").onclick = () => { $("#rb_price").value = Math.round(ex[1] * 100 / 10000) * 10000; $("#rb_rent").value = Math.round(ex[2] * 100 / 50) * 50; location.hash = "hyrakopa"; };
+  bindCapture("#areaForm", "#aEmail", "#aErr", async email => {
+    const msg = $("#aMsg").value.trim();
+    if(!msg){ $("#aErr").textContent = "Skriv er fråga först."; $("#aErr").hidden = false; return true; }
+    const ok = await saveLead({source:"area", email, area: a.name, message: msg, profile: profile()});
+    if(ok) $("#areaForm").outerHTML = `<div class="ok-msg">Tack. Vi svarar på er fråga om ${esc(a.short || a.name)} till ${esc(email)}.</div>`;
+    return ok;
+  });
+}
+function renderPartnerCats2(){
+  $("#pcats2").innerHTML = PCATS.map(([id, name, txt]) => `<div class="pcat"><h3>${name}</h3><p>${txt}</p></div>`).join("");
+}
+bindCapture("#nlForm", "#nlEmail", "#nlErr", async email => {
+  const ok = await saveLead({source:"newsletter", email, newsletter: true, message: $("#nlWhen").value || null, profile: profile()});
+  if(ok){ $("#nlForm").hidden = true; $("#nlOk").hidden = false; }
+  return ok;
+});
+renderAreaTeaser();
+
 /* ---------- landing forms ---------- */
 bindCapture("#checklistForm", "#cl_email", "#cl_err", async email => {
   const ok = await saveLead({source:"checklist", email, profile: profile()});
@@ -1797,6 +2044,7 @@ function renderHomeLead(){
         <label class="field"><span>Något vi bör veta? (valfritt)</span><input id="hl_msg" placeholder="t.ex. inkomst i SEK, eget bolag, när ni vill köpa"></label>
       </div>
       <div class="row"><button class="btn sun" type="submit">Bli kontaktad</button><span class="err" id="hl_err" hidden></span></div>
+      <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label>
     </form>`;
   const f = $("#homeLead"); if(!f || f.tagName !== "FORM") return;
   f.addEventListener("submit", async e => {
@@ -1859,9 +2107,9 @@ function renderSchools(){
 }
 
 /* ---------- routing ---------- */
-const VIEWS = ["start","plan","bostad","hyrakopa","skatt","skolor","kontakter","dokument","fragor","fraga"];
+const VIEWS = ["start","plan","omraden","bostadsguide","bli-partner","bostad","hyrakopa","skatt","skolor","kontakter","dokument","fragor","fraga"];
 function route(){
-  const h = location.hash.slice(1);
+  const [h, sub] = location.hash.slice(1).split("/");
   const v = VIEWS.includes(h) ? h : "landing";
   $$("main > div[id^=v-]").forEach(el => el.hidden = el.id !== "v-" + v);
   const app = v !== "landing" && v !== "start";
@@ -1873,11 +2121,13 @@ function route(){
   cta.hidden = v === "start";
   if(hasPlan()){ cta.textContent = v === "plan" ? "Ändra svar" : "Till er plan"; cta.href = v === "plan" ? "#start" : "#plan"; }
   else { cta.textContent = "Gör er flyttplan"; cta.href = "#start"; }
-  if(v === "start"){ if(!location.hash.includes("start") || wzStep >= STEPS.length) wzStep = 0; renderWizard(); }
+  if(v === "start"){ if(!location.hash.includes("start") || wzStep >= wzSteps().length) wzStep = 0; renderWizard(); }
   if(v === "plan"){ if(!hasPlan()){ location.hash = "start"; return; } renderPlan(); }
   if(v === "bostad") renderBostad();
   if(v === "skatt") renderBeckham();
   if(v === "hyrakopa") renderRentBuy();
+  if(v === "omraden") renderAreas(sub);
+  if(v === "bli-partner") renderPartnerCats2();
   if(v === "skolor") renderSchools();
   if(v === "kontakter") renderContacts();
   if(v === "dokument") renderDocs();
