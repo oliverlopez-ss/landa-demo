@@ -88,6 +88,35 @@ header.site .wrap{display:flex;align-items:center;gap:18px;min-height:76px}
 .dd.open .dd-menu{visibility:visible;opacity:1;transform:none;transition:opacity .18s ease,transform .18s ease}
 .mm{max-width:1160px;margin:0 auto;padding:36px max(20px,env(safe-area-inset-left,0px)) 44px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:48px}
 .mm-k{font-size:.86rem;color:var(--muted);margin:0 0 10px 14px}
+.mm-wide{grid-template-columns:minmax(0,2.4fr) minmax(0,1fr)}
+.mm-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.mm-col{display:grid;align-content:start;gap:2px}
+.ms{display:block;text-decoration:none;color:var(--ink);font:600 1rem/1.3 var(--body);padding:9px 14px;border-radius:10px}
+.ms:hover,.ms:focus-visible{background:var(--deep);outline:none}
+.ms[aria-current="page"]{color:var(--acc-ink)}
+.mm-side{display:grid;align-content:start;gap:4px}
+.mm-side .small-cta{min-height:0;margin-top:10px;padding:22px}
+.mm-side .small-cta b{font-size:1.6rem}
+.pgrid.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1000px){.pgrid.four{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.pgrid.four{grid-template-columns:1fr}}
+a.pcat{text-decoration:none;color:var(--ink)}
+.plinks{display:grid;gap:6px;margin-top:6px}
+.plinks a{color:var(--ink);text-decoration:none;font-weight:500}
+.plinks a:hover{color:var(--acc-ink);text-decoration:underline;text-underline-offset:3px}
+.crumb{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted)}
+.crumb a{color:var(--muted)}
+.ptswitch{position:relative}
+.ptbtn{display:inline-flex;align-items:center;gap:8px;font:600 1rem var(--body);color:var(--ink);background:var(--deep);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+.ptbtn:hover{border-color:var(--ink)}
+.ptlist{position:absolute;top:calc(100% + 8px);left:0;z-index:20;background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:16px;display:grid;grid-template-columns:repeat(4,minmax(170px,1fr));gap:16px;width:max-content;max-width:min(860px,calc(100vw - 32px))}
+.ptlist[hidden]{display:none}
+.ptlist .ptg{font-size:.82rem;color:var(--muted);margin:0 0 6px 10px}
+.ptlist a{display:block;text-decoration:none;color:var(--ink);font-weight:500;padding:7px 10px;border-radius:8px}
+.ptlist a:hover{background:var(--deep)}
+.ptlist a[aria-current="page"]{color:var(--acc-ink);font-weight:700}
+@media(max-width:760px){.ptlist{grid-template-columns:repeat(2,minmax(0,1fr));width:calc(100vw - 40px);left:0}}
+@media(max-width:960px){.mm-wide{grid-template-columns:1fr}.mm-cols{grid-template-columns:1fr 1fr}.mm-side .small-cta{display:none}.ms{font-size:1rem;padding:8px 6px}}
 .mm-links{display:grid;align-content:start;gap:2px}
 .ml{display:block;width:100%;text-align:left;background:none;border:0;text-decoration:none;color:var(--ink);font:600 1.3rem/1.2 var(--body);letter-spacing:-.02em;padding:12px 14px;border-radius:12px;cursor:pointer;transition:background .15s}
 .ml span{display:block;font:400 .92rem/1.4 var(--body);letter-spacing:0;color:var(--muted);margin-top:4px}
@@ -509,9 +538,9 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <div class="dd" data-group="partners">
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-partners">Partners <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="dd-menu" id="m-partners">
-          <div class="mm">
-            <div class="mm-links"><div class="mm-k">Rätt person för varje steg</div><a class="ml" href="#kontakter">Partners och kontakter<span>Myndigheter, skolor och verifierade partners</span></a><a class="ml" href="#bli-partner">Bli partner<span>För gestorer, rådgivare och mäklare</span></a></div>
-            <a class="mm-feat" href="#bli-partner"><span class="mm-ph" style="background-image:url('https://images.unsplash.com/photo-1770929356217-cc70b66b30c2?fm=jpg&q=70&w=900&auto=format&fit=crop')"></span><span class="mm-ft"><small>För leverantörer</small><b>Arbetar ni med svenska familjer på kusten?</b><em>Bli partner <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></em></span></a>
+          <div class="mm mm-wide">
+            <div class="mm-cols"><div class="mm-col"><div class="mm-k">Myndigheter och papper</div><a class="ms" href="#partners/gestor">Gestor</a><a class="ms" href="#partners/oversattare">Auktoriserad översättare</a><a class="ms" href="#partners/fordon">Fordonsregistrering</a></div><div class="mm-col"><div class="mm-k">Ekonomi och juridik</div><a class="ms" href="#partners/skatt">Skatterådgivare</a><a class="ms" href="#partners/redovisning">Redovisning för egenföretagare</a><a class="ms" href="#partners/advokat">Fastighetsadvokat</a><a class="ms" href="#partners/bolan">Hypoteksmäklare</a><a class="ms" href="#partners/bank">Bank och valuta</a><a class="ms" href="#partners/forsakring">Försäkring</a></div><div class="mm-col"><div class="mm-k">Bostad</div><a class="ms" href="#partners/kopmaklare">Köparrådgivare</a><a class="ms" href="#partners/hyresmaklare">Uthyrningsmäklare</a><a class="ms" href="#partners/hantverkare">Hantverkare och renovering</a><a class="ms" href="#partners/stad">Städning och fastighetsskötsel</a></div><div class="mm-col"><div class="mm-k">Familj och vardag</div><a class="ms" href="#partners/flytt">Flyttfirma</a><a class="ms" href="#partners/spanska">Spanskundervisning</a></div></div>
+            <div class="mm-side"><a class="ml" href="#partners">Alla partnertyper<span>Vad de gör och vad ni ska fråga</span></a><a class="ml" href="#kontakter">Myndigheter och skolor<span>Officiella kontakter och länkar</span></a><a class="mm-cta small-cta" href="#bli-partner"><small>För leverantörer</small><b>Bli partner</b><em>Läs mer <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></em></a></div>
           </div>
         </div>
       </div>
@@ -662,9 +691,9 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
         <h2>Rätt person för varje steg</h2>
         <p class="lead">Vi tar bara in partners som arbetar med svenska familjer, som vi har avtal med och som svarar inom två arbetsdagar. Med Solpass Plus får ni en varm introduktion med er profil bifogad.</p>
       </div>
-      <div class="pgrid" id="pcats"></div>
+      <div class="pgrid four" id="pcats"></div>
 
-      <div class="row" style="margin-top:24px"><a class="btn sea" href="#kontakter">Se alla partners</a><a class="btn ghost" href="#bli-partner">Arbetar ni med svenskar? Bli partner</a></div>
+      <div class="row" style="margin-top:24px"><a class="btn sea" href="#partners">Se alla partnertyper</a><a class="btn ghost" href="#bli-partner">Arbetar ni med svenskar? Bli partner</a></div>
       <p class="transparency">Så tjänar Solpass pengar: familjer betalar för Solpass Plus, och partners betalar en ersättning när en introduktion leder till ett uppdrag. Det påverkar inte vilka partners vi visar; vi tar bara in dem vi själva skulle anlita.</p>
     </div>
   </section>
@@ -961,6 +990,8 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       </div>
 </div></div>
 
+<div id="v-partners" hidden><div class="wrap" style="padding-bottom:64px"><div id="ptOut"></div></div></div>
+
 <div id="v-bli-partner" hidden><div class="wrap" style="padding-bottom:64px">
   <div class="apphead">
     <div class="eyebrow">För leverantörer</div>
@@ -973,7 +1004,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <div class="step"><div class="n">3</div><h3>Betala för resultat</h3><p>Ni betalar bara när en introduktion leder till ett uppdrag. Vi kräver svar inom två arbetsdagar.</p></div>
   </div>
   <h3 style="margin-bottom:12px">Kategorier vi söker partners i</h3>
-  <div class="pgrid" id="pcats2"></div>
+  <div class="pgrid four" id="pcats2"></div>
       <div class="become" id="partnerblock">
         <div class="stack">
           <div class="eyebrow">För leverantörer</div>
@@ -991,7 +1022,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
             <label class="field"><span>Telefon</span><input id="p_phone" type="tel" autocomplete="tel"></label>
           </div>
           <div class="grid2">
-            <label class="field"><span>Kategori</span><select id="p_cat" required><option value="">Välj</option><option>Gestor</option><option>Skatterådgivare</option><option>Mäklare, köp</option><option>Mäklare, hyra</option><option>Fastighetsadvokat</option><option>Sjukförsäkring</option><option>Bank och valuta</option><option>Flyttfirma</option><option>Internationell skola</option><option>Hantverkare</option><option>Städ</option><option>Annat</option></select></label>
+            <label class="field"><span>Kategori</span><select id="p_cat" required><option value="">Välj</option><option>Gestor</option><option>Auktoriserad översättare</option><option>Fordonsregistrering</option><option>Skatterådgivare</option><option>Redovisning för egenföretagare</option><option>Fastighetsadvokat</option><option>Hypoteksmäklare</option><option>Bank och valuta</option><option>Försäkring</option><option>Köparrådgivare</option><option>Uthyrningsmäklare</option><option>Hantverkare och renovering</option><option>Städning och fastighetsskötsel</option><option>Flyttfirma</option><option>Spanskundervisning</option><option>Skola</option><option>Annat</option></select></label>
             <label class="field"><span>Område</span><input id="p_area" placeholder="t.ex. Marbella–Estepona"></label>
           </div>
           <label class="field"><span>Kort om er (valfritt)</span><textarea id="p_msg" placeholder="Språk, hur många svenska kunder ni har, vad ni är bäst på."></textarea></label>
@@ -1283,7 +1314,7 @@ const PCATS = [
   ["flytt","Flyttfirma","Bohag från Sverige till kusten, två till fyra veckors ledtid."]
 ];
 function renderPartnerCats(){
-  $("#pcats").innerHTML = PCATS.map(([id,name,txt]) => `<div class="pcat"><span class="pill o">Partner väljs nu</span><h3>${name}</h3><p>${txt}</p></div>`).join("");
+  $("#pcats").innerHTML = PGROUPS.map(([g, gn]) => `<div class="pcat"><h3>${gn}</h3><div class="plinks">${PTYPES.filter(t => t.g === g).map(t => `<a href="#partners/${t.id}">${t.name}</a>`).join("")}</div></div>`).join("");
 }
 function renderFaqTop(){
   const picks = [[0,1],[1,0],[2,0],[0,4],[0,3]];
@@ -1875,7 +1906,7 @@ function renderAreas(id){
   });
 }
 function renderPartnerCats2(){
-  $("#pcats2").innerHTML = PCATS.map(([id, name, txt]) => `<div class="pcat"><h3>${name}</h3><p>${txt}</p></div>`).join("");
+  $("#pcats2").innerHTML = PGROUPS.map(([g, gn]) => `<div class="pcat"><h3>${gn}</h3><p>${PTYPES.filter(t => t.g === g).map(t => t.name).join(", ")}</p></div>`).join("");
 }
 bindCapture("#nlForm", "#nlEmail", "#nlErr", async email => {
   const ok = await saveLead({source:"newsletter", email, newsletter: true, message: $("#nlWhen").value || null, profile: profile()});
@@ -1883,6 +1914,136 @@ bindCapture("#nlForm", "#nlEmail", "#nlErr", async email => {
   return ok;
 });
 renderAreaTeaser();
+
+/* ---------- partner types: one page per type, switched with a dropdown ---------- */
+const PGROUPS = [["papper","Myndigheter och papper"],["ekonomi","Ekonomi och juridik"],["bostad","Bostad"],["vardag","Familj och vardag"]];
+const PTYPES = [
+  {id:"gestor", g:"papper", name:"Gestor", short:"NIE, padrón, residencia och skatteregistrering",
+   lead:"Den viktigaste personen i flytten. En gestoría bokar tider hos myndigheterna, fyller i blanketterna och lämnar in dem åt er, ofta med fullmakt.",
+   does:["Bokar cita previa för NIE och residencia","Registrerar er hos kommunen (padrón) och skatteverket (Modelo 030)","Sköter omregistrering av bil och byte av körkort"],
+   when:"Tre till sex månader före flytten, så att NIE är klart i tid.",
+   ask:["Pratar ni engelska eller svenska, och vem är min kontaktperson?","Är priset fast per ärende eller per timme?","Behöver ni fullmakt hos notarie, och vad omfattar den?"]},
+  {id:"oversattare", g:"papper", name:"Auktoriserad översättare", short:"Edsvurna översättningar av svenska dokument",
+   lead:"Vissa svenska dokument måste översättas av en edsvuren översättare (traductor jurado) för att godtas av spanska myndigheter, till exempel personbevis, betyg och vigselbevis.",
+   does:["Översätter personbevis, betyg, intyg och domar","Levererar stämplade översättningar som myndigheterna godtar","Kan ofta hjälpa med vilka dokument som behöver apostille"],
+   when:"Innan ni behöver dokumenten, ofta inför residencia och skolinskrivning.",
+   ask:["Är ni auktoriserad (traductor jurado) för svenska?","Tar ni emot digitala kopior eller krävs original?","Hur lång leveranstid har ni?"]},
+  {id:"fordon", g:"papper", name:"Fordonsregistrering", short:"Omregistrera svensk bil i Spanien",
+   lead:"Den som bor i Spanien ska ha bilen registrerad här. Det kräver besiktning (ITV), dokumentation och registrering hos DGT, och befrielse från registreringsskatt måste sökas i tid.",
+   does:["Ansöker om befrielse från registreringsskatt vid flytt","Bokar ITV och tar fram tekniska intyg","Registrerar bilen och tar fram spanska skyltar"],
+   when:"Direkt efter padrón. Befrielsen ska sökas inom 60 dagar.",
+   ask:["Har ni gjort svenska bilar förut?","Vad kostar det totalt, inklusive avgifter och intyg?","Hur lång tid tar det från start till spanska skyltar?"]},
+  {id:"skatt", g:"ekonomi", name:"Skatterådgivare", short:"Sverige och Spanien, bolag och Beckham",
+   lead:"Den enskilt viktigaste rådgivaren om ni har bolag, kapital, pension eller tänker på Beckham-regimen. Det måste vara någon som kan både svensk och spansk skatt.",
+   does:["Planerar flyttmånad och skatterättslig hemvist","Bedömer Beckham-regimen och lämnar in Modelo 149","Gör första spanska deklarationen och Modelo 720"],
+   when:"Sex månader före flytten. Det styr allt annat.",
+   ask:["Har ni klienter som flyttat från Sverige?","Kan ni både svensk och spansk skatt, eller samarbetar ni med någon?","Vad kostar en första genomgång?"]},
+  {id:"redovisning", g:"ekonomi", name:"Redovisning för egenföretagare", short:"Autónomo, moms och kvartalsdeklarationer",
+   lead:"Den som driver verksamhet i Spanien som egenföretagare (autónomo) har avgifter och deklarationer varje kvartal. En asesoría sköter det löpande.",
+   does:["Registrerar er som autónomo","Lämnar kvartalsvis moms (Modelo 303) och preliminärskatt (Modelo 130)","Gör årsdeklarationen"],
+   when:"Innan ni börjar fakturera från Spanien.",
+   ask:["Vad ingår i månadsavgiften?","Hur snabbt svarar ni på frågor?","Har ni kunder med svenska uppdragsgivare?"]},
+  {id:"advokat", g:"ekonomi", name:"Fastighetsadvokat", short:"Granskar köpet innan ni betalar",
+   lead:"En egen advokat kontrollerar lagfart, skulder, bygglov och föreningens ekonomi innan ni betalar handpenning. Mäklaren företräder nästan alltid säljaren.",
+   does:["Granskar lagfart, skulder och bygglov","Läser och förhandlar kontrakt med handpenning (arras)","Följer med till notarien och registrerar köpet"],
+   when:"Innan ni betalar något, även reservationsavgiften.",
+   ask:["Är ni oberoende av mäklaren?","Är arvodet fast eller en procent av priset?","Kan ni sköta köpet med fullmakt om vi inte är på plats?"]},
+  {id:"bolan", g:"ekonomi", name:"Hypoteksmäklare", short:"Jämför bankerna och tar fram lånebesked",
+   lead:"En hypoteksmäklare jämför bankernas villkor för er situation, särskilt om ni inte är residenta eller har inkomst i kronor. Kontrollera att förmedlaren är registrerad som kreditförmedlare.",
+   does:["Jämför flera bankers villkor","Tar fram lånebesked innan ni skriver kontrakt","Sköter kontakten med banken fram till notarien"],
+   when:"Innan ni lägger bud.",
+   ask:["Är ni registrerade som kreditförmedlare?","Vem betalar er, banken eller vi?","Vilka banker arbetar ni med för icke-residenter?"]},
+  {id:"bank", g:"ekonomi", name:"Bank och valuta", short:"Konto och stora överföringar från Sverige",
+   lead:"Ett spanskt konto behövs för hyra, el och skola. För stora överföringar, som kontantinsatsen, kan valutaväxling via specialist bli billigare än via banken.",
+   does:["Öppnar konto, även för icke-residenter","Växlar kronor till euro till bättre kurs än bankens","Hjälper med dokumentation för penningtvättsreglerna"],
+   when:"Två månader före flytten, och innan ni ska betala för en bostad.",
+   ask:["Vilka avgifter har kontot per månad?","Vilken kurs och avgift gäller för 100 000 €?","Vilka dokument behövs för att visa var pengarna kommer ifrån?"]},
+  {id:"forsakring", g:"ekonomi", name:"Försäkring", short:"Sjukförsäkring, hem och bil",
+   lead:"Privat sjukförsäkring utan självrisk brukar krävas för att registrera sig som resident om man inte omfattas av Seguridad Social. Hem- och bilförsäkring tecknas i Spanien.",
+   does:["Sjukförsäkring som godtas för EX-18","Hemförsäkring för hyrd eller ägd bostad","Bilförsäkring när bilen är spanskregistrerad"],
+   when:"Sjukförsäkringen före residencia, de andra vid inflyttning.",
+   ask:["Godtas försäkringen för residencia (utan självrisk och karens)?","Täcks befintliga sjukdomar?","Kan vi få villkoren på engelska?"]},
+  {id:"kopmaklare", g:"bostad", name:"Köparrådgivare", short:"Någon som köper åt er, inte åt säljaren",
+   lead:"På kusten företräder mäklaren nästan alltid säljaren. En köparrådgivare söker bland alla objekt på marknaden, granskar affären med er advokat och förhandlar för er.",
+   does:["Söker bland alla objekt, inte bara sina egna","Värderar och förhandlar pris","Samordnar advokat, bank och notarie"],
+   when:"Sex till tolv månader innan ni vill ha köpt.", link:["#bostadsguide/radgivning","Läs om Solpass rådgivning inför köp"],
+   ask:["Vem betalar er, och får ni ersättning från säljaren?","Hur många köpare har ni hjälpt i området?","Kan ni visa referenser?"]},
+  {id:"hyresmaklare", g:"bostad", name:"Uthyrningsmäklare", short:"Hitta ett långtidskontrakt",
+   lead:"Den som hjälper er hitta en bostad att hyra på långtidskontrakt. Sedan hyreslagen ändrades betalar hyresvärden mäklarens arvode, inte ni.",
+   does:["Hittar bostäder med kontrakt för permanentbostad","Förhandlar villkor och deposition","Går igenom kontraktet med er"],
+   when:"Två till tre månader före flytten.",
+   ask:["Gäller kontraktet permanentbostad (vivienda habitual)?","Vad är depositionen och eventuella extra garantier?","Är bostaden registrerad och får vi skriva oss där?"]},
+  {id:"hantverkare", g:"bostad", name:"Hantverkare och renovering", short:"Renovering, el, VVS och pool",
+   lead:"För allt från en ny köksbänk till en helrenovering. Större arbeten kräver tillstånd från kommunen, och en skriftlig offert (presupuesto) är standard.",
+   does:["Renovering av kök, badrum och ytskikt","El, VVS, luftkonditionering och pool","Ansöker om tillstånd hos kommunen vid större arbeten"],
+   when:"Efter köpet, eller före inflyttning om ni hyr omöblerat.",
+   ask:["Kan vi få en skriftlig offert med tidplan?","Vem söker tillstånd hos kommunen?","Kan vi prata med en tidigare kund?"]},
+  {id:"stad", g:"bostad", name:"Städning och fastighetsskötsel", short:"Städ, trädgård, pool och tillsyn",
+   lead:"Löpande städning, trädgård och pool, och tillsyn av bostaden när ni är i Sverige.",
+   does:["Veckostädning och flyttstädning","Trädgård och poolskötsel","Tillsyn och nyckelhantering när ni är borta"],
+   when:"Vid inflyttning.",
+   ask:["Är personalen anställd och försäkrad?","Vad ingår per besök?","Hur hanterar ni nycklar och larm?"]},
+  {id:"flytt", g:"vardag", name:"Flyttfirma", short:"Bohag från Sverige till kusten",
+   lead:"Ett helt bohag tar två till fyra veckor från Sverige. Delad last är billigare men tar längre tid.",
+   does:["Packning, transport och uppackning","Magasinering i väntan på bostad","Transport av bil och husdjursutrustning"],
+   when:"Boka två månader före flytten.",
+   ask:["Är försäkringen för fullvärde under hela transporten?","Delad eller egen last, och vad är leveranstiden?","Ingår packmaterial och uppackning?"]},
+  {id:"spanska", g:"vardag", name:"Spanskundervisning", short:"Kurser för vuxna och läxhjälp för barn",
+   lead:"Barnen lär sig snabbt i skolan, men vuxna behöver oftast en kurs. Läxhjälp gör övergången till spansk eller internationell skola lättare.",
+   does:["Intensivkurs före eller direkt efter flytten","Privatlektioner för vuxna","Läxhjälp och stöd för barn"],
+   when:"Gärna redan före flytten.",
+   ask:["Undervisar ni på plats eller online?","Har ni kurser på morgonen när barnen är i skolan?","Hur testar ni nivån?"]}
+];
+const PT = Object.fromEntries(PTYPES.map(t => [t.id, t]));
+function ptMenu(cur){
+  return `<div class="ptswitch"><button class="ptbtn" type="button" aria-expanded="false" aria-controls="ptlist">${esc(cur.name)} <svg width="14" height="14" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="ptlist" id="ptlist" hidden>${PGROUPS.map(([g, gn]) => `<div><div class="ptg">${gn}</div>${PTYPES.filter(t => t.g === g).map(t => `<a href="#partners/${t.id}"${t.id === cur.id ? ' aria-current="page"' : ""}>${t.name}</a>`).join("")}</div>`).join("")}</div></div>`;
+}
+document.addEventListener("click", e => {
+  const l = $("#ptlist");
+  if(l && !l.hidden && !e.target.closest(".ptswitch")){ l.hidden = true; $(".ptbtn").setAttribute("aria-expanded", "false"); }
+});
+document.addEventListener("keydown", e => { const l = $("#ptlist"); if(e.key === "Escape" && l && !l.hidden){ l.hidden = true; $(".ptbtn").setAttribute("aria-expanded", "false"); $(".ptbtn").focus(); } });
+function renderPartnerTypes(id){
+  const t = PT[id];
+  if(!t){
+    $("#ptOut").innerHTML = `<div class="apphead"><div class="eyebrow">Partners</div><h2>Rätt person för varje steg</h2><p class="lead">Vi tar bara in ett fåtal partners per kategori och område: de som arbetar med svenska familjer, har avtal med oss och svarar inom två arbetsdagar. Välj vad ni behöver hjälp med.</p></div>
+      ${PGROUPS.map(([g, gn]) => `<h3 style="margin:32px 0 14px">${gn}</h3><div class="pgrid">${PTYPES.filter(t => t.g === g).map(t => `<a class="pcat" href="#partners/${t.id}"><h3>${t.name}</h3><p>${t.short}</p><span class="small" style="color:var(--acc-ink);font-weight:600">Läs mer</span></a>`).join("")}</div>`).join("")}
+      <div class="row" style="margin-top:36px"><a class="btn ghost" href="#kontakter">Myndigheter och skolor</a><a class="btn ghost" href="#bli-partner">Arbetar ni med svenskar? Bli partner</a></div>`;
+    return;
+  }
+  $("#ptOut").innerHTML = `
+    <div class="apphead" style="padding-bottom:6px"><div class="crumb"><a href="#partners">Partners</a><span>/</span>${ptMenu(t)}</div>
+      <h2>${t.name}</h2><p class="lead">${t.lead}</p></div>
+    <div class="acols">
+      <div>
+        <h3>Det här gör de</h3><ul>${t.does.map(x => `<li>${x}</li>`).join("")}</ul>
+        <h3>När i flytten</h3><p>${t.when}</p>
+        <h3>Fråga det här innan ni anlitar någon</h3><ul>${t.ask.map(x => `<li>${x}</li>`).join("")}</ul>
+        ${t.link ? `<p style="margin-top:16px"><a href="${t.link[0]}">${t.link[1]}</a></p>` : ""}
+      </div>
+      <form class="card stack" id="ptForm" onsubmit="return false">
+        <span class="pill" style="justify-self:start">Partner väljs nu</span>
+        <h3 style="margin:0">Bli kopplade till ${t.name.toLowerCase()}</h3>
+        <p class="small muted" style="margin:0">Berätta vad ni behöver. Vi kopplar er till en partner vi har avtal med i ert område, och er profil följer med så att ni slipper börja om.</p>
+        <label class="field"><span>Vad behöver ni hjälp med?</span><textarea id="ptMsg" required placeholder="T.ex. område, när ni flyttar och vad det gäller"></textarea></label>
+        <div class="grid2"><label class="field"><span>Namn</span><input id="ptName" autocomplete="name" value="${esc(state.hushall)}"></label><label class="field"><span>E-post</span><input id="ptEmail" type="email" required autocomplete="email" value="${esc(state.email)}"></label></div>
+        <label class="field"><span>Telefon (valfritt)</span><input id="ptTel" type="tel" autocomplete="tel"></label>
+        <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label>
+        <div class="row"><button class="btn sun" type="submit">Skicka</button></div>
+        <p class="err" id="ptErr" hidden></p>
+      </form>
+    </div>`;
+  const btn = $(".ptbtn"), list = $("#ptlist");
+  btn.onclick = () => { const o = list.hidden; list.hidden = !o; btn.setAttribute("aria-expanded", String(o)); };
+  bindCapture("#ptForm", "#ptEmail", "#ptErr", async email => {
+    const msg = $("#ptMsg").value.trim();
+    if(!msg){ $("#ptErr").textContent = "Skriv kort vad ni behöver hjälp med."; $("#ptErr").hidden = false; return true; }
+    const ok = await saveLead({source:"intro", email, name: $("#ptName").value.trim() || null, phone: $("#ptTel").value.trim() || null, partner: t.id, category: t.name, message: msg, profile: profile()});
+    if(ok) $("#ptForm").outerHTML = `<div class="ok-msg">Tack. Vi hör av oss inom två arbetsdagar med en ${esc(t.name.toLowerCase())} som passar er.</div>`;
+    return ok;
+  });
+}
 
 /* ---------- landing forms ---------- */
 bindCapture("#checklistForm", "#cl_email", "#cl_err", async email => {
@@ -2204,7 +2365,7 @@ function renderSchools(){
 }
 
 /* ---------- routing ---------- */
-const VIEWS = ["start","plan","omraden","bostadsguide","bli-partner","bostad","hyrakopa","skatt","skolor","kontakter","dokument","fragor","fraga"];
+const VIEWS = ["start","plan","omraden","partners","bostadsguide","bli-partner","bostad","hyrakopa","skatt","skolor","kontakter","dokument","fragor","fraga"];
 function route(){
   const [h, sub] = location.hash.slice(1).split("/");
   const v = VIEWS.includes(h) ? h : "landing";
@@ -2226,8 +2387,9 @@ function route(){
   if(v === "skatt") renderBeckham();
   if(v === "hyrakopa") renderRentBuy();
   if(v === "omraden") renderAreas(sub);
+  if(v === "partners") renderPartnerTypes(sub);
   if(v === "bli-partner") renderPartnerCats2();
-  if(sub && v !== "omraden") setTimeout(() => document.getElementById(sub)?.scrollIntoView({behavior:"smooth"}), 60);
+  if(sub && v !== "omraden" && v !== "partners") setTimeout(() => document.getElementById(sub)?.scrollIntoView({behavior:"smooth"}), 60);
   if(v === "skolor") renderSchools();
   if(v === "kontakter") renderContacts();
   if(v === "dokument") renderDocs();
@@ -2239,7 +2401,7 @@ function route(){
 let lastHash = location.hash;
 addEventListener("hashchange", () => { if(location.hash === "#start" && lastHash !== "#start") wzStep = 0; lastHash = location.hash; route(); });
 /* ---------- main menu ---------- */
-const NAV_GROUPS = { flytt:["plan","start","dokument","fragor","fraga"], omraden:["omraden","skolor"], bostad:["bostadsguide","bostad","hyrakopa"], ekonomi:["skatt"], partners:["kontakter","bli-partner"] };
+const NAV_GROUPS = { flytt:["plan","start","dokument","fragor","fraga"], omraden:["omraden","skolor"], bostad:["bostadsguide","bostad","hyrakopa"], ekonomi:["skatt"], partners:["partners","kontakter","bli-partner"] };
 const desktopNav = matchMedia("(min-width: 961px) and (hover: hover)");
 function closeMenus(except){
   $$(".dd").forEach(d => { if(d !== except){ d.classList.remove("open"); d.querySelector(".dd-btn").setAttribute("aria-expanded", "false"); } });
