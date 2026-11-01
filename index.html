@@ -56,6 +56,8 @@ p{margin:0}
 .lead{font-size:1.12rem;color:var(--muted);max-width:60ch}
 .muted{color:var(--muted)}
 .small{font-size:.86rem}
+.est{font-size:.84rem;line-height:1.5;margin:0;padding:12px 14px;border-left:3px solid currentColor;opacity:.85}
+.est b{font-weight:600}
 .stack{display:grid;gap:12px}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 
@@ -708,7 +710,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <div class="sec-head">
         <div class="eyebrow">Kalkyl</div>
         <h2>Vad blir kvar varje månad?</h2>
-        <p class="lead">Levnadskostnad på kusten, netto i Spanien jämfört med Sverige och vad Beckham-regimen kan betyda för er. Grov uppskattning för beslutet, inte för deklarationen.</p>
+        <p class="lead">Levnadskostnad på kusten, netto i Spanien jämfört med Sverige och vad Beckham-regimen kan betyda för er. Estimat för att förstå storleksordningen, inte underlag för beslut eller deklaration.</p>
       </div>
       <div class="calc">
         <form class="card stack" id="calc" onsubmit="return false">
@@ -732,6 +734,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
         </form>
         <div class="result">
           <div id="calcOut" class="stack" style="gap:18px"></div>
+      <p class="est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
           <div class="stack" id="calcCap"><b>Spara kalkylen</b><p class="note">Vi mejlar resultatet till er.</p><form class="capture" onsubmit="return false" id="calcForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="calcEmail"><button class="btn sun" type="submit">Mejla mig</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="calcErr" hidden></p></div>
         </div>
       </div>
@@ -942,6 +945,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <div class="qc-cash"><div><span>Kontant på köpdagen</span><b id="qcCash"></b></div><div><span>Lån</span><b id="qcLoan"></b></div></div>
       <div class="qc-scen-h">Scenarier</div>
       <div class="qc-scen" id="qcScen"></div>
+      <p class="est" style="margin-top:16px"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
       <div class="row" style="margin-top:18px"><a class="btn sun" href="#partners/bolan">Få ett riktigt lånebesked</a><button class="btn ghost" type="button" id="qcAdd">Lägg till i jämförelsen</button></div>
     </div>
   </section>
@@ -1016,6 +1020,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     </form>
     <div class="result">
       <div id="rbOut" class="stack" style="gap:18px"></div>
+      <p class="est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
       <div class="stack" id="rbCap"><b>Spara jämförelsen</b><p class="note">Vi skickar den till er. Vill ni ha bostäder att räkna på får ni dem från Solpass köprådgivning när den lanseras.</p><form class="capture" onsubmit="return false" id="rbForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="rbEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="rbErr" hidden></p></div>
     </div>
   </div>
@@ -1051,6 +1056,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     </form>
     <div class="result">
       <div id="bkOut" class="stack" style="gap:18px"></div>
+      <p class="est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
       <div class="stack" id="bkCap"><b>Få kalkylen granskad</b><p class="note">En skatterådgivare som kan både Sverige och Spanien bekräftar om ni kvalificerar och hur ansökan ska göras. Vi skickar kalkylen till er och till rådgivaren.</p><form class="capture" onsubmit="return false" id="bkForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="bkEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="bkErr" hidden></p></div>
     </div>
   </div>
@@ -2611,7 +2617,7 @@ function renderHomeResults(){
     <div class="hint"><b>Bankens paket.</b> ${caixa
       ? `Räknat med CaixaBank HolaBanks publicerade villkor: fast ränta 2,80 % med full rabatt och 3,80 % utan. Full rabatt kräver lön och tre räkningar i banken, hemförsäkring, livförsäkring och larm via banken, cirka ${eur(CAIXA.packageMonthly)} i månaden. Utan paket räknar vi med ${eur(CAIXA.homeInsuranceMonthly)} för en egen hemförsäkring. Kontot på 35 € per kvartal ingår i båda.`
       : `Spanska banker annonserar en rabatterad ränta (TIN bonificado) som bara gäller om ni också köper deras liv- och hemförsäkring och har lönen i banken. Vi räknar med ${eur(HOME_CFG.linkedProductsMonthly)} i månaden för paketet, mot ${eur(HOME_CFG.homeInsuranceMonthly)} för en egen hemförsäkring.`} Jämför alltid båda, och fråga banken vad paketet faktiskt kostar.</div>
-    <p class="small muted" style="margin-top:12px">Uppskattning, inte ett lånelöfte. Skatten är den allmänna satsen per region. Advokat räknas som ${pct(HOME_CFG.purchaseFees.lawyerRate)} av priset inklusive IVA.${b.residency === "nonResident" ? ` Icke-residenta betalar årligen skatt på en schablonintäkt: ${pct(HOME_CFG.imputedRate)} av katastervärdet, beskattat med ${pct(HOME_CFG.nonResidentTaxRate)} för EU-medborgare. Utan katastervärde räknar vi med ${pct(HOME_CFG.catastralRatio)} av priset.` : ""} Kurs ${RATE.toLocaleString("sv-SE")} SEK/EUR. ${HOME_CFG.note}</p>
+    <p class="small muted" style="margin-top:12px">Estimat, inte ett lånelöfte eller beslutsunderlag. Skatten är den allmänna satsen per region. Advokat räknas som ${pct(HOME_CFG.purchaseFees.lawyerRate)} av priset inklusive IVA.${b.residency === "nonResident" ? ` Icke-residenta betalar årligen skatt på en schablonintäkt: ${pct(HOME_CFG.imputedRate)} av katastervärdet, beskattat med ${pct(HOME_CFG.nonResidentTaxRate)} för EU-medborgare. Utan katastervärde räknar vi med ${pct(HOME_CFG.catastralRatio)} av priset.` : ""} Kurs ${RATE.toLocaleString("sv-SE")} SEK/EUR. ${HOME_CFG.note}</p>
     <div id="homeLeadSlot"></div>`;
   if(keepForm) $("#homeLeadSlot").replaceWith(keepForm);
   else renderHomeLead();
