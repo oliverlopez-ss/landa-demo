@@ -1242,7 +1242,13 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <div class="eyebrow">Dokumentvalv</div>
     <h2>Allt ni kommer att bli ombedda att visa</h2>
     <p class="lead">I den ordning ni behöver det. Markera vad ni har, så ser ni vad som saknas.</p>
-    <div class="row"><button class="btn sm ghost" type="button" data-pdf>Ladda ner checklistan som PDF</button></div>
+  </div>
+  <div class="card stack" style="margin-bottom:24px" id="dvCap">
+    <b>Checklistan som PDF</b>
+    <p class="note" style="margin:0">Alla dokument i rätt ordning, med länkar till de officiella blanketterna. Skriv er e-post så laddas den ner direkt.</p>
+    <form class="capture" id="dvForm" onsubmit="return false"><input type="email" id="dv_email" required placeholder="din@epost.se" aria-label="E-post" autocomplete="email"><button class="btn sun" type="submit">Ladda ner checklistan</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form>
+    <p class="err" id="dv_err" hidden></p>
+    <div class="ok-msg" id="dv_ok" hidden>Klart. Checklistan laddas ner nu. <button class="linkbtn" type="button" data-pdf style="color:inherit">Ladda ner igen</button></div>
   </div>
   <div id="docs"></div>
 </div></div>
@@ -2416,6 +2422,12 @@ bindCapture("#checklistForm", "#cl_email", "#cl_err", async email => {
   if(ok){ rememberEmail(email); pdfLeadSent = true; $("#checklistForm").hidden = true; $("#cl_ok").hidden = false; downloadChecklist(); }
   return ok;
 });
+bindCapture("#dvForm", "#dv_email", "#dv_err", async email => {
+  const ok = await saveLead({source:"checklist", email, profile: profile()});
+  if(ok){ rememberEmail(email); pdfLeadSent = true; $("#dvForm").hidden = true; $("#dv_ok").hidden = false; downloadChecklist(); }
+  return ok;
+});
+if(state.email && $("#dv_email")) $("#dv_email").value = state.email;
 bindCapture("#buyerForm", "#b_email", "#b_err", async email => {
   if(!$("#b_consent").checked){ $("#b_err").textContent = "Kryssa i att vi får dela era uppgifter med mäklarna."; $("#b_err").hidden = false; return false; }
   const areas = $$('[name="b_area"]:checked').map(i => i.value).join(", ");
