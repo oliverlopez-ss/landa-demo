@@ -1122,7 +1122,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
           <span class="pill" style="background:rgba(255,255,255,.7);color:var(--sea)">Lanseras snart</span>
           <div class="eyebrow">Rådgivning inför köp</div>
           <h2 style="font-size:clamp(1.5rem,3vw,2.1rem)">En mäklare som står på er sida, inte säljarens</h2>
-          <p>På kusten företräder mäklaren nästan alltid säljaren. Vi gör tvärtom: vi söker bland alla objekt på marknaden, granskar affären tillsammans med er advokat och företräder er genom hela köpet. Estepona, San Pedro och Marbella.</p>
+          <p>På kusten företräder mäklaren nästan alltid säljaren. Vi förbereder en köprådgivning där mäklaren företräder er i stället: söker bland objekt på hela marknaden, granskar affären tillsammans med er advokat och följer er genom köpet. Estepona, San Pedro och Marbella.</p>
           <form class="stack" id="buyerForm" onsubmit="return false">
             <div class="chips" role="group" aria-label="Område">
               <label class="chip"><input type="checkbox" name="b_area" value="Estepona">Estepona</label>
@@ -1137,7 +1137,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
             <p class="err" id="b_err" hidden></p>
           <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form>
           <div class="ok-msg" id="b_ok" hidden>Tack. Ni hör från oss när köprådgivningen öppnar, före alla andra.</div>
-          <p class="disclose">Solpass köprådgivning drivs av en registrerad mäklare i Andalusien i samarbete med Solpass grundare. Ni väljer alltid själva och får även förslag på andra verifierade mäklare.</p>
+          <p class="disclose">Köprådgivningen är inte öppen än. Innan den öppnar presenterar vi mäklaren med namn och registrering. Solpass kan få ersättning från partners som vi introducerar er till, och vi berättar alltid hur innan ni bestämmer er. Ni väljer själva och kan alltid anlita en annan mäklare.</p>
         </div>
       </div>
 </div></div>
@@ -1497,6 +1497,8 @@ function qaHtml(it, open){
 
 /* ---------- calculator ---------- */
 const eur = n => Math.round(n).toLocaleString("sv-SE") + " €";
+// tax estimates are shown as an order of magnitude, never as an exact amount
+const eurCa = (n, step = 1000) => "ca " + (Math.round(n / step) * step).toLocaleString("sv-SE") + " €";
 let calcSnapshot = {};
 function renderCalc(){
   const inc = +$("#c_inc").value || 0;
@@ -1521,7 +1523,7 @@ function renderCalc(){
       <div class="kpi"><div class="v">${eur(net)}</div><div class="l">netto i Spanien${esNetBeck ? ", med Beckham" : ""}</div></div>
       <div class="kpi"><div class="v">${eur(seNet)}</div><div class="l">netto i Sverige, jämförelse</div></div>
       <div class="kpi"><div class="v">${eur(cost)}</div><div class="l">levnadskostnad</div></div>
-      <div class="kpi"><div class="v">${esNetBeck ? eur(esNetBeck - esNetStd) : "–"}</div><div class="l">${esNetBeck ? "mer per månad tack vare Beckham" : "Beckham gäller inte er inkomst"}</div></div>
+      <div class="kpi"><div class="v">${esNetBeck ? eurCa(esNetBeck - esNetStd, 100) : "–"}</div><div class="l">${esNetBeck ? "mer per månad tack vare Beckham" : "Beckham gäller inte er inkomst"}</div></div>
     </div>
     <details><summary>Så räknade vi</summary>
       <table>${lines.map(l => `<tr><td>${l[0]}</td><td>${eur(l[1])}</td></tr>`).join("")}<tr><td><b>Summa</b></td><td><b>${eur(cost)}</b></td></tr></table>
@@ -1897,25 +1899,25 @@ function renderBeckham(){
   let html = "";
   if(!eligible){
     html += `<div class="kpis"><div class="kpi big neg"><div class="v">Kvalificerar inte</div><div class="l">${why_txt}</div></div>
-      <div class="kpi"><div class="v">${eur(stdTax)}</div><div class="l">spansk skatt per år med vanlig IRPF</div></div>
+      <div class="kpi"><div class="v">${eurCa(stdTax)}</div><div class="l">spansk skatt per år med vanlig IRPF</div></div>
       <div class="kpi"><div class="v">${eff} %</div><div class="l">effektiv skatt på hushållets inkomst</div></div></div>`;
   } else {
     const pos = saving > 0;
-    html += `<div class="kpis"><div class="kpi big${pos ? "" : " neg"}"><div class="v">${pos ? "+" : ""}${eur(saving)}</div><div class="l">${pos ? "lägre spansk skatt per år med Beckham" : "Beckham ger ingen vinst på den här inkomsten. Under ungefär 57 000 € per person är den vanliga skalan lägre."}</div></div>
-      <div class="kpi"><div class="v">${eur(stdTax)}</div><div class="l">spansk skatt per år, vanlig IRPF (${eff} %)</div></div>
-      <div class="kpi"><div class="v">${eur(bkTax)}</div><div class="l">spansk skatt per år, Beckham (${effBk} %)</div></div>
-      <div class="kpi"><div class="v">${eur(Math.max(0, saving) / 12)}</div><div class="l">mer kvar per månad</div></div>
-      <div class="kpi"><div class="v">${eur(Math.max(0, saving) * years)}</div><div class="l">över hela perioden, sex år</div></div></div>`;
+    html += `<div class="kpis"><div class="kpi big${pos ? "" : " neg"}"><div class="v">${pos ? eurCa(saving).replace("ca ","ca +") : eurCa(saving)}</div><div class="l">${pos ? "lägre spansk skatt per år med Beckham" : "Beckham ger ingen vinst på den här inkomsten. Under ungefär 57 000 € per person är den vanliga skalan lägre."}</div></div>
+      <div class="kpi"><div class="v">${eurCa(stdTax)}</div><div class="l">spansk skatt per år, vanlig IRPF (${eff} %)</div></div>
+      <div class="kpi"><div class="v">${eurCa(bkTax)}</div><div class="l">spansk skatt per år, Beckham (${effBk} %)</div></div>
+      <div class="kpi"><div class="v">${eurCa(Math.max(0, saving) / 12, 100)}</div><div class="l">mer kvar per månad</div></div>
+      <div class="kpi"><div class="v">${eurCa(Math.max(0, saving) * years)}</div><div class="l">över hela perioden, sex år</div></div></div>`;
     if(s2 > 0 && std2.tax > bk2.tax && s2 >= s1) html += `<p class="note">Person 2 tjänar mest och blir huvudperson i regimen. Person 1 kan följa med som familjemedlem så länge inkomsten är lägre.</p>`;
-    if(s2 > 0 && bk2.tax > std2.tax) html += `<p class="note">Person 2 tjänar på att stå utanför regimen (vanlig skala ${eur(std2.tax)} mot ${eur(bk2.tax)} med 24 %). Regimen väljs per person.</p>`;
-    if(cap > 0) html += `<p class="note">Kapitalinkomsten från Sverige (${eur(cap)}) beskattas inte i Spanien under Beckham, men Sverige kan ta ut kupongskatt eller tillämpa tioårsregeln. Den delen av vinsten (${eur(capStd)} per år) ska bekräftas av rådgivaren.</p>`;
+    if(s2 > 0 && bk2.tax > std2.tax) html += `<p class="note">Person 2 tjänar på att stå utanför regimen (vanlig skala ${eurCa(std2.tax)} mot ${eurCa(bk2.tax)} med 24 %). Regimen väljs per person.</p>`;
+    if(cap > 0) html += `<p class="note">Kapitalinkomsten från Sverige (${eur(cap)}) beskattas inte i Spanien under Beckham, men Sverige kan ta ut kupongskatt eller tillämpa tioårsregeln. Den delen av vinsten (${eurCa(capStd)} per år) ska bekräftas av rådgivaren.</p>`;
     if(why === "vd") html += `<p class="note">Som bolagsledare: äger ni 25 % eller mer av ett bolag som mest förvaltar kapital gäller inte regimen. Ett rörelsedrivande bolag går bra.</p>`;
   }
   html += `<details><summary>Så räknar vi</summary><table>
-    <tr><td>Person 1, vanlig IRPF efter sociala avgifter ${eur(std1.ss)}</td><td>${eur(std1.tax)}</td></tr>
-    <tr><td>Person 1, Beckham 24 %</td><td>${eur(bk1.tax)}</td></tr>
-    ${s2 > 0 ? `<tr><td>Person 2, vanlig IRPF efter sociala avgifter ${eur(std2.ss)}</td><td>${eur(std2.tax)}</td></tr><tr><td>Person 2, Beckham 24 %</td><td>${eur(bk2.tax)}</td></tr>` : ""}
-    ${cap > 0 ? `<tr><td>Kapital från Sverige, spansk sparskala 19–30 %</td><td>${eur(capStd)}</td></tr><tr><td>Kapital från Sverige under Beckham</td><td>0 €</td></tr>` : ""}
+    <tr><td>Person 1, vanlig IRPF efter sociala avgifter ${eurCa(std1.ss)}</td><td>${eurCa(std1.tax)}</td></tr>
+    <tr><td>Person 1, Beckham 24 %</td><td>${eurCa(bk1.tax)}</td></tr>
+    ${s2 > 0 ? `<tr><td>Person 2, vanlig IRPF efter sociala avgifter ${eurCa(std2.ss)}</td><td>${eurCa(std2.tax)}</td></tr><tr><td>Person 2, Beckham 24 %</td><td>${eurCa(bk2.tax)}</td></tr>` : ""}
+    ${cap > 0 ? `<tr><td>Kapital från Sverige, spansk sparskala 19–30 %</td><td>${eurCa(capStd)}</td></tr><tr><td>Kapital från Sverige under Beckham</td><td>0 €</td></tr>` : ""}
   </table>
   <p class="note" style="margin-top:10px">Statlig skala 9,5–24,5 % plus Andalusiens skala 9,5–22,5 % för 2026, grundavdrag 5 550 €, schablonavdrag 2 000 € och arbetstagarens sociala avgifter 6,47 % upp till maxbasen. Individuell beskattning, inga andra avdrag. Beckham: 24 % på bruttolönen utan avdrag, 47 % över 600 000 €. Sociala avgifter betalas i båda fallen om ni är anslutna till spansk socialförsäkring. Kalkylen visar bara spansk skatt; svensk skatt på svenska inkomster tillkommer och kräver rådgivare.</p></details>`;
   $("#bkOut").innerHTML = html;
