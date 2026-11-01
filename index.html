@@ -1011,8 +1011,9 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <form class="card stack" id="rb" onsubmit="return false">
       <div class="grid2">
         <label class="field"><span>Pris för bostaden ni skulle köpa (€)</span><input type="number" id="rb_price" value="450000" step="10000" min="0" inputmode="numeric"></label>
-        <label class="field"><span>Hyra för motsvarande bostad (€ per månad)</span><input type="number" id="rb_rent" value="1900" step="100" min="0" inputmode="numeric"></label>
+        <label class="field"><span>Hyra för motsvarande bostad (€ per månad)</span><input type="number" id="rb_rent" value="2200" step="50" min="0" inputmode="numeric"></label>
       </div>
+      <p class="small muted" style="margin:-4px 0 0">Hyran föreslås till cirka 5,8&nbsp;% av priset per år. En 3:a på 120–150&nbsp;m² kostar ofta 2&nbsp;500–3&nbsp;000&nbsp;€ i månaden på långtidskontrakt (annonser, november 2026). Ändra till den hyra ni faktiskt ser.</p>
       <div class="field"><span>Hur länge räknar vi?</span>
         <div class="chips">
           <label class="chip"><input type="radio" name="rb_years" value="3">3 år</label>
@@ -2005,6 +2006,13 @@ function renderRentBuy(){
     <p class="note" style="margin-top:10px">Köpa: kontantinsats, ITP 7 %, notarie, registro, advokat och värdering, lån ${eur(r.home.loan)} på 25 år till ${(i.rate * 100).toFixed(2).replace(".", ",")} % (${eur(r.pay)} per månad), hemförsäkring, comunidad, IBI 0,5 % och underhåll 1 % per år. Vid försäljning: mäklare 5 %, reavinstskatt 19–30 % på vinsten efter köpkostnader, kvarvarande lån löses. Plus den avkastning (${Math.round(i.alt * 100)} %) ni gått miste om på kontantinsatsen. Hyra: hyran med ${Math.round(i.rentg * 100)} % höjning per år; depositionen räknas som återbetald. Plusvalía municipal och lånets uppläggning ingår inte.</p></details>`;
   $("#rbOut").innerHTML = html;
 }
+// family homes on the coast rent for about 5.8 % of the asking price per year (listings, November 2026);
+// the rent follows the price until the visitor types their own rent
+const RENT_YIELD = 0.058;
+const suggestRent = price => Math.round(price * RENT_YIELD / 12 / 50) * 50;
+let rbRentEdited = false;
+$("#rb_rent").addEventListener("input", () => { rbRentEdited = true; });
+$("#rb_price").addEventListener("input", () => { if(!rbRentEdited) $("#rb_rent").value = suggestRent(+$("#rb_price").value || 0); });
 $$("#rb input").forEach(el => el.addEventListener("input", renderRentBuy));
 bindCapture("#rbForm", "#rbEmail", "#rbErr", async email => {
   const ok = await saveLead({source:"rentbuy", email, calc: rbSnapshot, profile: profile()});
@@ -2101,7 +2109,7 @@ function renderAreas(id){
         </form>
       </div>
     </div>`;
-  $("#aCalc").onclick = () => { $("#rb_price").value = Math.round(ex[1] * 100 / 10000) * 10000; $("#rb_rent").value = Math.round(ex[2] * 100 / 50) * 50; location.hash = "hyrakopa"; };
+  $("#aCalc").onclick = () => { $("#rb_price").value = Math.round(ex[1] * 100 / 10000) * 10000; $("#rb_rent").value = suggestRent(+$("#rb_price").value); rbRentEdited = false; location.hash = "hyrakopa"; };
   bindCapture("#areaForm", "#aEmail", "#aErr", async email => {
     const msg = [pick("aNeed"), pick("aWhen") && "flyttar " + pick("aWhen").toLowerCase()].filter(Boolean).join(" · ");
     const ok = await saveLead({source:"area", email, area: a.name, message: msg, profile: profile()});
