@@ -735,7 +735,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
         <div class="result">
           <div id="calcOut" class="stack" style="gap:18px"></div>
       <p class="est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
-          <div class="stack" id="calcCap"><b>Spara kalkylen</b><p class="note">Vi mejlar resultatet till er.</p><form class="capture" onsubmit="return false" id="calcForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="calcEmail"><button class="btn sun" type="submit">Mejla mig</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="calcErr" hidden></p></div>
+          <div class="stack" id="calcCap"><b>Spara kalkylen</b><p class="note">Vi mejlar resultatet till er.</p><form class="capture" onsubmit="return false" id="calcForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="calcEmail"><button class="btn sun" type="submit">Mejla mig</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form><p class="err" id="calcErr" hidden></p></div>
         </div>
       </div>
     </div>
@@ -864,8 +864,10 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <div class="wrap letter">
       <div class="stack">
         <div class="eyebrow">Flyttbrevet</div>
-        <h2>Ett brev i månaden för er som planerar flytten.</h2>
-        <p class="lead">Nya regler och deadlines, ett område i taget och en familj som berättar hur det faktiskt gick. Inget annat, och ni avslutar med ett klick.</p>
+        <h2>Det som ändras, innan det påverkar er flytt.</h2>
+        <p class="lead">Regler för skatt, hyra, skola och bostad i Spanien ändras ofta, och nästan allt skrivs på spanska. En gång i månaden får ni det som är nytt, vad det betyder för en svensk familj och vad ni bör göra just nu.</p>
+        <ul class="small" style="margin:0;padding-left:18px;display:grid;gap:6px"><li><b>Det som har ändrats.</b> Nya regler och beslut, förklarade på svenska och med länk till källan.</li><li><b>Månadens deadlines.</b> Vad som ska vara klart om ni flyttar inom ett år.</li><li><b>Ett område på djupet.</b> Skolor, bostadspriser och hur vardagen ser ut.</li></ul>
+        <p class="small muted" style="margin:0">En gång i månaden. Partners syns bara med tydlig märkning. Avsluta med ett klick.</p>
       </div>
       <div>
         <form class="card stack" id="nlForm" onsubmit="return false">
@@ -884,7 +886,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <div class="eyebrow">Checklistan</div>
       <h2>Hela flytten i en PDF.</h2>
       <p>Alla steg i rätt ordning, vilka papper som behövs, vem som löser vad och länkar till de officiella blanketterna. Har ni gjort planen blir den personlig.</p>
-      <form class="capture" id="checklistForm" onsubmit="return false"><input type="email" id="cl_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Ladda ner checklistan</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form>
+      <form class="capture" id="checklistForm" onsubmit="return false"><input type="email" id="cl_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Ladda ner checklistan</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form>
       <p class="err" id="cl_err" hidden></p>
       <div class="ok-msg" id="cl_ok" hidden>Klart. Checklistan laddas ner nu. <button class="linkbtn" type="button" data-pdf style="color:inherit">Ladda ner igen</button></div>
     </div>
@@ -1021,7 +1023,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <div class="result">
       <div id="rbOut" class="stack" style="gap:18px"></div>
       <p class="est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
-      <div class="stack" id="rbCap"><b>Spara jämförelsen</b><p class="note">Vi skickar den till er. Vill ni ha bostäder att räkna på kan ni bli kontaktade av mäklare i bostadsguiden.</p><form class="capture" onsubmit="return false" id="rbForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="rbEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="rbErr" hidden></p></div>
+      <div class="stack" id="rbCap"><b>Spara jämförelsen</b><p class="note">Vi skickar den till er. Vill ni ha bostäder att räkna på kan ni bli kontaktade av mäklare i bostadsguiden.</p><form class="capture" onsubmit="return false" id="rbForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="rbEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form><p class="err" id="rbErr" hidden></p></div>
     </div>
   </div>
 </div></div>
@@ -1057,7 +1059,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <div class="result">
       <div id="bkOut" class="stack" style="gap:18px"></div>
       <p class="est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
-      <div class="stack" id="bkCap"><b>Få kalkylen granskad</b><p class="note">En skatterådgivare som kan både Sverige och Spanien bekräftar om ni kvalificerar och hur ansökan ska göras. Vi skickar kalkylen till er och till rådgivaren.</p><form class="capture" onsubmit="return false" id="bkForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="bkEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="bkErr" hidden></p></div>
+      <div class="stack" id="bkCap"><b>Få kalkylen granskad</b><p class="note">En skatterådgivare som kan både Sverige och Spanien bekräftar om ni kvalificerar och hur ansökan ska göras. Vi skickar kalkylen till er och till rådgivaren.</p><form class="capture" onsubmit="return false" id="bkForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="bkEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form><p class="err" id="bkErr" hidden></p></div>
     </div>
   </div>
   <div class="card stack" style="margin-top:24px">
@@ -1145,7 +1147,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
             <label class="nl"><input type="checkbox" id="b_consent" required> Ni får dela våra uppgifter med det antal mäklare vi valt ovan, och bara med dem.</label>
             <div class="capture"><input type="email" id="b_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Bli kontaktade</button></div>
             <p class="err" id="b_err" hidden></p>
-          <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form>
+          <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form>
           <div class="ok-msg" id="b_ok" hidden>Tack. Vi matchar er med mäklare i området, och de hör av sig till er.</div>
           <p class="disclose">Mäklarna är fristående från Solpass. Solpass kan få ersättning från dem när en introduktion leder till ett uppdrag, och vi berättar hur innan ni bestämmer er. Ni väljer själva och kan alltid anlita någon annan.</p>
         </div>
@@ -1256,7 +1258,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <label class="field"><span>E-post för svaret</span><input id="askMail" type="email" required placeholder="din@epost.se"></label>
     </div>
     <div class="row"><button class="btn sea" type="submit">Skicka frågan</button><span class="err" id="askErr" hidden></span></div>
-  <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form>
+  <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form>
   <div id="askDone" class="ok-msg" style="margin-top:16px" hidden></div>
 </div></div>
 </main>
@@ -1587,7 +1589,7 @@ function renderWizard(){
     body = `<div class="grid2"><label class="field"><span>Namn på hushållet (valfritt)</span><input type="text" id="wzName" value="${esc(state.hushall)}" placeholder="Familjen Andersson"></label>
       <label class="field"><span>E-post</span><input type="email" id="wzEmail" value="${esc(state.email)}" placeholder="din@epost.se" autocomplete="email"></label></div>
       <p class="err" id="wzErr" hidden></p>
-      <label class="nl"><input type="checkbox" id="wzNl"> Skicka mig Flyttbrevet, en gång i månaden</label>
+      <label class="nl"><input type="checkbox" id="wzNl"> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label>
       <div class="row"><button class="btn sun" id="wzDone">Visa vår plan</button><button class="linkbtn" id="wzSkipMail">Visa planen utan att spara</button></div>`;
   } else {
     body = `<div class="opts">${s.opts.map(([v,l,sub]) => `<button class="opt${state.answers[s.key] === v ? " sel" : ""}" data-v="${v}"><span>${l}${sub ? `<small>${sub}</small>` : ""}</span></button>`).join("")}</div>`;
@@ -2074,7 +2076,7 @@ function renderAreas(id){
           ${pickHtml("aNeed", "Vad vill ni veta?", ["Vilka delar som passar barnfamiljer", "Skolor och skolplatser", "Bostäder att hyra", "Bostäder att köpa", "Prisnivåer och vad vi får för pengarna", "Pendling och tid till flyget", "Vardag, vård och service"], {other: "Annan fråga", placeholder: "Skriv er fråga"})}
           ${pickHtml("aWhen", "När flyttar ni?", ["Inom 6 månader", "Om 6–12 månader", "Om mer än ett år", "Vi funderar bara"], {other: ""})}
           <label class="field"><span>E-post</span><input type="email" id="aEmail" required autocomplete="email" value="${esc(state.email)}"></label>
-          ${'<label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label>'}
+          ${'<label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label>'}
           <div class="row"><button class="btn sun" type="submit">Skicka frågan</button></div>
           <p class="err" id="aErr" hidden></p>
         </form>
@@ -2291,7 +2293,7 @@ function renderPartnerTypes(id){
         <div class="grid2">${pickHtml("ptWhen", "När?", WHEN_OPTS, {other: ""})}${pickHtml("ptArea", "Område", AREAS.map(a => a.name).concat(["Hela kusten"]), {other: "Annat område"})}</div>
         <div class="grid2"><label class="field"><span>Namn</span><input id="ptName" autocomplete="name" value="${esc(state.hushall)}"></label><label class="field"><span>E-post</span><input id="ptEmail" type="email" required autocomplete="email" value="${esc(state.email)}"></label></div>
         <label class="field"><span>Telefon (valfritt)</span><input id="ptTel" type="tel" autocomplete="tel"></label>
-        <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label>
+        <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label>
         <div class="row"><button class="btn sun" type="submit">Bli kopplade</button></div>
         <p class="err" id="ptErr" hidden></p>
       </form>
@@ -2656,7 +2658,7 @@ function renderHomeLead(){
         ${pickHtml("hl_when", "När vill ni köpa?", ["Inom 6 månader", "6–12 månader", "Om mer än ett år"], {required: false, other: ""})}
       </div>
       <div class="row"><button class="btn sun" type="submit">Bli kontaktad</button><span class="err" id="hl_err" hidden></span></div>
-      <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label>
+      <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label>
     </form>`;
   const f = $("#homeLead"); if(!f || f.tagName !== "FORM") return;
   f.addEventListener("submit", async e => {
