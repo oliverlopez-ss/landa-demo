@@ -632,8 +632,8 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
         <button class="dd-btn" type="button" aria-expanded="false" aria-controls="m-bostad">Bostad <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 4.5 6 8l3.5-3.5" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         <div class="dd-menu" id="m-bostad">
           <div class="mm">
-            <div class="mm-links"><div class="mm-k">Hyra eller köpa</div><a class="ml" href="#bostadsguide">Bostadsguiden<span>Hyra först eller köpa, steg för steg</span></a><a class="ml" href="#bostad">Bolånekalkyl<span>Månadskostnad med spanska banker</span></a><a class="ml" href="#hyrakopa">Hyra eller köpa<span>Vad som är borta efter 3, 5 eller 10 år</span></a><a class="ml" href="#bostadsguide/radgivning">Rådgivning inför köp<span>Någon som köper åt er, inte åt säljaren</span></a></div>
-            <a class="mm-feat" href="#bostadsguide/radgivning"><span class="mm-ph" style="background-image:url('https://images.unsplash.com/photo-1747495956302-6e41f0af9b83?fm=jpg&q=70&w=900&auto=format&fit=crop')"></span><span class="mm-ft"><small>Rådgivning inför köp</small><b>En rådgivare som står på er sida, inte säljarens</b><em>Läs mer <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></em></span></a>
+            <div class="mm-links"><div class="mm-k">Hyra eller köpa</div><a class="ml" href="#bostadsguide">Bostadsguiden<span>Hyra först eller köpa, steg för steg</span></a><a class="ml" href="#bostad">Bolånekalkyl<span>Månadskostnad med spanska banker</span></a><a class="ml" href="#hyrakopa">Hyra eller köpa<span>Vad som är borta efter 3, 5 eller 10 år</span></a><a class="ml" href="#bostadsguide/radgivning">Prata med mäklare<span>1–3 mäklare som kan svenska köpare</span></a></div>
+            <a class="mm-feat" href="#bostadsguide/radgivning"><span class="mm-ph" style="background-image:url('https://images.unsplash.com/photo-1747495956302-6e41f0af9b83?fm=jpg&q=70&w=900&auto=format&fit=crop')"></span><span class="mm-ft"><small>Inför köp</small><b>Mäklare som kan företräda er, inte bara säljaren</b><em>Läs mer <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></em></span></a>
           </div>
         </div>
       </div>
@@ -1021,7 +1021,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <div class="result">
       <div id="rbOut" class="stack" style="gap:18px"></div>
       <p class="est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
-      <div class="stack" id="rbCap"><b>Spara jämförelsen</b><p class="note">Vi skickar den till er. Vill ni ha bostäder att räkna på får ni dem från Solpass köprådgivning när den lanseras.</p><form class="capture" onsubmit="return false" id="rbForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="rbEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="rbErr" hidden></p></div>
+      <div class="stack" id="rbCap"><b>Spara jämförelsen</b><p class="note">Vi skickar den till er. Vill ni ha bostäder att räkna på kan ni bli kontaktade av mäklare i bostadsguiden.</p><form class="capture" onsubmit="return false" id="rbForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="rbEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form><p class="err" id="rbErr" hidden></p></div>
     </div>
   </div>
 </div></div>
@@ -1119,10 +1119,15 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <div class="feature" id="radgivning">
         <div class="img" role="img" aria-label="Playa de la Rada i Estepona"></div>
         <div class="body">
-          <span class="pill" style="background:rgba(255,255,255,.7);color:var(--sea)">Lanseras snart</span>
-          <div class="eyebrow">Rådgivning inför köp</div>
-          <h2 style="font-size:clamp(1.5rem,3vw,2.1rem)">En mäklare som står på er sida, inte säljarens</h2>
-          <p>På kusten företräder mäklaren nästan alltid säljaren. Vi förbereder en köprådgivning där mäklaren företräder er i stället: söker bland objekt på hela marknaden, granskar affären tillsammans med er advokat och följer er genom köpet. Estepona, San Pedro och Marbella.</p>
+                    <div class="eyebrow">Inför köp</div>
+          <h2 style="font-size:clamp(1.5rem,3vw,2.1rem)">Prata med mäklare som kan svenska familjer</h2>
+          <p>Berätta var och när ni vill köpa, så kontaktar en till tre mäklare er. Ni väljer själva hur många, och ingen annan får era uppgifter.</p>
+          <ul class="small" style="margin:0;padding-left:18px;display:grid;gap:4px">
+            <li>Registrerade och verksamma i Estepona, San Pedro eller Marbella</li>
+            <li>Kan företräda er som köpare, inte bara säljaren</li>
+            <li>Talar svenska eller engelska</li>
+            <li>Säger från start vad de tar betalt och av vem</li>
+          </ul>
           <form class="stack" id="buyerForm" onsubmit="return false">
             <div class="chips" role="group" aria-label="Område">
               <label class="chip"><input type="checkbox" name="b_area" value="Estepona">Estepona</label>
@@ -1133,11 +1138,16 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
               <select id="b_budget" aria-label="Budget"><option value="">Budget</option><option>Under 500 000 €</option><option>500 000–1 000 000 €</option><option>1–2 miljoner €</option><option>Över 2 miljoner €</option></select>
               <select id="b_when" aria-label="När vill ni köpa"><option value="">När vill ni köpa?</option><option>Inom 6 månader</option><option>6–12 månader</option><option>Om mer än ett år</option></select>
             </div>
-            <div class="capture"><input type="email" id="b_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Anmäl intresse</button></div>
+            <div class="grid2">
+              <select id="b_count" aria-label="Hur många mäklare får kontakta er"><option value="1">Högst 1 mäklare</option><option value="2" selected>Högst 2 mäklare</option><option value="3">Högst 3 mäklare</option></select>
+              <input type="tel" id="b_phone" autocomplete="tel" placeholder="Telefon (valfritt)" aria-label="Telefon">
+            </div>
+            <label class="nl"><input type="checkbox" id="b_consent" required> Ni får dela våra uppgifter med det antal mäklare vi valt ovan, och bara med dem.</label>
+            <div class="capture"><input type="email" id="b_email" required placeholder="din@epost.se" aria-label="E-post"><button class="btn sun" type="submit">Bli kontaktade</button></div>
             <p class="err" id="b_err" hidden></p>
           <label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet, en gång i månaden</label></form>
-          <div class="ok-msg" id="b_ok" hidden>Tack. Ni hör från oss när köprådgivningen öppnar, före alla andra.</div>
-          <p class="disclose">Köprådgivningen är inte öppen än. Innan den öppnar presenterar vi mäklaren med namn och registrering. Solpass kan få ersättning från partners som vi introducerar er till, och vi berättar alltid hur innan ni bestämmer er. Ni väljer själva och kan alltid anlita en annan mäklare.</p>
+          <div class="ok-msg" id="b_ok" hidden>Tack. Vi matchar er med mäklare i området, och de hör av sig till er.</div>
+          <p class="disclose">Mäklarna är fristående från Solpass. Solpass kan få ersättning från dem när en introduktion leder till ett uppdrag, och vi berättar hur innan ni bestämmer er. Ni väljer själva och kan alltid anlita någon annan.</p>
         </div>
       </div>
 </div></div>
@@ -1659,7 +1669,7 @@ function renderContacts(){
   $("#contacts").innerHTML = shown.map(c => {
     const partner = !c.link;
     if(c.k === "Skola") c.note = "Se alla skolor";
-    const extra = c.k === "Skola" ? `<a class="small" href="#skolor">Jämför ${SCHOOLS.length} skolor på kusten</a>` : c.id === "maklare" ? `<span class="small muted">Solpass köprådgivning för Estepona, San Pedro och Marbella lanseras snart.</span>` : "";
+    const extra = c.k === "Skola" ? `<a class="small" href="#skolor">Jämför ${SCHOOLS.length} skolor på kusten</a>` : c.id === "maklare" ? `<a class="small" href="#bostadsguide/radgivning">Bli kontaktade av 1–3 mäklare i Estepona, San Pedro eller Marbella</a>` : "";
     const foot = partner
       ? `<div class="foot"><span class="pill o">${c.note}</span>${state.plus ? `<button class="btn sm sea" data-intro="${c.id}">Be om introduktion</button>` : `<button class="btn sm ghost" data-plus>Introduktion i Plus</button>`}</div>`
       : `${c.more && c.more.length ? `<ul class="more-links">${c.more.map(([n, u]) => `<li><a href="${u}" target="_blank" rel="noopener">${n} ↗</a></li>`).join("")}</ul>` : ""}<div class="foot"><a class="ext" href="${c.link}" target="_blank" rel="noopener">${c.lt || "Gå till sidan"} ↗</a><span class="pill v">Officiell källa</span></div>`;
@@ -2160,7 +2170,7 @@ const PTYPES = [
   {id:"kopmaklare", g:"bostad", name:"Köparrådgivare", short:"Någon som köper åt er, inte åt säljaren",
    lead:"På kusten företräder mäklaren nästan alltid säljaren. En köparrådgivare söker bland alla objekt på marknaden, granskar affären med er advokat och förhandlar för er.",
    does:["Söker bland alla objekt, inte bara sina egna","Värderar och förhandlar pris","Samordnar advokat, bank och notarie"],
-   when:"Sex till tolv månader innan ni vill ha köpt.", link:["#bostadsguide/radgivning","Läs om Solpass rådgivning inför köp"],
+   when:"Sex till tolv månader innan ni vill ha köpt.", link:["#bostadsguide/radgivning","Bli kontaktade av mäklare via Solpass"],
    ask:["Vem betalar er, och får ni ersättning från säljaren?","Hur många köpare har ni hjälpt i området?","Kan ni visa referenser?"]},
   {id:"hyresmaklare", g:"bostad", name:"Uthyrningsmäklare", short:"Hitta ett långtidskontrakt",
    lead:"Den som hjälper er hitta en bostad att hyra på långtidskontrakt. Sedan hyreslagen ändrades betalar hyresvärden mäklarens arvode, inte ni.",
@@ -2392,8 +2402,9 @@ bindCapture("#checklistForm", "#cl_email", "#cl_err", async email => {
   return ok;
 });
 bindCapture("#buyerForm", "#b_email", "#b_err", async email => {
+  if(!$("#b_consent").checked){ $("#b_err").textContent = "Kryssa i att vi får dela era uppgifter med mäklarna."; $("#b_err").hidden = false; return false; }
   const areas = $$('[name="b_area"]:checked').map(i => i.value).join(", ");
-  const ok = await saveLead({source:"buyer", email, area: areas || null, message: [$("#b_budget").value, $("#b_when").value].filter(Boolean).join(" · ") || null, profile: profile()});
+  const ok = await saveLead({source:"buyer", email, area: areas || null, phone: $("#b_phone").value.trim() || null, message: [$("#b_budget").value, $("#b_when").value, "högst " + $("#b_count").value + " mäklare, samtycke till delning"].filter(Boolean).join(" · "), profile: profile()});
   if(ok){ $("#buyerForm").hidden = true; $("#b_ok").hidden = false; }
   return ok;
 });
