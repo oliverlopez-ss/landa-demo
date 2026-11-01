@@ -185,7 +185,7 @@ body.menu-open header.site,body.nav-open header.site{background:var(--paper);bac
 @media (prefers-reduced-motion: reduce){.hero::before{animation:none}}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.9fr);gap:48px;align-items:center;padding-block:clamp(56px,10vw,120px)}
 .hero .eyebrow{color:rgba(255,255,255,.72)}
-.hero h1 .mute{color:rgba(255,255,255,.6);display:block}
+.hero h1 .mute{color:rgba(255,255,255,.85);display:block}
 .hero .btn.sun{background:#fff;color:#0E1116}
 .hero .btn.sun:hover{background:#E9ECEF}
 .hero h1{margin:14px 0 18px}
@@ -703,7 +703,19 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     </div>
   </section>
 
-  <section class="block alt" id="kalkyl">
+  <section class="block alt" id="planen">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="eyebrow">Planen</div>
+        <h2>Fyra faser, rätt ordning</h2>
+        <p class="lead">Det mesta som går fel i en flytt till Spanien går fel för att något gjordes för sent. Planen räknar baklänges från er flyttdag.</p>
+      </div>
+      <div class="timeline" id="timeline"></div>
+      <div class="row" style="margin-top:32px"><a class="btn sea" href="#start">Gör er egen plan</a></div>
+    </div>
+  </section>
+
+  <section class="block" id="kalkyl">
     <div class="wrap">
       <div class="sec-head">
         <div class="eyebrow">Kalkyl</div>
@@ -738,58 +750,18 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     </div>
   </section>
 
-  <section class="block" id="planen">
+  <section class="block alt" id="fordjupa">
     <div class="wrap">
       <div class="sec-head">
-        <div class="eyebrow">Planen</div>
-        <h2>Fyra faser, rätt ordning</h2>
-        <p class="lead">Det mesta som går fel i en flytt till Spanien går fel för att något gjordes för sent. Planen räknar baklänges från er flyttdag.</p>
+        <div class="eyebrow">Fördjupa er</div>
+        <h2>Bostad, område och skatt</h2>
+        <p class="lead">De tre beslut som styr resten av flytten. Läs in er i lugn och ro, och räkna på just ert läge.</p>
       </div>
-      <div class="timeline" id="timeline"></div>
-      <div class="row" style="margin-top:32px"><a class="btn sea" href="#start">Gör er egen plan</a></div>
-    </div>
-  </section>
-
-  <section class="block alt" id="bostad-teaser">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="eyebrow">Bostad och bolån</div>
-        <h2>Vad kostar bostaden, på riktigt?</h2>
-        <p class="lead">Jämför upp till sex bostäder sida vid sida: vad köpet kräver kontant på köpdagen, månadskostnaden med och utan bankens paket, och vad det blir i kronor. Byggt för den som inte bor i Spanien än.</p>
+      <div class="steps">
+        <a class="step" href="#omraden" style="text-decoration:none;color:inherit"><div class="n">Områden</div><h3>Var på kusten passar ni?</h3><p>Sex områden från Estepona till Málaga: skolor, tid till flyget och vad det kostar att hyra och köpa.</p></a>
+        <a class="step" href="#bostad" style="text-decoration:none;color:inherit"><div class="n">Bostad</div><h3>Vad kostar bostaden, på riktigt?</h3><p>Kontantinsats, skatter vid köp och månadskostnad med spanska banker, för er som inte bor i Spanien än.</p></a>
+        <a class="step" href="#skatt" style="text-decoration:none;color:inherit"><div class="n">Skatt</div><h3>Kvalificerar ni för Beckham?</h3><p>Spaniens skatteregim för inflyttade och fristen som avgör om ni får den. En uppskattning, inte rådgivning.</p></a>
       </div>
-      <div class="homefacts">
-        <div><b>70 %</b><span>lånar spanska banker normalt ut till den som inte är resident, mot 80 % för residenta</span></div>
-        <div><b>7 %</b><span>överlåtelseskatt på en begagnad bostad i Andalusien, plus notarie, registro och advokat</span></div>
-        <div><b>3,23 %</b><span>Euribor 12 månader, preliminärt snitt oktober 2026. Rörlig ränta är Euribor plus bankens marginal.</span></div>
-      </div>
-      <div class="row" style="margin-top:28px"><a class="btn sea" href="#bostad">Räkna på en bostad</a><a class="btn ghost" href="#hyrakopa">Hyra eller köpa, över fem år?</a></div>
-    </div>
-  </section>
-
-  <section class="block" id="omraden-teaser">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="eyebrow">Områden</div>
-        <h2>Var på kusten passar ni?</h2>
-        <p class="lead">Sex områden, sex vardagar. Skolor, tid till flyget, vem som trivs där och vad det kostar att hyra och köpa.</p>
-      </div>
-      <div class="agrid" id="areaTeaser"></div>
-    </div>
-  </section>
-
-  <section class="block" id="beckham-teaser">
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="eyebrow">Beckham-regimen</div>
-        <h2>Vad sparar ni på Beckham?</h2>
-        <p class="lead">Spaniens särskilda skatteregim för inflyttade: 24 % platt skatt på lönen i sex år i stället för upp till 47 %. Den gäller distansanställda, spanskt anställda och bolagsledare, men bara om ansökan lämnas i tid.</p>
-      </div>
-      <div class="homefacts">
-        <div><b>24 %</b><span>platt skatt på arbetsinkomst upp till 600 000 € per år, 47 % därutöver</span></div>
-        <div><b>6 år</b><span>flyttåret plus fem år. Inkomst och kapital från Sverige beskattas inte i Spanien under tiden.</span></div>
-        <div><b>6 mån</b><span>från registreringen hos Seguridad Social har ni på er att lämna Modelo 149. Efter det är chansen borta.</span></div>
-      </div>
-      <div class="row" style="margin-top:28px"><a class="btn sea" href="#skatt">Räkna på Beckham</a></div>
     </div>
   </section>
 
@@ -802,7 +774,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       </div>
       <div class="pgrid four" id="pcats"></div>
 
-      <div class="row" style="margin-top:24px"><a class="btn sea" href="#partners">Se alla partnertyper</a><a class="btn ghost" href="#bli-partner">Arbetar ni med svenskar? Bli partner</a></div>
+      <div class="row" style="margin-top:24px"><a class="btn sea" href="#partners">Se alla partnertyper</a></div>
       <p class="transparency">Så tjänar Solpass pengar: familjer betalar för Solpass Plus, och partners betalar en ersättning när en introduktion leder till ett uppdrag. Det påverkar inte vilka partners vi visar; vi tar bara in dem vi själva skulle anlita.</p>
     </div>
   </section>
@@ -854,25 +826,6 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       </div>
       <div id="faqTop"></div>
       <div class="row" style="margin-top:24px"><a class="btn ghost" href="#fragor" id="allFaqLink">Alla svar</a></div>
-    </div>
-  </section>
-
-  <section class="block alt" id="flyttbrevet">
-    <div class="wrap letter">
-      <div class="stack">
-        <div class="eyebrow">Flyttbrevet</div>
-        <h2>Ett brev i månaden för er som planerar flytten.</h2>
-        <p class="lead">Nya regler och deadlines, ett område i taget och en familj som berättar hur det faktiskt gick. Inget annat, och ni avslutar med ett klick.</p>
-      </div>
-      <div>
-        <form class="card stack" id="nlForm" onsubmit="return false">
-          <label class="field"><span>E-post</span><input type="email" id="nlEmail" required placeholder="namn@exempel.se" autocomplete="email"></label>
-          <label class="field"><span>När tror ni att ni flyttar? (valfritt)</span><select id="nlWhen"><option value="">Välj</option><option>Inom 6 månader</option><option>Om 6–12 månader</option><option>Om mer än ett år</option><option>Vi funderar bara</option></select></label>
-          <div class="row"><button class="btn sun" type="submit">Prenumerera</button></div>
-          <p class="err" id="nlErr" hidden></p>
-        </form>
-        <div class="ok-msg" id="nlOk" hidden>Tack. Första brevet kommer i början av nästa månad.</div>
-      </div>
     </div>
   </section>
 
