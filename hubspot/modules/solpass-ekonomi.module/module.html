@@ -1,0 +1,33 @@
+<!-- Solpass: Ekonomikalkyl (vad blir kvar varje månad). Calculator logic and texts copied from the Solpass demo (index.html). -->
+<div class="sp-ekonomi" data-portal="{{ module.portal_id }}" data-form="{{ module.form_guid }}" data-source="{{ module.source_value }}" data-nl="{{ module.newsletter_subscription_type_id }}" data-consent="{{ module.consent_text|escape_attr }}" style="--sp-acc: {{ module.accent_color.color }}" data-income="{{ module.default_income_sek }}" data-senet="{{ module.default_net_sek }}">
+  <div class="sp-head">{% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}{% if module.intro %}<div class="sp-intro">{{ module.intro }}</div>{% endif %}</div>
+  <div class="sp-calc">
+    <form class="sp-card sp-stack" data-role="in" onsubmit="return false">
+      <label class="sp-field"><span>Hushållets bruttoinkomst per år (SEK)</span><input type="number" data-k="inc" value="1500000" step="50000" min="0" inputmode="numeric"></label>
+      <div class="sp-grid2">
+        <label class="sp-field"><span>Vuxna</span><select data-k="adults"><option value="2">Två vuxna</option><option value="1">En vuxen</option></select></label>
+        <label class="sp-field"><span>Inkomsten kommer från</span><select data-k="income"><option value="distans">Anställning på distans</option><option value="spansk">Spansk anställning</option><option value="bolag">Eget svenskt bolag</option><option value="pension">Pension eller kapital</option></select></label>
+      </div>
+      <div class="sp-field"><span>Boende</span>
+        <div class="sp-chips">
+          <label class="sp-chip"><input type="radio" data-radio="bo" value="lgh" checked>Lägenhet, 3 rum</label>
+          <label class="sp-chip"><input type="radio" data-radio="bo" value="hus">Hus eller radhus</label>
+          <label class="sp-chip"><input type="radio" data-radio="bo" value="villa">Villa med pool</label>
+        </div></div>
+      <div class="sp-grid2">
+        <label class="sp-field"><span>Antal barn</span><input type="number" data-k="kids" value="2" min="0" max="6"></label>
+        <label class="sp-field"><span>Skola</span><select data-k="skola"><option value="int">Internationell skola</option><option value="sv">Svensk skola</option><option value="pub">Spansk kommunal skola</option></select></label>
+      </div>
+      <div class="sp-grid2">
+        <label class="sp-field"><span>Bilar</span><input type="number" data-k="bil" value="1" min="0" max="4"></label>
+        <label class="sp-field"><span>Netto i Sverige i dag, hela hushållet (kr per månad)</span><input type="number" data-k="senet" value="60000" step="1000" min="0" inputmode="numeric"><small class="sp-muted">Står på lönebeskedet.</small></label>
+      </div>
+      <p class="sp-small sp-muted">Kurs 11,3 SEK/EUR. Belopp i euro per månad.</p>
+    </form>
+    <div class="sp-result">
+      <div data-role="out" class="sp-stack" style="gap:18px" aria-live="polite"></div>
+      <p class="sp-est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
+      <div class="sp-stack" data-role="cap"><b>{{ module.cap_heading }}</b><p class="sp-note">{{ module.cap_note }}</p><form class="sp-capture" data-role="cap-form"><input type="email" required placeholder="din@epost.se" aria-label="E-post" autocomplete="email"><button class="sp-btn" type="submit">{{ module.cap_button }}</button>{% if module.newsletter_subscription_type_id %}<label class="sp-nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label>{% endif %}</form>{% if module.consent_text %}<p class="sp-consent">{{ module.consent_text }}</p>{% endif %}<p class="sp-err" data-role="cap-err" hidden></p></div>
+    </div>
+  </div>
+</div>

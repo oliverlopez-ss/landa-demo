@@ -1,0 +1,41 @@
+<!-- Solpass: Vad kostar bostaden per månad. Calculator logic and texts copied from the Solpass demo (index.html). -->
+<div class="sp-bostadskostnad" data-portal="{{ module.portal_id }}" data-form="{{ module.form_guid }}" data-source="{{ module.source_value }}" data-nl="{{ module.newsletter_subscription_type_id }}" data-consent="{{ module.consent_text|escape_attr }}" style="--sp-acc: {{ module.accent_color.color }}" data-price="{{ module.default_price }}">
+  <div class="sp-head">{% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}{% if module.intro %}<div class="sp-intro">{{ module.intro }}</div>{% endif %}</div>
+  <section class="sp-qc" aria-label="Snabbkalkyl">
+    <form class="sp-qc-in" data-role="in" onsubmit="return false">
+      <label class="sp-qrange"><span class="sp-qrow"><span>Pris</span><output data-o="price"></output></span>
+      <input type="range" data-k="price" min="150000" max="3000000" step="10000" value="450000"></label>
+      <div class="sp-qc-two">
+        <label class="sp-field"><span>Region</span><select data-k="region"></select></label>
+        <div class="sp-field"><span>Typ</span><div class="sp-seg" role="group" aria-label="Typ av bostad"><button type="button" data-nb="0" aria-pressed="true">Begagnad</button><button type="button" data-nb="1" aria-pressed="false">Nyproduktion</button></div></div>
+      </div>
+      <div class="sp-field"><span>Ni bor när ni köper</span><div class="sp-seg" role="group" aria-label="Bosättning"><button type="button" data-res="nonResident" aria-pressed="true">I Sverige</button><button type="button" data-res="resident" aria-pressed="false">I Spanien</button></div></div>
+      <label class="sp-qrange"><span class="sp-qrow"><span>Kontantinsats</span><output data-o="down"></output></span>
+      <input type="range" data-k="down" min="20" max="100" step="5" value="30"></label>
+      <label class="sp-qrange"><span class="sp-qrow"><span>Löptid</span><output data-o="years"></output></span>
+      <input type="range" data-k="years" min="5" max="30" step="1" value="25"></label>
+      <label class="sp-qrange"><span class="sp-qrow"><span>Ränta</span><output data-o="rate"></output></span>
+      <input type="range" data-k="rate" min="1" max="7" step="0.05" value="3.1"></label>
+      <div class="sp-presets" data-role="presets" role="group" aria-label="Föreslagna räntenivåer"></div>
+      <details class="sp-qc-more"><summary>Löpande kostnader</summary>
+        <label class="sp-qrange"><span class="sp-qrow"><span>Comunidad (förening)</span><output data-o="com"></output></span>
+        <input type="range" data-k="com" min="0" max="1000" step="10" value="150"></label>
+        <label class="sp-qrange"><span class="sp-qrow"><span>IBI (fastighetsskatt)</span><output data-o="ibi"></output></span>
+        <input type="range" data-k="ibi" min="0" max="6000" step="50" value="1150"></label>
+        <label class="sp-nl" style="margin-top:4px"><input type="checkbox" data-k="pkg" checked> Bankens paket (lägre ränta mot försäkringar och kort)</label>
+      </details>
+    </form>
+    <div class="sp-qc-out" aria-live="polite">
+      <div class="sp-qc-big"><span>Per månad</span><b data-o="total"></b><small data-o="sub"></small></div>
+      <div class="sp-qc-bar" data-o="bar" aria-hidden="true"></div>
+      <ul class="sp-qc-legend" data-o="legend"></ul>
+      <div class="sp-qc-cash"><div><span>Kontant på köpdagen</span><b data-o="cash"></b></div><div><span>Lån</span><b data-o="loan"></b></div></div>
+      <div class="sp-qc-scen-h">Scenarier</div>
+      <p class="sp-small" style="margin:0;color:#AAB2BD">Fast ränta: scenarierna visar vad lånet kostar om räntan är en annan när ni tecknar det.</p>
+      <div class="sp-qc-scen" data-o="scen"></div>
+      <p class="sp-est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
+      {% if module.cta_url %}<div class="sp-row"><a class="sp-btn sp-light" href="{{ module.cta_url }}">{{ module.cta_label }}</a></div>{% endif %}
+      <div class="sp-stack" data-role="cap"><b>{{ module.cap_heading }}</b><p class="sp-note">{{ module.cap_note }}</p><form class="sp-capture" data-role="cap-form"><input type="email" required placeholder="din@epost.se" aria-label="E-post" autocomplete="email"><button class="sp-btn" type="submit">{{ module.cap_button }}</button>{% if module.newsletter_subscription_type_id %}<label class="sp-nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label>{% endif %}</form>{% if module.consent_text %}<p class="sp-consent">{{ module.consent_text }}</p>{% endif %}<p class="sp-err" data-role="cap-err" hidden></p></div>
+    </div>
+  </section>
+</div>

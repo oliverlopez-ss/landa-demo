@@ -1,0 +1,121 @@
+[
+  {
+    "name": "heading",
+    "label": "Rubrik",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Vad kostar bostaden i månaden, på riktigt?"
+  },
+  {
+    "name": "intro",
+    "label": "Ingress",
+    "required": false,
+    "locked": false,
+    "type": "richtext",
+    "default": "<p>Dra i reglagen. Vi räknar med spanska bankers villkor, skatterna vid köp och de löpande kostnader som mäklarannonsen inte visar.</p>"
+  },
+  {
+    "name": "accent_color",
+    "label": "Accentfärg",
+    "required": false,
+    "locked": false,
+    "type": "color",
+    "default": {
+      "color": "#17724A",
+      "opacity": 100
+    }
+  },
+  {
+    "required": false,
+    "locked": false,
+    "name": "default_price",
+    "label": "Förvalt pris (€)",
+    "type": "number",
+    "display": "text",
+    "min": 150000,
+    "max": 3000000,
+    "step": 10000,
+    "default": 450000
+  },
+  {
+    "required": false,
+    "locked": false,
+    "name": "cta_label",
+    "label": "Knapptext, länk till lånepartner",
+    "type": "text",
+    "default": "Få ett riktigt lånebesked"
+  },
+  {
+    "required": false,
+    "locked": false,
+    "name": "cta_url",
+    "label": "Länk till lånepartner (tom = ingen knapp)",
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "cap_heading",
+    "label": "Formulär: rubrik",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Spara kalkylen"
+  },
+  {
+    "name": "cap_note",
+    "label": "Formulär: text",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Vi sparar kalkylen."
+  },
+  {
+    "name": "cap_button",
+    "label": "Formulär: knapptext",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Spara"
+  },
+  {
+    "name": "portal_id",
+    "label": "HubSpot portal-id (tomt = förhandsläge, inget skickas)",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "form_guid",
+    "label": "HubSpot formulär-GUID",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "newsletter_subscription_type_id",
+    "label": "Prenumerationstyp-id för Flyttbrevet (valfritt; tomt = ingen kryssruta)",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "consent_text",
+    "label": "Samtyckestext",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Vi sparar e-postadressen och era svar för att kunna skicka resultatet och svara på frågor. Ni kan när som helst be oss ta bort uppgifterna. Läs mer i integritetspolicyn."
+  },
+  {
+    "name": "source_value",
+    "label": "Källa (solpass_kalla)",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "kalkyl-bostad"
+  }
+]

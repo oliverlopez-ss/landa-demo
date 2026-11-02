@@ -1,0 +1,141 @@
+/* Solpass calculator module. Every selector is scoped under .sp-bostadskostnad; the theme sets the font (Schibsted Grotesk). */
+.sp-bostadskostnad{
+  --sp-acc-c: var(--sp-acc, #17724A);
+  --sp-acc-soft: color-mix(in srgb, var(--sp-acc-c) 11%, #fff);
+  --sp-ink: #0E1116; --sp-muted: #5B6470; --sp-line: #E4E7EB; --sp-paper: #FFFFFF; --sp-deep: #F5F6F8;
+  --sp-warn: #B4452B; --sp-ok-soft: #E6F4EC; --sp-r: 14px;
+  color: var(--sp-ink); font: inherit; line-height: 1.6; display: block; max-width: 1160px; margin: 0 auto;
+}
+.sp-bostadskostnad *, .sp-bostadskostnad *::before, .sp-bostadskostnad *::after{ box-sizing: border-box }
+.sp-bostadskostnad [hidden]{ display: none !important }
+.sp-bostadskostnad p{ margin: 0 }
+.sp-bostadskostnad .sp-head{ display: grid; gap: 10px; margin-bottom: 24px }
+.sp-bostadskostnad .sp-head h2{ margin: 0; font-family: inherit; font-weight: 700; font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.05; letter-spacing: -.04em; color: var(--sp-ink) }
+.sp-bostadskostnad .sp-intro{ font-size: 1.08rem; color: var(--sp-muted); max-width: 60ch }
+.sp-bostadskostnad .sp-intro p{ margin: 0 0 .6em }
+.sp-bostadskostnad .sp-intro p:last-child{ margin: 0 }
+.sp-bostadskostnad .sp-small{ font-size: .86rem }
+.sp-bostadskostnad .sp-muted{ color: var(--sp-muted) }
+.sp-bostadskostnad .sp-stack{ display: grid; gap: 12px }
+.sp-bostadskostnad .sp-row{ display: flex; flex-wrap: wrap; gap: 10px; align-items: center }
+.sp-bostadskostnad .sp-est{ font-size: .84rem; line-height: 1.5; margin: 0; padding: 12px 14px; border-left: 3px solid currentColor; opacity: .85 }
+.sp-bostadskostnad .sp-est b{ font-weight: 600 }
+
+.sp-bostadskostnad .sp-btn{ display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 8px; padding: 13px 22px; font: inherit; font-weight: 600; font-size: 1rem; line-height: 1.2; cursor: pointer; text-decoration: none; background: var(--sp-ink); color: #fff }
+.sp-bostadskostnad .sp-btn:hover{ background: color-mix(in srgb, var(--sp-ink) 86%, var(--sp-acc-c)) }
+.sp-bostadskostnad .sp-btn.sp-light{ background: #fff; color: var(--sp-ink) }
+.sp-bostadskostnad .sp-btn.sp-light:hover{ background: #EEF0F3 }
+.sp-bostadskostnad .sp-btn[disabled]{ opacity: .55; cursor: default }
+.sp-bostadskostnad .sp-btn:focus-visible, .sp-bostadskostnad summary:focus-visible, .sp-bostadskostnad a:focus-visible{ outline: 3px solid var(--sp-acc-c); outline-offset: 2px }
+
+/* form */
+.sp-bostadskostnad .sp-calc{ display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1.1fr); gap: 24px; align-items: start }
+.sp-bostadskostnad .sp-card{ background: var(--sp-paper); border: 1px solid var(--sp-line); border-radius: var(--sp-r); padding: 24px; min-width: 0 }
+.sp-bostadskostnad .sp-field{ display: grid; gap: 6px; min-width: 0 }
+.sp-bostadskostnad .sp-field > span, .sp-bostadskostnad .sp-label{ font-size: .82rem; font-weight: 700; color: var(--sp-muted); letter-spacing: .02em }
+.sp-bostadskostnad input[type=text], .sp-bostadskostnad input[type=email], .sp-bostadskostnad input[type=number], .sp-bostadskostnad select{ width: 100%; padding: 12px 14px; border: 1.5px solid var(--sp-line); border-radius: 12px; background: var(--sp-paper); color: var(--sp-ink); font: inherit; font-size: 1rem; line-height: 1.3; margin: 0 }
+.sp-bostadskostnad input:focus, .sp-bostadskostnad select:focus{ outline: none; border-color: var(--sp-acc-c); box-shadow: 0 0 0 3px var(--sp-acc-soft) }
+.sp-bostadskostnad .sp-chips{ display: flex; flex-wrap: wrap; gap: 8px }
+.sp-bostadskostnad .sp-chip{ position: relative; border: 1.5px solid var(--sp-line); border-radius: 8px; padding: 8px 14px; font-size: .92rem; cursor: pointer; background: var(--sp-paper); user-select: none }
+.sp-bostadskostnad .sp-chip input{ position: absolute; opacity: 0; pointer-events: none }
+.sp-bostadskostnad .sp-chip:has(input:checked){ border-color: var(--sp-acc-c); background: var(--sp-acc-soft); color: var(--sp-acc-c); font-weight: 700 }
+.sp-bostadskostnad .sp-chip:has(input:focus-visible){ outline: 3px solid var(--sp-acc-c); outline-offset: 2px }
+.sp-bostadskostnad .sp-grid2{ display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px }
+
+/* result */
+.sp-bostadskostnad .sp-result{ background: var(--sp-deep); color: var(--sp-ink); border-radius: var(--sp-r); padding: 26px; display: grid; gap: 18px; min-width: 0 }
+.sp-bostadskostnad .sp-kpis{ display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px }
+.sp-bostadskostnad .sp-kpi{ border-radius: 12px; background: rgba(255,255,255,.65); padding: 14px 16px; min-width: 0 }
+.sp-bostadskostnad .sp-kpi .v{ font-weight: 800; font-size: clamp(1.4rem, 3vw, 1.9rem); font-variant-numeric: tabular-nums; line-height: 1.1; overflow-wrap: anywhere }
+.sp-bostadskostnad .sp-kpi .l{ font-size: .82rem; color: var(--sp-muted) }
+.sp-bostadskostnad .sp-kpi.big{ grid-column: 1 / -1 }
+.sp-bostadskostnad .sp-kpi.big .v{ font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--sp-acc-c) }
+.sp-bostadskostnad .sp-kpi.big.neg .v{ color: var(--sp-warn) }
+.sp-bostadskostnad .sp-result details{ border-top: 1px solid rgba(31,46,58,.15); padding-top: 12px }
+.sp-bostadskostnad .sp-result summary{ cursor: pointer; font-weight: 600 }
+.sp-bostadskostnad .sp-result table{ width: 100%; border-collapse: collapse; margin-top: 8px; font-size: .92rem }
+.sp-bostadskostnad .sp-result td{ padding: 6px 0; border-bottom: 1px solid rgba(31,46,58,.12); vertical-align: top }
+.sp-bostadskostnad .sp-result td:last-child{ text-align: right; font-variant-numeric: tabular-nums; padding-left: 10px }
+.sp-bostadskostnad .sp-note{ font-size: .8rem; color: var(--sp-muted) }
+
+/* capture */
+.sp-bostadskostnad .sp-capture{ display: flex; gap: 8px; flex-wrap: wrap }
+.sp-bostadskostnad .sp-capture input[type=email]{ flex: 1 1 200px; min-width: 0; width: auto; background: rgba(255,255,255,.95); color: #0F2535; border-color: transparent }
+.sp-bostadskostnad .sp-capture input[type=email]:focus{ border-color: var(--sp-acc-c) }
+.sp-bostadskostnad .sp-nl{ display: flex; align-items: center; gap: 8px; flex-basis: 100%; font-size: .88rem; color: var(--sp-muted); cursor: pointer }
+.sp-bostadskostnad .sp-nl input{ flex: none; width: 16px; height: 16px; accent-color: var(--sp-acc-c); margin: 0 }
+.sp-bostadskostnad .sp-consent{ font-size: .76rem; color: var(--sp-muted) }
+.sp-bostadskostnad .sp-ok{ background: color-mix(in srgb, var(--sp-acc-c) 14%, #fff); color: var(--sp-ink); border-radius: 12px; padding: 12px 14px; font-size: .95rem }
+.sp-bostadskostnad .sp-err{ color: var(--sp-warn); font-size: .9rem }
+
+@media (max-width: 900px){ .sp-bostadskostnad .sp-calc{ grid-template-columns: 1fr } }
+@media (max-width: 520px){
+  .sp-bostadskostnad .sp-grid2{ grid-template-columns: 1fr }
+  .sp-bostadskostnad .sp-card{ padding: 18px }
+  .sp-bostadskostnad .sp-result{ padding: 18px }
+}
+@media (max-width: 420px){ .sp-bostadskostnad .sp-kpis{ grid-template-columns: 1fr } }
+
+/* quick calculator */
+.sp-bostadskostnad .sp-qc{ display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 0; border: 1px solid var(--sp-line); border-radius: 20px; overflow: hidden; background: var(--sp-paper) }
+.sp-bostadskostnad .sp-qc-in{ padding: 28px; display: grid; gap: 10px; align-content: start; min-width: 0 }
+.sp-bostadskostnad .sp-qrange{ display: grid; gap: 0; margin: 0 }
+.sp-bostadskostnad .sp-qrow{ display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 8px }
+.sp-bostadskostnad .sp-qrow > span{ font-weight: 600 }
+.sp-bostadskostnad .sp-qrow output{ font-weight: 700; font-size: 1.15rem; font-variant-numeric: tabular-nums; letter-spacing: -.02em; text-align: right }
+.sp-bostadskostnad .sp-qc-two{ display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; margin-top: 6px }
+.sp-bostadskostnad input[type=range]{ -webkit-appearance: none; appearance: none; width: 100%; height: 28px; background: transparent; cursor: pointer; margin: 0; padding: 0; border: 0; --p: 50% }
+.sp-bostadskostnad input[type=range]::-webkit-slider-runnable-track{ height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--sp-acc-c) var(--p), var(--sp-line) var(--p)) }
+.sp-bostadskostnad input[type=range]::-moz-range-track{ height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--sp-acc-c) var(--p), var(--sp-line) var(--p)) }
+.sp-bostadskostnad input[type=range]::-webkit-slider-thumb{ -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--sp-paper); border: 2px solid var(--sp-acc-c); margin-top: -8px; box-shadow: 0 1px 4px rgba(14,17,22,.2) }
+.sp-bostadskostnad input[type=range]::-moz-range-thumb{ width: 18px; height: 18px; border-radius: 50%; background: var(--sp-paper); border: 2px solid var(--sp-acc-c) }
+.sp-bostadskostnad input[type=range]:focus{ box-shadow: none }
+.sp-bostadskostnad input[type=range]:focus-visible{ outline: none }
+.sp-bostadskostnad input[type=range]:focus-visible::-webkit-slider-thumb{ box-shadow: 0 0 0 4px var(--sp-acc-soft) }
+.sp-bostadskostnad .sp-seg{ display: inline-flex; flex-wrap: wrap; background: var(--sp-deep); border: 1px solid var(--sp-line); border-radius: 10px; padding: 3px; gap: 2px; justify-self: start }
+.sp-bostadskostnad .sp-seg button{ font: inherit; font-weight: 500; font-size: .92rem; line-height: 1.3; background: none; border: 0; border-radius: 8px; padding: 8px 12px; cursor: pointer; color: var(--sp-muted) }
+.sp-bostadskostnad .sp-seg button[aria-pressed="true"]{ background: var(--sp-paper); color: var(--sp-ink); font-weight: 600; box-shadow: 0 1px 2px rgba(14,17,22,.08) }
+.sp-bostadskostnad .sp-presets{ display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 8px; margin-top: 4px }
+.sp-bostadskostnad .sp-presets button{ text-align: left; background: var(--sp-paper); border: 1.5px solid var(--sp-line); border-radius: 12px; padding: 10px 12px; cursor: pointer; font: inherit; font-weight: 600; font-size: .92rem; line-height: 1.35; color: var(--sp-ink) }
+.sp-bostadskostnad .sp-presets button b{ display: block; font-weight: 700; font-size: 1.15rem; letter-spacing: -.02em; margin-top: 2px }
+.sp-bostadskostnad .sp-presets button small{ display: block; font-weight: 400; color: var(--sp-muted); font-size: .78rem; margin-top: 2px }
+.sp-bostadskostnad .sp-presets button[aria-pressed="true"]{ border-color: var(--sp-acc-c); background: var(--sp-acc-soft) }
+.sp-bostadskostnad .sp-qc-more{ margin-top: 10px; border-top: 1px solid var(--sp-line); padding-top: 10px }
+.sp-bostadskostnad .sp-qc-more summary{ cursor: pointer; font-weight: 600 }
+.sp-bostadskostnad .sp-qc-out{ background: #0E1116; color: #fff; padding: 28px; display: grid; gap: 16px; align-content: start; min-width: 0 }
+.sp-bostadskostnad .sp-qc-big span{ display: block; color: #AAB2BD; font-size: .92rem }
+.sp-bostadskostnad .sp-qc-big b{ display: block; font-weight: 700; font-size: clamp(2.6rem, 6vw, 4.6rem); line-height: 1; letter-spacing: -.05em; font-variant-numeric: tabular-nums; margin: 6px 0 }
+.sp-bostadskostnad .sp-qc-big small{ color: #AAB2BD; font-size: .9rem }
+.sp-bostadskostnad .sp-qc-bar{ display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: #1F252D }
+.sp-bostadskostnad .sp-qc-bar i{ display: block; height: 100%; transition: width .3s ease }
+.sp-bostadskostnad .sp-qc-legend{ list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 6px 16px; font-size: .88rem; color: #C9CFD6 }
+.sp-bostadskostnad .sp-qc-legend li{ display: flex; align-items: center; gap: 8px; margin: 0 }
+.sp-bostadskostnad .sp-qc-legend li b{ margin-left: auto; color: #fff; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap }
+.sp-bostadskostnad .sp-qc-legend i{ width: 10px; height: 10px; border-radius: 3px; flex: none }
+.sp-bostadskostnad .sp-qc-cash{ display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; border-top: 1px solid #262B33; padding-top: 16px }
+.sp-bostadskostnad .sp-qc-cash span{ display: block; color: #AAB2BD; font-size: .86rem }
+.sp-bostadskostnad .sp-qc-cash b{ font-weight: 700; font-size: 1.5rem; letter-spacing: -.03em; font-variant-numeric: tabular-nums }
+.sp-bostadskostnad .sp-qc-scen-h{ color: #AAB2BD; font-size: .86rem; border-top: 1px solid #262B33; padding-top: 16px }
+.sp-bostadskostnad .sp-qc-scen{ display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px }
+.sp-bostadskostnad .sp-qc-scen div{ background: #171B21; border: 1px solid #262B33; border-radius: 12px; padding: 12px 14px; min-width: 0 }
+.sp-bostadskostnad .sp-qc-scen span{ display: block; font-size: .84rem; color: #AAB2BD }
+.sp-bostadskostnad .sp-qc-scen b{ display: block; font-weight: 700; font-size: 1.25rem; font-variant-numeric: tabular-nums; margin-top: 2px }
+.sp-bostadskostnad .sp-qc-scen em{ font-style: normal; font-size: .84rem; font-weight: 600 }
+.sp-bostadskostnad .sp-qc-scen .up{ color: #F0A08A }
+.sp-bostadskostnad .sp-qc-scen .down{ color: #7FD6AA }
+/* the result panel is dark: light text for the estimate box and the capture form */
+.sp-bostadskostnad .sp-qc-out .sp-est{ margin-top: 0 }
+.sp-bostadskostnad .sp-qc-out .sp-note, .sp-bostadskostnad .sp-qc-out .sp-nl, .sp-bostadskostnad .sp-qc-out .sp-consent{ color: #AAB2BD }
+.sp-bostadskostnad .sp-qc-out [data-role=cap]{ border-top: 1px solid #262B33; padding-top: 16px }
+.sp-bostadskostnad .sp-qc-out .sp-capture .sp-btn{ background: #fff; color: #0E1116 }
+.sp-bostadskostnad .sp-qc-out .sp-capture .sp-btn:hover{ background: #EEF0F3 }
+.sp-bostadskostnad .sp-qc-out .sp-ok{ background: rgba(98,195,148,.16); color: #fff }
+.sp-bostadskostnad .sp-qc-out .sp-err{ color: #F0A08A }
+@media (max-width: 900px){ .sp-bostadskostnad .sp-qc{ grid-template-columns: 1fr } }
+@media (max-width: 520px){
+  .sp-bostadskostnad .sp-qc-two{ grid-template-columns: 1fr }
+  .sp-bostadskostnad .sp-qc-in, .sp-bostadskostnad .sp-qc-out{ padding: 20px }
+}
+@media (max-width: 400px){
+  .sp-bostadskostnad .sp-presets, .sp-bostadskostnad .sp-qc-legend, .sp-bostadskostnad .sp-qc-scen{ grid-template-columns: 1fr }
+}

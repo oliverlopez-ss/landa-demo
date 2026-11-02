@@ -1,0 +1,11 @@
+{
+  "label": "Solpass flyttplan",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "host_template_types": ["PAGE"],
+  "is_available_for_new_content": true,
+  "smart_type": "NOT_SMART",
+  "tags": [],
+  "content_types": ["SITE_PAGE", "LANDING_PAGE"]
+}

@@ -1,0 +1,115 @@
+[
+  {
+    "name": "heading",
+    "label": "Rubrik",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Vad sparar ni på Beckham-regimen?"
+  },
+  {
+    "name": "intro",
+    "label": "Ingress",
+    "required": false,
+    "locked": false,
+    "type": "richtext",
+    "default": "<p>Jämför spansk skatt med och utan regimen, för hela hushållet och för hela perioden. Regimen är personlig; make eller maka och barn kan följa med om deras sammanlagda skatteunderlag är lägre än huvudpersonens, varje år.</p>"
+  },
+  {
+    "name": "accent_color",
+    "label": "Accentfärg",
+    "required": false,
+    "locked": false,
+    "type": "color",
+    "default": {
+      "color": "#17724A",
+      "opacity": 100
+    }
+  },
+  {
+    "required": false,
+    "locked": false,
+    "name": "default_salary_1",
+    "label": "Förvald lön, person 1 (€ per år)",
+    "type": "number",
+    "display": "text",
+    "min": 0,
+    "step": 5000,
+    "default": 120000
+  },
+  {
+    "required": false,
+    "locked": false,
+    "name": "default_salary_2",
+    "label": "Förvald lön, person 2 (€ per år, 0 om ingen)",
+    "type": "number",
+    "display": "text",
+    "min": 0,
+    "step": 5000,
+    "default": 60000
+  },
+  {
+    "name": "cap_heading",
+    "label": "Formulär: rubrik",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Få kalkylen granskad"
+  },
+  {
+    "name": "cap_note",
+    "label": "Formulär: text",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Vill ni få kalkylen granskad? Vi sparar den och hör av oss när vi har en skatterådgivare som kan både Sverige och Spanien."
+  },
+  {
+    "name": "cap_button",
+    "label": "Formulär: knapptext",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Skicka"
+  },
+  {
+    "name": "portal_id",
+    "label": "HubSpot portal-id (tomt = förhandsläge, inget skickas)",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "form_guid",
+    "label": "HubSpot formulär-GUID",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "newsletter_subscription_type_id",
+    "label": "Prenumerationstyp-id för Flyttbrevet (valfritt; tomt = ingen kryssruta)",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": ""
+  },
+  {
+    "name": "consent_text",
+    "label": "Samtyckestext",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "Vi sparar e-postadressen och era svar för att kunna skicka resultatet och svara på frågor. Ni kan när som helst be oss ta bort uppgifterna. Läs mer i integritetspolicyn."
+  },
+  {
+    "name": "source_value",
+    "label": "Källa (solpass_kalla)",
+    "required": false,
+    "locked": false,
+    "type": "text",
+    "default": "kalkyl-beckham"
+  }
+]

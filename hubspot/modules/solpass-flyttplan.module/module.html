@@ -1,0 +1,35 @@
+{# Solpass flyttplan: wizard + generated moving plan. All behaviour in module.js, scoped to this root element. #}
+<div class="sp-flyttplan"
+  data-portal="{{ module.portal_id|escape_attr }}"
+  data-form="{{ module.form_guid|escape_attr }}"
+  data-source="{{ module.source_value|escape_attr }}"
+  data-nl="{{ module.newsletter_subscription_type_id|escape_attr }}"
+  data-consent="{{ module.consent_text|escape_attr }}"
+  data-urls='{{ {"partners": module.url_partners, "dokument": module.url_dokument, "skatt": module.url_skatt, "bostad": module.url_bostad}|tojson|replace("'", "&#39;") }}'
+  style="--sp-acc: {{ module.accent_color.color }}">
+
+  <div class="fp-intro" data-fp-view="intro">
+    <div class="fp-eyebrow">Flyttplan</div>
+    <h2 class="fp-h">{{ module.heading }}</h2>
+    <div class="fp-lead">{{ module.intro }}</div>
+    <div class="fp-row"><button type="button" class="fp-btn fp-btn-sun" data-fp-act="start">Gör er flyttplan</button></div>
+  </div>
+
+  <div class="fp-wizard" data-fp-view="wizard" hidden>
+    <div class="fp-wz" data-fp-wz aria-live="polite"></div>
+  </div>
+
+  <div class="fp-planview" data-fp-view="plan" hidden>
+    <div class="fp-apphead">
+      <div class="fp-eyebrow">Er flyttplan</div>
+      <h2 class="fp-h" data-fp-title>Er flytt, steg för steg</h2>
+      <div class="fp-summary" data-fp-summary></div>
+      <div class="fp-row"><button type="button" class="fp-linkbtn" data-fp-act="edit">Ändra svar</button><button type="button" class="fp-linkbtn" data-fp-act="pdf">Ladda ner som PDF</button></div>
+      <p class="fp-err" data-fp-pdfmsg hidden></p>
+      <div class="fp-bar"><div class="fp-progress"><i data-fp-prog style="width:0%"></i></div><span class="fp-small fp-muted" data-fp-count></span></div>
+    </div>
+    <div data-fp-plan></div>
+  </div>
+
+  <noscript><p>Flyttplanen kräver JavaScript.</p></noscript>
+</div>

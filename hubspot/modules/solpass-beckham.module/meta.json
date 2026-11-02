@@ -1,0 +1,17 @@
+{
+  "label": "Solpass: Beckham-kalkyl",
+  "css_assets": [],
+  "external_js": [],
+  "global": false,
+  "host_template_types": [
+    "PAGE",
+    "BLOG_POST"
+  ],
+  "is_available_for_new_content": true,
+  "smart_type": "NOT_SMART",
+  "tags": [],
+  "content_types": [
+    "SITE_PAGE",
+    "LANDING_PAGE"
+  ]
+}

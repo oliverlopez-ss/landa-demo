@@ -1,0 +1,37 @@
+<!-- Solpass: Hyra eller köpa. Calculator logic and texts copied from the Solpass demo (index.html). -->
+<div class="sp-hyra-eller-kopa" data-portal="{{ module.portal_id }}" data-form="{{ module.form_guid }}" data-source="{{ module.source_value }}" data-nl="{{ module.newsletter_subscription_type_id }}" data-consent="{{ module.consent_text|escape_attr }}" style="--sp-acc: {{ module.accent_color.color }}" data-price="{{ module.default_price }}" data-rent="{{ module.default_rent }}">
+  <div class="sp-head">{% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}{% if module.intro %}<div class="sp-intro">{{ module.intro }}</div>{% endif %}</div>
+  <div class="sp-calc">
+    <form class="sp-card sp-stack" data-role="in" onsubmit="return false">
+      <div class="sp-grid2">
+        <label class="sp-field"><span>Pris för bostaden ni skulle köpa (€)</span><input type="number" data-k="price" value="450000" step="10000" min="0" inputmode="numeric"></label>
+        <label class="sp-field"><span>Hyra för motsvarande bostad (€ per månad)</span><input type="number" data-k="rent" value="1950" step="50" min="0" inputmode="numeric"></label>
+      </div>
+      <p class="sp-small sp-muted" style="margin:-4px 0 0">Hyran föreslås till cirka 5,2&nbsp;% av priset per år. Snitten från idealista ger 4,5–5,5&nbsp;% och annonser för familjebostäder ofta lite mer. Ändra till den hyra ni faktiskt ser.</p>
+      <div class="sp-field"><span>Hur länge räknar vi?</span>
+        <div class="sp-chips">
+          <label class="sp-chip"><input type="radio" data-radio="years" value="3">3 år</label>
+          <label class="sp-chip"><input type="radio" data-radio="years" value="5" checked>5 år</label>
+          <label class="sp-chip"><input type="radio" data-radio="years" value="10">10 år</label>
+        </div></div>
+      <div class="sp-grid2">
+        <label class="sp-field"><span>Kontantinsats (% av priset)</span><input type="number" data-k="down" value="30" min="10" max="100" step="5"></label>
+        <label class="sp-field"><span>Bolåneränta, fast (%)</span><input type="number" data-k="rate" value="2.85" min="0" max="15" step="0.05"></label>
+      </div>
+      <div class="sp-grid2">
+        <label class="sp-field"><span>Prisutveckling per år (%)</span><input type="number" data-k="growth" value="2" min="-10" max="15" step="0.5"></label>
+        <label class="sp-field"><span>Hyreshöjning per år (%, marknadshyra)</span><input type="number" data-k="rentg" value="3" min="-5" max="15" step="0.5"></label>
+      </div>
+      <div class="sp-grid2">
+        <label class="sp-field"><span>Comunidad (€ per månad)</span><input type="number" data-k="com" value="150" min="0" step="10"></label>
+        <label class="sp-field"><span>Avkastning på pengar ni inte binder (% per år)</span><input type="number" data-k="alt" value="3" min="0" max="15" step="0.5"></label>
+      </div>
+      <p class="sp-small sp-muted">Andalusien, begagnad bostad, lån på 25 år, ni är residenta vid köpet. Mäklararvode vid försäljning 5 % plus moms, underhåll 1 % av priset per år, reavinstskatt enligt spansk sparskala. Den som är resident kan slippa skatten om vinsten återinvesteras i en ny permanentbostad.</p>
+    </form>
+    <div class="sp-result">
+      <div data-role="out" class="sp-stack" style="gap:18px" aria-live="polite"></div>
+      <p class="sp-est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
+      <div class="sp-stack" data-role="cap"><b>{{ module.cap_heading }}</b><p class="sp-note">{{ module.cap_note }}</p><form class="sp-capture" data-role="cap-form"><input type="email" required placeholder="din@epost.se" aria-label="E-post" autocomplete="email"><button class="sp-btn" type="submit">{{ module.cap_button }}</button>{% if module.newsletter_subscription_type_id %}<label class="sp-nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label>{% endif %}</form>{% if module.consent_text %}<p class="sp-consent">{{ module.consent_text }}</p>{% endif %}<p class="sp-err" data-role="cap-err" hidden></p></div>
+    </div>
+  </div>
+</div>

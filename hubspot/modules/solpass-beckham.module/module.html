@@ -1,0 +1,32 @@
+<!-- Solpass: Beckham-kalkyl. Calculator logic and texts copied from the Solpass demo (index.html). -->
+<div class="sp-beckham" data-portal="{{ module.portal_id }}" data-form="{{ module.form_guid }}" data-source="{{ module.source_value }}" data-nl="{{ module.newsletter_subscription_type_id }}" data-consent="{{ module.consent_text|escape_attr }}" style="--sp-acc: {{ module.accent_color.color }}" data-s1="{{ module.default_salary_1 }}" data-s2="{{ module.default_salary_2 }}">
+  <div class="sp-head">{% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}{% if module.intro %}<div class="sp-intro">{{ module.intro }}</div>{% endif %}</div>
+  <div class="sp-calc">
+    <form class="sp-card sp-stack" data-role="in" onsubmit="return false">
+      <div class="sp-grid2">
+        <label class="sp-field"><span>Lön, person 1 (€ per år, brutto)</span><input type="number" data-k="s1" value="120000" step="5000" min="0" inputmode="numeric"></label>
+        <label class="sp-field"><span>Lön, person 2 (€ per år, 0 om ingen)</span><input type="number" data-k="s2" value="60000" step="5000" min="0" inputmode="numeric"></label>
+      </div>
+      <label class="sp-field"><span>Varför flyttar ni?</span>
+        <select data-k="why">
+          <option value="distans">Jobbar på distans för en arbetsgivare utanför Spanien</option>
+          <option value="spansk">Anställning hos en arbetsgivare i Spanien</option>
+          <option value="vd">Blir styrelseledamot eller VD i ett bolag (eget eller annans)</option>
+          <option value="egen">Egen verksamhet som egenföretagare</option>
+          <option value="pension">Pension eller kapital, ingen lön</option>
+        </select></label>
+      <div class="sp-field"><span>Har någon av er bott i Spanien de senaste fem åren?</span>
+        <div class="sp-chips">
+          <label class="sp-chip"><input type="radio" data-radio="prev" value="nej" checked>Nej</label>
+          <label class="sp-chip"><input type="radio" data-radio="prev" value="ja">Ja</label>
+        </div></div>
+      <label class="sp-field"><span>Utdelning, ränta och kapitalvinst från Sverige (€ per år)</span><input type="number" data-k="cap" value="0" step="5000" min="0" inputmode="numeric"></label>
+      <p class="sp-small sp-muted">Skatt i Andalusien 2026: statlig plus regional skala. Beckham: 24 % på lönen, ingen spansk skatt på kapital utanför Spanien. Svensk skatt på svenska inkomster ingår inte.</p>
+    </form>
+    <div class="sp-result">
+      <div data-role="out" class="sp-stack" style="gap:18px" aria-live="polite"></div>
+      <p class="sp-est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
+      <div class="sp-stack" data-role="cap"><b>{{ module.cap_heading }}</b><p class="sp-note">{{ module.cap_note }}</p><form class="sp-capture" data-role="cap-form"><input type="email" required placeholder="din@epost.se" aria-label="E-post" autocomplete="email"><button class="sp-btn" type="submit">{{ module.cap_button }}</button>{% if module.newsletter_subscription_type_id %}<label class="sp-nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label>{% endif %}</form>{% if module.consent_text %}<p class="sp-consent">{{ module.consent_text }}</p>{% endif %}<p class="sp-err" data-role="cap-err" hidden></p></div>
+    </div>
+  </div>
+</div>
