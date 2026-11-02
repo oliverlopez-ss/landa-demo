@@ -742,13 +742,16 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
             <label class="field"><span>Antal barn</span><input type="number" id="c_kids" value="2" min="0" max="6"></label>
             <label class="field"><span>Skola</span><select id="c_skola"><option value="int">Internationell skola</option><option value="sv">Svensk skola</option><option value="pub">Spansk kommunal skola</option></select></label>
           </div>
-          <label class="field"><span>Bilar</span><input type="number" id="c_bil" value="1" min="0" max="4"></label>
+          <div class="grid2">
+            <label class="field"><span>Bilar</span><input type="number" id="c_bil" value="1" min="0" max="4"></label>
+            <label class="field"><span>Netto i Sverige i dag, hela hushållet (kr per månad)</span><input type="number" id="c_senet" value="60000" step="1000" min="0" inputmode="numeric"><small class="muted">Står på lönebeskedet.</small></label>
+          </div>
           <p class="small muted">Kurs 11,3 SEK/EUR. Belopp i euro per månad.</p>
         </form>
         <div class="result">
           <div id="calcOut" class="stack" style="gap:18px"></div>
       <p class="est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
-          <div class="stack" id="calcCap"><b>Spara kalkylen</b><p class="note">Vi sparar kalkylen och skickar den till er.</p><form class="capture" onsubmit="return false" id="calcForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="calcEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form><p class="err" id="calcErr" hidden></p></div>
+          <div class="stack" id="calcCap"><b>Spara kalkylen</b><p class="note">Vi sparar kalkylen.</p><form class="capture" onsubmit="return false" id="calcForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="calcEmail"><button class="btn sun" type="submit">Spara</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form><p class="err" id="calcErr" hidden></p></div>
         </div>
       </div>
     </div>
@@ -776,7 +779,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <div class="homefacts">
         <div><b>70 %</b><span>lånar spanska banker normalt ut till den som inte är resident, mot 80 % för residenta</span></div>
         <div><b>7 %</b><span>överlåtelseskatt på en begagnad bostad i Andalusien (2026; Junta de Andalucía har föreslagit 6,75 % från 2027), plus notarie, registro och advokat</span></div>
-        <div><b>3,24 %</b><span>Euribor 12 månader, snitt oktober 2026. Rörlig ränta är Euribor plus bankens marginal.</span></div>
+        <div><b>3,24 %</b><span>Euribor 12 månader, preliminärt oktobersnitt 2026. Rörlig ränta är Euribor plus bankens marginal.</span></div>
       </div>
       <div class="row" style="margin-top:28px"><a class="btn sea" href="#bostad">Räkna på en bostad</a><a class="btn ghost" href="#hyrakopa">Hyra eller köpa, över fem år?</a></div>
     </div>
@@ -847,7 +850,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
         <div class="plan hl">
           <span class="pill">Mest värde</span>
           <h3>Solpass Plus</h3>
-          <div class="price">249 € <small>en gång, hela flytten</small></div>
+          <div class="price">249 € <small>kommande pris, en gång för hela flytten</small></div>
           <ul>
             <li>Matchning och varm introduktion till utvalda partners, när de är på plats</li>
             <li>Sista datum på varje steg, räknat från er flyttdag</li>
@@ -1038,7 +1041,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
     <div class="result">
       <div id="rbOut" class="stack" style="gap:18px"></div>
       <p class="est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
-      <div class="stack" id="rbCap"><b>Spara jämförelsen</b><p class="note">Vi sparar jämförelsen och skickar den till er. Vill ni ha bostäder att räkna på kan ni bli kontaktade av mäklare i bostadsguiden.</p><form class="capture" onsubmit="return false" id="rbForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="rbEmail"><button class="btn sun" type="submit">Skicka</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form><p class="err" id="rbErr" hidden></p></div>
+      <div class="stack" id="rbCap"><b>Spara jämförelsen</b><p class="note">Vi sparar jämförelsen. Vill ni ha bostäder att räkna på kan ni bli kontaktade av mäklare i bostadsguiden.</p><form class="capture" onsubmit="return false" id="rbForm"><input type="email" required placeholder="din@epost.se" aria-label="E-post" id="rbEmail"><button class="btn sun" type="submit">Spara</button><label class="nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label></form><p class="err" id="rbErr" hidden></p></div>
     </div>
   </div>
 </div></div>
@@ -1117,7 +1120,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
 
   <h3 style="margin:40px 0 4px">Att hyra</h3>
   <ol class="guide">
-    <li><div><b>Kontrakt för permanentbostad</b><p>Kräv kontrakt för permanentbostad (vivienda habitual). Med ett temporada-kontrakt kan kommunen vägra padrón, och det är padrón som låser upp skola, vård och bil.</p></div></li>
+    <li><div><b>Hyresavtal och padrón</b><p>Välj ett avtal som motsvarar hur bostaden faktiskt ska användas. För padrón bedöms var ni verkligen bor, inte bara kontraktets rubrik. Ett tillfälligt avtal kan kräva mer underlag eller kontroll från kommunen. Det är padrón som låser upp skola, vård och bil.</p></div></li>
     <li><div><b>Ni bestämmer hur länge ni bor kvar</b><p>Som hyresgäst kan ni förlänga kontraktet år för år upp till fem år om hyresvärden är en privatperson, och sju år om det är ett bolag (hyreslagen LAU, artikel 9).</p></div></li>
     <li><div><b>Deposition och garantier har ett tak</b><p>Depositionen (fianza) är en månadshyra. Extra garantier får vara högst två månadshyror på kontrakt upp till fem år, eller sju om hyresvärden är ett bolag (artikel 36).</p></div></li>
     <li><div><b>Mäklarens arvode betalas av hyresvärden</b><p>Avgifter för förmedling och kontrakt får inte läggas på hyresgästen (artikel 20). Ber någon om det, säg nej.</p></div></li>
@@ -1288,7 +1291,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
   <div class="wrap">
     <a class="logo" href="#" aria-label="Solpass">s<i aria-hidden="true"></i>lpass</a>
     <p>Solpass är en guide, inte juridisk eller skatterättslig rådgivning. Belopp, tidsfrister och regler ändras; verifiera alltid hos myndigheten eller en rådgivare innan ni fattar beslut.</p>
-    <p>Testversion. Planen sparas i den här webbläsaren. E-post och förfrågningar ni skickar sparas hos Solpass så att vi kan svara.</p>
+    <p>Testversion. Planen sparas i den här webbläsaren. Formulären sparar inga uppgifter just nu; det slås på när bolaget bakom Solpass är registrerat.</p>
     <p>Foto från Unsplash: <a href="https://unsplash.com/photos/whitewashed-village-nestled-on-a-hillside-at-sunset-CZyHIMBIC34" target="_blank" rel="noopener">Parastou Najdalizadeh</a> (Mijas), <a href="https://unsplash.com/photos/boats-docked-in-a-marina-with-white-buildings-and-mountain-EIIxFvNh4Vs" target="_blank" rel="noopener">Ionut Dobre</a> (Marbella), <a href="https://unsplash.com/photos/tall-palm-tree-trunks-against-a-clear-blue-sky-PqUC0_UydYs" target="_blank" rel="noopener">Victor Broch</a> (San Pedro och <a href="https://unsplash.com/photos/silhouette-of-trees-and-mountains-during-daytime-hPkIQ4yUUp0" target="_blank" rel="noopener">Benahavís</a>), <a href="https://unsplash.com/photos/a-narrow-street-lined-with-potted-plants-h-RVqwj3g4A" target="_blank" rel="noopener">Christian Hergesell</a> och <a href="https://unsplash.com/photos/beautiful-beach-along-a-coastline-with-a-city-czTRILo5r2E" target="_blank" rel="noopener">Javier Ramos</a> (Estepona) samt <a href="https://unsplash.com/photos/a-narrow-city-street-with-a-clock-tower-in-the-background-YOWXcpVtDsQ" target="_blank" rel="noopener">Kristina Bekher</a> (Málaga).</p>
   </div>
 </footer>
@@ -1314,7 +1317,7 @@ const CONTACTS = [
  {id:"skv",k:"Myndighet",title:"Skatteverket – anmäl flytt utomlands",status:"v",text:"Anmälan görs före avresan. Avgör folkbokföring, SINK och om Sverige fortfarande ser er som skatterättsligt bosatta (väsentlig anknytning).",link:"https://www.skatteverket.se/privat/folkbokforing/flyttafransverige.4.18e1b10334ebe8bc80001591.html",lt:"Flytta från Sverige",more:[["Beställ personbevis","https://www.skatteverket.se/privat/folkbokforing/personbevis/hittaochbestallpersonbevis.4.361dc8c15312eff6fdb20.html"]]},
  {id:"aeat",k:"Myndighet",title:"Agencia Tributaria (AEAT)",status:"v",text:"Spanska skatteverket. Registrering med Modelo 030, deklaration (Renta) i april–juni, Modelo 720 för utländska tillgångar.",link:"https://sede.agenciatributaria.gob.es/Sede/no-residentes/residencia-personas-fisicas-juridicas/persona-fisica-residente-espana.html",lt:"När ni blir skatterättsligt bosatta",more:[["Modelo 030, skatteregistrering","https://sede.agenciatributaria.gob.es/Sede/procedimientoini/G321.shtml"],["Modelo 720","https://sede.agenciatributaria.gob.es/Sede/todas-gestiones/impuestos-tasas/declaraciones-informativas/modelo-720-decla_____sobre-bienes-derechos-extranjero_/plazos-presentacion.html"]]},
  {id:"dgt",k:"Myndighet",title:"DGT – trafikverket",status:"v",text:"Omregistrering av bil, byte av körkort, fordonsskatt via kommunen. Tid bokas via cita previa; en gestor gör det i praktiken åt er.",link:"https://www.dgt.es/nuestros-servicios/tu-vehiculo/quieres-traer-o-llevarte-un-vehiculo-del-extranjero/matricular-un-vehiculo-proveniente-de-la-ue/",lt:"Registrera en bil från EU",more:[["Körkort från EU: giltighet och byte","https://sede.dgt.gob.es/es/permisos-de-conducir/canjes-de-permisos/canjes-de-permisos-extranjeros/canjes-inscripcion-renovacion-y-sustitucion-de-permisos-de-la-ue-y-eee/canje-de-permisos-de-la-ue-y-eee/"]]},
- {id:"ss",k:"Myndighet",title:"Seguridad Social",status:"v",text:"Socialförsäkringsnummer (NUSS) och tillgång till den offentliga vården. Vem som har rätt till vad beror på om ni arbetar i Spanien, är pensionär med S1 eller betalar privat.",link:"https://portal.seg-social.gob.es/wps/portal/importass/importass/Categorias/Altas%2C+bajas+y+modificaciones/Altas+y+afiliacion+de+trabajadores/Solicitar+el+numero+de+la+Seguridad+Social",lt:"Ansök om socialförsäkringsnummer (NUSS)",more:[["Registrera intyg S1 för vård","https://prestaciones.seg-social.es/servicio/registrar-formulario-s1-asistencia-sanitaria-espana.html"]]},
+ {id:"ss",k:"Myndighet",title:"Seguridad Social",status:"v",text:"Socialförsäkringsnummer (NUSS) och tillgång till den offentliga vården. Numret (NUSS) och registreringen av arbetet (alta) är olika steg. Anställda och egenföretagare ska registreras innan arbetet börjar. Vem som har rätt till vad beror på om ni arbetar i Spanien, är pensionär med S1 eller betalar privat.",link:"https://portal.seg-social.gob.es/wps/portal/importass/importass/Categorias/Altas%2C+bajas+y+modificaciones/Altas+y+afiliacion+de+trabajadores/Solicitar+el+numero+de+la+Seguridad+Social",lt:"Ansök om socialförsäkringsnummer (NUSS)",more:[["Registrera intyg S1 för vård","https://prestaciones.seg-social.es/servicio/registrar-formulario-s1-asistencia-sanitaria-espana.html"]]},
  {id:"fnmt",k:"Myndighet",title:"FNMT – digitalt certifikat",status:"v",text:"Certificado digital låser upp i stort sett alla myndighetsärenden online. Skaffa det så tidigt det går efter NIE.",link:"https://www.sede.fnmt.gob.es/certificados/persona-fisica",lt:"Ansök om certifikat",more:[]},
  {id:"skola-sv",k:"Skola",title:"Svenska skolan Marbella",status:"v",text:"Svensk läroplan, svensk gemenskap, mjuk landning för barn som ska kunna gå tillbaka till svenskt system.",link:"https://www.svenskaskolanmarbella.com"},
  {id:"skola-int",k:"Skola",title:"Internationella skolor på kusten",status:"o",text:"Engelskspråkiga skolor med brittisk eller amerikansk läroplan (t.ex. Atlas, Aloha, EIC, Swans). Avgifter, köer och antagningsdatum skiljer sig kraftigt; jämför dem under Skolor.",link:null,note:"Jämförelse under arbete"},
@@ -1337,9 +1340,9 @@ const FAQ = [
   {q:"Hyra först eller köpa direkt?",a:"<p>Hyr först om ni inte känner området. Ett år på plats visar vilka områden som fungerar med skola, trafik och vardag, och ni slipper ta en köpskatt på 7 % i Andalusien (2026; Junta de Andalucía har föreslagit 6,75 % från 2027) på ett hus ni kanske vill byta. Köp direkt bara om ni redan har tillbringat mycket tid i området och vet exakt var ni vill bo.</p>",who:["maklare","advokat"]}
  ]},
  {cat:"Papper och myndigheter",items:[
-  {q:"Vad är NIE och hur får vi det?",a:"<p>NIE (Número de Identidad de Extranjero) är ert spanska identifikationsnummer. Utan det kan ni inte öppna bankkonto, skriva hyreskontrakt, köpa bil eller betala skatt. Det söks hos Policía Nacional med blankett EX-15, pass, avgift (tasa 790/012) och ett skäl, till exempel bostadsköp eller flytt. Varje person i familjen behöver eget NIE, även barnen.</p><p>Tiderna är ofta långa. Boka cita previa flera veckor i förväg, eller låt en gestor sköta det. Det går också att söka via spanska konsulatet i Stockholm före flytten.</p>",who:["policia","gestor"]},
+  {q:"Vad är NIE och hur får vi det?",a:"<p>NIE (Número de Identidad de Extranjero) är ert spanska identifikationsnummer och behövs i många myndighets-, skatte- och bankärenden. Kraven varierar mellan ärenden och banker; vissa banker erbjuder konton för icke-residenter med pass. Varje person i familjen behöver eget NIE, även barnen.</p><p>Flyttar ni hit på riktigt får ni NIE genom EU-registreringen (EX-18). En separat NIE-ansökan (EX-15) behövs främst om ni ska hyra eller köpa innan flytten. Den söks hos Policía Nacional eller via spanska konsulatet i Stockholm, med pass, avgift (tasa 790/012) och ett skäl, till exempel bostadsköp.</p><p>Tiderna är ofta långa. Boka cita previa flera veckor i förväg, eller låt en gestor sköta det.</p>",who:["policia","gestor"]},
   {q:"Vad är empadronamiento och varför tjatar alla om det?",a:"<p>Att skriva sig i kommunens register (padrón). Det är beviset på att ni bor här, och det krävs för skola, vårdcentral, bilomregistrering och de flesta kommunala tjänster. Görs på ayuntamiento med hyreskontrakt eller lagfart, pass och NIE. Gör det så fort ni har en bostad; det låser upp nästa steg.</p>",who:["ayto"]},
-  {q:"Måste vi registrera oss som residenta?",a:"<p>Ja. EU-medborgare som stannar mer än tre månader ska registrera sig och får ett grönt intyg (certificado de registro de ciudadano de la Unión). Arbetar ni i Spanien räcker anställningsbevis eller bevis på egenföretagande. Arbetar ni inte i Spanien (till exempel distansarbete utan spansk anställning eller pension) krävs både tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården. Blankett EX-18, bokad tid hos Policía Nacional.</p>",who:["policia","gestor"]},
+  {q:"Måste vi registrera oss som residenta?",a:"<p>Ja. EU-medborgare som stannar mer än tre månader ska registrera sig och får ett grönt intyg (certificado de registro de ciudadano de la Unión). Kraven för EU-registreringen beror på er faktiska arbets- och försörjningssituation i Spanien. Arbetar ni som anställd eller egenföretagare räcker normalt anställningsbevis eller bevis på egenföretagande. Distansarbete från Spanien åt en svensk arbetsgivare behandlas inte automatiskt som att ni saknar arbete här; kontrollera vilket anställningsunderlag och socialförsäkringsintyg som krävs. Arbetar ni inte alls krävs tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården. Blankett EX-18, bokad tid hos Policía Nacional.</p>",who:["policia","gestor"]},
   {q:"Vad gör vi hos Skatteverket innan vi åker?",a:"<p>Anmäl flytt till utlandet minst en vecka före avresan. Då avregistreras ni från folkbokföringen, och Skatteverket tar ställning till er skattestatus. Ansök om SINK om ni fortsätter ha svensk inkomst som anställda eller pension. Behåller ni bostad eller bolag i Sverige bör ni få skattestatusen bedömd skriftligt innan flytten.</p>",who:["skv","skatt"]},
   {q:"Vad är ett digitalt certifikat och behöver vi det?",a:"<p>Certificado digital från FNMT är den spanska motsvarigheten till BankID för myndigheter. Med det deklarerar ni, bokar tider, hämtar intyg och sköter bilärenden hemifrån. Utan det står ni i kö. Skaffa det direkt efter NIE; det kräver normalt ett besök på ett registreringskontor, och videoidentifiering finns för vissa.</p>",who:["fnmt"]}
  ]},
@@ -1349,7 +1352,7 @@ const FAQ = [
   {q:"Vad behöver vi för papper till skolan?",a:"<p>Empadronamiento, NIE för barnet, pass, vaccinationsintyg och betyg eller intyg från svensk skola. Internationella skolor vill ofta ha senaste två årens betyg och en rekommendation. Översättningar kan behövas för kommunal skola.</p><p>Ska ett barn börja på Bachillerato behöver studierna från Sverige homologeras. Under tiden skrivs barnet in villkorat (volante de inscripción condicional).</p>",who:["ayto"]}
  ]},
  {cat:"Bostad",items:[
-  {q:"Hur fungerar hyreskontrakt i Spanien?",a:"<p>Två typer: långtidskontrakt (vivienda habitual) med lagstadgat skydd, normalt fem år med rätt att säga upp efter sex månader, och tillfälliga kontrakt (temporada) utan samma skydd. Real Decreto-ley 29/2026, som ska godkännas av Kongressen i november, begränsar korttidskontrakt till högst tolv månader med ett verkligt skäl. Lagstadgad deposition är en månadshyra, men hyresvärdar begär ofta ytterligare garanti. Begär alltid långtidskontrakt när ni ska skriva er på adressen; vissa kommuner accepterar inte temporada-kontrakt för padrón.</p>",who:["maklare"]},
+  {q:"Hur fungerar hyreskontrakt i Spanien?",a:"<p>Två typer: långtidskontrakt (vivienda habitual) med lagstadgat skydd, normalt fem år med rätt att säga upp efter sex månader, och tillfälliga kontrakt (temporada) utan samma skydd. Real Decreto-ley 29/2026, som ska godkännas av Kongressen i november, begränsar korttidskontrakt till högst tolv månader med ett verkligt skäl. Lagstadgad deposition är en månadshyra, men hyresvärdar begär ofta ytterligare garanti. Välj ett avtal som motsvarar hur bostaden faktiskt ska användas. För padrón bedöms var ni verkligen bor, inte bara kontraktets rubrik. Ett tillfälligt avtal kan kräva mer underlag eller kontroll från kommunen.</p>",who:["maklare"]},
   {q:"Hur går ett bostadsköp till?",a:"<p>Först ett reservationsavtal med en mindre summa. Sedan ett kontrakt med handpenning (arras), oftast 10 %. Om kontraktet uttryckligen anger arras penitenciales (artikel 1454 Código Civil) kan båda backa: köparen förlorar handpenningen och säljaren betalar tillbaka det dubbla. Står det inte så kan motparten i stället kräva att köpet genomförs eller skadestånd. Sist betalas resten hos notarien.</p><p>Köpskatten (ITP) är 7 % i Andalusien för begagnade bostäder (2026; Junta de Andalucía har föreslagit 6,75 % från 2027). För nyproduktion gäller 10 % moms plus 1,2 % stämpelskatt. Lägg till notarie, registrering och advokat, så blir det totalt runt 8–9 % ovanpå priset för en begagnad bostad och 12–13 % för nyproduktion.</p><p>Mäklaren företräder säljaren. Ha egen advokat som kontrollerar lagfart, skulder, bygglov och eventuella olagliga tillbyggnader före arras.</p>",who:["advokat","maklare"]},
   {q:"Vilka löpande kostnader har en bostad?",a:"<p>IBI (kommunal fastighetsskatt), sophämtning, comunidad (föreningsavgift) om det är en urbanisation eller lägenhet, hemförsäkring, el, vatten och internet. El är dyrare än i Sverige och villor med pool och luftkonditionering drar mycket.</p>",who:["ayto"]}
  ]},
@@ -1358,7 +1361,7 @@ const FAQ = [
   {q:"Gäller vårt svenska körkort?",a:"<p>Ja. Ett giltigt svenskt körkort gäller i Spanien och byte är frivilligt. När det går ut förnyar ni det hos DGT, eftersom ni då bor i Spanien. Det kan ändå vara praktiskt att ha ett spanskt kort när ni ska visa legitimation.</p>",who:["dgt"]}
  ]},
  {cat:"Sjukvård och försäkring",items:[
-  {q:"Hur får vi sjukvård?",a:"<p>Arbetar ni i Spanien och betalar till Seguridad Social har hela familjen rätt till offentlig vård via vårdcentralen (centro de salud). Svenska pensionärer får offentlig vård genom S1-intyg från Försäkringskassan. Bor och arbetar ni i Spanien åt en svensk arbetsgivare ska ni normalt försäkras i Spanien. Arbetsgivaren behöver då registrera sig här, om ni inte är utsända med intyg A1. Stäm av med Försäkringskassan och en rådgivare.</p><p>För residensregistreringen gäller: arbetar ni i Spanien räcker anställningsbevis eller bevis på egenföretagande. Arbetar ni inte i Spanien (till exempel distansarbete utan spansk anställning eller pension) krävs både tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården.</p>",who:["ss","bank"]},
+  {q:"Hur får vi sjukvård?",a:"<p>Arbetar ni i Spanien och betalar till Seguridad Social har hela familjen rätt till offentlig vård via vårdcentralen (centro de salud). Svenska pensionärer får offentlig vård genom S1-intyg från Försäkringskassan. Bor och arbetar ni i Spanien åt en svensk arbetsgivare ska ni normalt försäkras i Spanien. Arbetsgivaren behöver då registrera sig här, om ni inte är utsända med intyg A1. Stäm av med Försäkringskassan och en rådgivare.</p><p>För residensregistreringen gäller: kraven för EU-registreringen beror på er faktiska arbets- och försörjningssituation i Spanien. Arbetar ni som anställd eller egenföretagare räcker normalt anställningsbevis eller bevis på egenföretagande. Distansarbete från Spanien åt en svensk arbetsgivare behandlas inte automatiskt som att ni saknar arbete här; kontrollera vilket anställningsunderlag och socialförsäkringsintyg som krävs. Arbetar ni inte alls krävs tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården.</p>",who:["ss","bank"]},
   {q:"Vad händer med Försäkringskassan och barnbidrag?",a:"<p>När ni flyttar och arbetar utanför Sverige upphör normalt svenska förmåner som barnbidrag och föräldrapenning. Är ni fortsatt anställda av svensk arbetsgivare och utsända kan annat gälla. Anmäl flytten till Försäkringskassan samtidigt som till Skatteverket.</p>",who:["skv"]}
  ]},
  {cat:"Efter landning",items:[
@@ -1381,9 +1384,9 @@ const TASKS = [
  {ph:1,off:-180,t:"Bestäm om bilen ska säljas i Sverige",d:"Omregistrering kostar tid och pengar; för de flesta är det bättre att sälja och köpa här. Vill ni ta med den skattefritt måste ni ha använt den i minst sex månader före flytten och inte sälja den inom tolv månader i Spanien. Dessutom gäller att ni ska ha bott utanför Spanien minst tolv månader i följd före flytten, och bilen ska ha köpts med vanlig skatt i Sverige.",who:"dgt",c:a=>a.bil==="med"},
 
  {ph:2,off:-90,t:"Ansök om NIE om ni hyr eller köper före flytten",d:"Behövs bara om ni skriver kontrakt innan ni flyttat. Söks via spanska konsulatet i Stockholm eller hos Policía Nacional med blankett EX-15. Flyttar ni först får ni NIE när ni registrerar er som residenta.",who:"policia",c:()=>true},
- {ph:2,off:-45,t:"Teckna privat sjukförsäkring om ni inte arbetar i Spanien",d:"Arbetar ni i Spanien räcker anställningsbevis eller bevis på egenföretagande. Arbetar ni inte i Spanien (till exempel distansarbete utan spansk anställning eller pension) krävs både tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården. Försäkringen täcker också glappet tills ni eventuellt är inne i Seguridad Social.",who:"ss",c:a=>a.inkomst!=="spansk"},
+ {ph:2,off:-45,t:"Teckna privat sjukförsäkring om ni inte arbetar",d:"Kraven för EU-registreringen beror på er faktiska arbets- och försörjningssituation i Spanien. Arbetar ni som anställd eller egenföretagare räcker normalt anställningsbevis eller bevis på egenföretagande. Distansarbete från Spanien åt en svensk arbetsgivare behandlas inte automatiskt som att ni saknar arbete här; kontrollera vilket anställningsunderlag och socialförsäkringsintyg som krävs. Arbetar ni inte alls krävs tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården. Försäkringen täcker också glappet tills ni eventuellt är inne i Seguridad Social.",who:"ss",c:a=>a.inkomst==="pension"},
  {ph:2,off:-14,t:"Anmäl flytt till Skatteverket och Försäkringskassan",d:"Minst en vecka före avresan. Begär SINK om svensk inkomst kvarstår. Be om skriftlig bedömning av väsentlig anknytning om ni behåller bostad eller bolag.",who:"skv",c:()=>true},
- {ph:2,off:-60,t:"Säkra bostad med långtidskontrakt",d:"Kräv kontrakt för permanentbostad (vivienda habitual). Med ett temporada-kontrakt kan kommunen vägra padrón. Räkna med deposition plus extra garanti.",who:"maklare",c:a=>a.bostad==="hyra"},
+ {ph:2,off:-60,t:"Säkra bostad med långtidskontrakt",d:"Välj ett avtal som motsvarar hur bostaden faktiskt ska användas. För padrón bedöms var ni verkligen bor, inte bara kontraktets rubrik. Ett tillfälligt avtal kan kräva mer underlag eller kontroll från kommunen. Räkna med deposition plus extra garanti.",who:"maklare",c:a=>a.bostad==="hyra"},
  {ph:2,off:-90,t:"Anlita fastighetsadvokat före reservation",d:"Lagfart, skulder, bygglov och förening kontrolleras innan arras. Budgetera runt 8–9 % i skatter och avgifter ovanpå priset för en begagnad bostad, och 12–13 % för nyproduktion.",who:"advokat",c:a=>a.bostad==="kopa"},
  {ph:1,off:-150,t:"Prata med någon som köper åt er, inte åt säljaren",d:"På kusten företräder mäklaren nästan alltid säljaren. En köparrådgivare söker bland alla objekt, granskar affären med er advokat och förhandlar för er. Läs mer i bostadsguiden.",who:"maklare",c:a=>a.bostad==="kopa"},
  {ph:2,off:-60,t:"Öppna spanskt bankkonto",d:"Behövs för hyra, el, skola och bil. Kan göras som icke-resident med NIE och pass.",who:"bank",c:()=>true},
@@ -1391,16 +1394,16 @@ const TASKS = [
  {ph:2,off:-30,t:"Samla skolpapper",d:"Betyg, vaccinationsintyg och intyg från svensk skola, gärna med engelsk översättning.",who:"skola-sv",c:a=>a.familj==="barn"},
 
  {ph:3,off:7,t:"Skriv er i kommunen (empadronamiento)",d:"Ayuntamiento, med hyreskontrakt eller lagfart, pass och NIE. Gör det första veckan; det låser upp skola, vård och bil.",who:"ayto",c:()=>true},
- {ph:3,off:35,t:"Registrera er som residenta (EU-intyg)",d:"Blankett EX-18 hos Policía Nacional, personligen och inom tre månader efter ankomst. Arbetar ni i Spanien räcker anställningsbevis eller bevis på egenföretagande. Arbetar ni inte i Spanien (till exempel distansarbete utan spansk anställning eller pension) krävs både tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården. NIE ingår i intyget.",who:"policia",c:()=>true},
+ {ph:3,off:35,t:"Registrera er som residenta (EU-intyg)",d:"Blankett EX-18 hos Policía Nacional, personligen och inom tre månader efter ankomst. Kraven för EU-registreringen beror på er faktiska arbets- och försörjningssituation i Spanien. Arbetar ni som anställd eller egenföretagare räcker normalt anställningsbevis eller bevis på egenföretagande. Distansarbete från Spanien åt en svensk arbetsgivare behandlas inte automatiskt som att ni saknar arbete här; kontrollera vilket anställningsunderlag och socialförsäkringsintyg som krävs. Arbetar ni inte alls krävs tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården. NIE ingår i intyget.",who:"policia",c:()=>true},
  {ph:3,off:21,t:"Skaffa digitalt certifikat",d:"FNMT, normalt med ett besök på ett registreringskontor; videoidentifiering finns för vissa. Därefter sköter ni skatt, DGT och intyg hemifrån.",who:"fnmt",c:()=>true},
- {ph:3,off:14,t:"Registrera er hos Seguridad Social",d:"Socialförsäkringsnummer och tillgång till vårdcentral. Går via arbetsgivaren om ni har spansk anställning.",who:"ss",c:a=>a.inkomst==="spansk"},
+ {ph:3,off:14,t:"Registrera er hos Seguridad Social",d:"Socialförsäkringsnummer och tillgång till vårdcentral. Numret (NUSS) och registreringen av arbetet (alta) är olika steg. Anställda och egenföretagare ska registreras innan arbetet börjar. Med spansk anställning sköter arbetsgivaren registreringen.",who:"ss",c:a=>a.inkomst==="spansk"},
  {ph:3,off:14,t:"Skriv in barnen i skolan",d:"Med padrón, NIE, pass och skolpapper. Kommer ni mitt i läsåret till kommunal skola ansöker ni direkt hos skolan ni önskar; finns ingen plats anvisar Junta de Andalucías antagningskommission (comisión de garantías de admisión) en annan skola.",who:"skola-pub",c:a=>a.familj==="barn"},
  {ph:3,off:30,t:"Registrera er hos spanska skatteverket (Modelo 030)",d:"Anmäler skatterättslig hemvist och adress. Gestorn gör det på tio minuter med ert certifikat.",who:"aeat",c:()=>true},
  {ph:3,off:21,t:"Omregistrera bilen",d:"Registrering och befrielse från registreringsskatt ska sökas inom 60 dagar från att bilen kom till Spanien, så vänta inte på padrón. ITV och dokumentation, ofta 4–8 veckor via gestor.",who:"dgt",c:a=>a.bil==="med"},
  {ph:3,off:30,t:"Köp bil i Spanien",d:"Kräver NIE och padrón. Begagnat via handlare ger garanti; privatköp kräver att ni själva sköter ägarbytet hos DGT.",who:"dgt",c:a=>a.bil==="kop"},
 
- {ph:4,fixed:"m720",t:"Lämna Modelo 720 senast 31 mars",d:"Gäller året efter det första året ni är skatterättsligt bosatta, om utländska tillgångar i någon kategori överstiger 50 000 euro. Kryptotillgångar hos utländska plattformar deklareras separat på Modelo 721. En ny 720 krävs också om en redovisad tillgång säljs eller avslutas. Datumet i planen utgår från att en flytt under första halvåret ger residens samma år; stäm av med rådgivaren.",who:"aeat",c:()=>true},
- {ph:4,fixed:"renta",t:"Gör första spanska deklarationen med rådgivare",d:"Renta lämnas april–juni året efter inkomståret. Första året ska svenska inkomster, avräkning och bolagsfrågor hanteras rätt.",who:"skatt",c:()=>true},
+ {ph:4,fixed:"m720",t:"Lämna Modelo 720 senast 31 mars",d:"Om ni har tillgångar utomlands över 50 000 € per kategori och inte beskattas enligt Beckham. Lämnas året efter det första året ni är skatterättsligt bosatta. Kryptotillgångar hos utländska plattformar deklareras separat på Modelo 721. En ny 720 krävs också om en redovisad tillgång säljs eller avslutas. Datumet i planen utgår från det första skatteresidensåret ni anger ovanför planen; stäm av med rådgivaren.",who:"aeat",c:()=>true},
+ {ph:4,fixed:"renta",t:"Gör första spanska deklarationen med rådgivare",d:"Renta lämnas april–juni året efter inkomståret. Med Beckham lämnas Modelo 151 i stället för vanlig Renta. Första året ska svenska inkomster, avräkning och bolagsfrågor hanteras rätt.",who:"skatt",c:()=>true},
  {ph:4,off:180,t:"Se över ISK, pension och eventuella svenska lån",d:"ISK-fördelen försvinner i Spanien. Strukturera om med rådgivaren när ni vet att ni stannar.",who:"skatt",c:a=>a.inkomst!=="spansk"},
  {ph:4,off:700,t:"Håll koll på körkortets giltighet",d:"Svenskt körkort gäller i Spanien så länge det är giltigt, och byte är frivilligt. När det går ut förnyar ni det hos DGT, eftersom ni då bor i Spanien.",who:"dgt",c:a=>a.bil!=="ingen"},
  {ph:4,off:90,t:"Gå med i ett svenskt nätverk på kusten",d:"Fritidsaktiviteter för barnen, hantverkare, läkare och vänner. Det är här vardagen faktiskt löser sig.",who:"natverk",c:()=>true}
@@ -1413,12 +1416,12 @@ const MIGR = "https://www.inclusion.gob.es/documents/d/migraciones/"; // Migraci
 const DOCS_CHECKED = "30 okt 2026";
 const DOCS = [
  {id:"pass",t:"Pass för alla i familjen, giltiga under hela flyttåret",d:"Krävs vid NIE, residens, bank, skola och bil. Pass eller nationellt id-kort godtas. Pass är säkrast för NIE och bank.",src:[["Boka tid för pass hos Polisen","https://polisen.se/tjanster-tillstand/pass-och-nationellt-id-kort/boka-tid-hitta-passexpedition/"]],free:true},
- {id:"ex15",t:"EX-15 – ansökan om NIE",d:"En per person, även barn. Fylls i på spanska.",src:[["EX-15, ifyllbar PDF",MIGR+"ex15-formulario-solicitud-numero-de-identidad-de-extranjero-y-certificados-editable.pdf"],["Utskriftsversion",MIGR+"ex15-formulario-solicitud-numero-de-identidad-de-extranjero-y-certificados.pdf"]],tpl:["Ladda ner den ifyllbara blanketten ovan (Migraciones officiella PDF).","Fyll i personuppgifter exakt som i passet.","Ange ett konkret skäl, till exempel 'firma de contrato de alquiler' eller 'compra de vivienda'. Flyttar ni först får ni NIE via EX-18.","Betala tasa 790 kod 012 på bank före besöket och ta med kvittot.","Boka cita previa, ta med pass, kopia, blankett och kvitto."],free:true},
+ {id:"ex15",t:"EX-15 – ansökan om NIE",d:"Behövs främst om ni ska hyra eller köpa innan flytten. Flyttar ni hit på riktigt får ni NIE genom EU-registreringen (EX-18). En per person, även barn. Fylls i på spanska.",src:[["EX-15, ifyllbar PDF",MIGR+"ex15-formulario-solicitud-numero-de-identidad-de-extranjero-y-certificados-editable.pdf"],["Utskriftsversion",MIGR+"ex15-formulario-solicitud-numero-de-identidad-de-extranjero-y-certificados.pdf"]],tpl:["Ladda ner den ifyllbara blanketten ovan (Migraciones officiella PDF).","Fyll i personuppgifter exakt som i passet.","Ange ett konkret skäl, till exempel 'firma de contrato de alquiler' eller 'compra de vivienda'. Flyttar ni först får ni NIE via EX-18.","Betala tasa 790 kod 012 på bank före besöket och ta med kvittot.","Boka cita previa, ta med pass, kopia, blankett och kvitto."],free:true},
  {id:"tasa",t:"Kvitto på betald avgift (tasa 790/012)",d:"Fyll i formuläret hos Policía Nacional, skriv ut och betala på bank eller online före besöket. Samma blankett (790 kod 012) men olika belopp: 9,84 € för NIE och 12 € för EU-registreringen (oktober 2026).",src:[["Generera tasa 790/012","https://sede.policia.gob.es/Tasa790_012/"]],free:true},
- {id:"hyra",t:"Hyreskontrakt eller lagfart",d:"Underlag för padrón, skola och bil. Långtidskontrakt, inte temporada.",src:[["Hyreslagen (LAU), BOE","https://www.boe.es/buscar/act.php?id=BOE-A-1994-26003"]],free:false},
+ {id:"hyra",t:"Hyreskontrakt eller lagfart",d:"Underlag för padrón, skola och bil. Välj ett avtal som motsvarar hur bostaden faktiskt ska användas. För padrón bedöms var ni verkligen bor, inte bara kontraktets rubrik. Ett tillfälligt avtal kan kräva mer underlag eller kontroll från kommunen.",src:[["Hyreslagen (LAU), BOE","https://www.boe.es/buscar/act.php?id=BOE-A-1994-26003"]],free:false},
  {id:"padron",t:"Empadronamiento-intyg (volante de empadronamiento)",d:"Hämtas på ayuntamiento efter registrering. Begär flera kopior; alla vill ha ett original.",src:PADRON_LINKS,free:false},
- {id:"ex18",t:"EX-18 – registrering som EU-resident",d:"Arbetar ni i Spanien räcker anställningsbevis eller bevis på egenföretagande. Arbetar ni inte i Spanien (till exempel distansarbete utan spansk anställning eller pension) krävs både tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården.",src:[["EX-18, ifyllbar PDF",MIGR+"ex18-formulario-inscripcion-en-el-rce-residencia-ciudadano-de-la-ue-editable.pdf"],["Krav enligt Policía Nacional","https://sede.policia.gob.es/portalCiudadano/_es/tramites_extranjeria_tramite_certificadoregistro_ciudadanoue.php"]],tpl:["Ladda ner den ifyllbara blanketten ovan.","Bifoga pass och padrón (padrón är ofta efterfrågat). Arbetar ni i Spanien: anställningsbevis eller bevis på egenföretagande. Annars: bevis på tillräckliga medel (kontoutdrag eller pensionsbesked) och sjukförsäkring.","Betala tasa 790/012.","Cita previa hos Policía Nacional, en tid per person."],free:false},
- {id:"forsakring",t:"Sjukförsäkringsbevis på spanska eller engelska",d:"Behövs för EX-18 om ni inte arbetar i Spanien. Ska motsvara den spanska offentliga vården. I praktiken krävs oftast privat försäkring utan självrisk och karens. Pensionärer kan använda intyg S1.",src:[["Krav för EU-medborgare, Migraciones","https://www.inclusion.gob.es/web/migraciones/w/65.-certificado-de-registro-de-ciudadano-de-la-union-europea"],["Intyg S1 för pensionärer, Försäkringskassan","https://www.forsakringskassan.se/privatperson/flytta-jobba-studera-eller-fa-vard-utomlands/flytta-utomlands"],["Registrera S1 i Spanien","https://prestaciones.seg-social.es/servicio/registrar-formulario-s1-asistencia-sanitaria-espana.html"]],free:false},
+ {id:"ex18",t:"EX-18 – registrering som EU-resident",d:"Kraven beror på er faktiska arbets- och försörjningssituation i Spanien. Arbetar ni som anställd, även på distans åt en svensk arbetsgivare, eller som egenföretagare räcker normalt anställningsbevis eller bevis på egenföretagande; kontrollera vilket socialförsäkringsintyg som krävs. Arbetar ni inte alls krävs tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården.",src:[["EX-18, ifyllbar PDF",MIGR+"ex18-formulario-inscripcion-en-el-rce-residencia-ciudadano-de-la-ue-editable.pdf"],["Krav enligt Policía Nacional","https://sede.policia.gob.es/portalCiudadano/_es/tramites_extranjeria_tramite_certificadoregistro_ciudadanoue.php"]],tpl:["Ladda ner den ifyllbara blanketten ovan.","Bifoga pass och padrón (padrón är ofta efterfrågat). Arbetar ni som anställd, även på distans, eller egenföretagare: anställningsbevis eller bevis på egenföretagande och det socialförsäkringsintyg som krävs. Arbetar ni inte alls: bevis på tillräckliga medel (kontoutdrag eller pensionsbesked) och sjukförsäkring.","Betala tasa 790/012.","Cita previa hos Policía Nacional, en tid per person."],free:false},
+ {id:"forsakring",t:"Sjukförsäkringsbevis på spanska eller engelska",d:"Behövs för EX-18 om ni inte arbetar alls. Ska motsvara den spanska offentliga vården. I praktiken krävs oftast privat försäkring utan självrisk och karens. Pensionärer kan använda intyg S1.",src:[["Krav för EU-medborgare, Migraciones","https://www.inclusion.gob.es/web/migraciones/w/65.-certificado-de-registro-de-ciudadano-de-la-union-europea"],["Intyg S1 för pensionärer, Försäkringskassan","https://www.forsakringskassan.se/privatperson/flytta-jobba-studera-eller-fa-vard-utomlands/flytta-utomlands"],["Registrera S1 i Spanien","https://prestaciones.seg-social.es/servicio/registrar-formulario-s1-asistencia-sanitaria-espana.html"]],free:false},
  {id:"inkomst",t:"Inkomstbevis",d:"Anställningsavtal, lönespecifikationer, pensionsbesked eller kontoutdrag senaste tre månaderna.",src:[["Vad som krävs för EX-18, Policía Nacional","https://sede.policia.gob.es/portalCiudadano/_es/tramites_extranjeria_tramite_certificadoregistro_ciudadanoue.php"]],free:false},
  {id:"skv",t:"Bekräftelse från Skatteverket på utflyttning",d:"Beslut om avregistrering och eventuellt SINK-beslut. Spara som PDF.",src:[["Flytta från Sverige, Skatteverket","https://www.skatteverket.se/privat/folkbokforing/flyttafransverige.4.18e1b10334ebe8bc80001591.html"],["Beställ personbevis","https://www.skatteverket.se/privat/folkbokforing/personbevis/hittaochbestallpersonbevis.4.361dc8c15312eff6fdb20.html"]],free:false},
  {id:"skola",t:"Betyg, skolintyg och vaccinationsintyg",d:"Översatt till engelska eller spanska. Internationella skolor vill ha två års betyg.",src:[["Skolplats i Andalusien, Junta de Andalucía","https://www.juntadeandalucia.es/educacion/portales/web/escolarizacion/infantil-a-bachillerato"],["Personbevis utan apostille inom EU (gäller personbevis, inte betyg)","https://www.skatteverket.se/privat/folkbokforing/personbevis/informationompersonbevisforutlandskamyndigheter.4.3810a01c150939e893f22054.html"]],free:false},
@@ -1429,24 +1432,17 @@ const DOCS = [
 ];
 
 const RATE=11.3;
-// Swedish comparison, per person, SEK, 2026. Simplified: flat grundavdrag and jobbskatteavdrag, 32 % municipal tax,
-// 20 % state tax on taxable income above the skiktgräns 643 000 kr (brytpunkt 660 400 kr gross).
-const SE_GRUNDAVDRAG = 17400, SE_JOBBSKATTEAVDRAG = 5000, SE_SKIKTGRANS = 643000;
-function seTax(gross){
-  const taxable = Math.max(0, gross - SE_GRUNDAVDRAG);
-  let t = taxable * 0.32;
-  if(taxable > SE_SKIKTGRANS) t += (taxable - SE_SKIKTGRANS) * 0.20;
-  return Math.max(0, t - SE_JOBBSKATTEAVDRAG);
-}
-
 
 /* ---------- lead capture: insert-only table in the Supabase project named "landa" ---------- */
+const SAVE_LEADS = false;
+if(!SAVE_LEADS) document.addEventListener("DOMContentLoaded", () => { const n = document.createElement("div"); n.textContent = "Testversion: formulären sparar inga uppgifter just nu."; n.setAttribute("role","note"); n.style.cssText = "position:fixed;left:12px;bottom:12px;z-index:60;background:#0E1116;color:#fff;font-size:.78rem;padding:6px 10px;border-radius:6px;opacity:.9"; document.body.appendChild(n); }); // off until the controller company exists; set true to store leads in Supabase
 const SB_URL = "https://zdgxdwlztcjtjgxvmfjn.supabase.co";
 const SB_KEY = "sb_publishable_1fz_TxUhf9OPesOVSUmsNw_vKKpdqpf";
 let nlFlag = false; // set from the submitted form's "Flyttbrevet" checkbox
 document.addEventListener("submit", e => { nlFlag = !!e.target.querySelector?.("[data-nl]:checked"); }, true);
 async function saveLead(row){
   row = Object.assign({newsletter: nlFlag}, row); nlFlag = false;
+  if(!SAVE_LEADS) return true;
   try{
     const r = await fetch(SB_URL + "/rest/v1/demo_leads", {
       method: "POST",
@@ -1479,11 +1475,14 @@ function profileText(){ const a = state.answers; return [state.hushall, ...Objec
 
 /* ---------- dates ---------- */
 const fmt = d => d.toLocaleDateString("sv-SE", {day:"numeric", month:"short", year:"numeric"});
+// preliminary first Spanish tax-residence year: a move before July makes the move year the residency year; the user can change it
+function defaultResYear(){ const m = new Date(state.movedate + "T12:00:00"); return m.getMonth() < 6 ? m.getFullYear() : m.getFullYear() + 1; }
+function resYear(){ return +state.resYear || defaultResYear(); }
 function dueFor(t){
   if(!state.movedate) return null;
   const m = new Date(state.movedate + "T12:00:00");
   if(t.fixed){
-    const residentYear = m.getMonth() < 6 ? m.getFullYear() : m.getFullYear() + 1; // a move before July makes the move year the residency year
+    const residentYear = resYear();
     return t.fixed === "m720" ? new Date(residentYear + 1, 2, 31, 12) : new Date(residentYear + 1, 5, 30, 12);
   }
   const d = new Date(m); d.setDate(d.getDate() + t.off); return d;
@@ -1539,39 +1538,47 @@ function renderCalc(){
   const income = $("#c_income").value;
   const bo = document.querySelector('[name="c_bo"]:checked').value;
   const kids = Math.max(0, +$("#c_kids").value || 0), skola = $("#c_skola").value, bilar = Math.max(0, +$("#c_bil").value || 0);
-  const perSe = inc / adults, perEs = inc / RATE / adults;
-  const seNet = (perSe - seTax(perSe)) * adults / RATE / 12;
+  const seNetSek = Math.max(0, +$("#c_senet").value || 0);
+  const perEs = inc / RATE / adults;
+  const seNet = seNetSek / RATE; // the household's Swedish net today, per month, converted at the same rate
+  // pension, dividends and capital are taxed differently from salary; the calculator only models salary
+  const salaryIncome = income === "distans" || income === "spansk";
   // same model as the Beckham calculator: IRPF Andalucía and the employee's social security, per person
   const std = irpfStandard(perEs), netStd = perEs - std.tax - std.ss;
   const esNetStd = netStd * adults / 12;
-  const beckham = income === "distans" || income === "spansk";
+  const beckham = salaryIncome;
   // Beckham for the main earner only; with an equal split the other adult never has a lower base, so uses the standard scale
   let esNetBeck = null;
   if(beckham){ const bk = irpfBeckham(perEs); esNetBeck = (perEs - bk.tax - bk.ss + netStd * (adults - 1)) / 12; }
   const beckNoGain = esNetBeck !== null && esNetBeck <= esNetStd; // below roughly 58 000 € per person the standard scale is lower
   if(beckNoGain) esNetBeck = null;
   const rent = {lgh:1600,hus:2400,villa:3800}[bo], util = {lgh:200,hus:300,villa:450}[bo];
-  const school = {int:1100,sv:450,pub:60}[skola] * kids;
+  const school = {int:1100,sv:700,pub:60}[skola] * kids;
   const lines = [["Bostad (hyra)",rent],["El, vatten, internet",util],["Skola",school],["Sjukförsäkring, privat",60*(adults+kids)],["Bil (försäkring, bränsle, skatt)",350*bilar],["Mat och hushåll",1100+250*kids],["Övrigt (fritid, resor hem, kläder)",700]];
   const cost = lines.reduce((s,l) => s + l[1], 0);
   const net = esNetBeck ?? esNetStd;
-  calcSnapshot = {inc, adults, income, bo, kids, skola, bilar, cost: Math.round(cost), netSpain: Math.round(net), netSweden: Math.round(seNet), surplus: Math.round(net - cost), beckham};
-  $("#calcOut").innerHTML = `
-    <div class="kpis">
+  calcSnapshot = {inc, adults, income, bo, kids, skola, bilar, cost: Math.round(cost), netSpain: salaryIncome ? Math.round(net) : null, netSweden: Math.round(seNet), netSwedenSek: seNetSek, surplus: salaryIncome ? Math.round(net - cost) : null, beckham};
+  const kpis = salaryIncome ? `
       <div class="kpi big${net - cost < 0 ? " neg" : ""}"><div class="v">${eur(net - cost)}</div><div class="l">kvar per månad efter skatt och levnadskostnad</div></div>
       <div class="kpi"><div class="v">${eur(net)}</div><div class="l">netto i Spanien${esNetBeck ? ", med Beckham" : ""}</div></div>
-      <div class="kpi"><div class="v">${eur(seNet)}</div><div class="l">netto i Sverige, jämförelse</div></div>
+      <div class="kpi"><div class="v">${eur(seNet)}</div><div class="l">netto i Sverige i dag, ert eget belopp</div></div>
+      <div class="kpi"><div class="v">${eur(net - seNet)}</div><div class="l">skillnad per månad, Spanien mot Sverige</div></div>
       <div class="kpi"><div class="v">${eur(cost)}</div><div class="l">levnadskostnad</div></div>
-      <div class="kpi"><div class="v">${esNetBeck ? eurCa(esNetBeck - esNetStd, 100) : "–"}</div><div class="l">${esNetBeck ? "mer per månad tack vare Beckham" : beckNoGain ? "Beckham ger ingen vinst på den här inkomsten" : "Beckham gäller inte er inkomst"}</div></div>
+      <div class="kpi"><div class="v">${esNetBeck ? eurCa(esNetBeck - esNetStd, 100) : "–"}</div><div class="l">${esNetBeck ? "mer per månad tack vare Beckham" : beckNoGain ? "Beckham ger ingen vinst på den här inkomsten" : "Beckham gäller inte er inkomst"}</div></div>` : `
+      <div class="kpi big"><div class="v">${eur(cost)}</div><div class="l">levnadskostnad per månad</div></div>
+      <div class="kpi"><div class="v">${eur(seNet)}</div><div class="l">netto i Sverige i dag, ert eget belopp</div></div>`;
+  $("#calcOut").innerHTML = `
+    <div class="kpis">${kpis}
     </div>
+    ${salaryIncome ? "" : `<p class="note">Pension, utdelning och kapital beskattas på andra sätt än lön. Den här kalkylen räknar bara på lön. Låt en skatterådgivare räkna på er situation.</p>`}
     <details><summary>Så räknade vi</summary>
       <table>${lines.map(l => `<tr><td>${l[0]}</td><td>${eur(l[1])}</td></tr>`).join("")}<tr><td><b>Summa</b></td><td><b>${eur(cost)}</b></td></tr></table>
-      <p class="note" style="margin-top:10px">Sverige: kommunalskatt 32 % och statlig skatt 20 % över skiktgränsen 643 000 kr, med förenklat grundavdrag och jobbskatteavdrag. Spanien: IRPF för Andalusien och arbetstagarens sociala avgifter, som i Beckham-kalkylen. Inkomsten delad lika mellan de vuxna. Med Beckham räknar vi regimen för en vuxen; den andra beskattas enligt vanlig skala. Utdelning, kapital och pension beskattas annorlunda och kräver rådgivare. Kostnaderna är typiska nivåer för Marbella–Estepona hösten 2026.</p>
+      <p class="note" style="margin-top:10px">Sverige: det nettobelopp ni själva anger, omräknat med kursen ${RATE.toLocaleString("sv-SE")} SEK/EUR. Spanien: IRPF för Andalusien och arbetstagarens sociala avgifter, som i Beckham-kalkylen. Inkomsten delad lika mellan de vuxna. Med Beckham räknar vi regimen för en vuxen; den andra beskattas enligt vanlig skala. Utdelning, kapital och pension beskattas annorlunda och kräver rådgivare. Kostnaderna är typiska nivåer för Marbella–Estepona hösten 2026. Skolan räknas som 700 € per barn och månad för svensk skola och 1 100 € för internationell skola. Svenska Skolan Costa del Sol kostar 8 050–8 500 € per år 2026/27 (F–9), inklusive mat och läromedel, plus inskrivning och medlemsavgift.</p>
     </details>`;
 }
 bindCapture("#calcForm", "#calcEmail", "#calcErr", async email => {
   const ok = await saveLead({source:"calc", email, calc: calcSnapshot, profile: profile()});
-  if(ok) $("#calcCap").innerHTML = `<div class="ok-msg">Tack. Vi har sparat kalkylen och skickar den till ${esc(email)} inom två arbetsdagar.</div>`;
+  if(ok) $("#calcCap").innerHTML = `<div class="ok-msg">Tack. Vi har sparat kalkylen.</div>`;
   return ok;
 });
 
@@ -1602,7 +1609,7 @@ const STEPS = [
   {key:"budget", when: a => a.bostad !== "kopa", q:"Ungefär vad vill ni hyra för?", help:"Frivilligt. Per månad, för en bostad som passar familjen.", opts:[["h1","Under 1 500 € i månaden",""],["h2","1 500–2 500 €",""],["h3","2 500–4 000 €",""],["h4","Över 4 000 €",""],["vet","Vet inte än",""]]},
   {key:"kopwhen", when: a => a.bostad === "kopa", q:"När vill ni ha köpt?", opts:[["6m","Inom sex månader",""],["12m","Inom ett år",""],["later","Om mer än ett år",""],["hyrforst","Vi hyr nog först och ser",""]]},
   {key:"bil", q:"Hur gör ni med bil?", opts:[["med","Tar med svensk bil","Ska omregistreras i Spanien"],["kop","Köper i Spanien",""],["ingen","Ingen bil",""]]},
-  {key:"email", type:"email", q:"Vart ska vi skicka er plan?", help:"Vi sparar er plan och skickar den till er. Inget annat. Påminnelser kommer senare."}
+  {key:"email", type:"email", q:"Vill ni spara er plan?", help:"Vi sparar er plan. Inget annat."}
 ];
 let wzStep = 0;
 const wzSteps = () => STEPS.filter(x => !x.when || x.when(state.answers));
@@ -1629,7 +1636,7 @@ function renderWizard(){
   const next = () => { wzStep++; renderWizard(); window.scrollTo({top:0, behavior:"instant"}); };
   $("#wzBack")?.addEventListener("click", () => { wzStep--; renderWizard(); });
   $$("#wz .opt").forEach(b => b.addEventListener("click", () => { state.answers[s.key] = b.dataset.v; save(); next(); }));
-  $("#wzNext")?.addEventListener("click", () => { state.movedate = $("#wzDate").value; save(); next(); });
+  $("#wzNext")?.addEventListener("click", () => { if(state.movedate !== $("#wzDate").value) state.resYear = ""; state.movedate = $("#wzDate").value; save(); next(); });
   $("#wzSkipDate")?.addEventListener("click", () => { state.movedate = ""; save(); next(); });
   $("#wzSkipMail")?.addEventListener("click", () => { state.hushall = $("#wzName").value.trim(); save(); location.hash = "plan"; });
   $("#wzDone")?.addEventListener("click", async () => {
@@ -1640,13 +1647,13 @@ function renderWizard(){
     const ok = await saveLead({source:"plan", email, name: state.hushall || null, profile: profile()});
     btn.disabled = false;
     if(!ok){ err.textContent = "Det gick inte att spara just nu. Försök igen, eller visa planen utan att spara."; err.hidden = false; return; }
-    rememberEmail(email); toast("Planen är sparad. Vi skickar den till din e-post inom två arbetsdagar."); location.hash = "plan";
+    rememberEmail(email); toast("Planen är sparad."); location.hash = "plan";
   });
 }
 
 /* ---------- plan ---------- */
 function gateHtml(why){
-  return `<div class="gate"><span class="pill" style="justify-self:start">Solpass Plus</span><h3>${why}</h3><p>Matchning med utvalda partners när de är på plats, sista datum på varje steg, hela dokumentvalvet och svar inom två arbetsdagar.</p><div class="row"><span class="price">249 €</span><span class="small" style="color:var(--on-deep-muted)">en gång, hela flytten · gratis under testperioden</span></div><div><button class="btn sun" data-plus>Lås upp Solpass Plus</button></div></div>`;
+  return `<div class="gate"><span class="pill" style="justify-self:start">Solpass Plus</span><h3>${why}</h3><p>Matchning med utvalda partners när de är på plats, sista datum på varje steg, hela dokumentvalvet och svar inom två arbetsdagar.</p><div class="row"><span class="price">249 €</span><span class="small" style="color:var(--on-deep-muted)">kommande pris, en gång för hela flytten · gratis under testperioden</span></div><div><button class="btn sun" data-plus>Lås upp Solpass Plus</button></div></div>`;
 }
 function renderPlan(){
   const a = answers();
@@ -1678,10 +1685,12 @@ function renderPlan(){
     html += `</div>`;
   }
   if(late) html = `<div class="hint">${late} steg har passerat sitt datum. Börja med dem; det mesta efter beror på dem.</div>` + html;
+  if(state.movedate) html = `<label class="field" style="max-width:360px;margin-bottom:18px"><span>Första år som skatteresident i Spanien (preliminärt)</span><input type="number" id="planResYear" value="${resYear()}" min="2000" max="2100" step="1" inputmode="numeric"><small class="muted">Flytt januari–juni ger normalt flyttåret, annars året efter. Stäm av med rådgivaren.</small></label>` + html;
   if(!state.movedate) html = `<div class="hint">Ange flyttdag under <a href="#start">Ändra svar</a>, så får varje steg ett sista datum.</div>` + html;
   if(a.inkomst === "bolag") html += `<div class="hint">Ni har ett svenskt AB. Var bolaget leds ifrån avgör var det beskattas. Det är den enskilt dyraste frågan att få fel; lös den innan ni bokar flyttfirma.</div>`;
   if(!state.plus) html += gateHtml("Få datum och rätt partners");
   $("#plan").innerHTML = html;
+  $("#planResYear")?.addEventListener("change", e => { const y = +e.target.value; state.resYear = y >= 2000 && y <= 2100 ? y : ""; save(); renderPlan(); });
   $$("#plan input[type=checkbox]").forEach(cb => cb.addEventListener("change", e => {
     state.done[e.target.dataset.task] = e.target.checked; save(); renderPlan();
   }));
@@ -1910,46 +1919,65 @@ const SAVINGS = [[6000,.19],[50000,.21],[200000,.23],[300000,.27],[1e12,.30]];
 function scale(base, br){ let t = 0, prev = 0; for(const [lim, r] of br){ if(base > prev) t += (Math.min(base, lim) - prev) * r; prev = lim; } return t; }
 // personal minimum: state 5 550 €, Andalusia 5 790 € (Ley 5/2021, art. 23 bis); employee SS 2026: 4,70 + 1,55 + 0,10 + 0,15 %
 const PERSONAL_MIN = 5550, PERSONAL_MIN_AND = 5790, SS_EMPLOYEE = 0.065, SS_MAX_BASE = 5101.2 * 12;
+// solidarity contribution 2026 (cuota de solidaridad), employee share, on salary above the max base:
+// 0,19 % up to 10 % above the base, 0,21 % from 10 to 50 % above, 0,24 % beyond
+function ssSolidarity(salary){
+  const ex = Math.max(0, salary - SS_MAX_BASE), b1 = SS_MAX_BASE * 0.1, b2 = SS_MAX_BASE * 0.5;
+  return Math.min(ex, b1) * 0.0019 + Math.max(0, Math.min(ex, b2) - b1) * 0.0021 + Math.max(0, ex - b2) * 0.0024;
+}
+function ssEmployee(salary){ return salary > 0 ? Math.min(salary, SS_MAX_BASE) * SS_EMPLOYEE + ssSolidarity(salary) : 0; }
 function irpfStandard(salary){ // employee: SS contributions and the 2 000 € expense deduction, personal minimum as a credit
   if(salary <= 0) return {tax:0, ss:0};
-  const ss = Math.min(salary, SS_MAX_BASE) * SS_EMPLOYEE;
+  const ss = ssEmployee(salary);
   const base = Math.max(0, salary - ss - 2000);
   const gross = scale(base, IRPF_STATE) + scale(base, IRPF_AND);
   const credit = scale(Math.min(base, PERSONAL_MIN), IRPF_STATE) + scale(Math.min(base, PERSONAL_MIN_AND), IRPF_AND);
   return {tax: Math.max(0, gross - credit), ss};
 }
-function irpfBeckham(salary){ return {tax: scale(salary, [[600000,.24],[1e12,.47]]), ss: Math.min(salary, SS_MAX_BASE) * SS_EMPLOYEE}; }
+function irpfBeckham(salary){ return {tax: scale(salary, [[600000,.24],[1e12,.47]]), ss: ssEmployee(salary)}; }
 let bkSnapshot = {};
 function renderBeckham(){
   const s1 = +$("#bk_s1").value || 0, s2 = +$("#bk_s2").value || 0, cap = +$("#bk_cap").value || 0;
   const why = $("#bk_why").value, prev = $('[name="bk_prev"]:checked').value;
   const eligible = prev === "nej" && ["distans","spansk","vd"].includes(why);
   const std1 = irpfStandard(s1), std2 = irpfStandard(s2), bk1 = irpfBeckham(s1), bk2 = irpfBeckham(s2);
-  const capStd = scale(cap, SAVINGS);
-  const stdTax = std1.tax + std2.tax + capStd, bkTax = bk1.tax + bk2.tax;
-  // the spouse follows the main taxpayer only with a lower taxable base; if person 2 earns more, person 2 is the main one
+  // capital is split equally when both have a salary; under Beckham the Swedish capital is not taxed in Spain
+  const n = s2 > 0 ? 2 : 1, capHalf = scale(cap / n, SAVINGS), capStd = capHalf * n;
+  const hi = s2 > s1 ? 2 : 1; // the higher earner is the main person in the regime
+  const stdH = hi === 1 ? std1 : std2, stdL = hi === 1 ? std2 : std1, bkH = hi === 1 ? bk1 : bk2;
+  // A: both standard IRPF. B: the higher earner in Beckham, the other standard. C: both in Beckham (only if person 2 has a salary)
+  const scen = [{id:"A", tax: std1.tax + std2.tax + capStd}];
+  scen.push({id:"B", tax: bkH.tax + stdL.tax + (n - 1) * capHalf});
+  if(s2 > 0) scen.push({id:"C", tax: bk1.tax + bk2.tax});
+  const best = scen.reduce((a, b) => b.tax < a.tax ? b : a);
+  const stdTax = scen[0].tax, bkTax = best.tax;
+  const lo = hi === 1 ? 2 : 1;
+  const bestTxt = best.id === "A" ? "vanlig skatt för " + (s2 > 0 ? "båda" : "person 1")
+    : best.id === "C" ? "båda i Beckham"
+    : s2 > 0 ? `person ${hi} i Beckham, person ${lo} vanlig skatt` : "person 1 i Beckham";
   const saving = stdTax - bkTax, years = 6;
   const salary = s1 + s2;
-  bkSnapshot = {s1, s2, cap, why, prev, eligible, stdTax: Math.round(stdTax), bkTax: Math.round(bkTax), saving: Math.round(saving)};
+  bkSnapshot = {s1, s2, cap, why, prev, eligible, stdTax: Math.round(stdTax), bkTax: Math.round(bkTax), saving: Math.round(saving), scenario: best.id};
   let why_txt = "";
   if(prev === "ja") why_txt = "Ni har bott i Spanien under de senaste fem åren. Då går regimen inte att söka, oavsett inkomst.";
   else if(why === "egen") why_txt = "Egen verksamhet som egenföretagare räknas inte, om den inte godkänns som entreprenörsverksamhet (Ley 14/2013) eller är högkvalificerat arbete för startups. Ett alternativ är att driva verksamheten i ett bolag där ni är styrelseledamot. Fråga rådgivaren innan ni flyttar.";
-  else if(why === "pension") why_txt = "Regimen kräver en flytt på grund av arbete. Pension och kapital kvalificerar inte. För er handlar frågan i stället om SINK, pensionsbeskattning och förmögenhetsskatt, som i Andalusien i praktiken inte betalas under cirka 3 miljoner euro i nettoförmögenhet (deklaration krävs över 2 miljoner euro i tillgångar).";
+  else if(why === "pension") why_txt = "Regimen kräver en flytt på grund av arbete. Pension och kapital kvalificerar inte. För er handlar frågan i stället om SINK, pensionsbeskattning och förmögenhet, som beskattas i Andalusien i samspel med statens solidaritetsskatt: efter ett grundavdrag på 700 000 € är de första 3 miljonerna i skatteunderlag skattefria. Deklaration krävs över 2 miljoner euro i tillgångar. Reglerna för 2026 är inte slutligt bekräftade.";
   const eff = salary ? Math.round(stdTax / (salary + cap) * 100) : 0, effBk = salary ? Math.round(bkTax / (salary + cap) * 100) : 0;
   let html = "";
   if(!eligible){
-    html += `<div class="kpis"><div class="kpi big neg"><div class="v">Kvalificerar inte</div><div class="l">${why_txt}</div></div>
+    html += `<div class="kpis"><div class="kpi big neg"><div class="v">Kvalificerar troligen inte</div><div class="l">${why_txt}</div></div>
       <div class="kpi"><div class="v">${eurCa(stdTax)}</div><div class="l">spansk skatt per år med vanlig IRPF</div></div>
       <div class="kpi"><div class="v">${eff} %</div><div class="l">effektiv skatt på hushållets inkomst</div></div></div>`;
   } else {
     const pos = saving > 0;
     html += `<div class="kpis"><div class="kpi big${pos ? "" : " neg"}"><div class="v">${pos ? eurCa(saving).replace("ca ","ca +") : eurCa(saving)}</div><div class="l">${pos ? "lägre spansk skatt per år med Beckham" : "Beckham ger ingen vinst på den här inkomsten. Under ungefär 58 000 € per person är den vanliga skalan lägre."}</div></div>
       <div class="kpi"><div class="v">${eurCa(stdTax)}</div><div class="l">spansk skatt per år, vanlig IRPF (${eff} %)</div></div>
-      <div class="kpi"><div class="v">${eurCa(bkTax)}</div><div class="l">spansk skatt per år, Beckham (${effBk} %)</div></div>
+      <div class="kpi"><div class="v">${eurCa(bkTax)}</div><div class="l">spansk skatt per år, med Beckham (${effBk} %)</div></div>
       <div class="kpi"><div class="v">${eurCa(Math.max(0, saving) / 12, 100)}</div><div class="l">mer kvar per månad</div></div>
-      <div class="kpi"><div class="v">${eurCa(Math.max(0, saving) * years)}</div><div class="l">över hela perioden, sex år</div></div></div>`;
-    if(s2 > 0 && std2.tax > bk2.tax && s2 >= s1) html += `<p class="note">Person 2 tjänar mest och blir huvudperson i regimen. Person 1 kan följa med som familjemedlem om det sammanlagda skatteunderlaget är lägre än huvudpersonens, varje år.</p>`;
-    if(s2 > 0 && bk2.tax > std2.tax) html += `<p class="note">Person 2 tjänar på att stå utanför regimen (vanlig skala ${eurCa(std2.tax)} mot ${eurCa(bk2.tax)} med 24 %). Regimen väljs per person.</p>`;
+      <div class="kpi"><div class="v">${eurCa(Math.max(0, saving) * years)}</div><div class="l">över sex år, om inkomsterna är oförändrade</div></div></div>
+    <p class="note"><b>Bäst: ${bestTxt}.</b> Regimen väljs per person.</p>`;
+    if(s2 > 0 && hi === 2) html += `<p class="note">Person 2 tjänar mest och blir huvudperson i regimen.</p>`;
+    if(best.id === "C") html += `<p class="note">Båda i Beckham förutsätter att person ${lo} följer med som familjemedlem, vilket bara går om skatteunderlaget är lägre än huvudpersonens, varje år. Annars behöver person ${lo} ett eget kvalificerande skäl, till exempel ett eget arbete som flytten sker för.</p>`;
     if(cap > 0) html += `<p class="note">Kapitalinkomsten från Sverige (${eur(cap)}) beskattas inte i Spanien under Beckham, men Sverige kan ta ut kupongskatt eller tillämpa tioårsregeln. Den delen av vinsten (${eurCa(capStd)} per år) ska bekräftas av rådgivaren.</p>`;
     if(why === "vd") html += `<p class="note">Som bolagsledare: äger ni 25 % eller mer av ett bolag som mest förvaltar kapital gäller inte regimen. Ett rörelsedrivande bolag går bra.</p>`;
   }
@@ -1959,7 +1987,7 @@ function renderBeckham(){
     ${s2 > 0 ? `<tr><td>Person 2, vanlig IRPF efter sociala avgifter ${eurCa(std2.ss)}</td><td>${eurCa(std2.tax)}</td></tr><tr><td>Person 2, Beckham 24 %</td><td>${eurCa(bk2.tax)}</td></tr>` : ""}
     ${cap > 0 ? `<tr><td>Kapital från Sverige, spansk sparskala 19–30 %</td><td>${eurCa(capStd)}</td></tr><tr><td>Kapital från Sverige under Beckham</td><td>0 €</td></tr>` : ""}
   </table>
-  <p class="note" style="margin-top:10px">Statlig skala 9,5–24,5 % plus Andalusiens skala 9,5–22,5 % för 2026, grundavdrag 5 550 € i den statliga skalan och 5 790 € i den andalusiska, schablonavdrag 2 000 € och arbetstagarens sociala avgifter 6,5 % upp till maxbasen. Individuell beskattning, inga andra avdrag. Beckham: 24 % på bruttolönen utan avdrag, 47 % över 600 000 €. Sociala avgifter betalas i båda fallen om ni är anslutna till spansk socialförsäkring. Kalkylen visar bara spansk skatt; svensk skatt på svenska inkomster tillkommer och kräver rådgivare.</p></details>`;
+  <p class="note" style="margin-top:10px">Statlig skala 9,5–24,5 % plus Andalusiens skala 9,5–22,5 % för 2026, grundavdrag 5 550 € i den statliga skalan och 5 790 € i den andalusiska, schablonavdrag 2 000 € och arbetstagarens sociala avgifter 6,5 % upp till maxbasen. Individuell beskattning, inga andra avdrag. Från lönen över maxbasen tillkommer solidaritetsavgiften för 2026 (cuota de solidaridad), arbetstagarens del 0,19 % upp till 10 % över maxbasen, 0,21 % mellan 10 och 50 % och 0,24 % därutöver. Vi jämför tre upplägg: båda med vanlig skatt, den som tjänar mest i Beckham och den andra med vanlig skatt, och båda i Beckham. Med Beckham visar vi det upplägg som ger lägst skatt. Kapitalinkomsten delas lika när båda har lön. Beckham: 24 % på bruttolönen utan avdrag, 47 % över 600 000 €. Sociala avgifter betalas i båda fallen om ni är anslutna till spansk socialförsäkring. Kalkylen visar bara spansk skatt; svensk skatt på svenska inkomster tillkommer och kräver rådgivare.</p></details>`;
   $("#bkOut").innerHTML = html;
 }
 $$("#bk input, #bk select").forEach(el => el.addEventListener("input", renderBeckham));
@@ -2027,7 +2055,7 @@ $("#rb_price").addEventListener("input", () => { if(!rbRentEdited) $("#rb_rent")
 $$("#rb input").forEach(el => el.addEventListener("input", renderRentBuy));
 bindCapture("#rbForm", "#rbEmail", "#rbErr", async email => {
   const ok = await saveLead({source:"rentbuy", email, calc: rbSnapshot, profile: profile()});
-  if(ok) $("#rbCap").innerHTML = `<div class="ok-msg">Tack. Vi har sparat jämförelsen och skickar den till ${esc(email)} inom två arbetsdagar.</div>`;
+  if(ok) $("#rbCap").innerHTML = `<div class="ok-msg">Tack. Vi har sparat jämförelsen.</div>`;
   return ok;
 });
 
@@ -2202,7 +2230,7 @@ const PTYPES = [
    when:"Två månader före flytten, och innan ni ska betala för en bostad.",
    ask:["Vilka avgifter har kontot per månad?","Vilken kurs och avgift gäller för 100 000 €?","Vilka dokument behövs för att visa var pengarna kommer ifrån?"]},
   {id:"forsakring", g:"ekonomi", name:"Försäkring", short:"Sjukförsäkring, hem och bil",
-   lead:"För att bli resident: arbetar ni i Spanien räcker anställningsbevis eller bevis på egenföretagande. Arbetar ni inte i Spanien (till exempel distansarbete utan spansk anställning eller pension) krävs både tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården. I praktiken krävs oftast privat försäkring utan självrisk och karens. Pensionärer kan i stället använda intyg S1 från Försäkringskassan. Hem- och bilförsäkring tecknas i Spanien.",
+   lead:"För att bli resident: kraven beror på er faktiska arbets- och försörjningssituation i Spanien. Arbetar ni som anställd, även på distans åt en svensk arbetsgivare, eller som egenföretagare räcker normalt anställningsbevis eller bevis på egenföretagande; kontrollera vilket socialförsäkringsintyg som krävs. Arbetar ni inte alls krävs tillräckliga medel och en sjukförsäkring som motsvarar den offentliga vården. I praktiken krävs oftast privat försäkring utan självrisk och karens. Pensionärer kan i stället använda intyg S1 från Försäkringskassan. Hem- och bilförsäkring tecknas i Spanien.",
    src:[["Migraciones: krav för EU-medborgare","https://www.inclusion.gob.es/web/migraciones/w/65.-certificado-de-registro-de-ciudadano-de-la-union-europea"]],
    does:["Sjukförsäkring som godtas för EX-18","Hemförsäkring för hyrd eller ägd bostad","Bilförsäkring när bilen är spanskregistrerad"],
    when:"Sjukförsäkringen före residencia, de andra vid inflyttning.",
@@ -2366,7 +2394,7 @@ function qcPresets(){
   const list = [
     { id: "fix-pkg", label: "Fast med paket", rate: c.rates.fixed.bonified + add, pkg: true, note: "typisk ränta, oktober 2026" },
     { id: "fix", label: "Fast utan paket", rate: c.rates.fixed.plain + add, pkg: false, note: "utan försäkringar via banken" },
-    { id: "var", label: "Rörlig med paket", rate: c.euribor + c.rates.variable.bonified + add, pkg: true, note: `Euribor ${qpct(c.euribor)} plus marginal` }
+    { id: "var", label: "Rörlig med paket", rate: c.euribor + c.rates.variable.bonified + add, pkg: true, note: `Euribor ${qpct(c.euribor)} (prel.) plus marginal` }
   ];
   if(qc.res === "nonResident") list.push({ id: "caixa", label: "CaixaBank HolaBank", rate: CAIXA.rate.bonified, pkg: true, note: "publicerad ränta, högst 20 år", years: CAIXA.maxYears });
   return list;
@@ -2577,7 +2605,7 @@ function renderBuyer(){
   $("#h_bank").value = b.bank;
   if(caixa && b.rateType === "variable") b.rateType = "fixed";
   $$('[name="h_rate"]').forEach(i => { i.checked = i.value === b.rateType; i.disabled = caixa && i.value === "variable"; i.closest(".chip").style.opacity = i.disabled ? .45 : ""; });
-  $("#varLabel").textContent = `Rörlig (Euribor ${pct(HOME_CFG.euribor)} + marginal)`;
+  $("#varLabel").textContent = `Rörlig (Euribor ${pct(HOME_CFG.euribor)}, preliminärt oktobersnitt 2026, + marginal)`;
   $("#ltvLabel").textContent = `Lån, % av priset (högst ${Math.round(c.ltv * 100)})`;
   $("#yearsLabel").textContent = `Löptid, år (högst ${c.years})`;
   $("#h_ltv").max = Math.round(c.ltv * 100); $("#h_ltv").value = Math.round(b.ltv * 100);
