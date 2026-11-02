@@ -35,7 +35,7 @@ Inställningar → Egenskaper → Kontaktegenskaper. Lägg dem i en egen grupp, 
 
 1. **Prenumerationstyp:** Inställningar → Marknadsföring → E-post → Prenumerationer. Skapa "Flyttbrevet" och notera dess id.
 2. **Formulär:** skapa ett formulär, "Solpass – webbplats", med e-post och samtliga egenskaper ovan som dolda fält. Modulerna skickar till formuläret via HubSpots Forms API, så själva formuläret visas aldrig. Notera formulärets GUID och ert portal-id (kontots id).
-3. **Uppföljningsmejl:** lägg ett enkelt uppföljningsmejl på formuläret, så att "Vi mejlar kalkylen till er" stämmer. Kräver den nuvarande texten ändras i modulens fält.
+3. **Uppföljningsmejl:** lägg ett enkelt uppföljningsmejl på formuläret, så att "Vi mejlar kalkylen till er" stämmer. Annars behöver texten ändras i modulens fält.
 
 ## 3. Ladda upp modulerna
 
