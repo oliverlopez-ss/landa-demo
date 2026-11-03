@@ -24,29 +24,39 @@ module.exports = [
     name: "solpass-hero",
     label: "Solpass hero",
     fields: [
+      text("eyebrow", "Liten text ovanför rubriken", "För svenska familjer som flyttar till Costa del Sol"),
       text("heading", "Rubrik", "Flytten till Spanien,"),
-      text("heading_muted", "Rubrik, andra raden (grå)", "i rätt ordning."),
+      text("heading_muted", "Rubrik, andra raden", "i rätt ordning."),
       rich("lead", "Ingress", "<p>En personlig plan för hela flytten: varje myndighetssteg med datum, vad det kostar och rätt person att ringa. Svara på några korta frågor, det tar två minuter.</p>"),
-      text("button_text", "Knapptext", "Gör er flyttplan"),
+      text("button_text", "Knapptext", "Gör er flyttplan, gratis"),
       text("button_url", "Knapplänk", "/flyttplan"),
-      text("fine", "Liten text under knappen", "Tar två minuter. Ingen inloggning."),
+      text("button2_text", "Andra knappen, text", "Räkna på ekonomin"),
+      text("button2_url", "Andra knappen, länk", "/ekonomi"),
+      text("fine", "Liten text under knapparna", "Tar två minuter. Ingen inloggning."),
+      { name: "image", label: "Bakgrundsbild", type: "image", required: false, locked: false, responsive: true, resizable: false, default: { src: "https://images.unsplash.com/photo-1774208671069-c2e5a00689c3?fm=jpg&q=70&w=2200&auto=format&fit=crop", alt: "", loading: "eager" } },
       bool("show_preview", "Visa exempel på en plan", true),
     ],
+    // Same as the demo's landing hero: photo with a slow zoom, dark gradient, white text, example plan to the right.
     html: `<section class="hero">
+  {% if module.image.src %}<div class="hero-bg" style="background-image:url('{{ module.image.src|escape_attr }}')"></div>{% endif %}
   <div class="wrap">
     <div>
+      {% if module.eyebrow %}<div class="eyebrow">{{ module.eyebrow }}</div>{% endif %}
       <h1>{{ module.heading }}{% if module.heading_muted %} <span class="mute">{{ module.heading_muted }}</span>{% endif %}</h1>
       <div class="lead">{{ module.lead }}</div>
-      <div class="row"><a class="btn primar" href="{{ module.button_url|escape_attr }}">{{ module.button_text }}</a></div>
+      <div class="row">
+        <a class="btn sun" href="{{ module.button_url|escape_attr }}">{{ module.button_text }}</a>
+        {% if module.button2_text %}<a class="btn light" href="{{ module.button2_url|escape_attr }}">{{ module.button2_text }}</a>{% endif %}
+      </div>
       {% if module.fine %}<p class="fine">{{ module.fine }}</p>{% endif %}
     </div>
     {% if module.show_preview %}
     <div class="preview" aria-hidden="true">
-      <div class="ph"><b>Exempel på en plan</b><span class="small muted">flytt 1 aug 2027 · Marbella</span></div>
+      <div class="ph"><div><b>Familjen Andersson</b> <span class="pill">Exempel</span></div><span class="small muted">flytt 1 aug 2027 · Marbella</span></div>
       <div class="ptask done"><span class="box"></span><div><div class="tt">Boka möte med skatterådgivare</div></div></div>
-      <div class="ptask"><span class="box"></span><div><div class="tt">Ansök om NIE för alla i familjen</div><div class="meta">senast 3 maj · Policía Nacional</div></div></div>
-      <div class="ptask"><span class="box"></span><div><div class="tt">Säkra bostad med långtidskontrakt</div><div class="meta">senast 2 jun · Mäklare</div></div></div>
-      <div class="ptask"><span class="box"></span><div><div class="tt">Skriv in barnen i skolan</div><div class="meta">senast 15 aug · Skola</div></div></div>
+      <div class="ptask"><span class="box"></span><div><div class="tt">Ansök om NIE för alla i familjen</div><div class="meta"><span class="due soon">senast 3 maj</span><span class="who">Policía Nacional</span></div></div></div>
+      <div class="ptask"><span class="box"></span><div><div class="tt">Säkra bostad med långtidskontrakt</div><div class="meta"><span class="due">senast 2 jun</span><span class="who">Mäklare</span></div></div></div>
+      <div class="ptask"><span class="box"></span><div><div class="tt">Skriv in barnen i skolan</div><div class="meta"><span class="due">senast 15 aug</span><span class="who">Skola</span></div></div></div>
     </div>
     {% endif %}
   </div>
