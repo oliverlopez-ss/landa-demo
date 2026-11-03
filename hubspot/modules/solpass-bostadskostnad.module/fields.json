@@ -144,5 +144,13 @@
     "locked": false,
     "type": "text",
     "default": "kalkyl-bostad"
+  },
+  {
+    "name": "compare",
+    "label": "Visa knappen Lägg till i jämförelsen (när bostadsjämförelsen ligger på sidan)",
+    "type": "boolean",
+    "required": false,
+    "locked": false,
+    "default": false
   }
 ]

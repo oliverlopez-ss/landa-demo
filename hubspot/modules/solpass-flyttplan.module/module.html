@@ -5,6 +5,7 @@
   data-source="{{ module.source_value|escape_attr }}"
   data-nl="{{ module.newsletter_subscription_type_id|escape_attr }}"
   data-consent="{{ module.consent_text|escape_attr }}"
+  data-skip-intro="{{ 'true' if module.skip_intro else '' }}"
   data-urls='{{ {"partners": module.url_partners, "dokument": module.url_dokument, "skatt": module.url_skatt, "bostad": module.url_bostad}|tojson|replace("'", "&#39;") }}'
   style="--sp-acc: {{ module.accent_color.color }}">
 

@@ -11,7 +11,7 @@ The Solpass portal is **149676609** (app-eu1). Built there, from `hubspot/site/`
 - The portal refused new contact properties after ten (`OBJECT_CREATION property limit of 10`); partner and question forms use the standard `message` field. `solpass_omraden` gained six area options for the broker form.
 - One test submission exists: contact `oliver.lopez+solpasstest@structsales.se`.
 
-Later the same day Oliver asked for the HubSpot site to look exactly like the demo: the main menu (mega menus), the start page hero and the start page itself now follow the demo's landing page section by section, without Solpass Plus (no product or payment in HubSpot yet). This replaces the seven-section start page below. The broker form and housing calculator live on /bostad.
+Later the same day Oliver asked for the HubSpot site to look exactly like the demo: the main menu (mega menus), the start page hero and the start page itself now follow the demo's landing page section by section, without Solpass Plus (no product or payment in HubSpot yet). This replaces the seven-section start page below. The subpages are the demo's own views (module solpass-vy, built by `hubspot/site/snapshot-views.js`); new pages /skolor, /kontakter, /fraga, /bostad/bolanekalkyl (with the demo's home comparison) and /bostad/hyra-eller-kopa; /ekonomi became /skatt. The portal allows 30 site pages, so the 15 partner types share /partners and the hash picks one, like the demo. See `hubspot/site/README.md`.
 
 Still open before launch: follow-up emails (the calculators and the checklist form promise an email that is not sent yet; no checklist PDF exists), privacy policy page content, the photo, the hot-lead list (step 6), end-to-end tests of every form (step 7), Euribor update, publishing, domain.
 

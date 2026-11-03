@@ -1,0 +1,42 @@
+[
+  {
+    "name": "html",
+    "label": "Innehåll (HTML från demon)",
+    "type": "richtext",
+    "required": false,
+    "locked": false,
+    "default": ""
+  },
+  {
+    "name": "portal_id",
+    "label": "Portal-id",
+    "type": "text",
+    "required": false,
+    "locked": false,
+    "default": ""
+  },
+  {
+    "name": "form_guid",
+    "label": "Formulär för leads (GUID)",
+    "type": "text",
+    "required": false,
+    "locked": false,
+    "default": ""
+  },
+  {
+    "name": "newsletter_subscription_type_id",
+    "label": "Prenumerationstyp Flyttbrevet (id)",
+    "type": "text",
+    "required": false,
+    "locked": false,
+    "default": ""
+  },
+  {
+    "name": "consent_text",
+    "label": "Samtyckestext",
+    "type": "text",
+    "required": false,
+    "locked": false,
+    "default": "Vi sparar e-postadressen och era svar för att kunna skicka resultatet och svara på frågor. Ni kan när som helst be oss ta bort uppgifterna. Läs mer i integritetspolicyn."
+  }
+]

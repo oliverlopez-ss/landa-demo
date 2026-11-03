@@ -95,7 +95,10 @@ page("bostadsguide", "Bostad");
 pages.push({
   name: "Bolånekalkyl", slug: "bostad/bolanekalkyl", title: "Vad kostar bostaden i månaden? – Solpass",
   description: "Månadskostnad med spanska bankers villkor, skatterna vid köp och de löpande kostnaderna.",
-  sections: [{ module: "bostadskostnad", params: { ...CALC } }, vy("bostad-banker")],
+  sections: [
+    { module: "bostadskostnad", params: { ...CALC, compare: true, cta_url: "/partners#bolan" } },
+    { module: "jamfor", params: { ...CALC, html: VIEWS["bostad-jamfor"].html } },
+  ],
 });
 pages.push({
   name: "Hyra eller köpa", slug: "bostad/hyra-eller-kopa", title: "Hyra först eller köpa direkt? – Solpass",

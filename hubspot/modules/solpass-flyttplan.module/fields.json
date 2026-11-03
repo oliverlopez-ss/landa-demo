@@ -10,5 +10,6 @@
   {"name": "newsletter_subscription_type_id", "label": "Prenumerationstyp-id för Flyttbrevet", "help_text": "Samtycke till Flyttbrevet skickas bara om besökaren kryssar i rutan och ett id finns här.", "type": "text", "required": false, "locked": false, "default": ""},
   {"name": "consent_text", "label": "Samtyckestext", "type": "text", "required": false, "locked": false, "default": "Jag godkänner att Solpass sparar mina uppgifter för att skicka min flyttplan och, om jag kryssat i rutan, Flyttbrevet."},
   {"name": "source_value", "label": "Källa (solpass_kalla)", "type": "text", "required": false, "locked": false, "default": "plan"},
-  {"name": "accent_color", "label": "Accentfärg", "type": "color", "required": false, "locked": false, "default": {"color": "#17724A", "opacity": 100}}
+  {"name": "accent_color", "label": "Accentfärg", "type": "color", "required": false, "locked": false, "default": {"color": "#17724A", "opacity": 100}},
+  {"name": "skip_intro", "label": "Börja direkt på första frågan (som i demon)", "type": "boolean", "required": false, "locked": false, "default": true}
 ]

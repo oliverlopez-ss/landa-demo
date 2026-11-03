@@ -1,0 +1,5 @@
+{# Solpass jämför bostäder: the demo's home comparison and bank table. Markup from snapshot-views.js, code from build-jamfor-js.js,
+   styles are the demo's (same file as Solpass vy). Leads go to the hidden website form. #}
+<div class="dv" data-jamfor data-portal="{{ module.portal_id|escape_attr }}" data-form="{{ module.form_guid|escape_attr }}" data-nl="{{ module.newsletter_subscription_type_id|escape_attr }}" data-consent="{{ module.consent_text|escape_attr }}">
+  {{ module.html }}
+</div>

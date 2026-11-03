@@ -37,7 +37,8 @@ const VIEWS = [
   ["fragor", "#fragor", "fragor", "Vanliga frågor"],
   ["fraga", "#fraga", "fraga", "Ställ en fråga", "fraga"],
   // parts of calculator views; the calculators themselves are modules
-  ["bostad-banker", "#bostad", "bostad/bolanekalkyl", "Bolånekalkyl", null, "after:#homeResults"],
+  // the home comparison keeps the demo's markup as is; solpass-jamfor runs the demo's code on it
+  ["bostad-jamfor", "#bostad", "bostad/bolanekalkyl", "Bolånekalkyl", "keep", "after:#qc"],
   ["skatt-info", "#skatt", "skatt", "Beckham-regimen", null, "last"],
 ];
 
@@ -63,6 +64,7 @@ const VIEWS = [
         wrap.replaceChildren(...keep);
         if (part === "last") wrap.style.paddingTop = "0";
       }
+      if (formKey === "keep") return { html: view.innerHTML, heading: "", lead: "" };
       const q = (s, r = view) => [...r.querySelectorAll(s)];
       // Solpass Plus is not offered on the HubSpot site
       q("[data-plus], .gate, .plusbadge, [data-intro], [data-scroll='plus']").forEach(e => e.remove());

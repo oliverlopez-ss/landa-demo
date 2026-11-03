@@ -112,6 +112,8 @@ function init(root){
     nl: (root.getAttribute("data-nl") || "").trim(),
     consent: (root.getAttribute("data-consent") || "").trim()
   };
+  // like the demo: straight to the first question unless the page wants the intro screen
+  const skipIntro = root.getAttribute("data-skip-intro") === "true";
   const urls = {partners:"/partners", dokument:"/dokument", skatt:"/skatt", bostad:"/bostad/bolanekalkyl"};
   try{
     const u = JSON.parse(root.getAttribute("data-urls") || "{}");
@@ -192,7 +194,7 @@ function init(root){
     const next = () => { wzStep++; renderWizard(); show("wizard"); };
     const on = (act, fn) => { const b = wz.querySelector(`[data-fp-act="${act}"]`); if(b) b.addEventListener("click", fn); };
     on("back", () => { wzStep--; renderWizard(); });
-    on("cancel", () => { if(hasPlan()) openPlan(); else show("intro"); });
+    on("cancel", () => { if(hasPlan()) openPlan(); else if(skipIntro) location.href = "/"; else show("intro"); });
     wz.querySelectorAll(".fp-opt").forEach(b => b.addEventListener("click", () => { state.answers[s.key] = b.getAttribute("data-v"); save(); next(); }));
     on("next", () => { const v = wz.querySelector("[data-fp-date]").value; if(state.movedate !== v) state.resYear = ""; state.movedate = v; save(); next(); });
     on("skipdate", () => { state.movedate = ""; save(); next(); });
@@ -373,7 +375,7 @@ function init(root){
     else if(act === "pdf") downloadChecklist();
   });
 
-  if(hasPlan()) openPlan(); else show("intro");
+  if(hasPlan()) openPlan(); else if(skipIntro) startWizard(); else show("intro");
 }
 
 function boot(){ document.querySelectorAll(".sp-flyttplan").forEach(init); }

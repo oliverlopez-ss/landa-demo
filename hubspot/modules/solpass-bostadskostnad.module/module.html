@@ -34,8 +34,11 @@
       <p class="sp-small" style="margin:0;color:#AAB2BD">Fast ränta: scenarierna visar vad lånet kostar om räntan är en annan när ni tecknar det.</p>
       <div class="sp-qc-scen" data-o="scen"></div>
       <p class="sp-est"><b>Estimat, inte beslutsunderlag.</b> Siffrorna bygger på förenklade antaganden och är inte granskade av en rådgivare. Fatta inga beslut om flytt, bostad eller skatt på dem utan att stämma av med en rådgivare som ser hela er situation.</p>
+      {% if module.compare %}<div class="sp-row" style="margin-top:18px"><a class="sp-btn sp-green" href="{{ module.cta_url or '/partners#bolan' }}">{{ module.cta_label }}</a><button type="button" class="sp-btn sp-ghost" data-role="add">Lägg till i jämförelsen</button></div>
+      {% else %}
       {% if module.cta_url %}<div class="sp-row"><a class="sp-btn sp-light" href="{{ module.cta_url }}">{{ module.cta_label }}</a></div>{% endif %}
       <div class="sp-stack" data-role="cap"><b>{{ module.cap_heading }}</b><p class="sp-note">{{ module.cap_note }}</p><form class="sp-capture" data-role="cap-form"><input type="email" required placeholder="din@epost.se" aria-label="E-post" autocomplete="email"><button class="sp-btn" type="submit">{{ module.cap_button }}</button>{% if module.newsletter_subscription_type_id %}<label class="sp-nl"><input type="checkbox" data-nl> Skicka mig Flyttbrevet: nya regler och deadlines, en gång i månaden</label>{% endif %}</form>{% if module.consent_text %}<p class="sp-consent">{{ module.consent_text }}</p>{% endif %}<p class="sp-err" data-role="cap-err" hidden></p></div>
+      {% endif %}
     </div>
   </section>
 </div>

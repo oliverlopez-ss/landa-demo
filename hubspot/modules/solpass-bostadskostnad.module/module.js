@@ -198,6 +198,12 @@
     qsa(root, "[data-nb]").forEach(function(b){ b.onclick = function(){ qc.newBuild = b.getAttribute("data-nb") === "1"; render(); }; });
     qsa(root, "[data-res]").forEach(function(b){ b.onclick = function(){ qc.res = b.getAttribute("data-res"); var pr = qcPresets().find(function(x){ return x.id === qc.preset; }); if(pr) qc.rate = pr.rate; else if(qc.preset === "caixa"){ qc.preset = "fix-pkg"; qc.rate = null; } render(); }; });
     render();
+    // hands the current home to the comparison below (solpass-jamfor), like the demo's "Lägg till i jämförelsen"
+    var add = qs(root, "[data-role=add]");
+    if(add) add.onclick = function(){
+      var ibi = qc.ibi != null ? qc.ibi : Math.round(qc.price * HOME_CFG.ibiRateOfPrice / 50) * 50;
+      document.dispatchEvent(new CustomEvent("solpass:add-home", { detail: { price: qc.price, region: qc.region, newBuild: qc.newBuild, communityMonthly: qc.com, ibiYearly: ibi } }));
+    };
     bindCapture(root, function(){
       var s = snap;
       var txt = "Pris " + eur(s.price) + ", " + s.region + ", " + (s.newBuild ? "nyproduktion" : "begagnad") + ", köper som " + (s.res === "nonResident" ? "icke-resident (bor i Sverige)" : "resident i Spanien") + ", kontantinsats " + Math.round(s.down * 100) + " %, " + s.years + " år, ränta " + qpct(s.rate) + (s.pkg ? " med bankens paket" : " utan paket") + ": ca " + eur(s.total) + " per månad, kontant på köpdagen " + eur(s.cash) + ", lån " + eur(s.loan) + ".";
