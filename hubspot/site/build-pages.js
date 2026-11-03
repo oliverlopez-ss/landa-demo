@@ -42,28 +42,51 @@ const BROKER = {
 
 const pages = [];
 
-// Start page: the seven sections from the handoff.
+// Start page: the demo's landing page in the same order, without Solpass Plus (no product or payment in HubSpot yet).
+const UNS = id => `https://images.unsplash.com/photo-${id}?fm=jpg&q=70&w=1400&auto=format&fit=crop`;
+const FACTS = [
+  [D.TASKS.length, "steg i rätt ordning"],
+  [4, "faser, från beslutet till första deklarationen"],
+  [allFaq.length, "svar på det alla frågar"],
+  [D.CONTACTS.length, "myndigheter, skolor och partnerroller"],
+].map(([n, l]) => ({ title: String(n), small: l }));
+const PHASE_CARDS = [1, 2, 3, 4].map(ph => ({ title: D.PHASES[ph], small: D.PHASE_WHEN[ph], text: ul(D.TASKS.filter(t => t.ph === ph).slice(0, 3).map(t => t.t)) }));
+const AREA_CARDS = D.AREAS.map(a => ({ title: a.name, small: a.pitch, small2: `<span><b>${nf(a.prices[0][1])} €</b>/m² att köpa</span><span>ca ${a.flyg} min till flyget</span>`, image: UNS(a.img), link_url: `/omraden/${a.id}` }));
+const PARTNER_CARDS = D.PGROUPS.map(([g, gn]) => ({ title: gn, text: D.PTYPES.filter(t => t.g === g).map(t => `<a href="/partners#${t.id}">${t.name}</a>`).join("") }));
 pages.push({
   name: "Startsida", slug: "", title: "Solpass – flytta till Costa del Sol",
   description: "Allt en svensk familj behöver göra för att flytta till Costa del Sol, i rätt ordning, och utvalda partners som kan hjälpa er när de är på plats.",
   sections: [
     { module: "hero", params: { show_preview: true } },
-    sek({ anchor: "sa-funkar-det", heading: "Från ”vi borde” till nycklar i handen", lead: "<p>Solpass samlar allt ni annars letar efter i tjugo flikar och fem Facebookgrupper, och kopplar er till de få personer som faktiskt löser det.</p>", numbered: true, cards: STEPS, buttons: [btn("Gör er flyttplan", "/flyttplan")] }),
-    { module: "om-oss", params: { anchor: "vilka-vi-ar", variant: "gra" } },
-    { module: "bostadskostnad", params: { ...CALC } },
-    BROKER,
-    sek({ anchor: "partners", heading: "Rätt person för varje steg", lead: "<p>Vi håller på att välja ut våra första partners: de som arbetar med svenska familjer, skriver avtal med oss och lovar att svara inom två arbetsdagar.</p>", cols: "4", cards: groupCards, buttons: [btn("Se alla partnertyper", "/partners"), btn("Arbetar ni med svenskar? Bli partner", "/bli-partner", "sekundar")], note: MONEY }),
+    sek({ variant: "vit rad", card_style: "siffror", cards: FACTS }),
+    sek({ anchor: "sa-funkar-det", eyebrow: "Så funkar det", heading: "Från ”vi borde” till nycklar i handen", lead: "<p>Solpass samlar allt ni annars letar efter i tjugo flikar och fem Facebookgrupper, och kopplar er till de få personer som faktiskt löser det.</p>", numbered: true, cards: STEPS }),
+    { module: "om-oss", params: { anchor: "vilka-vi-ar", variant: "vit linje" } },
+    { module: "ekonomi", params: { ...CALC, eyebrow: "Kalkyl", background: "gra" } },
+    sek({ anchor: "planen", eyebrow: "Planen", heading: "Fyra faser, rätt ordning", lead: "<p>Det mesta som går fel i en flytt till Spanien går fel för att något gjordes för sent. Planen räknar baklänges från er flyttdag.</p>", card_style: "faser", cards: PHASE_CARDS, buttons: [btn("Gör er egen plan", "/flyttplan", "gron")] }),
+    sek({ anchor: "bostad", variant: "gra", eyebrow: "Bostad och bolån", heading: "Vad kostar bostaden, på riktigt?", lead: "<p>Jämför upp till sex bostäder sida vid sida: vad köpet kräver kontant på köpdagen, månadskostnaden med och utan bankens paket, och vad det blir i kronor. Byggt för den som inte bor i Spanien än.</p>", card_style: "fakta", cards: [
+      { title: "70 %", small: "lånar spanska banker normalt ut till den som inte är resident, mot 80 % för residenta" },
+      { title: "7 %", small: "överlåtelseskatt på en begagnad bostad i Andalusien (2026; Junta de Andalucía har föreslagit 6,75 % från 2027), plus notarie, registro och advokat" },
+      { title: "3,24 %", small: "Euribor 12 månader, preliminärt oktobersnitt 2026. Rörlig ränta är Euribor plus bankens marginal." },
+    ], buttons: [btn("Räkna på en bostad", "/bostad#bolanekalkyl", "gron"), btn("Hyra eller köpa, över fem år?", "/bostad#hyra-eller-kopa", "sekundar")] }),
+    sek({ anchor: "omraden", eyebrow: "Områden", heading: "Var på kusten passar ni?", lead: "<p>Sex områden, sex vardagar. Skolor, tid till flyget, vem som trivs där och vad det kostar att hyra och köpa.</p>", card_style: "omraden", cards: AREA_CARDS }),
+    sek({ anchor: "beckham", eyebrow: "Beckham-regimen", heading: "Vad sparar ni på Beckham?", lead: "<p>Spaniens särskilda skatteregim för inflyttade: 24 % platt skatt på lönen i sex år i stället för upp till 47 %. Den gäller distansanställda, spanskt anställda och bolagsledare, men bara om ansökan lämnas i tid.</p>", card_style: "fakta", cards: [
+      { title: "24 %", small: "platt skatt på arbetsinkomst upp till 600 000 € per år, 47 % därutöver" },
+      { title: "6 år", small: "flyttåret plus fem år. Lön beskattas med 24 % i Spanien oavsett varifrån den betalas. Kapitalinkomster från Sverige beskattas inte i Spanien under tiden." },
+      { title: "6 mån", small: "har ni på er att lämna Modelo 149, räknat från startdatumet i registreringen hos Seguridad Social, eller i A1-intyget om ni stannar i svensk socialförsäkring." },
+    ], buttons: [btn("Räkna på Beckham", "/ekonomi#beckham", "gron")] }),
+    sek({ anchor: "partners", eyebrow: "Partners", heading: "Rätt person för varje steg", lead: "<p>Vi håller på att välja ut våra första partners: de som arbetar med svenska familjer, skriver avtal med oss och lovar att svara inom två arbetsdagar.</p>", card_style: "partners", cards: PARTNER_CARDS, buttons: [btn("Se alla partnertyper", "/partners", "gron"), btn("Arbetar ni med svenskar? Bli partner", "/bli-partner", "sekundar")], note: MONEY }),
+    { module: "fragor", params: { anchor: "vanliga-fragor", variant: "vit", eyebrow: "Vanliga frågor", heading: "Det alla undrar först", items: faqItems(TOP), buttons: [btn(`Alla ${allFaq.length} svar`, "/fragor", "sekundar")] } },
     {
       module: "formular",
       params: {
-        anchor: "flyttbrevet", variant: "band", layout: "sida",
+        anchor: "flyttbrevet", variant: "gra", layout: "sida", eyebrow: "Flyttbrevet",
         heading: "Det som ändras, innan det påverkar er flytt.",
         lead: "<p>Regler för skatt, hyra, skola och bostad i Spanien ändras ofta, och nästan allt skrivs på spanska. En gång i månaden får ni det som är nytt, vad det betyder för en svensk familj och vad ni bör göra just nu.</p>",
         content: ul(["<b>Det som har ändrats.</b> Nya regler och beslut, förklarade på svenska och med länk till källan.", "<b>Månadens deadlines.</b> Vad som ska vara klart om ni flyttar inom ett år.", "<b>Ett område på djupet.</b> Skolor, bostadspriser och hur vardagen ser ut."]) + "<p>En gång i månaden. Partners syns bara med tydlig märkning. Avsluta med ett klick.</p>",
         form: { ...form(FORMS.flyttbrevet), message: "<p>Tack. Första brevet kommer i början av nästa månad.</p>" },
       },
     },
-    { module: "fragor", params: { anchor: "vanliga-fragor", variant: "vit", heading: "Det alla undrar först", items: faqItems(TOP), buttons: [btn(`Alla ${allFaq.length} svar`, "/fragor", "sekundar")] } },
+    { module: "formular", params: { anchor: "checklistan", variant: "band", layout: "under", eyebrow: "Checklistan", heading: "Hela flytten i en PDF.", lead: "<p>Alla steg i rätt ordning, vilka papper som behövs, vem som löser vad och länkar till de officiella blanketterna. Har ni gjort planen blir den personlig.</p>", form: { ...form(FORMS.checklista), message: "<p>Tack. Vi mejlar checklistan till er.</p>" } } },
   ],
 });
 

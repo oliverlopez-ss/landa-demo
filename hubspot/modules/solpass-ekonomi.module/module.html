@@ -1,6 +1,6 @@
 <!-- Solpass: Ekonomikalkyl (vad blir kvar varje månad). Calculator logic and texts copied from the Solpass demo (index.html). -->
-<div class="sp-ekonomi" data-portal="{{ module.portal_id }}" data-form="{{ module.form_guid }}" data-source="{{ module.source_value }}" data-nl="{{ module.newsletter_subscription_type_id }}" data-consent="{{ module.consent_text|escape_attr }}" style="--sp-acc: {{ module.accent_color.color }}" data-income="{{ module.default_income_sek }}" data-senet="{{ module.default_net_sek }}">
-  <div class="sp-head">{% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}{% if module.intro %}<div class="sp-intro">{{ module.intro }}</div>{% endif %}</div>
+<div class="sp-ekonomi" data-bg="{{ module.background }}" data-portal="{{ module.portal_id }}" data-form="{{ module.form_guid }}" data-source="{{ module.source_value }}" data-nl="{{ module.newsletter_subscription_type_id }}" data-consent="{{ module.consent_text|escape_attr }}" style="--sp-acc: {{ module.accent_color.color }}" data-income="{{ module.default_income_sek }}" data-senet="{{ module.default_net_sek }}">
+  <div class="sp-head">{% if module.eyebrow %}<div class="eyebrow">{{ module.eyebrow }}</div>{% endif %}{% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}{% if module.intro %}<div class="sp-intro">{{ module.intro }}</div>{% endif %}</div>
   <div class="sp-calc">
     <form class="sp-card sp-stack" data-role="in" onsubmit="return false">
       <label class="sp-field"><span>Hushållets bruttoinkomst per år (SEK)</span><input type="number" data-k="inc" value="1500000" step="50000" min="0" inputmode="numeric"></label>

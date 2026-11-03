@@ -9,7 +9,8 @@ const group = (name, label, children, extra = {}) => ({ name, label, type: "grou
 const repeat = (name, label, children, def = []) => group(name, label, children, { occurrence: { min: 0, max: 40, default: 0 }, default: def });
 
 const anchor = text("anchor", "Ankare (id i adressen, t.ex. partners)");
-const variant = choice("variant", "Bakgrund", [["vit", "Vit"], ["gra", "Grå"], ["band", "Mörk"], ["vit tat", "Vit, mindre luft"], ["gra tat", "Grå, mindre luft"]], "vit");
+const variant = choice("variant", "Bakgrund", [["vit", "Vit"], ["gra", "Grå"], ["band", "Mörk"], ["vit linje", "Vit, med linje överst"], ["vit rad", "Vit, smal rad (siffror)"], ["vit tat", "Vit, mindre luft"], ["gra tat", "Grå, mindre luft"]], "vit");
+const eyebrow = text("eyebrow", "Liten text ovanför rubriken");
 const buttons = repeat("buttons", "Knappar", [
   text("text", "Text"),
   text("url", "Länk"),
@@ -18,6 +19,7 @@ const buttons = repeat("buttons", "Knappar", [
 
 const BUTTONS = `{% if module.buttons|length %}<div class="row knappar">{% for b in module.buttons %}<a class="btn {{ b.style }}" href="{{ b.url|escape_attr }}">{{ b.text }}</a>{% endfor %}</div>{% endif %}`;
 const OPEN = `<section class="sec {{ module.variant }}"{% if module.anchor %} id="{{ module.anchor|escape_attr }}"{% endif %}>`;
+const EYEBROW = `{% if module.eyebrow %}<div class="eyebrow">{{ module.eyebrow }}</div>{% endif %}`;
 
 module.exports = [
   {
@@ -69,26 +71,35 @@ module.exports = [
       anchor, variant,
       choice("width", "Bredd", [["bred", "Bred"], ["smal", "Smal (text)"]], "bred"),
       text("heading_level", "Rubriknivå (h1 eller h2)", "h2"),
+      eyebrow,
       text("heading", "Rubrik"),
       rich("lead", "Ingress"),
       rich("content", "Brödtext"),
       choice("cols", "Kort per rad", [["2", "2"], ["3", "3"], ["4", "4"]], "3"),
       bool("numbered", "Numrera korten", false),
-      repeat("cards", "Kort", [text("title", "Rubrik"), rich("text", "Text"), text("link_text", "Länktext"), text("link_url", "Länk"), text("anchor", "Ankare (t.ex. gestor)")]),
+      choice("card_style", "Kortens utseende", [["kort", "Kort"], ["siffror", "Siffror på rad"], ["fakta", "Faktarutor"], ["faser", "Faser på tidslinje"], ["omraden", "Områden med bild"], ["partners", "Partnergrupper med länkar"]], "kort"),
+      repeat("cards", "Kort", [text("title", "Rubrik (eller siffra)"), rich("text", "Text"), text("small", "Kort text (faktarutor, siffror, fas-tid, område)"), text("small2", "Extra rad (område: pris och flygtid)"), text("image", "Bild-URL (områden)"), text("link_text", "Länktext"), text("link_url", "Länk"), text("anchor", "Ankare (t.ex. gestor)")]),
       rich("after", "Text efter korten"),
       buttons,
       rich("note", "Liten text längst ner"),
     ],
     html: `${OPEN}
   <div class="wrap{% if module.width == 'smal' %} narrow{% endif %}">
-    {% if module.heading or module.lead %}<div class="sec-head">
+    {% if module.heading or module.lead or module.eyebrow %}<div class="sec-head">
+      ${EYEBROW}
       {% if module.heading %}{% if module.heading_level == 'h1' %}<h1>{{ module.heading }}</h1>{% else %}<h2>{{ module.heading }}</h2>{% endif %}{% endif %}
       {% if module.lead %}<div class="lead">{{ module.lead }}</div>{% endif %}
     </div>{% endif %}
     {% if module.content %}<div class="prose">{{ module.content }}</div>{% endif %}
-    {% if module.cards|length %}<div class="cards" style="--cols:{{ module.cols }}{% if module.content %};margin-top:40px{% endif %}">
+    {% if module.cards|length %}{% set cs = module.card_style or "kort" %}{% set mt = module.content and ";margin-top:40px" or "" %}
+    {% if cs == "siffror" %}<div class="facts-row" style="{{ mt }}">{% for c in module.cards %}<div class="fact"><b>{{ c.title }}</b><span>{{ c.small }}</span></div>{% endfor %}</div>
+    {% elif cs == "fakta" %}<div class="homefacts" style="{{ mt }}">{% for c in module.cards %}<div><b>{{ c.title }}</b><span>{{ c.small }}</span></div>{% endfor %}</div>
+    {% elif cs == "faser" %}<div class="timeline" style="{{ mt }}">{% for c in module.cards %}<div class="phase-card"><span class="dot"></span><div class="when">{{ c.small }}</div><h3>{{ c.title }}</h3>{{ c.text }}</div>{% endfor %}</div>
+    {% elif cs == "omraden" %}<div class="agrid" style="{{ mt }}">{% for c in module.cards %}<a class="acard" href="{{ c.link_url|escape_attr }}"><div class="ph" style="background-image:url('{{ c.image|escape_attr }}')" role="img" aria-label="{{ c.title|escape_attr }}"></div><div class="tx"><h3>{{ c.title }}</h3><p>{{ c.small }}</p>{% if c.small2 %}<div class="k">{{ c.small2 }}</div>{% endif %}</div></a>{% endfor %}</div>
+    {% elif cs == "partners" %}<div class="pgrid" style="{{ mt }}">{% for c in module.cards %}<div class="pcat"{% if c.anchor %} id="{{ c.anchor|escape_attr }}"{% endif %}><h3>{{ c.title }}</h3><div class="plinks">{{ c.text }}</div></div>{% endfor %}</div>
+    {% else %}<div class="cards" style="--cols:{{ module.cols }}{{ mt }}">
       {% for c in module.cards %}<div class="card"{% if c.anchor %} id="{{ c.anchor|escape_attr }}"{% endif %}>{% if module.numbered %}<div class="n">{{ loop.index }}</div>{% endif %}<h3>{{ c.title }}</h3>{% if c.text %}<div class="txt">{{ c.text }}</div>{% endif %}{% if c.link_url %}<a class="more" href="{{ c.link_url|escape_attr }}">{{ c.link_text or "Läs mer" }} →</a>{% endif %}</div>{% endfor %}
-    </div>{% endif %}
+    </div>{% endif %}{% endif %}
     {% if module.after %}<div class="prose" style="margin-top:32px">{{ module.after }}</div>{% endif %}
     ${BUTTONS}
     {% if module.note %}<div class="note">{{ module.note }}</div>{% endif %}
@@ -99,7 +110,7 @@ module.exports = [
     name: "solpass-fragor",
     label: "Solpass frågor",
     fields: [
-      anchor, variant,
+      anchor, variant, eyebrow,
       text("heading", "Rubrik", "Vanliga frågor"),
       rich("lead", "Ingress"),
       repeat("items", "Frågor", [text("q", "Fråga"), rich("a", "Svar")]),
@@ -107,7 +118,7 @@ module.exports = [
     ],
     html: `${OPEN}
   <div class="wrap narrow">
-    {% if module.heading or module.lead %}<div class="sec-head">{% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}{% if module.lead %}<div class="lead">{{ module.lead }}</div>{% endif %}</div>{% endif %}
+    {% if module.heading or module.lead %}<div class="sec-head">${EYEBROW}{% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}{% if module.lead %}<div class="lead">{{ module.lead }}</div>{% endif %}</div>{% endif %}
     <div>{% for i in module.items %}<details class="qa"><summary>{{ i.q }}</summary><div class="a">{{ i.a }}</div></details>{% endfor %}</div>
     ${BUTTONS}
   </div>
@@ -118,6 +129,7 @@ module.exports = [
     label: "Solpass om oss",
     fields: [
       anchor, variant,
+      text("eyebrow", "Liten text ovanför rubriken", "Vilka vi är"),
       text("heading", "Rubrik", "Därför finns Solpass."),
       rich("text", "Text", "<p>Vi är Oliver och Emelie. Vi har två barn och har valt Costa del Sol för vår familj: för vädret, maten och tempot.</p><p>Solpass är guiden vi själva hade velat ha: allt som ska göras, i rätt ordning, och människorna som kan hjälpa till.</p>"),
       text("signature", "Namn", "Oliver Lopez och Emelie Svedberg"),
@@ -126,6 +138,7 @@ module.exports = [
     html: `${OPEN}
   <div class="wrap two">
     <div class="stack">
+      ${EYEBROW}
       <h2>{{ module.heading }}</h2>
       <div class="lead">{{ module.text }}</div>
       {% if module.signature %}<p class="sign">{{ module.signature }}</p>{% endif %}
@@ -141,6 +154,7 @@ module.exports = [
     fields: [
       anchor, variant,
       choice("layout", "Layout", [["sida", "Text till vänster, formulär till höger"], ["under", "Formulär under texten"]], "sida"),
+      eyebrow,
       text("heading", "Rubrik"),
       rich("lead", "Ingress"),
       rich("content", "Text"),
@@ -150,6 +164,7 @@ module.exports = [
     html: `${OPEN}
   <div class="wrap{% if module.layout == 'sida' %} two top{% else %} narrow{% endif %}">
     <div class="stack">
+      ${EYEBROW}
       {% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}
       {% if module.lead %}<div class="lead">{{ module.lead }}</div>{% endif %}
       {% if module.content %}<div class="prose">{{ module.content }}</div>{% endif %}
