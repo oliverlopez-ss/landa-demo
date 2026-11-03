@@ -2,6 +2,17 @@
 
 Read this first. It is the state of the project as of 3 November 2026 and the plan for moving the site to HubSpot. Agent-facing text is English; everything shown to Oliver and all site copy is Swedish.
 
+## Status, 3 November 2026 (HubSpot build)
+
+The Solpass portal is **149676609** (app-eu1). Built there, from `hubspot/site/` (see its README for ids):
+
+- Steps 1–5 of the build plan are done: 12 Solpass contact properties, subscription type Flyttbrevet (4020326561), hidden form "Solpass – webbplats", the five calculator modules, a custom page template and five content modules, five visible forms (Flyttbrevet, mäklare, fråga, checklista, bli partner), and all 17 pages from the sitemap as **unpublished drafts**.
+- Uploaded without the HubSpot CLI, from a logged-in browser tab via HubSpot's internal APIs. The HubSpot MCP connector in Oliver's sessions points at Structsales (301000) – still do not use it.
+- The portal refused new contact properties after ten (`OBJECT_CREATION property limit of 10`); partner and question forms use the standard `message` field. `solpass_omraden` gained six area options for the broker form.
+- One test submission exists: contact `oliver.lopez+solpasstest@structsales.se`.
+
+Still open before launch: follow-up emails (the calculators and the checklist form promise an email that is not sent yet; no checklist PDF exists), privacy policy page content, the photo, the hot-lead list (step 6), end-to-end tests of every form (step 7), Euribor update, publishing, domain.
+
 ## What Solpass is
 
 A lead-generation site for Swedish families moving to Costa del Sol. Primary goal: capture leads (home buyers most valuable) without feeling salesy. Also: build an audience (the monthly newsletter Flyttbrevet) and connect families with partners (brokers, gestor, tax advisor, lawyer, etc.). Business model: introductions to partners, who pay Solpass.
