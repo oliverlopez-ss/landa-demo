@@ -1,0 +1,42 @@
+[
+  {
+    "name": "html",
+    "label": "Innehåll (HTML från demon)",
+    "type": "richtext",
+    "required": false,
+    "locked": false,
+    "default": ""
+  },
+  {
+    "name": "form_fraga",
+    "label": "Formulär: fråga (GUID)",
+    "type": "text",
+    "required": false,
+    "locked": false,
+    "default": "a5f95a34-0dd6-405a-abf7-d76fe0a48818"
+  },
+  {
+    "name": "form_maklare",
+    "label": "Formulär: mäklare (GUID)",
+    "type": "text",
+    "required": false,
+    "locked": false,
+    "default": "12641cd3-f495-4c42-9af8-4285ba14bede"
+  },
+  {
+    "name": "form_partner",
+    "label": "Formulär: bli partner (GUID)",
+    "type": "text",
+    "required": false,
+    "locked": false,
+    "default": "fc07ae8b-e4bf-4cfd-b550-64cad4afd999"
+  },
+  {
+    "name": "form_checklista",
+    "label": "Formulär: checklista (GUID)",
+    "type": "text",
+    "required": false,
+    "locked": false,
+    "default": "4ffffa19-54c0-405b-8683-64ebbe1abde8"
+  }
+]

@@ -112,7 +112,7 @@ function init(root){
     nl: (root.getAttribute("data-nl") || "").trim(),
     consent: (root.getAttribute("data-consent") || "").trim()
   };
-  const urls = {partners:"/partners", dokument:"/dokument", skatt:"/ekonomi", bostad:"/bostad"};
+  const urls = {partners:"/partners", dokument:"/dokument", skatt:"/skatt", bostad:"/bostad/bolanekalkyl"};
   try{
     const u = JSON.parse(root.getAttribute("data-urls") || "{}");
     for(const k in urls) if(u && typeof u[k] === "string" && u[k].trim()) urls[k] = u[k].trim();

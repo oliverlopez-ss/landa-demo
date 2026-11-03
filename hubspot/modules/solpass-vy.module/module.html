@@ -1,0 +1,12 @@
+{# Solpass vy: one subpage view from the demo, as static HTML (built by hubspot/site/snapshot-views.js) with the demo's own CSS.
+   Elements with class "hsf" are slots for a HubSpot form; data-form names which one. The forms are rendered here by HubSpot
+   (same look as the rest of the site) and module.js moves each into its visible slot. #}
+<div class="dv">
+  {{ module.html }}
+  <div class="hsf-src" hidden>
+    {% if module.html is string_containing 'data-form="fraga"' %}<div data-hsf-key="fraga">{% form "vy_fraga" form_to_use="{{ module.form_fraga }}" response_response_type="inline" response_message="<p>Tack. Vi svarar inom två arbetsdagar.</p>" %}</div>{% endif %}
+    {% if module.html is string_containing 'data-form="maklare"' %}<div data-hsf-key="maklare">{% form "vy_maklare" form_to_use="{{ module.form_maklare }}" response_response_type="inline" response_message="<p>Tack. Vi matchar er med mäklare i området, och de hör av sig till er.</p>" %}</div>{% endif %}
+    {% if module.html is string_containing 'data-form="partner"' %}<div data-hsf-key="partner">{% form "vy_partner" form_to_use="{{ module.form_partner }}" response_response_type="inline" response_message="<p>Tack. Vi hör av oss inom två arbetsdagar.</p>" %}</div>{% endif %}
+    {% if module.html is string_containing 'data-form="checklista"' %}<div data-hsf-key="checklista">{% form "vy_checklista" form_to_use="{{ module.form_checklista }}" response_response_type="inline" response_message="<p>Tack. Vi mejlar checklistan till er.</p>" %}</div>{% endif %}
+  </div>
+</div>

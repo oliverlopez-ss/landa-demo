@@ -1,6 +1,6 @@
 <!-- Solpass: Vad kostar bostaden per månad. Calculator logic and texts copied from the Solpass demo (index.html). -->
-<div class="sp-bostadskostnad" data-portal="{{ module.portal_id }}" data-form="{{ module.form_guid }}" data-source="{{ module.source_value }}" data-nl="{{ module.newsletter_subscription_type_id }}" data-consent="{{ module.consent_text|escape_attr }}" style="--sp-acc: {{ module.accent_color.color }}" data-price="{{ module.default_price }}">
-  <div class="sp-head">{% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}{% if module.intro %}<div class="sp-intro">{{ module.intro }}</div>{% endif %}</div>
+<div class="sp-bostadskostnad" data-bg="{{ module.background }}" data-portal="{{ module.portal_id }}" data-form="{{ module.form_guid }}" data-source="{{ module.source_value }}" data-nl="{{ module.newsletter_subscription_type_id }}" data-consent="{{ module.consent_text|escape_attr }}" style="--sp-acc: {{ module.accent_color.color }}" data-price="{{ module.default_price }}">
+  <div class="sp-head">{% if module.eyebrow %}<div class="eyebrow">{{ module.eyebrow }}</div>{% endif %}{% if module.heading %}<h2>{{ module.heading }}</h2>{% endif %}{% if module.intro %}<div class="sp-intro">{{ module.intro }}</div>{% endif %}</div>
   <section class="sp-qc" aria-label="Snabbkalkyl">
     <form class="sp-qc-in" data-role="in" onsubmit="return false">
       <label class="sp-qrange"><span class="sp-qrow"><span>Pris</span><output data-o="price"></output></span>

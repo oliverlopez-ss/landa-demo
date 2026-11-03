@@ -1,5 +1,32 @@
 [
   {
+    "name": "eyebrow",
+    "label": "Liten text ovanför rubriken",
+    "type": "text",
+    "required": false,
+    "locked": false,
+    "default": "Bostad och bolån"
+  },
+  {
+    "name": "background",
+    "label": "Bakgrund",
+    "type": "choice",
+    "display": "select",
+    "required": false,
+    "locked": false,
+    "choices": [
+      [
+        "vit",
+        "Vit"
+      ],
+      [
+        "gra",
+        "Grå"
+      ]
+    ],
+    "default": "vit"
+  },
+  {
     "name": "heading",
     "label": "Rubrik",
     "required": false,
