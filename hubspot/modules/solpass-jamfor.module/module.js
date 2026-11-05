@@ -53,7 +53,7 @@ document.addEventListener("change", e => {
   /* ---------- from the demo ---------- */
 /* ---------- home calculator (model ported from the app, PR #215; draft figures, verify with a broker) ---------- */
 const HOME_CFG = {
-  euribor: 0.0324,
+  euribor: 0.03239,
   regions: {
     andalucia: { label: "Andalusien (Costa del Sol)", itp: [[null, 0.07]], itpMode: "whole", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.012 },
     valencia: { label: "Valencia (Costa Blanca)", itp: [[1000000, 0.09], [null, 0.11]], itpMode: "whole", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.014 },
@@ -160,7 +160,7 @@ function renderBuyer(){
   $("#h_bank").value = b.bank;
   if(caixa && b.rateType === "variable") b.rateType = "fixed";
   $$('[name="h_rate"]').forEach(i => { i.checked = i.value === b.rateType; i.disabled = caixa && i.value === "variable"; i.closest(".chip").style.opacity = i.disabled ? .45 : ""; });
-  $("#varLabel").textContent = `Rörlig (Euribor ${pct(HOME_CFG.euribor)}, preliminärt oktobersnitt 2026, + marginal)`;
+  $("#varLabel").textContent = `Rörlig (Euribor ${pct(HOME_CFG.euribor)}, oktobersnitt 2026, + marginal)`;
   $("#ltvLabel").textContent = `Lån, % av priset (högst ${Math.round(c.ltv * 100)})`;
   $("#yearsLabel").textContent = `Löptid, år (högst ${c.years})`;
   $("#h_ltv").max = Math.round(c.ltv * 100); $("#h_ltv").value = Math.round(b.ltv * 100);

@@ -58,7 +58,7 @@
 
   /* ---------- home calculator (model from the Solpass demo; draft figures, verify with a broker) ---------- */
   var HOME_CFG = {
-    euribor: 0.0324,
+    euribor: 0.03239,
     regions: {
       andalucia: { label: "Andalusien (Costa del Sol)", itp: [[null, 0.07]], itpMode: "whole", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.012 },
       valencia: { label: "Valencia (Costa Blanca)", itp: [[1000000, 0.09], [null, 0.11]], itpMode: "whole", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.014 },

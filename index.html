@@ -779,7 +779,7 @@ table.compare .sub{display:block;font-size:.76rem;color:var(--muted);font-weight
       <div class="homefacts">
         <div><b>70 %</b><span>lånar spanska banker normalt ut till den som inte är resident, mot 80 % för residenta</span></div>
         <div><b>7 %</b><span>överlåtelseskatt på en begagnad bostad i Andalusien (2026; Junta de Andalucía har föreslagit 6,75 % från 2027), plus notarie, registro och advokat</span></div>
-        <div><b>3,24 %</b><span>Euribor 12 månader, preliminärt oktobersnitt 2026. Rörlig ränta är Euribor plus bankens marginal.</span></div>
+        <div><b>3,24 %</b><span>Euribor 12 månader, oktobersnitt 2026. Rörlig ränta är Euribor plus bankens marginal.</span></div>
       </div>
       <div class="row" style="margin-top:28px"><a class="btn sea" href="#bostad">Räkna på en bostad</a><a class="btn ghost" href="#hyrakopa">Hyra eller köpa, över fem år?</a></div>
     </div>
@@ -2498,7 +2498,7 @@ $("#partnerForm").addEventListener("submit", async e => {
 
 /* ---------- home calculator (model ported from the app, PR #215; draft figures, verify with a broker) ---------- */
 const HOME_CFG = {
-  euribor: 0.0324,
+  euribor: 0.03239,
   regions: {
     andalucia: { label: "Andalusien (Costa del Sol)", itp: [[null, 0.07]], itpMode: "whole", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.012 },
     valencia: { label: "Valencia (Costa Blanca)", itp: [[1000000, 0.09], [null, 0.11]], itpMode: "whole", newBuildVat: 0.1, newBuildVatLabel: "IVA", ajd: 0.014 },
@@ -2605,7 +2605,7 @@ function renderBuyer(){
   $("#h_bank").value = b.bank;
   if(caixa && b.rateType === "variable") b.rateType = "fixed";
   $$('[name="h_rate"]').forEach(i => { i.checked = i.value === b.rateType; i.disabled = caixa && i.value === "variable"; i.closest(".chip").style.opacity = i.disabled ? .45 : ""; });
-  $("#varLabel").textContent = `Rörlig (Euribor ${pct(HOME_CFG.euribor)}, preliminärt oktobersnitt 2026, + marginal)`;
+  $("#varLabel").textContent = `Rörlig (Euribor ${pct(HOME_CFG.euribor)}, oktobersnitt 2026, + marginal)`;
   $("#ltvLabel").textContent = `Lån, % av priset (högst ${Math.round(c.ltv * 100)})`;
   $("#yearsLabel").textContent = `Löptid, år (högst ${c.years})`;
   $("#h_ltv").max = Math.round(c.ltv * 100); $("#h_ltv").value = Math.round(b.ltv * 100);

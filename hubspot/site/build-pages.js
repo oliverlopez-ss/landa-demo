@@ -54,7 +54,7 @@ pages.push({
     sek({ anchor: "bostad", variant: "gra", eyebrow: "Bostad och bolån", heading: "Vad kostar bostaden, på riktigt?", lead: "<p>Jämför upp till sex bostäder sida vid sida: vad köpet kräver kontant på köpdagen, månadskostnaden med och utan bankens paket, och vad det blir i kronor. Byggt för den som inte bor i Spanien än.</p>", card_style: "fakta", cards: [
       { title: "70 %", small: "lånar spanska banker normalt ut till den som inte är resident, mot 80 % för residenta" },
       { title: "7 %", small: "överlåtelseskatt på en begagnad bostad i Andalusien (2026; Junta de Andalucía har föreslagit 6,75 % från 2027), plus notarie, registro och advokat" },
-      { title: "3,24 %", small: "Euribor 12 månader, preliminärt oktobersnitt 2026. Rörlig ränta är Euribor plus bankens marginal." },
+      { title: "3,24 %", small: "Euribor 12 månader, oktobersnitt 2026. Rörlig ränta är Euribor plus bankens marginal." },
     ], buttons: [btn("Räkna på en bostad", "/bostad/bolanekalkyl", "gron"), btn("Hyra eller köpa, över fem år?", "/bostad/hyra-eller-kopa", "sekundar")] }),
     sek({ anchor: "omraden", eyebrow: "Områden", heading: "Var på kusten passar ni?", lead: "<p>Sex områden, sex vardagar. Skolor, tid till flyget, vem som trivs där och vad det kostar att hyra och köpa.</p>", card_style: "omraden", cards: AREA_CARDS }),
     sek({ anchor: "beckham", eyebrow: "Beckham-regimen", heading: "Vad sparar ni på Beckham?", lead: "<p>Spaniens särskilda skatteregim för inflyttade: 24 % platt skatt på lönen i sex år i stället för upp till 47 %. Den gäller distansanställda, spanskt anställda och bolagsledare, men bara om ansökan lämnas i tid.</p>", card_style: "fakta", cards: [

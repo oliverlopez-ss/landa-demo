@@ -13,7 +13,7 @@ The Solpass portal is **149676609** (app-eu1). Built there, from `hubspot/site/`
 
 Later the same day Oliver asked for the HubSpot site to look exactly like the demo: the main menu (mega menus), the start page hero and the start page itself now follow the demo's landing page section by section, without Solpass Plus (no product or payment in HubSpot yet). This replaces the seven-section start page below. The subpages are the demo's own views (module solpass-vy, built by `hubspot/site/snapshot-views.js`); new pages /skolor, /kontakter, /fraga, /bostad/bolanekalkyl (with the demo's home comparison) and /bostad/hyra-eller-kopa; /ekonomi became /skatt. The portal allows 30 site pages, so the 15 partner types share /partners and the hash picks one, like the demo. See `hubspot/site/README.md`.
 
-Still open before launch: follow-up emails (the calculators and the checklist form promise an email that is not sent yet; no checklist PDF exists), privacy policy page content, the photo, the hot-lead list (step 6), end-to-end tests of every form (step 7), Euribor update, publishing, domain.
+Still open before launch: follow-up emails (the calculators and the checklist form promise an email that is not sent yet; no checklist PDF exists), privacy policy page content, the photo, the hot-lead list (step 6), end-to-end tests of every form (step 7), publishing, domain.
 
 ## What Solpass is
 
@@ -110,7 +110,7 @@ A cloud session cannot reach Oliver's Chrome. Options, best first:
 
 ## Time-sensitive facts to update in HubSpot
 
-- Euribor October 2026 is shown as "3,24 % (preliminärt)"; Banco de España was scheduled to publish the official value on 3 Nov 2026 – check and replace.
+- Euribor October 2026 is 3,239 % (Banco de España, 3 Nov 2026), shown as "3,24 %". Update it when November is published.
 - Real Decreto-ley 29/2026 (rental law, in force since 8 Oct 2026) is voted on in November; if it falls, update the rental texts.
 - Click-check two links that block bots: Policía cita previa (icp.administracionelectronica.gob.es/icpplus/index.html) and Benahavís padrón (benahavis.es/379/empadronamiento).
 - Not verified: Andalusian wealth-tax arrangement for 2026; catastral revision years per municipality (calculators use 2 % imputed income as the cautious default).
